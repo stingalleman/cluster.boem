@@ -17,6 +17,6 @@ spec:
       services:
         - kind: Service
           name: coc-bot
-          namespace: default
+          namespace: discord-bots
           passHostHeader: true
           port: 80
