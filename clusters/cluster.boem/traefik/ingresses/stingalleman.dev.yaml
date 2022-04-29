@@ -18,6 +18,6 @@ spec:
           name: coc-bot
           namespace: discord-bots
           passHostHeader: true
-          port: 8020
+          port: 80
   tls:
     secretName: cf-certs-stingalleman.dev
