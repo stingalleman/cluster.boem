@@ -1,0 +1,33 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: TLSStore
+metadata:
+  name: stingalleman.nl-cf
+  namespace: traefik
+
+spec:
+  defaultCertificate:
+    secretName: cf-certs-stingalleman.nl
+    namespace: traefik
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: TLSStore
+metadata:
+  name: stingalleman.dev-cf
+  namespace: traefik
+
+spec:
+  defaultCertificate:
+    secretName: cf-certs-stingalleman.dev
+    namespace: traefik
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: TLSStore
+metadata:
+  name: pakket.sh-cf
+  namespace: traefik
+
+spec:
+  defaultCertificate:
+    secretName: cf-certs-pakket.sh
+    namespace: traefik
