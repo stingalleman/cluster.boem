@@ -19,8 +19,14 @@ spec:
       - "--global.sendanonymoususage"
       - "--api"
       - "--api.insecure"
-      # - "--entrypoints.web.address=:80"
+      - "--certificatesresolvers.le-resolver.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.le-resolver.acme.storage=/certs/acme.json"
       # - "--providers.kubernetesingress"
+
+    persistence:
+      enabled: true
+      path: /certs
+      size: 128Mi
     #
     # Configure providers
     #
