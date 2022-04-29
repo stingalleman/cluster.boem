@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: coc-bot
-  namespace: default
+  namespace: discord-bots
 spec:
   selector:
     matchLabels:
