@@ -1,0 +1,23 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: routes
+  namespace: default
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`discord.stingalleman.dev`)
+      middlewares:
+        - name: upgrade-scheme
+          namespace: default
+      services:
+        - kind: Service
+          name: coc-bot
+          namespace: discord-bots
+          passHostHeader: true
+          port: 8020
+  tls:
+    secretName: cf-certs-stingalleman.dev

@@ -9,15 +9,15 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`discord.stingalleman.dev`)
+      match: Host(`stingalleman.nl`)
       middlewares:
         - name: upgrade-scheme
           namespace: default
       services:
         - kind: Service
-          name: coc-bot
-          namespace: discord-bots
+          name: website
+          namespace: default
           passHostHeader: true
-          port: 8020
-      tls:
-        secretName: cf-certs-stingalleman.dev
+          port: 80
+  tls:
+    secretName: cf-certs-stingalleman.nl
