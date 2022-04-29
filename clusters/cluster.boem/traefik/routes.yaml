@@ -19,3 +19,5 @@ spec:
           namespace: discord-bots
           passHostHeader: true
           port: 8020
+      tls:
+        secretName: cf-certs-stingalleman.dev
