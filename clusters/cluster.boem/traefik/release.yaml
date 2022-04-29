@@ -39,8 +39,6 @@ spec:
       name: certs
       path: /certs
       size: 128Mi
-      mode: 600
-    podSecurityContext: null
     #
     # Configure providers
     #
