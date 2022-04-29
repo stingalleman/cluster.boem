@@ -1,4 +1,3 @@
-# All resources definition must be declared
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
@@ -10,14 +9,13 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`test12345.stingalleman.nl`)
-      priority: 10
+      match: Host(`discord.stingalleman.dev`)
       middlewares:
         - name: upgrade-scheme
           namespace: default
       services:
         - kind: Service
-          name: website
-          namespace: default
+          name: coc-bot
+          namespace: discord-bots
           passHostHeader: true
           port: 80

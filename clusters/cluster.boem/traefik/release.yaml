@@ -51,7 +51,7 @@ spec:
         # labelSelector: environment=production,method=traefik
 
       kubernetesIngress:
-        enabled: true
+        enabled: false
         allowExternalNameServices: false
         allowEmptyServices: true
         ingressClass: traefik
