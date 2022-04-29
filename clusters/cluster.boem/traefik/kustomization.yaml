@@ -3,6 +3,5 @@ kind: Kustomization
 resources:
   - release.yaml
   - namespace.yaml
-  - routes.yaml
   - middleware.yaml
   - ingresses
