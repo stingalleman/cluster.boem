@@ -21,10 +21,9 @@ spec:
       - "--api.insecure"
       - "--certificatesresolvers.le-resolver.acme.tlschallenge=true"
       - "--certificatesresolvers.le-resolver.acme.storage=/certs/acme.json"
-      # - "--providers.kubernetesingress"
+      - "--certificatesresolvers.dns-resolver.acme.dnschallenge.provider=cloudflare"
 
     deployment:
-      # The "volume-permissions" init container is required if you run into permission issues.
       initContainers:
       # Related issue: https://github.com/traefik/traefik/issues/6972
         - name: volume-permissions
@@ -62,6 +61,21 @@ spec:
           # Published Kubernetes Service to copy status from. Format: namespace/servicename
           # By default this Traefik service
           # pathOverride: ""
+
+    # Environment variables to be passed to Traefik's binary
+    env:
+      - name: CF_API_EMAIL
+        valueFrom:
+          secretKeyRef:
+            name: cf-api
+            namespace: traefik
+            key: email
+      - name: CF_API_KEY
+        valueFrom:
+          secretKeyRef:
+            name: cf-api
+            namespace: traefik
+            key: token
 
     # Configure ports
     ports:

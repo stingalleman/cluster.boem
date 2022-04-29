@@ -20,4 +20,5 @@ spec:
           passHostHeader: true
           port: 80
   tls:
-    secretName: cf-certs-stingalleman.nl
+    certResolver: dns-resolver
+    # secretName: cf-certs-stingalleman.nl
