@@ -13,3 +13,34 @@ spec:
         namespace: flux-system
       version:  10.19.4
   interval: 5m
+  values:
+    globalArguments:
+      - "--global.checknewversion"
+      - "--global.sendanonymoususage"
+      - "--api"
+      - "--api.insecure"
+      # - "--entrypoints.web.address=:80"
+      # - "--providers.kubernetesingress"
+    #
+    # Configure providers
+    #
+    providers:
+      kubernetesCRD:
+        enabled: true
+        allowCrossNamespace: true
+        allowExternalNameServices: false
+        # ingressClass: traefik-internal
+        # labelSelector: environment=production,method=traefik
+
+      kubernetesIngress:
+        enabled: true
+        allowExternalNameServices: false
+        allowEmptyServices: true
+        ingressClass: traefik
+        # labelSelector: environment=production,method=traefik
+        # IP used for Kubernetes Ingress endpoints
+        publishedService:
+          enabled: false
+          # Published Kubernetes Service to copy status from. Format: namespace/servicename
+          # By default this Traefik service
+          # pathOverride: ""
