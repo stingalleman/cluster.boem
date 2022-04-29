@@ -8,4 +8,4 @@ spec:
     app: coc-bot
   ports:
   - port: 8020
-    targetPort: 80
+    targetPort: 8020
