@@ -2,7 +2,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: upgradeScheme
+  name: upgrade-scheme
   namespace: default
 spec:
   redirectScheme:
@@ -12,7 +12,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: upgradeSchemeTemp
+  name: upgrade-scheme-temp
   namespace: default
 spec:
   redirectScheme:
