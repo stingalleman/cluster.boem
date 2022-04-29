@@ -19,7 +19,7 @@ spec:
       - "--global.sendanonymoususage"
       - "--api"
       - "--api.insecure"
-      - "--certificatesresolvers.le-resolver.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.le-resolver.acme.tlschallenge=true"
       - "--certificatesresolvers.le-resolver.acme.storage=/certs/acme.json"
       # - "--providers.kubernetesingress"
 
