@@ -23,10 +23,24 @@ spec:
       - "--certificatesresolvers.le-resolver.acme.storage=/certs/acme.json"
       # - "--providers.kubernetesingress"
 
+    deployment:
+      # The "volume-permissions" init container is required if you run into permission issues.
+      initContainers:
+      # Related issue: https://github.com/traefik/traefik/issues/6972
+        - name: volume-permissions
+          image: busybox:1.31.1
+          command: ["sh", "-c", "chmod -Rv 600 /certs/acme.json"]
+          volumeMounts:
+            - name: certs
+              mountPath: /certs
+
     persistence:
       enabled: true
+      name: certs
       path: /certs
       size: 128Mi
+      mode: 600
+    podSecurityContext: null
     #
     # Configure providers
     #
@@ -110,7 +124,7 @@ spec:
         # Set TLS at the entrypoint
         # https://doc.traefik.io/traefik/routing/entrypoints/#tls
         tls:
-          enabled: false
+          enabled: true
           # this is the name of a TLSOption definition
           # options: ""
           certResolver: "le-resolver"
