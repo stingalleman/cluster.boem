@@ -9,7 +9,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`discord.stingalleman.nl`)
+      match: Host(`discord.stingalleman.dev`)
       priority: 10
       middlewares:
         - name: upgrade-scheme
