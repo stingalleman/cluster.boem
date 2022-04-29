@@ -7,27 +7,17 @@ metadata:
 spec:
   entryPoints:
     - web
-  routes: []
-# spec:
-#   entryPoints:
-#     - web
-#   routes:
-#   - kind: Rule
-#     match: Host(`stingalleman.nl`)
-#     priority: 10
-#     services:
-#     - kind: Service
-#       name: foo
-#       namespace: default
-#       passHostHeader: true
-#       port: 80
-#       responseForwarding:
-#         flushInterval: 1ms
-#       scheme: https
-#       sticky:
-#         cookie:
-#           httpOnly: true
-#           name: cookie
-#           secure: true
-#       strategy: RoundRobin
-#       weight: 10
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`test12345.stingalleman.nl`)
+      priority: 10
+      middlewares:
+        - name: upgrade-scheme
+          namespace: default
+      services:
+        - kind: Service
+          name: website
+          namespace: default
+          passHostHeader: true
+          port: 80
