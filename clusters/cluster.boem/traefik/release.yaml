@@ -68,13 +68,11 @@ spec:
         valueFrom:
           secretKeyRef:
             name: cf-api
-            namespace: traefik
             key: email
       - name: CF_API_KEY
         valueFrom:
           secretKeyRef:
             name: cf-api
-            namespace: traefik
             key: token
 
     # Configure ports
