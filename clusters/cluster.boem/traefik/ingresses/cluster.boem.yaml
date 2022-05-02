@@ -6,19 +6,18 @@ metadata:
 spec:
   entryPoints:
     - web
-    # - websecure
+    - websecure
   routes:
     - kind: Rule
       match: Host(`alerts.cluster.boem`)
-      # middlewares:
-        # - name: upgrade-scheme
-          # namespace: default
+      middlewares:
+        - name: upgrade-scheme
+          namespace: default
       services:
         - kind: Service
           name: alertmanager-operated
           namespace: monitoring
           passHostHeader: true
           port: 9093
-  # tls:
-    # certResolver: dns-resolver
-    # secretName: cf-certs-stingalleman.dev
+  tls:
+    secretName: cluster.boem-certs
