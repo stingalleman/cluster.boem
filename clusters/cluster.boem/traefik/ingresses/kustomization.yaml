@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - stingalleman.dev.yaml
   - stingalleman.nl.yaml
+  - cluster.boem.yaml
