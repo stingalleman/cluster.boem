@@ -34,11 +34,11 @@ spec:
     #           mountPath: /certs
 
     persistence:
-      enabled: true
+      enabled: false
       name: certs
       path: /certs
       accessMode: ReadWriteMany
-      size: 128Mi
+      size: 64Mi
     #
     # Configure providers
     #
