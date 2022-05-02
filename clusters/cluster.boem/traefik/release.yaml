@@ -22,6 +22,7 @@ spec:
       - "--certificatesresolvers.le-resolver.acme.tlschallenge=true"
       - "--certificatesresolvers.le-resolver.acme.storage=/certs/acme.json"
       - "--certificatesresolvers.dns-resolver.acme.dnschallenge.provider=cloudflare"
+      - "--certificatesresolvers.dns-resolver.acme.storage=/certs/acme.json"
 
     # deployment:
     #   initContainers:
@@ -34,10 +35,10 @@ spec:
     #           mountPath: /certs
 
     persistence:
-      enabled: false
+      enabled: true
       name: certs
       path: /certs
-      accessMode: ReadWriteMany
+      # accessMode: ReadWriteMany
       size: 64Mi
     #
     # Configure providers
