@@ -37,6 +37,7 @@ spec:
       enabled: true
       name: certs
       path: /certs
+      accessMode: ReadWriteMany
       size: 128Mi
     #
     # Configure providers
