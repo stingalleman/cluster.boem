@@ -24,15 +24,15 @@ spec:
       - "--certificatesresolvers.dns-resolver.acme.dnschallenge.provider=cloudflare"
       - "--certificatesresolvers.dns-resolver.acme.storage=/certs/acme.json"
 
-    # deployment:
-    #   initContainers:
-    #   # Related issue: https://github.com/traefik/traefik/issues/6972
-    #     - name: volume-permissions
-    #       image: busybox:1.31.1
-    #       command: ["sh", "-c", "touch /certs/acme.json && chmod -Rv 600 /certs/acme.json"]
-    #       volumeMounts:
-    #         - name: certs
-    #           mountPath: /certs
+    deployment:
+      initContainers:
+      # Related issue: https://github.com/traefik/traefik/issues/6972
+        - name: volume-permissions
+          image: busybox:1.31.1
+          command: ["sh", "-c", "chmod -Rv 600 /certs/acme.json"]
+          volumeMounts:
+            - name: certs
+              mountPath: /certs
 
     persistence:
       enabled: true
