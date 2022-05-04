@@ -239,15 +239,15 @@ spec:
         ## Using PersistentVolumeClaim
         ##
 
-    # kubeEtcd:
-    #   serviceMonitor:
-    #     scheme: https
-    #     insecureSkipVerify: false
-    #     serverName: localhost
-    #     caFile: /etc/prometheus/secrets/etcd-client-cert/ca.crt
-    #     certFile: /etc/prometheus/secrets/etcd-client-cert/healthcheck-client.crt
-    #     keyFile: /etc/prometheus/secrets/etcd-client-cert/healthcheck-client.key
+    kubeEtcd:
+      serviceMonitor:
+        scheme: https
+        insecureSkipVerify: false
+        serverName: localhost
+        caFile: /etc/prometheus/secrets/etcd-client-cert/ca.crt
+        certFile: /etc/prometheus/secrets/etcd-client-cert/healthcheck-client.crt
+        keyFile: /etc/prometheus/secrets/etcd-client-cert/healthcheck-client.key
 
-    # prometheusOperator:
-    #   kubeletService:
-    #     enabled: false
+    prometheusOperator:
+      kubeletService:
+        enabled: false
