@@ -16,13 +16,20 @@ spec:
           namespace: monitoring
           passHostHeader: true
           port: 9093
-    - kind: Rule
 
+    - kind: Rule
       match: Host(`traefik.cluster.boem`)
       services:
         - name: traefik-api
           namespace: traefik
           port: 9000
+
+    - kind: Rule
+      match: Host(`longhorn.cluster.boem`)
+      services:
+        - name: longhorn-frontend
+          namespace: longhorn-system
+          port: 80
 
   tls:
     secretName: cluster.boem-certs
