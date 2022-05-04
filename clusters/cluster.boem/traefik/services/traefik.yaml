@@ -5,8 +5,8 @@ metadata:
   namespace: traefik
 spec:
   selector:
-    helm.toolkit.fluxcd.io/name: traefik-ingress
-    helm.toolkit.fluxcd.io/namespace: traefik
+    app.kubernetes.io/instance: traefik-ingress
+    app.kubernetes.io/name: traefik
   type: ClusterIP
   ports:
   - port: 9090
