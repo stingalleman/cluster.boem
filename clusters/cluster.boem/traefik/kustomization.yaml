@@ -5,3 +5,4 @@ resources:
   - namespace.yaml
   - middleware.yaml
   - ingresses
+  - services
