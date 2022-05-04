@@ -10,9 +10,6 @@ spec:
   routes:
     - kind: Rule
       match: Host(`stingalleman.nl`)
-      middlewares:
-        - name: upgrade-scheme
-          namespace: default
       services:
         - kind: Service
           name: website
@@ -21,4 +18,3 @@ spec:
           port: 80
   tls:
     certResolver: dns-resolver
-    # secretName: cf-certs-stingalleman.nl

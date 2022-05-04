@@ -10,9 +10,6 @@ spec:
   routes:
     - kind: Rule
       match: Host(`alerts.cluster.boem`)
-      middlewares:
-        - name: upgrade-scheme
-          namespace: default
       services:
         - kind: Service
           name: alertmanager-operated
@@ -20,6 +17,7 @@ spec:
           passHostHeader: true
           port: 9093
     - kind: Rule
+
       match: Host(`traefik.cluster.boem`)
       services:
         - name: traefik-api

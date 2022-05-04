@@ -10,9 +10,6 @@ spec:
   routes:
     - kind: Rule
       match: Host(`discord.stingalleman.dev`)
-      middlewares:
-        - name: upgrade-scheme
-          namespace: default
       services:
         - kind: Service
           name: coc-bot
@@ -21,4 +18,3 @@ spec:
           port: 8020
   tls:
     certResolver: dns-resolver
-    # secretName: cf-certs-stingalleman.dev
