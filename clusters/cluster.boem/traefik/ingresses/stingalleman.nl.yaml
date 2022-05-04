@@ -16,5 +16,13 @@ spec:
           namespace: default
           passHostHeader: true
           port: 80
+
+    - kind: Rule
+      match: Host(`grafiekjes.stingalleman.nl`)
+      services:
+        - name: prometheus-stack-grafana
+          namespace: monitoring
+          port: 80
+          passHostHeader: true
   tls:
     certResolver: dns-resolver
