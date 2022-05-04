@@ -6,12 +6,11 @@ metadata:
 spec:
   chart:
     spec:
-      chart: traefik
+      chart: prometheus-blackbox-exporter
       sourceRef:
         kind: HelmRepository
-        name: pronetheus-community
+        name: prometheus-community
         namespace: flux-system
-      version:  10.19.4
   interval: 5m
   values:
     restartPolicy: Always
