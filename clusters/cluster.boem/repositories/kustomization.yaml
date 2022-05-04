@@ -4,3 +4,4 @@ resources:
   - k8s-at-home.yaml
   - traefik.yaml
   - bitnami.yaml
+  - prometheus-community.yaml
