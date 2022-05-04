@@ -19,5 +19,10 @@ spec:
           namespace: monitoring
           passHostHeader: true
           port: 9093
+    - kind: Rule
+      match: Host(`traefik.cluster.boem`)
+      services:
+        - kind: TraefikService
+          name: api@internal
   tls:
     secretName: cluster.boem-certs

@@ -16,7 +16,6 @@ spec:
   values:
     globalArguments:
       - "--global.checknewversion"
-      - "--global.sendanonymoususage"
       - "--api"
       - "--api.insecure"
       - "--certificatesresolvers.le-resolver.acme.tlschallenge=true"
