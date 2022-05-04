@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: traefik-api
+  namespace: traefik
+spec:
+  selector:
+    helm.toolkit.fluxcd.io/name: traefik-ingress
+    helm.toolkit.fluxcd.io/namespace: traefik
+  type: ClusterIP
+  ports:
+  - port: 9090
+    targetPort: 9090
