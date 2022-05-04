@@ -31,5 +31,12 @@ spec:
           namespace: longhorn-system
           port: 80
 
+    - kind: Rule
+      match: Host(`prometheus.cluster.boem`)
+      services:
+        - name: prometheus-operated
+          namespace: monitoring
+          port: http-web
+
   tls:
     secretName: cluster.boem-certs
