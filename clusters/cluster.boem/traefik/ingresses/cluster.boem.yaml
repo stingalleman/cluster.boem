@@ -22,7 +22,9 @@ spec:
     - kind: Rule
       match: Host(`traefik.cluster.boem`)
       services:
-        - kind: TraefikService
-          name: api@internal
+        - name: traefik-ingress
+          namespace: traefik
+          port: 9090
+
   tls:
     secretName: cluster.boem-certs
