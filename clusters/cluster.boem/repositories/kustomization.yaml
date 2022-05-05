@@ -5,3 +5,4 @@ resources:
   - traefik.yaml
   - bitnami.yaml
   - prometheus-community.yaml
+  - metallb.yaml
