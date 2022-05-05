@@ -47,5 +47,5 @@ spec:
           periodSeconds: 10
         ports:
         - containerPort:  80
-          name:  web-http
+          name: web-http
       restartPolicy: Always
