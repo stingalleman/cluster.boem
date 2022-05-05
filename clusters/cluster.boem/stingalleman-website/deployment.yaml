@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: stingalleman-website
-        image: stingalleman/stingalleman-website
+        image: stingalleman/stingalleman.nl
         resources:
           limits:
             cpu: 100m
