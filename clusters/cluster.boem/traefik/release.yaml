@@ -23,6 +23,11 @@ spec:
       - "--certificatesresolvers.dns-resolver.acme.dnschallenge.provider=cloudflare"
       - "--certificatesresolvers.dns-resolver.acme.storage=/certs/acme.json"
 
+    service:
+      spec:
+        externalTrafficPolicy: Client
+        loadBalancerIP: "10.10.10.200"
+
     deployment:
       initContainers:
       # Related issue: https://github.com/traefik/traefik/issues/6972
