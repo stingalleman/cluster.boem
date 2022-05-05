@@ -114,6 +114,7 @@ spec:
 
     prometheus:
       prometheusSpec:
+        serviceMonitorSelectorNilUsesHelmValues: false
         replicas: 1
 
         ## AdditionalScrapeConfigs allows specifying additional Prometheus scrape configurations. Scrape configurations
