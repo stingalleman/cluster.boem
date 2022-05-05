@@ -12,7 +12,7 @@ spec:
       match: Host(`stingalleman.nl`)
       services:
         - kind: Service
-          name: website
+          name: stingalleman.nl
           namespace: default
           passHostHeader: true
           port: 80
