@@ -36,11 +36,11 @@ spec:
 
       # the service account used by prometheus
       # required when .Values.prometheus.podMonitor.enabled == true
-      serviceAccount: ""
+      serviceAccount: "prometheus-stack-kube-prom-operator"
 
       # the namespace where prometheus is deployed
       # required when .Values.prometheus.podMonitor.enabled == true
-      namespace: ""
+      namespace: "monitoring"
 
       # Prometheus Operator PodMonitors
       podMonitor:
