@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  stingalleman.nl
+  name: stingalleman-website
   namespace: default
   labels:
-    app:  stingalleman.nl
+    app: stingalleman-website
 spec:
   selector:
     matchLabels:
-      app: stingalleman.nl
+      app: stingalleman-website
   replicas: 2
   strategy:
     rollingUpdate:
@@ -18,11 +18,11 @@ spec:
   template:
     metadata:
       labels:
-        app:  stingalleman.nl
+        app: stingalleman-website
     spec:
       containers:
-      - name:  stingalleman.nl
-        image:  stingalleman/stingalleman.nl
+      - name: stingalleman-website
+        image: stingalleman/stingalleman-website
         resources:
           limits:
             cpu: 100m
@@ -46,6 +46,6 @@ spec:
           failureThreshold: 3
           periodSeconds: 10
         ports:
-        - containerPort:  80
+        - containerPort: 80
           name: web-http
       restartPolicy: Always
