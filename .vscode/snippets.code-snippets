@@ -1,0 +1,15 @@
+{
+  "kustomization": {
+    "prefix": "kustomization",
+    "body": [
+      "apiVersion: kustomize.config.k8s.io/v1beta1",
+      "kind: Kustomization",
+      "resources:",
+      "\t- "
+    ]
+  },
+  "namespace": {
+    "prefix": "namespace",
+    "body": ["apiVersion: v1", "kind: Namespace", "metadata:", "\tname: "]
+  }
+}
