@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: stingalleman-website
-        image: registry.hub.docker.com/stingalleman/stingalleman.nl
+        image: stingalleman/stingalleman.nl:latest
         resources:
           limits:
             cpu: 100m
