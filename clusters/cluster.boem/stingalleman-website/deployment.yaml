@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
       app: stingalleman-website
-  replicas: 5
+  replicas: 2
   strategy:
     rollingUpdate:
       maxSurge: 25%
