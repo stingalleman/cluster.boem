@@ -32,5 +32,12 @@ spec:
           namespace: flux-system
           port: 80
 
+    - kind: Rule
+      match: Host(`kube.stingalleman.nl`)
+      services:
+        - name: kube-ops-view
+          namespace: kube-ops-view
+          port: 8080
+
   tls:
     certResolver: dns-resolver
