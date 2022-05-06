@@ -24,5 +24,13 @@ spec:
           namespace: monitoring
           port: 80
           passHostHeader: true
+
+    - kind: Rule
+      match: Host(`flux.stingalleman.nl`)
+      services:
+        - name: webhook-receiver
+          namespace: flux-system
+          port: 80
+
   tls:
     certResolver: dns-resolver

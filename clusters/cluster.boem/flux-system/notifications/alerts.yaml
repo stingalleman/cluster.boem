@@ -18,3 +18,9 @@ spec:
       name: '*'
     - kind: HelmChart
       name: '*'
+    - kind: ImageUpdateAutomation
+      name: '*'
+    - kind: ImageRepository
+      name: '*'
+    - kind: ImagePolicy
+      name: '*'

@@ -8,3 +8,4 @@ resources:
   - discord-webhook.yaml
   - github-alert.yaml
   - github.yaml
+  - webhook.yaml
