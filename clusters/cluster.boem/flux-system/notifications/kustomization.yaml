@@ -6,6 +6,4 @@ metadata:
 resources:
   - alerts.yaml
   - discord-webhook.yaml
-  - github-alert.yaml
-  - github.yaml
   - webhook.yaml

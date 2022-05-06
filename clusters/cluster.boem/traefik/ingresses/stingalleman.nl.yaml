@@ -26,7 +26,7 @@ spec:
           passHostHeader: true
 
     - kind: Rule
-      match: Host(`flux.stingalleman.nl`)
+      match: Host(`flux_webhook.stingalleman.nl`)
       services:
         - name: webhook-receiver
           namespace: flux-system
