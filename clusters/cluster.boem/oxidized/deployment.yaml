@@ -49,6 +49,9 @@ spec:
             - name: oxidized
               mountPath: "/root/.config/oxidized"
               readOnly: true
+            - name: oxidized-logs
+              mountPath: "/etc/oxidized-logs"
+              readOnly: false
       volumes:
         - name: oxidized
           secret:
