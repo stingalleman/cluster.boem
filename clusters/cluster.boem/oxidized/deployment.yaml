@@ -51,7 +51,9 @@ spec:
               readOnly: true
             - name: oxidized-logs
               mountPath: "/etc/oxidized-logs"
-              readOnly: false
+          env:
+            - name: OXIDIZED_CONFIG
+              value: /etc/oxidized-logs
       volumes:
         - name: oxidized
           secret:
