@@ -48,7 +48,7 @@ spec:
           volumeMounts:
             - name: oxidized
               mountPath: "/root/.config/oxidized"
-              readOnly: true
+              readOnly: false
             - name: oxidized-storage
               mountPath: "/etc/oxidized-storage"
           env:
