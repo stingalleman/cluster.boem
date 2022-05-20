@@ -6,3 +6,5 @@ metadata:
 resources:
   - namespace.yaml
   - deployment.yaml
+  - volume.yaml
+  
