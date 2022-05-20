@@ -49,16 +49,16 @@ spec:
             - name: oxidized
               mountPath: "/root/.config/oxidized"
               readOnly: true
-            - name: oxidized-logs
-              mountPath: "/etc/oxidized-logs"
+            - name: oxidized-storage
+              mountPath: "/etc/oxidized-storage"
           env:
             - name: OXIDIZED_LOGS
-              value: /etc/oxidized-logs/logs
+              value: /etc/oxidized-storage/logs
       volumes:
         - name: oxidized
           secret:
             secretName: oxidized
-        - name: oxidized-logs
+        - name: oxidized-storage
           persistentVolumeClaim:
-            claimName: oxidized-logs
+            claimName: oxidized-storage
       restartPolicy: Always
