@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: oxidized
-  namespace: default
+  namespace: oxidized
   labels:
     app: oxidized
 spec:
