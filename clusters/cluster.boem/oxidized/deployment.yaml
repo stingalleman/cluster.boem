@@ -53,7 +53,7 @@ spec:
               mountPath: "/etc/oxidized-logs"
           env:
             - name: OXIDIZED_CONFIG
-              value: /etc/oxidized-logs
+              value: /etc/oxidized-logs/logs
       volumes:
         - name: oxidized
           secret:
