@@ -2,8 +2,8 @@ kind: "postgresql"
 apiVersion: "acid.zalan.do/v1"
 
 metadata:
-  name: "tweede-kamer"
-  namespace: "default"
+  name: "tk-db"
+  namespace: "postgres"
   labels:
     team: acid
 
@@ -20,7 +20,7 @@ spec:
   users:
     tk-sync: []
   databases:
-    tweedekamer: tk-sync
+    tk-db: tk-sync
   # allowedSourceRanges:
   # - "10.0.0.0/8"
 
