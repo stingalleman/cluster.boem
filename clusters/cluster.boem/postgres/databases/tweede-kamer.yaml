@@ -2,13 +2,13 @@ kind: "postgresql"
 apiVersion: "acid.zalan.do/v1"
 
 metadata:
-  name: "acid-tweede-kamer"
-  namespace: "default"
+  name: "tweede-kamer"
+  namespace: "postgres"
   labels:
-    team: acid
+    team: tweede-kamer-team
 
 spec:
-  teamId: "acid"
+  teamId: "tweede-kamer-team"
   postgresql:
     version: "14"
   numberOfInstances: 1
@@ -22,7 +22,7 @@ spec:
   databases:
     tweedekamer: tk-sync
   allowedSourceRanges:
-    # IP ranges to access your cluster go here
+    - "10.0.0.0/8"
 
   resources:
     requests:
