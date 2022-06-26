@@ -1,7 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  # - databases/tweede-kamer.yaml
+  - databases/tweede-kamer.yaml
   - namespace.yaml
   - release-ui.yaml
   - release.yaml
