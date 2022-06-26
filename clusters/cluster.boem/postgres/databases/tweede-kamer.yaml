@@ -5,10 +5,10 @@ metadata:
   name: "tweede-kamer"
   namespace: "postgres"
   labels:
-    team: tweede-kamer-team
+    team: acid
 
 spec:
-  teamId: "tweede-kamer-team"
+  teamId: "acid"
   postgresql:
     version: "14"
   numberOfInstances: 1
