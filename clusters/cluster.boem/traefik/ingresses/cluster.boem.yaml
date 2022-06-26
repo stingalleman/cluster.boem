@@ -38,5 +38,12 @@ spec:
           namespace: monitoring
           port: http-web
 
+    - kind: Rule
+      match: Host(`postgres.cluster.boem`)
+      services:
+        - name: postgres-operator-ui
+          namespace: postgres
+          port: 80
+
   tls:
     secretName: cluster.boem-certs
