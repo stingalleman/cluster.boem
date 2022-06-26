@@ -3,7 +3,7 @@ apiVersion: "acid.zalan.do/v1"
 
 metadata:
   name: "tweede-kamer"
-  namespace: "postgres"
+  namespace: "default"
   labels:
     team: acid
 
@@ -21,8 +21,8 @@ spec:
     tk-sync: []
   databases:
     tweedekamer: tk-sync
-  allowedSourceRanges:
-    - "10.0.0.0/8"
+  # allowedSourceRanges:
+  # - "10.0.0.0/8"
 
   resources:
     requests:
