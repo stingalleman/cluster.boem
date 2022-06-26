@@ -18,11 +18,11 @@ spec:
   volume:
     size: "10Gi"
   users:
-    tk-sync: []
+    tk: []
   databases:
-    tk-db: tk-sync
-  # allowedSourceRanges:
-  # - "10.0.0.0/8"
+    tk-db: tk
+  allowedSourceRanges:
+    - "10.0.0.0/8"
 
   resources:
     requests:
