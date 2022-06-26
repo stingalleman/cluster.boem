@@ -2,7 +2,7 @@ kind: "postgresql"
 apiVersion: "acid.zalan.do/v1"
 
 metadata:
-  name: "tk-db"
+  name: "acid-tweede-kamer"
   namespace: "postgres"
   labels:
     team: acid
