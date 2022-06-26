@@ -9,3 +9,4 @@ resources:
   - bitnami.yaml
   - prometheus-community.yaml
   - metallb.yaml
+  - postgres-operator.yaml
