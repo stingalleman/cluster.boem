@@ -4,6 +4,7 @@ metadata:
   name: dailyfloppa
   namespace: discord-bots
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: dailyfloppa
