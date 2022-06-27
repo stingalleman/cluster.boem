@@ -39,5 +39,12 @@ spec:
           namespace: kube-ops-view
           port: 8080
 
+    - kind: Rule
+      match: Host(`share.stingalleman.nl`)
+      services:
+        - name: sharry
+          namespace: sharry
+          port: 9090
+
   tls:
     certResolver: dns-resolver
