@@ -180,67 +180,6 @@ spec:
         }
 
         backend {
-
-          # Authentication is flexible to let Sharry be integrated in other
-          # environments.
-          auth {
-            #### Login Modules
-            ##
-            ## The following settings configure how users are authenticated.
-            ## There are several ways possible. The simplest is to
-            ## authenticate agains the internal database. But often there is
-            ## already a user management component and sharry can be
-            ## configured to authenticated against other services.
-
-            # The http authentication module sends the username and password
-            # via a HTTP request and uses the response to indicate success or
-            # failure.
-            #
-            # If the method is POST, the `body' is sent with the request and
-            # the `content-type' is used.
-            http {
-              enabled = false
-              url = "http://localhost:1234/auth?user={{user}}&password={{pass}}"
-              method = "POST"
-              body = ""
-              content-type = ""
-              order = 20
-            }
-
-            # Use HTTP Basic authentication. An Authorization header using
-            # the Basic scheme is created and the request is send to the
-            # given url. The response body will be ignored, only the status
-            # is inspected.
-            http-basic {
-              enabled = false
-              url = "http://somehost:2345/path"
-              method = "GET"
-              order = 30
-            }
-
-            # The command authentication module runs an external command
-            # giving it the username and password. The return code indicates
-            # success or failure.
-            command {
-              enabled = false
-              program = [
-                "/path/to/someprogram"
-                "{{user}}"
-                "{{pass}}"
-              ]
-              # the return code to consider successful verification
-              success = 0
-              order = 40
-            }
-
-            # The internal authentication module checks against the internal
-            # database.
-            internal {
-              enabled = true
-              order = 50
-            }
-          }
-
           # The database connection.
           #
           # By default a H2 file-based database is configured. You can
