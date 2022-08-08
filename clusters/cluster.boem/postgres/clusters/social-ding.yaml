@@ -19,7 +19,8 @@ spec:
     size: "10Gi"
   users:
     social:
-      - social
+      - superuser
+      - createdb
   databases:
     social-db: social
   allowedSourceRanges:
