@@ -1,0 +1,33 @@
+kind: "postgresql"
+apiVersion: "acid.zalan.do/v1"
+
+metadata:
+  name: "acid-social-ding"
+  namespace: "postgres"
+  labels:
+    team: acid
+
+spec:
+  teamId: "acid"
+  postgresql:
+    version: "14"
+  numberOfInstances: 1
+  enableMasterLoadBalancer: true
+  enableReplicaLoadBalancer: true
+  enableConnectionPooler: true
+  volume:
+    size: "10Gi"
+  users:
+    tk: []
+  databases:
+    social-db: social
+  allowedSourceRanges:
+    - "10.0.0.0/8"
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 100Mi
+    limits:
+      cpu: 500m
+      memory: 500Mi
