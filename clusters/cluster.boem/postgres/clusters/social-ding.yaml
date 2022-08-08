@@ -18,7 +18,8 @@ spec:
   volume:
     size: "10Gi"
   users:
-    social: social
+    social:
+      - social
   databases:
     social-db: social
   allowedSourceRanges:
