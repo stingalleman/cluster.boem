@@ -188,21 +188,47 @@ spec:
         ## selfservice ##
         #
         selfservice:
-          ## Redirect browsers to set URL per default ##
-          #
-          # Ory Kratos redirects to this URL per default on completion of self-service flows and other browser interaction. Read this [article for more information on browser redirects](https://www.ory.sh/kratos/docs/concepts/browser-redirect-flow-completion).
-          #
-          # Examples:
-          # - https://my-app.com/dashboard
-          # - /dashboard
-          #
-          # Set this value using environment variables on
-          # - Linux/macOS:
-          #    $ export SELFSERVICE_DEFAULT_BROWSER_RETURN_URL=<value>
-          # - Windows Command Line (CMD):
-          #    > set SELFSERVICE_DEFAULT_BROWSER_RETURN_URL=<value>
-          #
-          default_browser_return_url: https://my-app.com/dashboard
+          default_browser_return_url: http://selfservice.kratos.cluster.boem/
+          allowed_return_urls:
+            - http://selfservice.kratos.cluster.boem/
+
+          methods:
+            password:
+              enabled: true
+
+          flows:
+            error:
+              ui_url: http://selfservice.kratos.cluster.boem/error
+
+            settings:
+              ui_url: http://selfservice.kratos.cluster.boem/settings
+              privileged_session_max_age: 15m
+
+            recovery:
+              enabled: true
+              ui_url: http://selfservice.kratos.cluster.boem/recovery
+
+            verification:
+              enabled: true
+              ui_url: http://selfservice.kratos.cluster.boem/verification
+              after:
+                default_browser_return_url: http://selfservice.kratos.cluster.boem/
+
+            logout:
+              after:
+                default_browser_return_url: http://selfservice.kratos.cluster.boem/login
+
+            login:
+              ui_url: http://selfservice.kratos.cluster.boem/login
+              lifespan: 10m
+
+            registration:
+              lifespan: 10m
+              ui_url: http://selfservice.kratos.cluster.boem/registration
+              after:
+                password:
+                  hooks:
+                    - hook: session
 
         #template_override_path: /conf/courier-templates
 
