@@ -176,6 +176,9 @@ spec:
       #        plainBody:
 
       config:
+        courier:
+          smtp: {}
+
         identity:
           schemas:
             - id: default
