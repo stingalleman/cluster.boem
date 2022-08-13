@@ -53,7 +53,7 @@ spec:
           port: 4436
 
     - kind: Rule
-      match: Host(`mailslurper.cluster.boem`) && PathPrefix(`/admin`)
+      match: Host(`mailslurper.cluster.boem`) && PathPrefix(`/adminm`)
       middlewares:
         - name: mailslurper-stripprefix
       services:

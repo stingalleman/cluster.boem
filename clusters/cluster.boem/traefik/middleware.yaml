@@ -26,4 +26,4 @@ metadata:
 spec:
   stripPrefix:
     prefixes:
-      - /admin
+      - /adminm
