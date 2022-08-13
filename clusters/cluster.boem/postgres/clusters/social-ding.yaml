@@ -23,8 +23,8 @@ spec:
       - createdb
     kratos:
   databases:
-    social-db: social
-    kratos-db: kratos
+    social: social
+    kratos: kratos
   allowedSourceRanges:
     - "10.0.0.0/8"
 
