@@ -68,7 +68,7 @@ spec:
 
     secret:
       # -- switch to false to prevent creating the secret
-      enabled: false
+      enabled: true
       # -- Provide custom name of existing secret, or custom name of secret to be created
       nameOverride: ""
       # nameOverride: "myCustomSecret"
@@ -199,44 +199,6 @@ spec:
           #    > set SELFSERVICE_DEFAULT_BROWSER_RETURN_URL=<value>
           #
           default_browser_return_url: https://my-app.com/dashboard
-
-        ## Courier configuration ##
-        #
-        # The courier is responsible for sending and delivering messages over email, sms, and other means.
-        #
-        courier:
-          ## SMTP Configuration ##
-          #
-          # Configures outgoing emails using the SMTP protocol.
-          #
-          smtp:
-            ## SMTP connection string ##
-            #
-            # This URI will be used to connect to the SMTP server. Use the scheme smtps for implicit TLS sessions or smtp for explicit StartTLS/cleartext sessions. Please note that TLS is always enforced with certificate trust verification by default for security reasons on both schemes. With the smtp scheme you can use the query parameter (`?disable_starttls=true`) to allow cleartext sessions or (`?disable_starttls=false`) to enforce StartTLS (default behaviour). Additionally, use the query parameter to allow (`?skip_ssl_verify=true`) or disallow (`?skip_ssl_verify=false`) self-signed TLS certificates (default behaviour) on both implicit and explicit TLS sessions.
-            #
-            # Examples:
-            # - smtps://foo:bar@my-mailserver:1234/?skip_ssl_verify=false
-            # - "smtp://foo:bar@my-mailserver:1234/?disable_starttls=true (NOT RECOMMENDED:
-            #   Cleartext smtp for devel and legacy infrastructure only)"
-            # - smtp://foo:bar@my-mailserver:1234/ (Explicit StartTLS with certificate trust
-            #   verification)
-            # - "smtp://foo:bar@my-mailserver:1234/?skip_ssl_verify=true (NOT RECOMMENDED:
-            #   Explicit StartTLS without certificate trust verification)"
-            # - smtps://foo:bar@my-mailserver:1234/ (Implicit TLS with certificate trust
-            #   verification)
-            # - "smtps://foo:bar@my-mailserver:1234/?skip_ssl_verify=true (NOT RECOMMENDED:
-            #   Implicit TLS without certificate trust verification)"
-            # - smtps://subdomain.my-mailserver:1234/?server_name=my-mailserver (allows TLS to
-            #   work if the server is hosted on a sudomain that uses a non-wildcard domain
-            #   certificate)
-            #
-            # Set this value using environment variables on
-            # - Linux/macOS:
-            #    $ export COURIER_SMTP_CONNECTION_URI=<value>
-            # - Windows Command Line (CMD):
-            #    > set COURIER_SMTP_CONNECTION_URI=<value>
-            #
-            # connection_uri: ""
 
         #template_override_path: /conf/courier-templates
 
