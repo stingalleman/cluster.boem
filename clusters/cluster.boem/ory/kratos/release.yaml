@@ -177,7 +177,8 @@ spec:
 
       config:
         courier:
-          smtp: {}
+          smtp:
+            connection_uri: ""
 
         identity:
           schemas:
