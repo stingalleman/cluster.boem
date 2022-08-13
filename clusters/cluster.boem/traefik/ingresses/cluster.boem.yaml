@@ -82,5 +82,12 @@ spec:
           namespace: ory
           port: 80
 
+    - kind: Rule
+      match: Host(`selfservice.kratos.cluster.boem`)
+      services:
+        - name: selfservice
+          namespace: ory
+          port: 80
+
   tls:
     secretName: cluster.boem-certs
