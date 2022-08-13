@@ -54,7 +54,8 @@ spec:
 
     - kind: Rule
       match: Host(`mailslurper.cluster.boem`) && PathPrefix(`/admin`)
-      middleware: mailslurper-stripprefix
+      middlewares:
+        - name: mailslurper-stripprefix
       services:
         - name: fake-smtp-server-admin
           namespace: ory
