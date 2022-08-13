@@ -10,3 +10,4 @@ resources:
   - prometheus-community.yaml
   - metallb.yaml
   - postgres-operator.yaml
+  - ory.yaml
