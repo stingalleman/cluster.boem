@@ -45,5 +45,19 @@ spec:
           namespace: postgres
           port: 80
 
+    - kind: Rule
+      match: Host(`mailslurper.cluster.boem`)
+      services:
+        - name: fake-smtp-server-ui
+          namespace: ory
+          port: 4436
+
+    - kind: Rule
+      match: Host(`admin.mailslurper.cluster.boem`)
+      services:
+        - name: fake-smtp-server-admin
+          namespace: ory
+          port: 4437
+
   tls:
     secretName: cluster.boem-certs
