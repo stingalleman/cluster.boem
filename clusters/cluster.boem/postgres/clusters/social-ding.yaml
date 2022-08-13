@@ -21,8 +21,10 @@ spec:
     social:
       - superuser
       - createdb
+    kratos:
   databases:
     social-db: social
+    kratos-db: kratos
   allowedSourceRanges:
     - "10.0.0.0/8"
 
