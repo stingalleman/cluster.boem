@@ -53,7 +53,7 @@ spec:
           port: 4436
 
     - kind: Rule
-      match: Host(`admin.mailslurper.cluster.boem`)
+      match: Host(`mailslurper.cluster.boem`) && PathPrefix(`/admin`)
       services:
         - name: fake-smtp-server-admin
           namespace: ory
