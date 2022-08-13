@@ -178,7 +178,7 @@ spec:
       config:
         courier:
           smtp:
-            connection_uri: ""
+            connection_uri: "smtps://kratos:kratos@mail-smtp.ory.svc.cluster.local:1025"
 
         identity:
           schemas:
