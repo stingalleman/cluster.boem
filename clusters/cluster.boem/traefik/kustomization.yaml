@@ -1,11 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-metadata:
-  name: traefik
-  namespace: traefik
 resources:
-  - release.yaml
-  - namespace.yaml
-  - middleware.yaml
-  - ingresses
-  - services
+- ingresses
+- middleware.yaml
+- namespace.yaml
+- release.yaml
+- serverstransport.yaml
+- services
