@@ -236,6 +236,8 @@ spec:
           public:
             port: 4433
             base_url: https://kratos.stingalleman.dev
+            cors:
+              enabled: true
           admin:
             port: 4434
             base_url: "https://adminkratos.stingalleman.dev"
