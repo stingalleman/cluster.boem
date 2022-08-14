@@ -61,12 +61,12 @@ spec:
           namespace: ory
           port: 4437
 
-    - kind: Rule
-      match: Host(`courier.kratos.cluster.boem`)
-      services:
-        - name: kratos-courier
-          namespace: ory
-          port: 80
+    # - kind: Rule
+    #   match: Host(`courier.kratos.cluster.boem`)
+    #   services:
+    #     - name: kratos-courier
+    #       namespace: ory
+    #       port: 80
 
   tls:
     secretName: cluster.boem-certs
