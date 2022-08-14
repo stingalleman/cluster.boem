@@ -11,7 +11,7 @@ spec:
         kind: HelmRepository
         name: traefik
         namespace: flux-system
-      version:  ^10.19.4
+      version: ^10.19.4
   interval: 5m
   values:
     globalArguments:
@@ -30,10 +30,15 @@ spec:
 
     deployment:
       initContainers:
-      # Related issue: https://github.com/traefik/traefik/issues/6972
+        # Related issue: https://github.com/traefik/traefik/issues/6972
         - name: volume-permissions
           image: busybox:1.31.1
-          command: ["sh", "-c", "chmod -Rv 600 /certs/acme.json"]
+          command:
+            [
+              "sh",
+              "-c",
+              "touch /certs/acme.json ; chmod -Rv 600 /certs/acme.json",
+            ]
           volumeMounts:
             - name: certs
               mountPath: /certs
