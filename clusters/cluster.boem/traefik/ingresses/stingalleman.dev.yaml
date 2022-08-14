@@ -16,5 +16,26 @@ spec:
           namespace: discord-bots
           passHostHeader: true
           port: 8020
+
+    - kind: Rule
+      match: Host(`kratos.cluster.boem`)
+      services:
+        - name: kratos-public
+          namespace: ory
+          port: 80
+
+    - kind: Rule
+      match: Host(`admin.kratos.cluster.boem`)
+      services:
+        - name: kratos-admin
+          namespace: ory
+          port: 80
+
+    - kind: Rule
+      match: Host(`selfservice.kratos.cluster.boem`)
+      services:
+        - name: selfservice
+          namespace: ory
+          port: 3000
   tls:
     certResolver: dns-resolver
