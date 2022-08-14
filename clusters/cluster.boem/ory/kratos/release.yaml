@@ -270,14 +270,16 @@ spec:
       # -- If you want to mount external volume
       # For example, mount a secret containing Certificate root CA to verify database
       # TLS connection.
-      extraVolumes: []
-      # - name: my-volume
-      #   secret:
-      #     secretName: my-secret
-      extraVolumeMounts: []
-      # - name: my-volume
-      #   mountPath: /etc/secrets/my-secret
-      #   readOnly: true
+      extraVolumes:
+        - name: chernobyl-ca
+          configMap:
+            name: chernobyl-ca
+
+      extraVolumeMounts:
+        - name: chernobyl-ca
+          mountPath: /etc/ssl/certs/chernobyl_root_ca.crt
+          subPath: chernobyl_root_ca.crt
+          readOnly: true
 
       # extraVolumes:
       #   - name: postgresql-tls
