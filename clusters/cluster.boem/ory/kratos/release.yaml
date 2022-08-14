@@ -235,8 +235,10 @@ spec:
         serve:
           public:
             port: 4433
+            base_url: https://kratos.stingalleman.dev
           admin:
             port: 4434
+            base_url: "https://admin.kratos.stingalleman.dev"
 
         secrets: {}
 
