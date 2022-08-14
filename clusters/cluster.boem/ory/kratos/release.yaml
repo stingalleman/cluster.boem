@@ -188,9 +188,9 @@ spec:
         ## selfservice ##
         #
         selfservice:
-          default_browser_return_url: http://selfservice.kratos.cluster.boem/
+          default_browser_return_url: https://selfservice.kratos.cluster.boem/
           allowed_return_urls:
-            - http://selfservice.kratos.cluster.boem/
+            - https://selfservice.kratos.cluster.boem/
 
           methods:
             password:
@@ -198,33 +198,33 @@ spec:
 
           flows:
             error:
-              ui_url: http://selfservice.kratos.cluster.boem/error
+              ui_url: https://selfservice.kratos.cluster.boem/error
 
             settings:
-              ui_url: http://selfservice.kratos.cluster.boem/settings
+              ui_url: https://selfservice.kratos.cluster.boem/settings
               privileged_session_max_age: 15m
 
             recovery:
               enabled: true
-              ui_url: http://selfservice.kratos.cluster.boem/recovery
+              ui_url: https://selfservice.kratos.cluster.boem/recovery
 
             verification:
               enabled: true
-              ui_url: http://selfservice.kratos.cluster.boem/verification
+              ui_url: https://selfservice.kratos.cluster.boem/verification
               after:
-                default_browser_return_url: http://selfservice.kratos.cluster.boem/
+                default_browser_return_url: https://selfservice.kratos.cluster.boem/
 
             logout:
               after:
-                default_browser_return_url: http://selfservice.kratos.cluster.boem/login
+                default_browser_return_url: https://selfservice.kratos.cluster.boem/login
 
             login:
-              ui_url: http://selfservice.kratos.cluster.boem/login
+              ui_url: https://selfservice.kratos.cluster.boem/login
               lifespan: 10m
 
             registration:
               lifespan: 10m
-              ui_url: http://selfservice.kratos.cluster.boem/registration
+              ui_url: https://selfservice.kratos.cluster.boem/registration
               after:
                 password:
                   hooks:
