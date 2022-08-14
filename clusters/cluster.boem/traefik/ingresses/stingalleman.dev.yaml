@@ -32,7 +32,7 @@ spec:
           port: 80
 
     - kind: Rule
-      match: Host(`selfservice.kratos.stingalleman.dev`)
+      match: Host(`ui.kratos.stingalleman.dev`)
       services:
         - name: selfservice
           namespace: ory
