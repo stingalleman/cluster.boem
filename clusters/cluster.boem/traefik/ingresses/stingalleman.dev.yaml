@@ -25,14 +25,14 @@ spec:
           port: 80
 
     - kind: Rule
-      match: Host(`admin.kratos.stingalleman.dev`)
+      match: Host(`adminkratos.stingalleman.dev`)
       services:
         - name: kratos-admin
           namespace: ory
           port: 80
 
     - kind: Rule
-      match: Host(`ui.kratos.stingalleman.dev`)
+      match: Host(`uikratos.stingalleman.dev`)
       services:
         - name: selfservice
           namespace: ory
