@@ -188,9 +188,9 @@ spec:
         ## selfservice ##
         #
         selfservice:
-          default_browser_return_url: https://ui.kratos.stingalleman.dev/
+          default_browser_return_url: https://uikratos.stingalleman.dev/
           allowed_return_urls:
-            - https://ui.kratos.stingalleman.dev/
+            - https://uikratos.stingalleman.dev/
 
           methods:
             password:
@@ -198,33 +198,33 @@ spec:
 
           flows:
             error:
-              ui_url: https://ui.kratos.stingalleman.dev/error
+              ui_url: https://uikratos.stingalleman.dev/error
 
             settings:
-              ui_url: https://ui.kratos.stingalleman.dev/settings
+              ui_url: https://uikratos.stingalleman.dev/settings
               privileged_session_max_age: 15m
 
             recovery:
               enabled: true
-              ui_url: https://ui.kratos.stingalleman.dev/recovery
+              ui_url: https://uikratos.stingalleman.dev/recovery
 
             verification:
               enabled: true
-              ui_url: https://ui.kratos.stingalleman.dev/verification
+              ui_url: https://uikratos.stingalleman.dev/verification
               after:
-                default_browser_return_url: https://ui.kratos.stingalleman.dev/
+                default_browser_return_url: https://uikratos.stingalleman.dev/
 
             logout:
               after:
-                default_browser_return_url: https://ui.kratos.stingalleman.dev/login
+                default_browser_return_url: https://uikratos.stingalleman.dev/login
 
             login:
-              ui_url: https://ui.kratos.stingalleman.dev/login
+              ui_url: https://uikratos.stingalleman.dev/login
               lifespan: 10m
 
             registration:
               lifespan: 10m
-              ui_url: https://ui.kratos.stingalleman.dev/registration
+              ui_url: https://uikratos.stingalleman.dev/registration
               after:
                 password:
                   hooks:
@@ -238,7 +238,7 @@ spec:
             base_url: https://kratos.stingalleman.dev
           admin:
             port: 4434
-            base_url: "https://admin.kratos.stingalleman.dev"
+            base_url: "https://adminkratos.stingalleman.dev"
 
         secrets: {}
 
