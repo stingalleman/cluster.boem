@@ -37,7 +37,7 @@ spec:
             [
               "sh",
               "-c",
-              "touch /certs/acme.json ; chmod -Rv 600 /certs/acme.json",
+              "touch /certs/acme.json ; chmod -Rv 660 /certs/acme.json",
             ]
           volumeMounts:
             - name: certs
