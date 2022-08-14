@@ -8,14 +8,14 @@ spec:
     - web
     - websecure
   routes:
-    # - kind: Rule
-    #   match: Host(`stingalleman.nl`)
-    #   services:
-    #     - kind: Service
-    #       name: stingalleman-website
-    #       namespace: default
-    #       passHostHeader: true
-    #       port: 80
+    - kind: Rule
+      match: Host(`stingalleman.nl`)
+      services:
+        - kind: Service
+          name: stingalleman-website
+          namespace: default
+          passHostHeader: true
+          port: 80
 
     - kind: Rule
       match: Host(`grafiekjes.stingalleman.nl`)
