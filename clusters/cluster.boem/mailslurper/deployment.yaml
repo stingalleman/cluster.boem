@@ -21,9 +21,9 @@ spec:
         - name: config
           configMap:
             name: mailslurper-config
-        - name: cert
-          secret:
-            secretName: mailslurper-cert
+        # - name: cert
+        #   secret:
+        #     secretName: mailslurper-cert
       containers:
         - name: fake-smtp-server
           image: "pingouin/mailslurper:latest"
@@ -34,9 +34,9 @@ spec:
             - name: config
               mountPath: /etc/config
               readOnly: true
-            - name: cert
-              mountPath: /etc/cert
-              readOnly: true
+          #   - name: cert
+          #     mountPath: /etc/cert
+          #     readOnly: true
           ports:
             - name: smtp
               containerPort: 1025
