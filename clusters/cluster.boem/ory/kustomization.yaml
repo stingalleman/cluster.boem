@@ -1,11 +1,11 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
-- kratos/release.yaml
-- mailslurper/deployment.yaml
-- mailslurper/services/admin-service.yaml
-- mailslurper/services/smtp-service.yaml
-- mailslurper/services/ui-service.yaml
-- namespace.yaml
-- selfservice-ui/deployment.yaml
-- selfservice-ui/service.yaml
+# apiVersion: kustomize.config.k8s.io/v1beta1
+# kind: Kustomization
+# resources:
+# - kratos/release.yaml
+# - mailslurper/deployment.yaml
+# - mailslurper/services/admin-service.yaml
+# - mailslurper/services/smtp-service.yaml
+# - mailslurper/services/ui-service.yaml
+# - namespace.yaml
+# - selfservice-ui/deployment.yaml
+# - selfservice-ui/service.yaml
