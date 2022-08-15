@@ -189,9 +189,9 @@ spec:
         ## selfservice ##
         #
         selfservice:
-          default_browser_return_url: https://uikratos.stingalleman.dev/
+          default_browser_return_url: http://localhost:3001/
           allowed_return_urls:
-            - https://uikratos.stingalleman.dev/
+            - http://localhost:3001/
 
           methods:
             password:
@@ -199,33 +199,33 @@ spec:
 
           flows:
             error:
-              ui_url: https://uikratos.stingalleman.dev/error
+              ui_url: http://localhost:3001/error
 
             settings:
-              ui_url: https://uikratos.stingalleman.dev/settings
+              ui_url: http://localhost:3001/settings
               privileged_session_max_age: 15m
 
             recovery:
               enabled: true
-              ui_url: https://uikratos.stingalleman.dev/recovery
+              ui_url: http://localhost:3001/recovery
 
             verification:
               enabled: true
-              ui_url: https://uikratos.stingalleman.dev/verification
+              ui_url: http://localhost:3001/verification
               after:
-                default_browser_return_url: https://uikratos.stingalleman.dev/
+                default_browser_return_url: http://localhost:3001/
 
             logout:
               after:
-                default_browser_return_url: https://uikratos.stingalleman.dev/login
+                default_browser_return_url: http://localhost:3001/login
 
             login:
-              ui_url: https://uikratos.stingalleman.dev/login
+              ui_url: http://localhost:3001/login
               lifespan: 10m
 
             registration:
               lifespan: 10m
-              ui_url: https://uikratos.stingalleman.dev/registration
+              ui_url: http://localhost:3001/registration
               # after:
               #   password:
               #     hooks:
