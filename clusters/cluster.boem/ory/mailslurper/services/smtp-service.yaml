@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: fake-smtp-server
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
     - port: 1025
       targetPort: smtp
