@@ -178,7 +178,8 @@ spec:
       config:
         courier:
           smtp:
-            connection_uri: "smtps://kratos:kratos@mail-smtp.ory.svc.cluster.local:1025"
+            from_address: kratos@social-ding.com
+            connection_uri: "smtps://kratos:kratos@mail-smtp.ory.svc.cluster.local:1025/?skip_ssl_verify=true"
 
         identity:
           schemas:
@@ -192,6 +193,9 @@ spec:
           allowed_return_urls:
             - https://uikratos.stingalleman.dev/
 
+        password:
+          hooks:
+            - hook: session
           methods:
             password:
               enabled: true
@@ -225,6 +229,8 @@ spec:
             registration:
               lifespan: 10m
               ui_url: https://uikratos.stingalleman.dev/registration
+              after:
+                hooks:
               # after:
               # password:
               # hooks:
