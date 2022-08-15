@@ -14,7 +14,7 @@ spec:
   numberOfInstances: 1
   enableMasterLoadBalancer: true
   enableReplicaLoadBalancer: true
-  enableConnectionPooler: true
+  enableConnectionPooler: false
   volume:
     size: "10Gi"
   users:
@@ -22,6 +22,8 @@ spec:
       - superuser
       - createdb
     kratos:
+      - superuser
+      - createdb
   databases:
     social: social
     kratos: kratos
