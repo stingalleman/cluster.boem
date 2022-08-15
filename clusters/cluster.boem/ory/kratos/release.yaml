@@ -229,12 +229,10 @@ spec:
             registration:
               lifespan: 10m
               ui_url: https://uikratos.stingalleman.dev/registration
-              # after:
-              # hooks:
-              # after:
-              # password:
-              # hooks:
-              # - hook: session
+              after:
+                password:
+                  hooks:
+                    - hook: session
 
         #template_override_path: /conf/courier-templates
 
