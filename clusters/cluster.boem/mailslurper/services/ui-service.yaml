@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mail-smtp
-  namespace: ory
+  name: fake-smtp-server-ui
+  namespace: mailslurper
   labels:
     app.kubernetes.io/name: fake-smtp-server
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
-    - port: 1025
-      targetPort: smtp
+    - port: 4436
+      targetPort: http-mail-ui
       protocol: TCP
       name: http
   selector:
