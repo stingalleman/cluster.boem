@@ -23,9 +23,8 @@ data:
       "dbPassword": "",
       "maxWorkers": 1000,
       "autoStartBrowser": false,
+      "keyFile": "",
+      "certFile": "",
+      "adminKeyFile": "",
+      "adminCertFile": ""
     }
-
-# "keyFile": "/etc/cert/mailslurper-key.pem",
-# "certFile": "/etc/cert/mailslurper-cert.pem",
-# "adminKeyFile": "",
-# "adminCertFile": ""
