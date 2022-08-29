@@ -33,7 +33,7 @@ spec:
         # Related issue: https://github.com/traefik/traefik/issues/6972
         - name: volume-permissions
           image: busybox:1.31.1
-          command: ["sh", "-c", "sleep 300"]
+          command: ["sh", "-c", "chmod 600 /certs/acme.json"]
           volumeMounts:
             - name: certs
               mountPath: /certs
