@@ -1,13 +1,11 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-metadata:
-  name: repositories
-  namespace: flux-system
 resources:
-  - k8s-at-home.yaml
-  - traefik.yaml
-  - bitnami.yaml
-  - prometheus-community.yaml
-  - metallb.yaml
-  - postgres-operator.yaml
-  - ory.yaml
+- bitnami.yaml
+- k8s-at-home.yaml
+- metallb.yaml
+- ory.yaml
+- podinfo.yaml
+- postgres-operator.yaml
+- prometheus-community.yaml
+- traefik.yaml
