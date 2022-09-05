@@ -13,13 +13,6 @@ spec:
         namespace: flux-system
   interval: 5m
   values:
-    configInline:
-      address-pools:
-      - name: default
-        protocol: layer2
-        addresses:
-        - 10.10.10.200-10.10.10.220
-
     prometheus:
       # scrape annotations specifies whether to add Prometheus metric
       # auto-collection annotations to pods. See
@@ -44,7 +37,6 @@ spec:
 
       # Prometheus Operator PodMonitors
       podMonitor:
-
         # enable support for Prometheus Operator
         enabled: true
 
@@ -74,7 +66,6 @@ spec:
 
       # Prometheus Operator alertmanager alerts
       prometheusRule:
-
         # enable alertmanager alerts
         enabled: true
 
@@ -142,10 +133,11 @@ spec:
         # nobody
         runAsUser: 65534
         fsGroup: 65534
-      resources: {}
+      resources:
+        {}
         # limits:
-          # cpu: 100m
-          # memory: 100Mi
+        # cpu: 100m
+        # memory: 100Mi
       nodeSelector: {}
       tolerations: []
       priorityClassName: ""
@@ -191,10 +183,11 @@ spec:
       ## By default secretName: {{ "metallb.fullname" }}-memberlist
       ##
       # secretName:
-      resources: {}
+      resources:
+        {}
         # limits:
-          # cpu: 100m
-          # memory: 100Mi
+        # cpu: 100m
+        # memory: 100Mi
       nodeSelector: {}
       tolerations: []
       priorityClassName: ""
