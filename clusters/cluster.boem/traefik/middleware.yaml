@@ -18,12 +18,3 @@
 #   redirectScheme:
 #     scheme: https
 #     permanent: false
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: mailslurper-stripprefix
-  namespace: default
-spec:
-  stripPrefix:
-    prefixes:
-      - /adminm

@@ -3,6 +3,8 @@ kind: Kustomization
 resources:
 - ingresses
 - middleware.yaml
+- middlewares/internal-whitelist.yaml
+- middlewares/mailslurper-stripprefix.yaml
 - namespace.yaml
 - release.yaml
 - serverstransport.yaml

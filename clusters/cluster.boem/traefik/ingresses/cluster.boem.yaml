@@ -10,6 +10,8 @@ spec:
   routes:
     - kind: Rule
       match: Host(`alerts.cluster.boem`)
+      middlewares:
+        - name: internal-whitelist
       services:
         - kind: Service
           name: alertmanager-operated
@@ -19,6 +21,8 @@ spec:
 
     - kind: Rule
       match: Host(`traefik.cluster.boem`)
+      middlewares:
+        - name: internal-whitelist
       services:
         - name: traefik-api
           namespace: traefik
@@ -26,6 +30,8 @@ spec:
 
     - kind: Rule
       match: Host(`longhorn.cluster.boem`)
+      middlewares:
+        - name: internal-whitelist
       services:
         - name: longhorn-frontend
           namespace: longhorn-system
@@ -33,6 +39,8 @@ spec:
 
     - kind: Rule
       match: Host(`prometheus.cluster.boem`)
+      middlewares:
+        - name: internal-whitelist
       services:
         - name: prometheus-operated
           namespace: monitoring
@@ -40,6 +48,8 @@ spec:
 
     - kind: Rule
       match: Host(`postgres.cluster.boem`)
+      middlewares:
+        - name: internal-whitelist
       services:
         - name: postgres-operator-ui
           namespace: postgres
@@ -47,6 +57,8 @@ spec:
 
     - kind: Rule
       match: Host(`mailslurper.cluster.boem`)
+      middlewares:
+        - name: internal-whitelist
       services:
         - name: fake-smtp-server-ui
           namespace: mailslurper
