@@ -34,7 +34,7 @@ spec:
       # Can be either Deployment or DaemonSet
       kind: Deployment
       # Number of pods of the deployment (only applies when kind == Deployment)
-      replicas: 2
+      replicas: 1
       initContainers:
         # Related issue: https://github.com/traefik/traefik/issues/6972
         - name: volume-permissions
