@@ -34,14 +34,14 @@ spec:
       # Can be either Deployment or DaemonSet
       kind: Deployment
       # Number of pods of the deployment (only applies when kind == Deployment)
-      replicas: 1
+      replicas: 2
       initContainers:
         # Related issue: https://github.com/traefik/traefik/issues/6972
         - name: volume-permissions
           image: busybox:1.31.1
           command: ["sh", "-c", "chmod 600 /certs/acme.json"]
           volumeMounts:
-            - name: certs
+            - name: certs2
               mountPath: /certs
 
     # Pod disruption budget
@@ -54,10 +54,11 @@ spec:
 
     persistence:
       enabled: true
-      name: certs
+      name: certs2
       path: /certs
-      # accessMode: ReadWriteMany
+      accessMode: ReadWriteMany
       size: 64Mi
+
     #
     # Configure providers
     #
