@@ -7,8 +7,8 @@ spec:
   entryPoints:
     - web
     - websecure
-  middlewares:
-    - name: internal-whitelist
+  # middlewares:
+  #   - name: internal-whitelist
   routes:
     - kind: Rule
       match: Host(`alerts.cluster.boem`)
