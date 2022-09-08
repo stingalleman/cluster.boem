@@ -161,6 +161,8 @@ spec:
     # speaker contains configuration specific to the MetalLB speaker
     # daemonset.
     speaker:
+      frr:
+        enabled: true
       enabled: true
       # -- Speaker log level. Must be one of: `all`, `debug`, `info`, `warn`, `error` or `none`
       logLevel: info
