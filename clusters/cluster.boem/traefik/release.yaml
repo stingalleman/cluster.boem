@@ -30,6 +30,11 @@ spec:
         loadBalancerIP: "45.83.205.8"
 
     deployment:
+      enabled: true
+      # Can be either Deployment or DaemonSet
+      kind: Deployment
+      # Number of pods of the deployment (only applies when kind == Deployment)
+      replicas: 2
       initContainers:
         # Related issue: https://github.com/traefik/traefik/issues/6972
         - name: volume-permissions
@@ -38,6 +43,14 @@ spec:
           volumeMounts:
             - name: certs
               mountPath: /certs
+
+    # Pod disruption budget
+    podDisruptionBudget:
+      enabled: true
+      # maxUnavailable: 1
+      # maxUnavailable: 33%
+      minAvailable: 1
+      # minAvailable: 25%
 
     persistence:
       enabled: true
