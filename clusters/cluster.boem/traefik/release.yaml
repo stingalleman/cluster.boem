@@ -22,6 +22,7 @@ spec:
       - "--certificatesresolvers.le-resolver.acme.storage=/certs/acme.json"
       - "--certificatesresolvers.dns-resolver.acme.dnschallenge.provider=cloudflare"
       - "--certificatesresolvers.dns-resolver.acme.storage=/certs/acme.json"
+      - "--accesslog=true"
 
     service:
       spec:
