@@ -6,5 +6,5 @@ metadata:
 spec:
   ipWhiteList:
     sourceRange:
-      - 10.0.0.0/24
-      - 10.10.0.0/16
+      - 10.0.0.0/8
+      - 83.84.120.246/32

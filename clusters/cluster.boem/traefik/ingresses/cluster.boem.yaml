@@ -12,8 +12,8 @@ spec:
   routes:
     - kind: Rule
       match: Host(`alerts.cluster.boem`)
-      # middlewares:
-      #   - name: internal-whitelist
+      middlewares:
+        - name: internal-whitelist
       services:
         - kind: Service
           name: alertmanager-operated
