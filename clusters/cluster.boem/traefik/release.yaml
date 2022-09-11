@@ -18,8 +18,8 @@ spec:
       - "--global.checknewversion"
       - "--api"
       - "--api.insecure"
-      - "--certificatesresolvers.le-resolver.acme.tlschallenge=true"
-      - "--certificatesresolvers.le-resolver.acme.storage=/certs/acme.json"
+      # - "--certificatesresolvers.le-resolver.acme.tlschallenge=true"
+      # - "--certificatesresolvers.le-resolver.acme.storage=/certs/acme.json"
       # - "--certificatesresolvers.dns-resolver.acme.dnschallenge.provider=cloudflare"
       # - "--certificatesresolvers.dns-resolver.acme.storage=/certs/acme.json"
       # - "--accesslog=true"
@@ -80,7 +80,7 @@ spec:
     # - "--certificatesresolvers.le.acme.storage=/data/acme.json"
     # It will persist TLS certificates.
     persistence:
-      enabled: true
+      enabled: false
       name: certs
       # existingClaim: "certs"
       accessMode: ReadWriteOnce
