@@ -30,14 +30,14 @@ spec:
           namespace: traefik
           port: 9000
 
-    - kind: Rule
-      match: Host(`longhorn.cluster.boem`)
-      middlewares:
-        - name: internal-whitelist
-      services:
-        - name: longhorn-frontend
-          namespace: longhorn-system
-          port: 80
+    # - kind: Rule
+    # match: Host(`longhorn.cluster.boem`)
+    # middlewares:
+    #   - name: internal-whitelist
+    # services:
+    #   - name: longhorn-frontend
+    #     namespace: longhorn-system
+    #     port: 80
 
     - kind: Rule
       match: Host(`prometheus.cluster.boem`)

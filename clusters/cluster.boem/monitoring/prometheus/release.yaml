@@ -20,16 +20,16 @@ spec:
     additionalPrometheusRulesMap:
       blackbox:
         groups:
-        - name: blackbox
-          interval: 1m
-          rules:
-          - alert: EndpointOffline
-            expr: probe_success{job="blackbox"} < 1
-            for: 90s
-            labels:
-              severity: critical
-            annotations:
-              summary: "{{ $labels.instance }} is offline!"
+          - name: blackbox
+            interval: 1m
+            rules:
+              - alert: EndpointOffline
+                expr: probe_success{job="blackbox"} < 1
+                for: 90s
+                labels:
+                  severity: critical
+                annotations:
+                  summary: "{{ $labels.instance }} is offline!"
     #   blackbox-down:
     #    groups:
     #    - name: blackbox
@@ -79,34 +79,34 @@ spec:
         global:
           resolve_timeout: 5m
         route:
-          group_by: ['job']
+          group_by: ["job"]
           group_wait: 30s
           group_interval: 5m
           repeat_interval: 12h
-          receiver: 'default'
+          receiver: "default"
           routes:
-          # - receiver: "void"
-          #   match:
-          #     alertname: etcdHighNumberOfFailedGRPCRequests
-          - receiver: "void"
-            match:
-              alertname: Watchdog
+            # - receiver: "void"
+            #   match:
+            #     alertname: etcdHighNumberOfFailedGRPCRequests
+            - receiver: "void"
+              match:
+                alertname: Watchdog
         receivers:
-        - name: default
-          pushover_configs:
-            - token: appy6o35262deao261tap6k6bnqstz
-              user_key: u74hw2c61vg6b873a4a5tbw72iotq2
-          webhook_configs:
-            - url: http://alertmanager-discord.monitoring.svc.cluster.local:9094
-        - name: "void"
+          - name: default
+            pushover_configs:
+              - token: appy6o35262deao261tap6k6bnqstz
+                user_key: u74hw2c61vg6b873a4a5tbw72iotq2
+            webhook_configs:
+              - url: http://alertmanager-discord.monitoring.svc.cluster.local:9094
+          - name: "void"
         templates:
-        - '/etc/alertmanager/config/*.tmpl'
+          - "/etc/alertmanager/config/*.tmpl"
 
       alertmanagerSpec:
         storage:
           volumeClaimTemplate:
             spec:
-              storageClassName: longhorn-ssd
+              storageClassName: nfs
               accessModes: ["ReadWriteOnce"]
               resources:
                 requests:
@@ -130,76 +130,76 @@ spec:
         ## port to 2379 and allow etcd scraping provided it is running on all Kubernetes master nodes
         ##
         additionalScrapeConfigs:
-        - job_name: "blackbox"
-          metrics_path: /probe
-          scrape_interval: 60s
-          params:
-            module: [http_2xx] # Look for a HTTP 200 response.
-          static_configs:
-            - targets:
-                - https://stingalleman.nl
-                - https://core.pakket.sh
-                - https://pakket.sh
-                - https://cdn.stingalleman.nl
-                # - https://pve.boem
-                # - https://ca.boem
-          relabel_configs:
-            - source_labels: [__address__]
-              target_label: __param_target
-            - source_labels: [__param_target]
-              target_label: instance
-            - target_label: __address__
-              replacement: blackbox-prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115
+          - job_name: "blackbox"
+            metrics_path: /probe
+            scrape_interval: 60s
+            params:
+              module: [http_2xx] # Look for a HTTP 200 response.
+            static_configs:
+              - targets:
+                  - https://stingalleman.nl
+                  - https://core.pakket.sh
+                  - https://pakket.sh
+                  - https://cdn.stingalleman.nl
+                  # - https://pve.boem
+                  # - https://ca.boem
+            relabel_configs:
+              - source_labels: [__address__]
+                target_label: __param_target
+              - source_labels: [__param_target]
+                target_label: instance
+              - target_label: __address__
+                replacement: blackbox-prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115
 
-        - job_name: "node-exporter"
-          scrape_interval: 5s
-          static_configs:
-          - targets: [10.10.10.2:9100]
-            labels:
-              instance: "chernobyl"
-              city: "Amsterdam"
-              latitude: 52.33626806224156
-              longitude: 4.886583946358772
-          - targets: [10.10.10.10:9100]
-            labels:
-              instance: "internals"
-              city: "Amsterdam"
-              latitude: 52.33626806224156
-              longitude: 4.886583946358772
-          - targets: [10.10.10.1:9100]
-            labels:
-              instance: "reactor"
-              city: "Amsterdam"
-              latitude: 52.33626806224156
-              longitude: 4.886583946358772
+          - job_name: "node-exporter"
+            scrape_interval: 5s
+            static_configs:
+              - targets: [10.10.10.2:9100]
+                labels:
+                  instance: "chernobyl"
+                  city: "Amsterdam"
+                  latitude: 52.33626806224156
+                  longitude: 4.886583946358772
+              - targets: [10.10.10.10:9100]
+                labels:
+                  instance: "internals"
+                  city: "Amsterdam"
+                  latitude: 52.33626806224156
+                  longitude: 4.886583946358772
+              - targets: [10.10.10.1:9100]
+                labels:
+                  instance: "reactor"
+                  city: "Amsterdam"
+                  latitude: 52.33626806224156
+                  longitude: 4.886583946358772
 
-        - job_name: caddy
-          static_configs:
-            # - targets: ["caddy:1990"]
-            #   labels:
-            #     instance: "gemairo"
-            #     city: "Amsterdam"
-            #     latitude: 52.33626806224156
-            #     longitude: 4.886583946358772
+          - job_name: caddy
+            static_configs:
+              # - targets: ["caddy:1990"]
+              #   labels:
+              #     instance: "gemairo"
+              #     city: "Amsterdam"
+              #     latitude: 52.33626806224156
+              #     longitude: 4.886583946358772
 
-            - targets: ["10.10.10.10:1990"]
-              labels:
-                instance: "internals"
-                city: "Amsterdam"
-                latitude: 52.33626806224156
-                longitude: 4.886583946358772
+              - targets: ["10.10.10.10:1990"]
+                labels:
+                  instance: "internals"
+                  city: "Amsterdam"
+                  latitude: 52.33626806224156
+                  longitude: 4.886583946358772
 
-        - job_name: adguard
-          static_configs:
-            - targets: ["10.10.10.10:9617"]
+          - job_name: adguard
+            static_configs:
+              - targets: ["10.10.10.10:9617"]
 
-        - job_name: "pve"
-          static_configs:
-            - targets:
-                - 10.10.10.2:8008 # Proxmox VE node with PVE exporter.
-          metrics_path: /pve
-          params:
-            module: [default]
+          - job_name: "pve"
+            static_configs:
+              - targets:
+                  - 10.10.10.2:8008 # Proxmox VE node with PVE exporter.
+            metrics_path: /pve
+            params:
+              module: [default]
 
         ## If scrape config contains a repetitive section, you may want to use a template.
         ## In the following example, you can see how to define `gce_sd_configs` for multiple zones
@@ -214,16 +214,16 @@ spec:
         #    relabel_configs:
         #    ...
 
-
         ## If additional scrape configurations are already deployed in a single secret file you can use this section.
         ## Expected values are the secret name and key
         ## Cannot be used with additionalScrapeConfigs
-        additionalScrapeConfigsSecret: {}
+        additionalScrapeConfigsSecret:
+          {}
           # enabled: false
           # name:
           # key:
 
-        secrets: ['etcd-client-cert']
+        secrets: ["etcd-client-cert"]
 
         ## Prometheus StorageSpec for persistent data
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/user-guides/storage.md
@@ -231,7 +231,7 @@ spec:
         storageSpec:
         volumeClaimTemplate:
           spec:
-            storageClassName: longhorn-ssd
+            storageClassName: nfs
             accessModes: ["ReadWriteOnce"]
             resources:
               requests:
