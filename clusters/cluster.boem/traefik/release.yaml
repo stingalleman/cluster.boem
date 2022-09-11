@@ -20,8 +20,8 @@ spec:
       - "--api.insecure"
       - "--certificatesresolvers.le-resolver.acme.tlschallenge=true"
       - "--certificatesresolvers.le-resolver.acme.storage=/certs/acme.json"
-      - "--certificatesresolvers.dns-resolver.acme.dnschallenge.provider=cloudflare"
-      - "--certificatesresolvers.dns-resolver.acme.storage=/certs/acme.json"
+      # - "--certificatesresolvers.dns-resolver.acme.dnschallenge.provider=cloudflare"
+      # - "--certificatesresolvers.dns-resolver.acme.storage=/certs/acme.json"
       # - "--accesslog=true"
 
     service:
@@ -116,17 +116,17 @@ spec:
           # pathOverride: ""
 
     # Environment variables to be passed to Traefik's binary
-    env:
-      - name: CF_API_EMAIL
-        valueFrom:
-          secretKeyRef:
-            name: cf-api
-            key: email
-      - name: CF_API_KEY
-        valueFrom:
-          secretKeyRef:
-            name: cf-api
-            key: token
+    # env:
+    #   - name: CF_API_EMAIL
+    #     valueFrom:
+    #       secretKeyRef:
+    #         name: cf-api
+    #         key: email
+    #   - name: CF_API_KEY
+    #     valueFrom:
+    #       secretKeyRef:
+    #         name: cf-api
+    #         key: token
 
     # Configure ports
     ports:
