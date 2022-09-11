@@ -19,7 +19,6 @@ spec:
             email: stingalleman@icloud.com
             apiTokenSecretRef:
               name: cloudflare-api-token
-              namespace: cert-manager
               key: token
         selector:
           dnsZones:
