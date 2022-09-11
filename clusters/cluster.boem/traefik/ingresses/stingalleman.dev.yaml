@@ -39,4 +39,4 @@ spec:
           port: 3000
 
   tls:
-    certResolver: dns-resolver
+    certResolver: le-resolver

@@ -40,4 +40,4 @@ spec:
           port: 8080
 
   tls:
-    certResolver: dns-resolver
+    certResolver: le-resolver
