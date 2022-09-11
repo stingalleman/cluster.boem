@@ -50,7 +50,7 @@ spec:
       # Can be either Deployment or DaemonSet
       kind: Deployment
       # Number of pods of the deployment (only applies when kind == Deployment)
-      replicas: 1
+      replicas: 3
       # initContainers:
       # Related issue: https://github.com/traefik/traefik/issues/6972
       # - name: volume-permissions
@@ -65,7 +65,7 @@ spec:
       enabled: true
       # maxUnavailable: 1
       # maxUnavailable: 33%
-      minAvailable: 1
+      minAvailable: 2
       # minAvailable: 25%
 
     # Additional volumeMounts to add to the Traefik container
