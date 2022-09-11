@@ -40,4 +40,4 @@ spec:
           port: 8080
 
   tls:
-    certResolver: le-resolver
+    secretName: stingalleman.nl-staging-tls

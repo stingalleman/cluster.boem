@@ -189,7 +189,7 @@ spec:
           enabled: true
           # this is the name of a TLSOption definition
           # options: ""
-          certResolver: "le-resolver"
+          # certResolver: "le-resolver"
           # domains: []
           # - main: example.com
           #   sans:

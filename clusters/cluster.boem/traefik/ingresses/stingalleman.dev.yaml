@@ -37,6 +37,3 @@ spec:
         - name: selfservice
           namespace: ory
           port: 3000
-
-  tls:
-    certResolver: le-resolver
