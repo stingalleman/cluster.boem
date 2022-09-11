@@ -40,4 +40,4 @@ spec:
           port: 8080
 
   tls:
-    secretName: stingalleman.nl-staging-tls
+    secretName: stingalleman.nl-prod-tls
