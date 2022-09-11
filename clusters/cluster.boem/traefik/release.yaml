@@ -68,28 +68,27 @@ spec:
       minAvailable: 1
       # minAvailable: 25%
 
-    # Add volumes to the traefik pod. The volume name will be passed to tpl.
-    # This can be used to mount a cert pair or a configmap that holds a config.toml file.
-    # After the volume has been mounted, add the configs into traefik by using the `additionalArguments` list below, eg:
-    # additionalArguments:
-    # - "--providers.file.filename=/config/dynamic.toml"
-    # - "--ping"
-    # - "--ping.entrypoint=web"
-    volumes:
-      - name: certs
-        mountPath: "/certs"
-        type: persistentVolumeClaim
-    # - name: '{{ printf "%s-configs" .Release.Name }}'
-    #   mountPath: "/config"
-    #   type: configMap
-
     # Additional volumeMounts to add to the Traefik container
     # additionalVolumeMounts:
     #   - name: certs
     #     mountPath: /certs
 
+    # Enable persistence using Persistent Volume Claims
+    # ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+    # After the pvc has been mounted, add the configs into traefik by using the `additionalArguments` list below, eg:
+    # additionalArguments:
+    # - "--certificatesresolvers.le.acme.storage=/data/acme.json"
+    # It will persist TLS certificates.
     persistence:
-      enabled: false
+      enabled: true
+      name: certs
+      # existingClaim: "certs"
+      accessMode: ReadWritMany
+      size: 64Mi
+      storageClass: "nfs"
+      path: /certs
+      # annotations: {}
+      # subPath: "" # only mount a subpath of the Volume into the pod
 
     #
     # Configure providers
