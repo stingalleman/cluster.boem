@@ -83,7 +83,7 @@ spec:
       enabled: true
       name: certs
       # existingClaim: "certs"
-      accessMode: ReadWriteMany
+      accessMode: ReadWriteOnce
       size: 64Mi
       storageClass: "nfs"
       path: /certs
