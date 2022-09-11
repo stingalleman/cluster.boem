@@ -75,18 +75,18 @@ spec:
     # - "--providers.file.filename=/config/dynamic.toml"
     # - "--ping"
     # - "--ping.entrypoint=web"
-    # volumes:
-    # - name: cert-claim
-    # mountPath: "/certs"
-    # type:
+    volumes:
+      - name: certs
+        mountPath: "/certs"
+        type: persistentVolumeClaim
     # - name: '{{ printf "%s-configs" .Release.Name }}'
     #   mountPath: "/config"
     #   type: configMap
 
     # Additional volumeMounts to add to the Traefik container
-    additionalVolumeMounts:
-      - name: certs
-        mountPath: /certs
+    # additionalVolumeMounts:
+    #   - name: certs
+    #     mountPath: /certs
 
     persistence:
       enabled: false
