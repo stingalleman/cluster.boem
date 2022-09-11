@@ -55,7 +55,7 @@ spec:
 
     installCRDs: true
 
-    replicaCount: 1
+    replicaCount: 2
 
     strategy:
       {}
@@ -165,11 +165,11 @@ spec:
     # cert-manager can access an ingress or DNS TXT records at all times.
     # NOTE: This requires Kubernetes 1.10 or `CustomPodDNS` feature gate enabled for
     # the cluster to work.
-    # podDnsPolicy: "None"
-    # podDnsConfig:
-    #   nameservers:
-    #     - "1.1.1.1"
-    #     - "8.8.8.8"
+    podDnsPolicy: "None"
+    podDnsConfig:
+      nameservers:
+        - "1.1.1.1"
+        - "8.8.8.8"
 
     nodeSelector:
       kubernetes.io/os: linux
@@ -279,7 +279,9 @@ spec:
 
       # Additional command line flags to pass to cert-manager webhook binary.
       # To see all available flags run docker run quay.io/jetstack/cert-manager-webhook:<version> --help
-      extraArgs: []
+      extraArgs:
+        - --dns01-recursive-nameservers=1.1.1.1:53,8.8.8.8:53
+        - --dns01-recursive-nameservers-only
       # Path to a file containing a WebhookConfiguration object used to configure the webhook
       # - --config=<path-to-config-file>
 
