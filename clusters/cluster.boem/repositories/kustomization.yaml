@@ -4,6 +4,7 @@ resources:
 - bitnami.yaml
 - k8s-at-home.yaml
 - metallb.yaml
+- nfs-provisioner.yaml
 - ory.yaml
 - podinfo.yaml
 - postgres-operator.yaml
