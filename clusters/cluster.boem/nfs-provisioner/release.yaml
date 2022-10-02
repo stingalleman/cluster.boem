@@ -24,7 +24,7 @@ spec:
 
     nfs:
       server: 10.10.10.20
-      path: /mnt/nfs/k8s
+      path: /mnt/disk/nfs/k8s
       mountOptions:
       volumeName: nfs-subdir-external-provisioner-root
       # Reclaim policy for the main nfs volume
