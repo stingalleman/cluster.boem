@@ -167,7 +167,7 @@ spec:
   # extraConfig:
   #   import:
   #     parameters: /opt/coredns/*.conf
-  extraConfig: {}
+  # extraConfig: {}
 
   # To use the livenessProbe, the health plugin needs to be enabled in CoreDNS' server config
   livenessProbe:
