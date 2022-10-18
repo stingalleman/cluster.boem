@@ -130,7 +130,7 @@ spec:
           - name: ready
           - name: auto
             configBlock: |-
-              directory: /etc/coredns
+              directory /etc/coredns
           - name: cache
             parameters: 30
           - name: loop
