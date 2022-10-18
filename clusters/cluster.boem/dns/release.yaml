@@ -116,7 +116,7 @@ spec:
     # https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns-configmap-options
     servers:
       - zones:
-          - zone: .
+          - zone: stingalleman.nl
         port: 53
         # If serviceType is nodePort you can specify nodePort here
         # nodePort: 30053
@@ -128,18 +128,9 @@ spec:
               lameduck 5s
           # Serves a /ready endpoint on :8181, required for readinessProbe
           - name: ready
-          # Required to query kubernetes API for data
-          # - name: kubernetes
-          # parameters: cluster.local in-addr.arpa ip6.arpa
-          # configBlock: |-
-          # pods insecure
-          # fallthrough in-addr.arpa ip6.arpa
-          # ttl 30
-          # Serves a /metrics endpoint on :9153, required for serviceMonitor
-          # - name: prometheus
-          # parameters: 0.0.0.0:9153
-          - name: forward
-            parameters: . /etc/resolv.conf
+          - name: out
+            configBlock: |-
+              directory: /etc/coredns
           - name: cache
             parameters: 30
           - name: loop
@@ -217,14 +208,10 @@ spec:
 
     # configure custom zone files as per https://coredns.io/2017/05/08/custom-dns-entries-for-kubernetes/
     zoneFiles:
-      - filename: example.db
-        domain: example.com
+      - filename: stingalleman.nl.db
+        domain: stingalleman.nl
         contents: |
-          example.com.   IN SOA sns.dns.icann.com. noc.dns.icann.com. 2015082541 7200 3600 1209600 3600
-          example.com.   IN NS  b.iana-servers.net.
-          example.com.   IN NS  a.iana-servers.net.
-          example.com.   IN A   192.168.99.102
-          *.example.com. IN A   192.168.99.102
+          stingalleman.nl.   IN A 45.83.205.8
 
     # optional array of extra volumes to create
     extraVolumes: []
