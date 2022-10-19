@@ -483,9 +483,10 @@ spec:
       # If not set and create is true, a name is generated using the fullname template
       name: ""
 
+    # TODO: fix
     ## Storage configuration for media
     persistence:
-      enabled: true
+      enabled: false
       ##
       ## Existing claim to use
       existingClaim: ""
