@@ -211,7 +211,7 @@ spec:
         exposedPort: 9100
         # The port protocol (TCP/UDP)
         protocol: TCP
-      test123:
+      dns:
         port: 1053
         #   # hostPort: 8000
         expose: true
