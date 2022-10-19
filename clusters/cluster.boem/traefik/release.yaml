@@ -31,7 +31,7 @@ spec:
         externalTrafficPolicy: Local
         loadBalancerIP: "45.83.205.8"
       annotations:
-        metallb.universe.tf/allow-shared-ip: "sharingkey"
+        "metallb.universe.tf/allow-shared-ip": "sharingkey"
       # loadBalancerSourceRanges:
       #   []
       # - 192.168.0.1/32
@@ -212,9 +212,9 @@ spec:
         # The port protocol (TCP/UDP)
         protocol: TCP
       test-entrypoint:
-        port: 5300
-        # hostPort: 5300
+        port: 8005
+        # hostPort: 8000
         expose: true
-        exposedPort: 5300
+        exposedPort: 8006
         # The port protocol (TCP/UDP)
         protocol: UDP
