@@ -12,7 +12,7 @@ spec:
       services:
         - name: coredns-external-coredns
           namespace: dns
-          port: 53
+          # port: 53
 
     # - kind: Rule
     #   match: Host(`ns2.stingalleman.dev`)
