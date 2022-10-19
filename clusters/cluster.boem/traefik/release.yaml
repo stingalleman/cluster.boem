@@ -210,7 +210,7 @@ spec:
         # The port protocol (TCP/UDP)
         protocol: TCP
       dns:
-        port: 5353
+        port: 5352
         protocol: UDP
         expose: true
-        exposedPort: 5353
+        # exposedPort: 5353
