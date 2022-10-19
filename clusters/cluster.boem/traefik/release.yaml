@@ -209,7 +209,7 @@ spec:
         exposedPort: 9100
         # The port protocol (TCP/UDP)
         protocol: TCP
-      dns:
+      test-entrypoint:
         port: 8005
         # hostPort: 8000
         expose: true
