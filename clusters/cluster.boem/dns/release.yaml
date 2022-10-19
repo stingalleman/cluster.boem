@@ -28,7 +28,7 @@ spec:
       # pullSecrets:
       #   - myRegistryKeySecretName
 
-    # replicaCount: 2
+    replicaCount: 2
 
     resources:
       limits:
@@ -40,21 +40,21 @@ spec:
 
     # Create HorizontalPodAutoscaler object.
     #
-    autoscaling:
-      minReplicas: 2
-      maxReplicas: 4
-      metrics:
-        - type: Resource
-          resource:
-            name: cpu
-            targetAverageUtilization: 60
-        - type: Resource
-          resource:
-            name: memory
-            targetAverageUtilization: 60
+    # autoscaling:
+    #   minReplicas: 2
+    #   maxReplicas: 4
+    #   metrics:
+    #     - type: Resource
+    #       resource:
+    #         name: cpu
+    #         targetAverageUtilization: 60
+    #     - type: Resource
+    #       resource:
+    #         name: memory
+    #         targetAverageUtilization: 60
 
     rollingUpdate:
-      maxUnavailable: 2
+      maxUnavailable: 1
       maxSurge: 25%
 
     # Under heavy load it takes more that standard time to remove Pod endpoint from a cluster.
