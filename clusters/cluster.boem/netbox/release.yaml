@@ -421,9 +421,9 @@ spec:
       port: 5432
       database: netbox
       username: netbox
-      password: ""
-      existingSecretName: ""
-      existingSecretKey: postgresql-password
+      # password: ""
+      # existingSecretName: ""
+      # existingSecretKey: postgresql-password
 
       # The following settings also apply when using the bundled PostgreSQL chart:
       sslMode: prefer
