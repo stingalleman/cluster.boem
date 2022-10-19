@@ -84,7 +84,7 @@ spec:
       # clusterIP: ""
       loadBalancerIP: "45.83.205.10"
       # externalIPs: []
-      # externalTrafficPolicy: ""
+      externalTrafficPolicy: "Local"
       # The name of the Service
       # If not set, a name is generated using the fullname template
       name: ""
@@ -134,7 +134,7 @@ spec:
               directory /etc/coredns
           - name: transfer
             configBlock: |-
-              to 141.148.232.74
+              to * 141.148.232.74
           - name: cache
             parameters: 30
           # - name: loop
@@ -184,6 +184,8 @@ spec:
           stingalleman.dev	3600	IN	SOA	ns1.stingalleman.dev root.stingalleman.dev 0000000001 7200 3600 86400 3600
 
           ;; A Records
+          ns1.stingalleman.dev. 1 IN A 45.83.205.10
+          ns2.stingalleman.dev. 1 IN A 141.148.232.74
           adminkratos.stingalleman.dev.	1	IN	A	45.83.205.4
           apollo.stingalleman.dev.	1	IN	A	207.254.31.169
           cdn.stingalleman.dev.	1	IN	A	45.83.205.3
