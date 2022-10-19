@@ -212,8 +212,9 @@ spec:
       - filename: db.stingalleman.nl
         domain: stingalleman.nl
         contents: |
-          @     IN SOA ns.stingalleman.nl. hostmaster.stingalleman.nl. 0000000001 600 3600 1209600 86400
-          @     IN A 45.83.205.8
+          @                       IN SOA ns.stingalleman.nl. hostmaster.stingalleman.nl. 0000000001 600 3600 1209600 86400
+          @                       IN A 45.83.205.8
+          cdn.stingalleman.nl.    IN A 45.83.205.3
 
     # optional array of extra volumes to create
     extraVolumes: []
