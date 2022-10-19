@@ -211,10 +211,17 @@ spec:
         exposedPort: 9100
         # The port protocol (TCP/UDP)
         protocol: TCP
-      dns:
+      dns-udp:
         port: 1053
         #   # hostPort: 8000
         expose: true
         exposedPort: 53
         #   # The port protocol (TCP/UDP)
         protocol: UDP
+      dns-tcp:
+        port: 1054
+        #   # hostPort: 8000
+        expose: true
+        exposedPort: 53
+        #   # The port protocol (TCP/UDP)
+        protocol: TCP
