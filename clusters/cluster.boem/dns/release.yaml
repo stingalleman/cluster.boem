@@ -82,9 +82,9 @@ spec:
 
     service:
       # clusterIP: ""
-      loadBalancerIP: "45.83.205.10"
+      # loadBalancerIP: "45.83.205.10" # TODO
       # externalIPs: []
-      externalTrafficPolicy: "Local"
+      # externalTrafficPolicy: "Local" # TODO
       # The name of the Service
       # If not set, a name is generated using the fullname template
       name: ""
