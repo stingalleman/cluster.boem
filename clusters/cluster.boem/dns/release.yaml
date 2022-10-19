@@ -41,7 +41,7 @@ spec:
     # Create HorizontalPodAutoscaler object.
     #
     autoscaling:
-      minReplicas: 1
+      minReplicas: 2
       maxReplicas: 4
       metrics:
         - type: Resource
@@ -129,7 +129,7 @@ spec:
           # Serves a /ready endpoint on :8181, required for readinessProbe
           - name: ready
           - name: auto
-            parameters: stingalleman.nl stingalleman.dev
+            # parameters:
             configBlock: |-
               directory /etc/coredns
           - name: transfer
