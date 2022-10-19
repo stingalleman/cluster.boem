@@ -17,26 +17,26 @@ spec:
           passHostHeader: true
           port: 8020
 
-    - kind: Rule
-      match: Host(`kratos.stingalleman.dev`)
-      services:
-        - name: kratos-public
-          namespace: ory
-          port: 80
+    # - kind: Rule
+    #   match: Host(`kratos.stingalleman.dev`)
+    #   services:
+    #     - name: kratos-public
+    #       namespace: ory
+    #       port: 80
 
-    - kind: Rule
-      match: Host(`adminkratos.stingalleman.dev`)
-      services:
-        - name: kratos-admin
-          namespace: ory
-          port: 80
+    # - kind: Rule
+    #   match: Host(`adminkratos.stingalleman.dev`)
+    #   services:
+    #     - name: kratos-admin
+    #       namespace: ory
+    #       port: 80
 
-    - kind: Rule
-      match: Host(`uikratos.stingalleman.dev`)
-      services:
-        - name: selfservice
-          namespace: ory
-          port: 3000
+    # - kind: Rule
+    #   match: Host(`uikratos.stingalleman.dev`)
+    #   services:
+    #     - name: selfservice
+    #       namespace: ory
+    #       port: 3000
 
   tls:
     secretName: stingalleman.nl-prod-tls
