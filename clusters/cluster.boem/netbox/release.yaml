@@ -483,10 +483,9 @@ spec:
       # If not set and create is true, a name is generated using the fullname template
       name: ""
 
-    # TODO: fix
     ## Storage configuration for media
     persistence:
-      enabled: false
+      enabled: true
       ##
       ## Existing claim to use
       existingClaim: ""
@@ -499,7 +498,8 @@ spec:
       ## If undefined (the default) or set to null, no storageClassName spec is
       ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
       ##   GKE, AWS & OpenStack)
-      storageClass: ""
+      storageClass: "nfs"
+      storageClassName: "nfs"
       ## Persistent Volume Selector
       ## if enabled, define any Selectors for choosing existing Persistent Volumes here
       # selector:
