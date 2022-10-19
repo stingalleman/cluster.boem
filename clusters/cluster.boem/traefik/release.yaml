@@ -30,6 +30,8 @@ spec:
       spec:
         externalTrafficPolicy: Local
         loadBalancerIP: "45.83.205.8"
+      annotations:
+        metallb.universe.tf/allow-shared-ip: "sharingkey"
       # loadBalancerSourceRanges:
       #   []
       # - 192.168.0.1/32
