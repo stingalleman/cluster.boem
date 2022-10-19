@@ -215,4 +215,4 @@ spec:
         expose: true
         exposedPort: 8006
         # The port protocol (TCP/UDP)
-        protocol: TCP
+        protocol: UDP
