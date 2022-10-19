@@ -210,7 +210,9 @@ spec:
         # The port protocol (TCP/UDP)
         protocol: TCP
       dns:
-        port: 5352
-        protocol: UDP
+        port: 8005
+        # hostPort: 8000
         expose: true
-        # exposedPort: 5353
+        exposedPort: 85
+        # The port protocol (TCP/UDP)
+        protocol: TCP
