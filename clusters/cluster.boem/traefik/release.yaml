@@ -209,3 +209,8 @@ spec:
         exposedPort: 9100
         # The port protocol (TCP/UDP)
         protocol: TCP
+      dns:
+        port: 53
+        protocol: UDP
+        expose: true
+        exposedPort: 53
