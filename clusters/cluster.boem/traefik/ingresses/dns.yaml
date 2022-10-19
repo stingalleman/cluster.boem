@@ -1,0 +1,25 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: stingalleman.dev
+  namespace: default
+spec:
+  entryPoints:
+    - dns
+  routes:
+    - kind: Rule
+      match: Host(`ns1.stingalleman.dev`)
+      services:
+        - name: coredns-external-coredns
+          namespace: dns
+          port: 53
+
+    # - kind: Rule
+    #   match: Host(`ns2.stingalleman.dev`)
+    #   services:
+    #     - name: coredns-external-coredns
+    #       namespace: dns
+    #       port: 53
+
+  tls:
+    secretName: stingalleman.nl-prod-tls
