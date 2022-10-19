@@ -498,8 +498,8 @@ spec:
       ## If undefined (the default) or set to null, no storageClassName spec is
       ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
       ##   GKE, AWS & OpenStack)
-      storageClass: "nfs"
-      storageClassName: "nfs"
+      storageClass: "nfs-client"
+      # storageClassName: "nfs-client"
       ## Persistent Volume Selector
       ## if enabled, define any Selectors for choosing existing Persistent Volumes here
       # selector:
