@@ -213,6 +213,6 @@ spec:
         port: 8005
         # hostPort: 8000
         expose: true
-        exposedPort: 85
+        exposedPort: 8006
         # The port protocol (TCP/UDP)
         protocol: TCP
