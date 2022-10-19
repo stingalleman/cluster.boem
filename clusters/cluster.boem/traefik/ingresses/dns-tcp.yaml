@@ -11,6 +11,7 @@ spec:
       # priority: 10 # [4]
       services: # [7]
         - name: coredns-external-coredns # [8]
+          namespace: dns
           port: 53 # [9]
           weight: 10 # [10]
           # terminationDelay: 400 # [11]

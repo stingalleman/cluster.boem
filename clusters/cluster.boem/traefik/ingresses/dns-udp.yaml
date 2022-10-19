@@ -9,6 +9,7 @@ spec:
   routes:
     - services: # [3]
         - name: coredns-external-coredns # [4]
+          namespace: dns
           port: 53 # [5]
           weight: 10 # [6]
     # - kind: Rule
