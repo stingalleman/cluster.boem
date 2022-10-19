@@ -1,15 +1,15 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: cert-manager
-  namespace: cert-manager
+  name: netbox
+  namespace: netbox
 spec:
   chart:
     spec:
-      chart: cert-manager
+      chart: netbox
       sourceRef:
         kind: HelmRepository
-        name: jetstack
+        name: netbox
         namespace: flux-system
   interval: 5m
   values:
@@ -29,9 +29,9 @@ spec:
     # See `existingSecret` for details
     superuser:
       name: admin
-      email: admin@example.com
-      password: admin
-      apiToken: 0123456789abcdef0123456789abcdef01234567
+      email: netbox@stingalleman.nl
+      # password: admin
+      # apiToken: 0123456789abcdef0123456789abcdef01234567
 
     # Skip the netbox-docker startup scripts which can pre-populate objects into a
     # fresh NetBox installation. By default these do nothing, but they take a while
@@ -409,7 +409,7 @@ spec:
       ## Deploy PostgreSQL using bundled chart
       # To use an external database, set this to false and configure the settings
       # under externalDatabase
-      enabled: true
+      enabled: false
 
       postgresqlUsername: netbox
       postgresqlDatabase: netbox
@@ -417,7 +417,7 @@ spec:
     ## External database settings
     # These are used if postgresql.enabled is false, and are ignored otherwise
     externalDatabase:
-      host: localhost
+      host: 10.10.10.15
       port: 5432
       database: netbox
       username: netbox
