@@ -213,4 +213,4 @@ spec:
         port: 5353
         protocol: UDP
         expose: true
-        exposedPort: 53
+        exposedPort: 5353
