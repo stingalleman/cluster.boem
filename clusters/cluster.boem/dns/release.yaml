@@ -151,7 +151,8 @@ spec:
           stingalleman.nl	3600	IN	SOA	ns1.stingalleman.dev root.stingalleman.nl 0000000005 7200 3600 86400 3600
 
           ;; NS records
-
+          stingalleman.nl. 3600 IN NS ns1.stingalleman.dev.
+          stingalleman.nl. 3600 IN NS ns2.stingalleman.dev.
 
           ;; A Records
           cdn.stingalleman.nl.	1	IN	A	45.83.205.3
@@ -186,6 +187,10 @@ spec:
         contents: |
           ;; SOA Record
           stingalleman.dev	3600	IN	SOA	ns1.stingalleman.dev root.stingalleman.dev 0000000001 7200 3600 86400 3600
+
+          ;; NS records
+          stingalleman.dev. 3600 IN NS ns1.stingalleman.dev.
+          stingalleman.dev. 3600 IN NS ns2.stingalleman.dev.
 
           ;; A Records
           ns1.stingalleman.dev. 1 IN A 45.83.205.10
