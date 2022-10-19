@@ -66,7 +66,7 @@ spec:
     podAnnotations: {}
     #  cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
 
-    serviceType: "ClusterIP"
+    serviceType: "LoadBalancer"
 
     prometheus:
       service:
@@ -82,7 +82,7 @@ spec:
 
     service:
       # clusterIP: ""
-      # loadBalancerIP: "45.83.205.10"
+      loadBalancerIP: "45.83.205.10"
       # externalIPs: []
       # externalTrafficPolicy: ""
       # The name of the Service
@@ -107,7 +107,7 @@ spec:
       # name:
 
     # isClusterService specifies whether chart should be deployed as cluster-service or normal k8s app.
-    isClusterService: true
+    isClusterService: false
 
     # Optional priority class to be used for the coredns pods. Used for autoscaler if autoscaler.priorityClassName not set.
     priorityClassName: ""
