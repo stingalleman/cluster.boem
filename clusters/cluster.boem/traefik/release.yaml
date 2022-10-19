@@ -214,7 +214,7 @@ spec:
       test-entrypoint2:
         port: 1053
         #   # hostPort: 8000
-        #   expose: true
-        #   exposedPort: 8006
+        expose: true
+        exposedPort: 53
         #   # The port protocol (TCP/UDP)
         protocol: UDP
