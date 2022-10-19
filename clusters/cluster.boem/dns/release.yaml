@@ -148,7 +148,10 @@ spec:
         domain: stingalleman.nl
         contents: |
           ;; SOA Record
-          stingalleman.nl	3600	IN	SOA	ns1.stingalleman.dev root.stingalleman.nl 0000000004 7200 3600 86400 3600
+          stingalleman.nl	3600	IN	SOA	ns1.stingalleman.dev root.stingalleman.nl 0000000005 7200 3600 86400 3600
+
+          ;; NS records
+
 
           ;; A Records
           cdn.stingalleman.nl.	1	IN	A	45.83.205.3
@@ -177,7 +180,7 @@ spec:
           ;; TXT Records
           _dmarc.stingalleman.nl.	1	IN	TXT	"v=DMARC1; p=quarantine; rua=mailto:me@stingalleman.nl"
           stingalleman.nl.	3600	IN	TXT	"v=spf1 include:icloud.com ~all"
-          stingalleman.nl.	1	IN	TXT	"apple-domain=Y3V4NfzAjFIa1rqG"
+          stingalleman.nl.	1	IN	TXT	"apple-domain=iKcZGOSjEiX2tkmF"
       - filename: db.stingalleman.dev
         domain: stingalleman.dev
         contents: |
