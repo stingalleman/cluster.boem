@@ -5,15 +5,18 @@ metadata:
   namespace: default
 spec:
   entryPoints:
-    - dns-tcp
     - dns-udp
   routes:
-    - kind: Rule
-      match: Host(`ns1.stingalleman.dev`)
-      services:
-        - name: coredns-external-coredns
-          namespace: dns
-          port: 53
+    - services: # [3]
+        - name: coredns-external-coredns # [4]
+          port: 53 # [5]
+          weight: 10 # [6]
+    # - kind: Rule
+    #   match: Host(`ns1.stingalleman.dev`)
+    #   services:
+    #     - name: coredns-external-coredns
+    #       namespace: dns
+    #       port: 53
 
     # - kind: Rule
     #   match: Host(`ns2.stingalleman.dev`)
