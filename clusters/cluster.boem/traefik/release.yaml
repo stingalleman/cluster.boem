@@ -212,7 +212,7 @@ spec:
         # The port protocol (TCP/UDP)
         protocol: TCP
       test-entrypoint:
-        port: 53
+        port: 5353
         # hostPort: 8000
         expose: true
         exposedPort: 53
