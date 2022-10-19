@@ -20,10 +20,10 @@ spec:
     replicaCount: 1
 
     image:
-      repository: netboxcommunity/netbox
+      repository: stingalleman/netbox-plugins
       pullPolicy: IfNotPresent
       # Overrides the image tag whose default is the chart appVersion.
-      tag: ""
+      tag: "latest"
 
     # You can also use an existing secret for the superuser password and API token
     # See `existingSecret` for details
