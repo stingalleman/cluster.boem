@@ -11,7 +11,7 @@ spec:
         kind: HelmRepository
         name: postgres-operator-ui
         namespace: flux-system
-  interval: 5m
+  interval: 24h
   values:
     # Default values for postgres-operator-ui.
     # This is a YAML-formatted file.

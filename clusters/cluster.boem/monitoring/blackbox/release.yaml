@@ -11,7 +11,7 @@ spec:
         kind: HelmRepository
         name: prometheus-community
         namespace: flux-system
-  interval: 5m
+  interval: 24h
   values:
     restartPolicy: Always
     kind: Deployment
@@ -23,9 +23,9 @@ spec:
       type: RollingUpdate
 
     # image:
-      # repository: prom/blackbox-exporter
-      # tag: v0.20.0
-      # pullPolicy: IfNotPresent
+    # repository: prom/blackbox-exporter
+    # tag: v0.20.0
+    # pullPolicy: IfNotPresent
 
     # Store the configuration as a `Secret` instead of a `ConfigMap`, useful in case it contains sensitive data
     secretConfig: false
@@ -43,13 +43,15 @@ spec:
 
     # extraConfigmapMounts:x
 
-    resources: {}
+    resources:
+      {}
       # limits:
       #   memory: 300Mi
       # requests:
       #   memory: 50Mi
 
-    extraArgs: []
+    extraArgs:
+      []
       # - --history.limit=1000
 
     replicas: 1

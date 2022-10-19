@@ -11,7 +11,7 @@ spec:
         kind: HelmRepository
         name: metallb
         namespace: flux-system
-  interval: 5m
+  interval: 24h
   values:
     prometheus:
       # scrape annotations specifies whether to add Prometheus metric

@@ -11,7 +11,7 @@ spec:
         kind: HelmRepository
         name: prometheus-community
         namespace: flux-system
-  interval: 5m
+  interval: 24h
   values:
     # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
 
@@ -81,7 +81,7 @@ spec:
         route:
           group_by: ["job"]
           group_wait: 30s
-          group_interval: 5m
+          group_interval: 24h
           repeat_interval: 12h
           receiver: "default"
           routes:

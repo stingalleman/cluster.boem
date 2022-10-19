@@ -12,5 +12,6 @@ spec:
         name: k8s-at-home
         namespace: flux-system
   values:
-  interval: 5m
+  interval:
+    24h
     # values.yml

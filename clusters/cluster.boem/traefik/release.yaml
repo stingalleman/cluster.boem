@@ -12,7 +12,7 @@ spec:
         name: traefik
         namespace: flux-system
       version: ^10.19.4
-  interval: 5m
+  interval: 24h
   values:
     globalArguments:
       - "--global.checknewversion"

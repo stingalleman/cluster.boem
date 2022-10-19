@@ -11,7 +11,7 @@ spec:
         kind: HelmRepository
         name: nfs-provisioner
         namespace: flux-system
-  interval: 5m
+  interval: 24h
   values:
     nfs:
       server: "10.10.10.20"

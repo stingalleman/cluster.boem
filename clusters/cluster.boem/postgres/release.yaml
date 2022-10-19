@@ -11,7 +11,7 @@ spec:
         kind: HelmRepository
         name: postgres-operator
         namespace: flux-system
-  interval: 5m
+  interval: 24h
   values:
     image:
       registry: registry.opensource.zalan.do
