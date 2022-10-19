@@ -132,10 +132,10 @@ spec:
             # parameters:
             configBlock: |-
               directory /etc/coredns
+              reload 30
           - name: transfer
             configBlock: |-
               to 141.148.232.74
-              reload 30
           - name: cache
             parameters: 30
           # - name: loop
