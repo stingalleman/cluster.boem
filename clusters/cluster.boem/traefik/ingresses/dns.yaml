@@ -20,6 +20,3 @@ spec:
     #     - name: coredns-external-coredns
     #       namespace: dns
     #       port: 53
-
-  tls:
-    secretName: stingalleman.nl-prod-tls
