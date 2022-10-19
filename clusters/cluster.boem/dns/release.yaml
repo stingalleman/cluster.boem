@@ -107,7 +107,7 @@ spec:
       # name:
 
     # isClusterService specifies whether chart should be deployed as cluster-service or normal k8s app.
-    isClusterService: true
+    isClusterService: false
 
     # Optional priority class to be used for the coredns pods. Used for autoscaler if autoscaler.priorityClassName not set.
     priorityClassName: ""
@@ -212,13 +212,8 @@ spec:
       - filename: db.stingalleman.nl
         domain: stingalleman.nl
         contents: |
-          @           IN  SOA  ns.stingalleman.nl. hostmaster.stingalleman.nl. (
-                              2022040200 ; Serial
-                              4H         ; Refresh
-                              1H         ; Retry
-                              7D         ; Expire
-                              4H )       ; Negative Cache TTL
-          @           IN A 45.83.205.8
+          @     IN SOA ns.stingalleman.nl. hostmaster.stingalleman.nl. 0000000001 600 3600 1209600 86400
+          @     IN A 45.83.205.8
 
     # optional array of extra volumes to create
     extraVolumes: []
