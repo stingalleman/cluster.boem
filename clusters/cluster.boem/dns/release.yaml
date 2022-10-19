@@ -128,13 +128,13 @@ spec:
               lameduck 5s
           # Serves a /ready endpoint on :8181, required for readinessProbe
           - name: ready
-          - name: transfer
-            configBlock: |-
-              to *
           - name: auto
             parameters: stingalleman.nl
             configBlock: |-
               directory /etc/coredns
+          - name: transfer
+            configBlock: |-
+              to *
           - name: cache
             parameters: 30
           # - name: loop
