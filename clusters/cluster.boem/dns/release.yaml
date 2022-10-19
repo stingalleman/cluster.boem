@@ -186,7 +186,7 @@ spec:
         domain: stingalleman.dev
         contents: |
           ;; SOA Record
-          stingalleman.dev	3600	IN	SOA	ns1.stingalleman.dev root.stingalleman.dev 0000000006 7200 3600 86400 3600
+          stingalleman.dev	3600	IN	SOA	ns1.stingalleman.dev root.stingalleman.dev 0000000007 7200 3600 86400 3600
 
           ;; NS records
           stingalleman.dev. 3600 IN NS ns1.stingalleman.dev.
@@ -217,14 +217,6 @@ spec:
           uikratos.stingalleman.dev.	1	IN	A	45.83.205.4
           volcano.stingalleman.dev.	1	IN	A	207.254.39.123
           www.stingalleman.dev.	1	IN	A	45.83.205.3
-
-          ;; MX Records
-          stingalleman.dev.	1	IN	MX	96 amir.mx.cloudflare.net.
-          stingalleman.dev.	1	IN	MX	46 linda.mx.cloudflare.net.
-          stingalleman.dev.	1	IN	MX	32 isaac.mx.cloudflare.net.
-
-          ;; TXT Records
-          stingalleman.dev.	1	IN	TXT	"v=spf1 include:_spf.mx.cloudflare.net ~all"
 
     # Complete example with all the options:
     # - zones:                 # the `zones` block can be left out entirely, defaults to "."
