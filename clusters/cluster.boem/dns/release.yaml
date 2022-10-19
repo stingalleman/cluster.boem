@@ -129,17 +129,91 @@ spec:
           # Serves a /ready endpoint on :8181, required for readinessProbe
           - name: ready
           - name: auto
-            parameters: stingalleman.nl
+            parameters: stingalleman.nl stingalleman.dev
             configBlock: |-
               directory /etc/coredns
           - name: transfer
             configBlock: |-
-              to * 141.148.232.74
+              to 141.148.232.74
           - name: cache
             parameters: 30
           # - name: loop
           - name: reload
           # - name: loadbalance
+
+    # configure custom zone files as per https://coredns.io/2017/05/08/custom-dns-entries-for-kubernetes/
+    zoneFiles:
+      - filename: db.stingalleman.nl
+        domain: stingalleman.nl
+        contents: |
+          ;; SOA Record
+          stingalleman.nl	3600	IN	SOA	ns1.stingalleman.dev root.stingalleman.nl 0000000004 7200 3600 86400 3600
+
+          ;; A Records
+          cdn.stingalleman.nl.	1	IN	A	45.83.205.3
+          chernobyl.stingalleman.nl.	1	IN	A	45.83.205.2
+          *.dev.stingalleman.nl.	1	IN	A	45.83.205.3
+          flux.stingalleman.nl.	1	IN	A	45.83.205.8
+          flux-webhook.stingalleman.nl.	1	IN	A	45.83.205.8
+          gemairo.stingalleman.nl.	1	IN	A	45.83.205.3
+          gh.stingalleman.nl.	1	IN	A	45.83.205.3
+          grafiekjes.stingalleman.nl.	1	IN	A	45.83.205.8
+          kube.stingalleman.nl.	1	IN	A	45.83.205.8
+          matrix.stingalleman.nl.	1	IN	A	45.83.205.3
+          media.stingalleman.nl.	1	IN	A	45.83.205.3
+          reactor.chernobyl.stingalleman.nl.	1	IN	A	45.83.205.2
+          share.stingalleman.nl.	1	IN	A	45.83.205.8
+          sonar.stingalleman.nl.	1	IN	A	45.83.205.3
+          stingalleman.nl.	1	IN	A	45.83.205.8
+
+          ;; CNAME Records
+          sig1._domainkey.stingalleman.nl.	3600	IN	CNAME	sig1.dkim.stingalleman.nl.at.icloudmailadmin.com.
+
+          ;; MX Records
+          stingalleman.nl.	3600	IN	MX	10 mx02.mail.icloud.com.
+          stingalleman.nl.	3600	IN	MX	10 mx01.mail.icloud.com.
+
+          ;; TXT Records
+          _dmarc.stingalleman.nl.	1	IN	TXT	"v=DMARC1; p=quarantine; rua=mailto:me@stingalleman.nl"
+          stingalleman.nl.	3600	IN	TXT	"v=spf1 include:icloud.com ~all"
+          stingalleman.nl.	1	IN	TXT	"apple-domain=Y3V4NfzAjFIa1rqG"
+      - filename: db.stingalleman.dev
+        domain: stingalleman.dev
+        contents: |
+          ;; SOA Record
+          stingalleman.dev	3600	IN	SOA	ns1.stingalleman.dev root.stingalleman.dev 0000000001 7200 3600 86400 3600
+
+          ;; A Records
+          adminkratos.stingalleman.dev.	1	IN	A	45.83.205.4
+          apollo.stingalleman.dev.	1	IN	A	207.254.31.169
+          cdn.stingalleman.dev.	1	IN	A	45.83.205.3
+          deluge.stingalleman.dev.	1	IN	A	45.83.205.3
+          discord.stingalleman.dev.	1	IN	A	45.83.205.4
+          element.stingalleman.dev.	1	IN	A	45.83.205.3
+          grafana.stingalleman.dev.	1	IN	A	45.83.205.3
+          hasura.stingalleman.dev.	1	IN	A	45.83.205.3
+          jackett.stingalleman.dev.	1	IN	A	45.83.205.3
+          kratos.stingalleman.dev.	1	IN	A	45.83.205.4
+          matrix.stingalleman.dev.	1	IN	A	45.83.205.3
+          media.stingalleman.dev.	1	IN	A	45.83.205.3
+          ns1.stingalleman.dev.	1	IN	A	45.83.205.10
+          ns2.stingalleman.dev.	1	IN	A	141.148.232.74
+          podcast.stingalleman.dev.	1	IN	A	45.83.205.3
+          radarr.stingalleman.dev.	1	IN	A	45.83.205.3
+          secret.stingalleman.dev.	1	IN	A	45.83.205.3
+          sonarr.stingalleman.dev.	1	IN	A	45.83.205.3
+          stingalleman.dev.	1	IN	A	45.83.205.3
+          uikratos.stingalleman.dev.	1	IN	A	45.83.205.4
+          volcano.stingalleman.dev.	1	IN	A	207.254.39.123
+          www.stingalleman.dev.	1	IN	A	45.83.205.3
+
+          ;; MX Records
+          stingalleman.dev.	1	IN	MX	96 amir.mx.cloudflare.net.
+          stingalleman.dev.	1	IN	MX	46 linda.mx.cloudflare.net.
+          stingalleman.dev.	1	IN	MX	32 isaac.mx.cloudflare.net.
+
+          ;; TXT Records
+          stingalleman.dev.	1	IN	TXT	"v=spf1 include:_spf.mx.cloudflare.net ~all"
 
     # Complete example with all the options:
     # - zones:                 # the `zones` block can be left out entirely, defaults to "."
@@ -209,43 +283,6 @@ spec:
 
     # https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget
     podDisruptionBudget: {}
-
-    # configure custom zone files as per https://coredns.io/2017/05/08/custom-dns-entries-for-kubernetes/
-    zoneFiles:
-      - filename: db.stingalleman.nl
-        domain: stingalleman.nl
-        contents: |
-          ;; SOA Record
-          stingalleman.nl	3600	IN	SOA	stingalleman.nl root.stingalleman.nl 0000000003 7200 3600 86400 3600
-
-          ;; A Records
-          cdn.stingalleman.nl.	1	IN	A	45.83.205.3
-          chernobyl.stingalleman.nl.	1	IN	A	45.83.205.2
-          *.dev.stingalleman.nl.	1	IN	A	45.83.205.3
-          flux.stingalleman.nl.	1	IN	A	45.83.205.8
-          flux-webhook.stingalleman.nl.	1	IN	A	45.83.205.8
-          gemairo.stingalleman.nl.	1	IN	A	45.83.205.3
-          gh.stingalleman.nl.	1	IN	A	45.83.205.3
-          grafiekjes.stingalleman.nl.	1	IN	A	45.83.205.8
-          kube.stingalleman.nl.	1	IN	A	45.83.205.8
-          matrix.stingalleman.nl.	1	IN	A	45.83.205.3
-          media.stingalleman.nl.	1	IN	A	45.83.205.3
-          reactor.chernobyl.stingalleman.nl.	1	IN	A	45.83.205.2
-          share.stingalleman.nl.	1	IN	A	45.83.205.8
-          sonar.stingalleman.nl.	1	IN	A	45.83.205.3
-          stingalleman.nl.	1	IN	A	45.83.205.8
-
-          ;; CNAME Records
-          sig1._domainkey.stingalleman.nl.	3600	IN	CNAME	sig1.dkim.stingalleman.nl.at.icloudmailadmin.com.
-
-          ;; MX Records
-          stingalleman.nl.	3600	IN	MX	10 mx02.mail.icloud.com.
-          stingalleman.nl.	3600	IN	MX	10 mx01.mail.icloud.com.
-
-          ;; TXT Records
-          _dmarc.stingalleman.nl.	1	IN	TXT	"v=DMARC1; p=quarantine; rua=mailto:me@stingalleman.nl"
-          stingalleman.nl.	3600	IN	TXT	"v=spf1 include:icloud.com ~all"
-          stingalleman.nl.	1	IN	TXT	"apple-domain=Y3V4NfzAjFIa1rqG"
 
     # optional array of extra volumes to create
     extraVolumes: []
