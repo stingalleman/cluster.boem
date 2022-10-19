@@ -135,6 +135,7 @@ spec:
           - name: transfer
             configBlock: |-
               to 141.148.232.74
+              reload 30
           - name: cache
             parameters: 30
           # - name: loop
@@ -143,40 +144,6 @@ spec:
 
     # configure custom zone files as per https://coredns.io/2017/05/08/custom-dns-entries-for-kubernetes/
     zoneFiles:
-      - filename: db.stingalleman.nl
-        domain: stingalleman.nl
-        contents: |
-          ;; SOA Record
-          stingalleman.nl	3600	IN	SOA	ns1.stingalleman.dev root.stingalleman.nl 0000000004 7200 3600 86400 3600
-
-          ;; A Records
-          cdn.stingalleman.nl.	1	IN	A	45.83.205.3
-          chernobyl.stingalleman.nl.	1	IN	A	45.83.205.2
-          *.dev.stingalleman.nl.	1	IN	A	45.83.205.3
-          flux.stingalleman.nl.	1	IN	A	45.83.205.8
-          flux-webhook.stingalleman.nl.	1	IN	A	45.83.205.8
-          gemairo.stingalleman.nl.	1	IN	A	45.83.205.3
-          gh.stingalleman.nl.	1	IN	A	45.83.205.3
-          grafiekjes.stingalleman.nl.	1	IN	A	45.83.205.8
-          kube.stingalleman.nl.	1	IN	A	45.83.205.8
-          matrix.stingalleman.nl.	1	IN	A	45.83.205.3
-          media.stingalleman.nl.	1	IN	A	45.83.205.3
-          reactor.chernobyl.stingalleman.nl.	1	IN	A	45.83.205.2
-          share.stingalleman.nl.	1	IN	A	45.83.205.8
-          sonar.stingalleman.nl.	1	IN	A	45.83.205.3
-          stingalleman.nl.	1	IN	A	45.83.205.8
-
-          ;; CNAME Records
-          sig1._domainkey.stingalleman.nl.	3600	IN	CNAME	sig1.dkim.stingalleman.nl.at.icloudmailadmin.com.
-
-          ;; MX Records
-          stingalleman.nl.	3600	IN	MX	10 mx02.mail.icloud.com.
-          stingalleman.nl.	3600	IN	MX	10 mx01.mail.icloud.com.
-
-          ;; TXT Records
-          _dmarc.stingalleman.nl.	1	IN	TXT	"v=DMARC1; p=quarantine; rua=mailto:me@stingalleman.nl"
-          stingalleman.nl.	3600	IN	TXT	"v=spf1 include:icloud.com ~all"
-          stingalleman.nl.	1	IN	TXT	"apple-domain=Y3V4NfzAjFIa1rqG"
       - filename: db.stingalleman.dev
         domain: stingalleman.dev
         contents: |
