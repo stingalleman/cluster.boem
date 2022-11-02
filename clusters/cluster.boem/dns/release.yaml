@@ -136,8 +136,8 @@ spec:
           - name: transfer
             configBlock: |-
               to 141.148.232.74
-          - name: cache
-            parameters: 30
+          # - name: cache
+          #   parameters: 30
           # - name: loop
           - name: reload
           # - name: loadbalance
