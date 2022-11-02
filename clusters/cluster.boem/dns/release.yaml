@@ -148,7 +148,7 @@ spec:
         domain: stingalleman.nl
         contents: |
           ;; SOA Record
-          stingalleman.nl	3600	IN	SOA	ns1.stingalleman.dev root.stingalleman.nl 0000000011 7200 3600 86400 60
+          stingalleman.nl	3600	IN	SOA	ns1.stingalleman.dev root.stingalleman.nl 0000000012 7200 3600 86400 2419200
 
           ;; NS records
           stingalleman.nl. 3600 IN NS ns1.stingalleman.dev.
