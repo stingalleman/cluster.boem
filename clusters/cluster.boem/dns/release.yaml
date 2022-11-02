@@ -148,7 +148,7 @@ spec:
         domain: stingalleman.nl
         contents: |
           ;; SOA Record
-          stingalleman.nl	3600	IN	SOA	ns1.stingalleman.dev root.stingalleman.nl 0000000012 7200 3600 86400 2419200
+          stingalleman.nl	3600	IN	SOA	ns1.stingalleman.dev root.stingalleman.nl 0000000013 7200 3600 86400 2419200
 
           ;; NS records
           stingalleman.nl. 3600 IN NS ns1.stingalleman.dev.
@@ -170,6 +170,7 @@ spec:
           share.stingalleman.nl.	300	IN	A	45.83.205.8
           sonar.stingalleman.nl.	300	IN	A	45.83.205.3
           stingalleman.nl.	300	IN	A	45.83.205.8
+          status.stingalleman.nl 300 IN A 45.83.205.8
 
           ;; CNAME Records
           sig1._domainkey.stingalleman.nl.	3600	IN	CNAME	sig1.dkim.stingalleman.nl.at.icloudmailadmin.com.
