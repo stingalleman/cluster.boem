@@ -148,29 +148,29 @@ spec:
         domain: stingalleman.nl
         contents: |
           ;; SOA Record
-          stingalleman.nl	3600	IN	SOA	ns1.stingalleman.dev root.stingalleman.nl 0000000013 7200 3600 86400 2419200
+          stingalleman.nl	3600	IN	SOA	ns1.stingalleman.dev root.stingalleman.nl 0000000014 7200 3600 86400 2419200
 
           ;; NS records
           stingalleman.nl. 3600 IN NS ns1.stingalleman.dev.
           stingalleman.nl. 3600 IN NS ns2.stingalleman.dev.
 
           ;; A Records
-          cdn.stingalleman.nl.	300	IN	A	45.83.205.3
-          chernobyl.stingalleman.nl.	300	IN	A	45.83.205.2
-          *.dev.stingalleman.nl.	300	IN	A	45.83.205.3
-          flux.stingalleman.nl.	300	IN	A	45.83.205.8
-          flux-webhook.stingalleman.nl.	300	IN	A	45.83.205.8
-          gemairo.stingalleman.nl.	300	IN	A	45.83.205.3
-          gh.stingalleman.nl.	300 IN	A	45.83.205.3
-          grafiekjes.stingalleman.nl.	300	IN	A	45.83.205.8
-          kube.stingalleman.nl.	300	IN	A	45.83.205.8
-          matrix.stingalleman.nl.	300	IN	A	45.83.205.3
-          media.stingalleman.nl.	300	IN	A	45.83.205.3
-          reactor.chernobyl.stingalleman.nl.	300	IN	A	45.83.205.2
-          share.stingalleman.nl.	300	IN	A	45.83.205.8
-          sonar.stingalleman.nl.	300	IN	A	45.83.205.3
-          stingalleman.nl.	300	IN	A	45.83.205.8
-          status.stingalleman.nl 300 IN A 45.83.205.8
+          cdn.stingalleman..                    300	IN	A	45.83.205.3
+          chernobyl.stingalleman..              300	IN	A	45.83.205.2
+          *.dev.stingalleman..                  300	IN	A	45.83.205.3
+          flux.stingalleman.nl.                 300	IN	A	45.83.205.8
+          flux-webhook.stingalleman.nl.         300	IN	A	45.83.205.8
+          gemairo.stingalleman..                300	IN	A	45.83.205.3
+          gh.stingalleman.nl.                   300 IN	A	45.83.205.3
+          grafiekjes.stingalleman.nl.           300	IN	A	45.83.205.8
+          kube.stingalleman.nl.                 300	IN	A	45.83.205.8
+          matrix.stingalleman.nl.	              300	IN	A	45.83.205.3
+          media.stingalleman.nl.	              300	IN	A	45.83.205.3
+          reactor.chernobyl.stingalleman.nl.    300	IN	A	45.83.205.2
+          share.stingalleman.nl.	              300	IN	A	45.83.205.8
+          sonar.stingalleman.nl.	              300	IN	A	45.83.205.3
+          stingalleman.nl.	                    300	IN	A	45.83.205.8
+          status.stingalleman.nl.               300 IN  A 45.83.205.8
 
           ;; CNAME Records
           sig1._domainkey.stingalleman.nl.	3600	IN	CNAME	sig1.dkim.stingalleman.nl.at.icloudmailadmin.com.
@@ -187,37 +187,22 @@ spec:
         domain: stingalleman.dev
         contents: |
           ;; SOA Record
-          stingalleman.dev	3600	IN	SOA	ns1.stingalleman.dev root.stingalleman.dev 0000000010 7200 3600 86400 3600
+          stingalleman.dev	3600	IN	SOA	ns1.stingalleman.dev root.stingalleman.dev 0000000011 7200 3600 86400 2419200
 
           ;; NS records
           stingalleman.dev. 3600 IN NS ns1.stingalleman.dev.
           stingalleman.dev. 3600 IN NS ns2.stingalleman.dev.
 
           ;; A Records
-          ns1.stingalleman.dev. 300 IN A 45.83.205.10
-          ns2.stingalleman.dev. 300 IN A 141.148.232.74
-          adminkratos.stingalleman.dev.	300	IN	A	45.83.205.4
-          apollo.stingalleman.dev.	1	IN	A	207.254.31.169
-          cdn.stingalleman.dev.	300	IN	A	45.83.205.3
-          deluge.stingalleman.dev.	300	IN	A	45.83.205.3
-          discord.stingalleman.dev.	300	IN	A	45.83.205.4
-          element.stingalleman.dev.	300	IN	A	45.83.205.3
-          grafana.stingalleman.dev.	300	IN	A	45.83.205.3
-          hasura.stingalleman.dev.	300	IN	A	45.83.205.3
-          jackett.stingalleman.dev.	300	IN	A	45.83.205.3
-          kratos.stingalleman.dev.	300	IN	A	45.83.205.4
-          matrix.stingalleman.dev.	300	IN	A	45.83.205.3
-          media.stingalleman.dev.	300	IN	A	45.83.205.3
-          ns1.stingalleman.dev.	300	IN	A	45.83.205.10
-          ns2.stingalleman.dev.	300	IN	A	141.148.232.74
-          podcast.stingalleman.dev.	300	IN	A	45.83.205.3
-          radarr.stingalleman.dev.	300	IN	A	45.83.205.3
-          secret.stingalleman.dev.	300	IN	A	45.83.205.3
-          sonarr.stingalleman.dev.	300	IN	A	45.83.205.3
-          stingalleman.dev.	300	IN	A	45.83.205.3
-          uikratos.stingalleman.dev.	300	IN	A	45.83.205.4
-          volcano.stingalleman.dev.	300	IN	A	207.254.39.123
-          www.stingalleman.dev.	300	IN	A	45.83.205.3
+          ns1.stingalleman.dev.         300 IN A 45.83.205.10
+          ns2.stingalleman.dev.         300 IN A 141.148.232.74
+          apollo.stingalleman.dev.	    300	IN	A	207.254.31.169
+          cdn.stingalleman.dev.	        300	IN	A	45.83.205.3
+          discord.stingalleman.dev.	    300	IN	A	45.83.205.4
+          media.stingalleman.dev.	      300	IN	A	45.83.205.3
+          stingalleman.dev.	            300	IN	A	45.83.205.3
+          volcano.stingalleman.dev.	    300	IN	A	207.254.39.123
+          www.stingalleman.dev.	        300	IN	A	45.83.205.3
 
     # Complete example with all the options:
     # - zones:                 # the `zones` block can be left out entirely, defaults to "."
