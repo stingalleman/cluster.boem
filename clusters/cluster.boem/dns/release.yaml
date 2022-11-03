@@ -148,29 +148,29 @@ spec:
         domain: stingalleman.nl
         contents: |
           ;; SOA Record
-          stingalleman.nl	3600	IN	SOA	ns1.stingalleman.dev root.stingalleman.nl 0000000014 7200 3600 86400 2419200
+          stingalleman.nl	3600	IN	SOA	ns1.stingalleman.dev root.stingalleman.nl 0000000015 7200 3600 86400 2419200
 
           ;; NS records
           stingalleman.nl. 3600 IN NS ns1.stingalleman.dev.
           stingalleman.nl. 3600 IN NS ns2.stingalleman.dev.
 
           ;; A Records
-          cdn.stingalleman..                    300	IN	A	45.83.205.3
-          chernobyl.stingalleman..              300	IN	A	45.83.205.2
-          *.dev.stingalleman..                  300	IN	A	45.83.205.3
-          flux.stingalleman.nl.                 300	IN	A	45.83.205.8
-          flux-webhook.stingalleman.nl.         300	IN	A	45.83.205.8
-          gemairo.stingalleman..                300	IN	A	45.83.205.3
-          gh.stingalleman.nl.                   300 IN	A	45.83.205.3
-          grafiekjes.stingalleman.nl.           300	IN	A	45.83.205.8
-          kube.stingalleman.nl.                 300	IN	A	45.83.205.8
-          matrix.stingalleman.nl.	              300	IN	A	45.83.205.3
-          media.stingalleman.nl.	              300	IN	A	45.83.205.3
-          reactor.chernobyl.stingalleman.nl.    300	IN	A	45.83.205.2
-          share.stingalleman.nl.	              300	IN	A	45.83.205.8
-          sonar.stingalleman.nl.	              300	IN	A	45.83.205.3
-          stingalleman.nl.	                    300	IN	A	45.83.205.8
-          status.stingalleman.nl.               300 IN  A 45.83.205.8
+          cdn  300	IN	A	45.83.205.3
+          chernobyl 300	IN	A	45.83.205.2
+          *.dev.stingalleman.nl. 300	IN	A	45.83.205.3
+          flux  300	IN	A	45.83.205.8
+          flux-webhook  300	IN	A	45.83.205.8
+          gemairo 300	IN	A	45.83.205.3
+          gh  300 IN	A	45.83.205.3
+          grafiekjes  300	IN	A	45.83.205.8
+          kube  300	IN	A	45.83.205.8
+          matrix  300	IN	A	45.83.205.3
+          media 300	IN	A	45.83.205.3
+          reactor.chernobyl.stingalleman.nl. 300	IN	A	45.83.205.2
+          share 300	IN	A	45.83.205.8
+          sonar 300	IN	A	45.83.205.3
+          stingalleman 300	IN	A	45.83.205.8
+          status  300 IN  A 45.83.205.8
 
           ;; CNAME Records
           sig1._domainkey.stingalleman.nl.	3600	IN	CNAME	sig1.dkim.stingalleman.nl.at.icloudmailadmin.com.
