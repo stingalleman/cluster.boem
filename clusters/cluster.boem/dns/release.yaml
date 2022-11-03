@@ -155,6 +155,7 @@ spec:
           stingalleman.nl. 3600 IN NS ns2.stingalleman.dev.
 
           ;; A Records
+          stingalleman.nl. 300	IN	A	45.83.205.8
           cdn  300	IN	A	45.83.205.3
           chernobyl 300	IN	A	45.83.205.2
           *.dev.stingalleman.nl. 300	IN	A	45.83.205.3
@@ -169,7 +170,6 @@ spec:
           reactor.chernobyl.stingalleman.nl. 300	IN	A	45.83.205.2
           share 300	IN	A	45.83.205.8
           sonar 300	IN	A	45.83.205.3
-          stingalleman 300	IN	A	45.83.205.8
           status  300 IN  A 45.83.205.8
 
           ;; CNAME Records
