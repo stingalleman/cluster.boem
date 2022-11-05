@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: stingalleman.nl
+  namespace: default
+spec:
+  selector:
+    app: stingalleman.nl
+  type: ClusterIP
+  # sessionAffinity:
+  ports:
+    - name: stingalleman.nl
+      protocol: TCP
+      port: 80
+      targetPort: 80
