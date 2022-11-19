@@ -48,14 +48,14 @@ spec:
           namespace: monitoring
           port: http-web
 
-    - kind: Rule
-      match: Host(`postgres.cluster.boem`)
-      middlewares:
-        - name: internal-whitelist
-      services:
-        - name: postgres-operator-ui
-          namespace: postgres
-          port: 80
+    # - kind: Rule
+    #   match: Host(`postgres.cluster.boem`)
+    #   middlewares:
+    #     - name: internal-whitelist
+    #   services:
+    #     - name: postgres-operator-ui
+    #       namespace: postgres
+    #       port: 80
 
     - kind: Rule
       match: Host(`mailslurper.cluster.boem`)
