@@ -75,6 +75,13 @@ spec:
           namespace: mailslurper
           port: 4437
 
+    - kind: Rule
+      match: Host(`dns.cluster.boem`)
+      services:
+        - name: pdns-admin
+          namespace: default
+          port: 80
+
     # - kind: Rule
     #   match: Host(`courier.kratos.cluster.boem`)
     #   services:
