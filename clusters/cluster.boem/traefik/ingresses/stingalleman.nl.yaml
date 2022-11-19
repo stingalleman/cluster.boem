@@ -39,5 +39,12 @@ spec:
           namespace: kube-ops-view
           port: 8080
 
+    - kind: Rule
+      match: Host(`status.stingalleman.nl`)
+      services:
+        - name: status-stingalleman-nl
+          namespace: default
+          port: 80
+
   tls:
     secretName: stingalleman.nl-prod-tls
