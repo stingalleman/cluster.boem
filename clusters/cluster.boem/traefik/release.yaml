@@ -99,13 +99,13 @@ spec:
       kubernetesCRD:
         enabled: true
         allowCrossNamespace: true
-        allowExternalNameServices: false
+        allowExternalNameServices: true
         # ingressClass: traefik-internal
         # labelSelector: environment=production,method=traefik
 
       kubernetesIngress:
         enabled: false
-        allowExternalNameServices: false
+        allowExternalNameServices: true
         allowEmptyServices: true
         ingressClass: traefik
         # labelSelector: environment=production,method=traefik
