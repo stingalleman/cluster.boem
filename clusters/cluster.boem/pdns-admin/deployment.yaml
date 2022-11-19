@@ -33,3 +33,7 @@ spec:
                   key: secret
             - name: OFFLINE_MODE
               value: "false"
+            - name: GUNICORN_TIMEOUT
+              value: "60"
+            - name: GUNICORN_WORKERS
+              value: "2"
