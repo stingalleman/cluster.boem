@@ -43,9 +43,8 @@ spec:
       match: Host(`status.stingalleman.nl`)
       services:
         - kind: Service
-          name: stingalleman-website
+          name: status-stingalleman-nl
           namespace: default
-          passHostHeader: true
           port: 80
 
   tls:
