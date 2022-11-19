@@ -5,4 +5,4 @@ metadata:
   namespace: default
 spec:
   type: ExternalName
-  externalName: 141.148.232.74
+  externalName: "141.148.232.74"
