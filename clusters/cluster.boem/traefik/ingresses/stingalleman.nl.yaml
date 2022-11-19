@@ -47,13 +47,13 @@ spec:
           namespace: default
           port: 3001
 
-    # - kind: Rule
-    #   match: Host(`mattermost.stingalleman.nl`)
-    #   services:
-    #     - kind: Service
-    #       name: status-stingalleman-nl
-    #       namespace: default
-    #       port: 3001
+    - kind: Rule
+      match: Host(`mattermost.stingalleman.nl`)
+      services:
+        - kind: Service
+          name: mattermost-team-edition
+          namespace: mattermost
+          port: http
 
   tls:
     secretName: stingalleman.nl-prod-tls
