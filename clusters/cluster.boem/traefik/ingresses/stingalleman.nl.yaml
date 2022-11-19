@@ -53,7 +53,7 @@ spec:
         - kind: Service
           name: mattermost-team-edition
           namespace: mattermost
-          port: http
+          port: 8065
 
   tls:
     secretName: stingalleman.nl-prod-tls
