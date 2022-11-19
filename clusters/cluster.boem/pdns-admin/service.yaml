@@ -11,5 +11,5 @@ spec:
   ports:
     - name: pdns-admin
       protocol: TCP
-      port: 9191
-      targetPort: 9191
+      port: 80
+      targetPort: 80
