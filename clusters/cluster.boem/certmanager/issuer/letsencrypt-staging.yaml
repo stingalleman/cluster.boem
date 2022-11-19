@@ -20,7 +20,7 @@ spec:
             tsigKeyName: certmanager-key
             tsigAlgorithm: HMACMD5
             tsigSecretSecretRef:
-              name: cert-manager-key
+              name: certmanager-pdns-key
               key: key
         selector:
           dnsZones:
