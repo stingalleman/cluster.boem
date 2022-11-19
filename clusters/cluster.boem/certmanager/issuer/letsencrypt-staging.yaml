@@ -15,13 +15,15 @@ spec:
     # Enable the HTTP-01 challenge provider
     solvers:
       - dns01:
-          cloudflare:
-            email: stingalleman@icloud.com
-            apiTokenSecretRef:
-              name: cloudflare-api-token
-              key: token
+          rfc2136:
+            nameserver: 10.10.10.12
+            tsigKeyName: certmanager-key
+            tsigAlgorithm: HMACMD5
+            tsigSecretSecretRef:
+              name: cert-manager-key
+              key: key
         selector:
           dnsZones:
             - "stingalleman.nl"
-            - "pakket.sh"
+            # - "pakket.sh"
             - "stingalleman.dev"
