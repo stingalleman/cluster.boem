@@ -5,6 +5,7 @@ resources:
 - coredns.yaml
 - jetstack.yaml
 - k8s-at-home.yaml
+- mattermost.yaml
 - metallb.yaml
 - netbox.yaml
 - nfs-provisioner.yaml
