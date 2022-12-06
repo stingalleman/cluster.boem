@@ -45,6 +45,6 @@ spec:
                   name: coc-bot
                   key: discord_bot_token
             - name: REDIS_HOST
-              value: redis.default.svc.cluster.local
+              value: "10.10.10.15"
             - name: REDIS_PORT
               value: "6379"
