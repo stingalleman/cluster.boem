@@ -39,4 +39,4 @@ spec:
     #       port: 3000
 
   tls:
-    secretName: stingalleman.nl-prod-tls
+    secretName: stingalleman.dev-prod-tls
