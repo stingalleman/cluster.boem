@@ -18,7 +18,7 @@ spec:
           image: dobernoeder/supertuxkart
           volumeMounts:
             - mountPath: /stk
-              name: supertuxkart
+              name: supertuxkart-volume
           resources:
             limits:
               memory: "20Gi"
@@ -46,6 +46,6 @@ spec:
                   key: STK-PASSWORD
                   name: supertuxkart
     volumes:
-      - name: supertuxkart
+      - name: supertuxkart-volume
         configMap:
           name: supertuxkart
