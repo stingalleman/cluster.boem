@@ -1,7 +1,7 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: supertuxkart
+  name: supertuxkart-configmap
   namespace: default
 data:
   server_config.xml: |
