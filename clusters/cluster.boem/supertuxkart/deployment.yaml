@@ -29,9 +29,9 @@ spec:
           #     cpu: "20Gi"
           ports:
             - containerPort: 2759
-              protocol: UDP
+              # protocol: UDP
             - containerPort: 2757
-              protocol: UDP
+              # protocol: UDP
           env:
             - name: IS_KI_SERVER
               value: "true"
