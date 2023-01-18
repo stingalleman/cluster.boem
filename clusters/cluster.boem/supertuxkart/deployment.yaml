@@ -23,10 +23,10 @@ spec:
           volumeMounts:
             - mountPath: /stk
               name: supertuxkart-volume
-          resources:
-            limits:
-              memory: "20Gi"
-              cpu: "20Gi"
+          # resources:
+          #   limits:
+          #     memory: "20Gi"
+          #     cpu: "20Gi"
           ports:
             - containerPort: 2759
               protocol: UDP
