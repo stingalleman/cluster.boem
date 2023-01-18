@@ -13,6 +13,10 @@ spec:
       labels:
         app: supertuxkart
     spec:
+      volumes:
+        - name: supertuxkart-volume
+          configMap:
+            name: supertuxkart-configmap
       containers:
         - name: supertuxkart
           image: dobernoeder/supertuxkart
@@ -45,7 +49,3 @@ spec:
                 secretKeyRef:
                   key: STK-PASSWORD
                   name: supertuxkart
-    volumes:
-      - name: supertuxkart-volume
-        configMap:
-          name: supertuxkart-configmap
