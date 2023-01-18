@@ -18,7 +18,7 @@ spec:
           image: dobernoeder/supertuxkart
           volumeMounts:
             - mountPath: /stk
-              name: server_config.yaml
+              name: super-tux-kart-config
           resources:
             limits:
               memory: "20Gi"
