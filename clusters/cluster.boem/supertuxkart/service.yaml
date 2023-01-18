@@ -11,9 +11,11 @@ spec:
     - port: 2759
       targetPort: 2759
       protocol: UDP
+      name: port1
     - port: 2757
       targetPort: 2757
       protocol: UDP
+      name: port2
   selector:
     app: supertuxkart
   type: LoadBalancer
