@@ -23,7 +23,7 @@ spec:
       containers:
         - name: stingalleman-website
           image: stingalleman/stingalleman.nl:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           resources:
             limits:
               cpu: 100m
