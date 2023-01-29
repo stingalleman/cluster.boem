@@ -55,5 +55,21 @@ spec:
           namespace: mattermost
           port: 8065
 
+    - kind: Rule
+      match: Host(`media.stingalleman.nl`)
+      services:
+        - kind: Service
+          name: media-stingalleman-nl
+          namespace: default
+          port: 8096
+
+    - kind: Rule
+      match: Host(`request.stingalleman.nl`)
+      services:
+        - kind: Service
+          name: media-stingalleman-nl
+          namespace: default
+          port: 5055
+
   tls:
     secretName: stingalleman.nl-prod-tls

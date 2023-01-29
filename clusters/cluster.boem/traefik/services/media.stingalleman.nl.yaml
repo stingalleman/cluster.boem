@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: media-stingalleman-nl
+  namespace: default
+spec:
+  type: ExternalName
+  externalName: 10.10.10.21
