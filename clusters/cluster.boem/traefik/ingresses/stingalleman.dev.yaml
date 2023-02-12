@@ -17,6 +17,14 @@ spec:
           passHostHeader: true
           port: 8020
 
+    - kind: Rule
+      match: Host(`request.stingalleman.nl`)
+      services:
+        - kind: Service
+          name: core-pakket-stingalleman-dev
+          namespace: default
+          port: 80
+
     # - kind: Rule
     #   match: Host(`kratos.stingalleman.dev`)
     #   services:
