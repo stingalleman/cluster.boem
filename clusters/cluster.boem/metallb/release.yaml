@@ -11,6 +11,7 @@ spec:
         kind: HelmRepository
         name: metallb
         namespace: flux-system
+      version: 0.13.7
   interval: 24h
   values:
     prometheus:
