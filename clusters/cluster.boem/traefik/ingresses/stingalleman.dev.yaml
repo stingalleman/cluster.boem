@@ -18,7 +18,7 @@ spec:
           port: 8020
 
     - kind: Rule
-      match: Host(`request.stingalleman.nl`)
+      match: Host(`core.pakket.stingalleman.dev`)
       services:
         - kind: Service
           name: core-pakket-stingalleman-dev
