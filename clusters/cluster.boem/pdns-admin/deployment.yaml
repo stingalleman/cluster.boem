@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: pdns-admin
-          image: ngoduykhanh/powerdns-admin:latest
+          image: ngoduykhanh/powerdns-admin:0.3.0
           resources:
             limits:
               memory: "128Mi"
