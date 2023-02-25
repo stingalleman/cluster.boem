@@ -31,3 +31,11 @@ spec:
                 secretKeyRef:
                   name: yucky-rs
                   key: discord_token
+          volumeMounts:
+            - name: tz-config
+              mountPath: /etc/localtime
+      volumes:
+        - name: tz-config
+          hostPath:
+            path: /usr/share/zoneinfo/Europe/Prague
+            type: File
