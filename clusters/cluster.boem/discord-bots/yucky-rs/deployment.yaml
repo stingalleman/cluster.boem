@@ -4,7 +4,7 @@ metadata:
   name: yucky-rs
   namespace: discord-bots
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: yucky-rs
