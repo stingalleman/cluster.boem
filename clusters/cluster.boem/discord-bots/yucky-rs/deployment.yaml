@@ -32,6 +32,11 @@ spec:
                 secretKeyRef:
                   name: yucky-rs
                   key: discord_token
+            - name: PREFIX
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs
+                  key: prefix
           volumeMounts:
             - name: tz-config
               mountPath: /etc/localtime
