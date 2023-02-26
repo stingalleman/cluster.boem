@@ -16,6 +16,7 @@ spec:
       containers:
         - name: yucky-rs
           image: ghcr.io/dev-shit/yucky.rs:main
+          imagePullPolicy: Always
           resources:
             limits:
               memory: "128Mi"
