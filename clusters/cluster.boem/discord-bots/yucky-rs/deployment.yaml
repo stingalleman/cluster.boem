@@ -43,5 +43,5 @@ spec:
       volumes:
         - name: tz-config
           hostPath:
-            path: /usr/share/zoneinfo/Europe/Prague
+            path: /usr/share/zoneinfo/Europe/Amsterdam
             type: File
