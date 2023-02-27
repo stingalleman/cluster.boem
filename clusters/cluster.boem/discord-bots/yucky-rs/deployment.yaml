@@ -1,47 +1,47 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: yucky-rs
-#   namespace: discord-bots
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: yucky-rs
-#   template:
-#     metadata:
-#       labels:
-#         app: yucky-rs
-#     spec:
-#       containers:
-#         - name: yucky-rs
-#           image: ghcr.io/dev-shit/yucky.rs:main
-#           imagePullPolicy: Always
-#           resources:
-#             limits:
-#               memory: "128Mi"
-#               cpu: "500m"
-#           env:
-#             - name: DATABASE_URL
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: yucky-rs
-#                   key: database_url
-#             - name: DISCORD_TOKEN
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: yucky-rs
-#                   key: discord_token
-#             - name: PREFIX
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: yucky-rs
-#                   key: prefix
-#           volumeMounts:
-#             - name: tz-config
-#               mountPath: /etc/localtime
-#       volumes:
-#         - name: tz-config
-#           hostPath:
-#             path: /usr/share/zoneinfo/Europe/Amsterdam
-#             type: File
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yucky-rs
+  namespace: discord-bots
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yucky-rs
+  template:
+    metadata:
+      labels:
+        app: yucky-rs
+    spec:
+      containers:
+        - name: yucky-rs
+          image: ghcr.io/dev-shit/yucky.rs:main
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs
+                  key: database_url
+            - name: DISCORD_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs
+                  key: discord_token
+            - name: PREFIX
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs
+                  key: prefix
+          volumeMounts:
+            - name: tz-config
+              mountPath: /etc/localtime
+      volumes:
+        - name: tz-config
+          hostPath:
+            path: /usr/share/zoneinfo/Europe/Amsterdam
+            type: File
