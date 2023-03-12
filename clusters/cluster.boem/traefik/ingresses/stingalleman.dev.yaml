@@ -31,6 +31,7 @@ spec:
         - kind: Service
           name: alles-dlp
           namespace: default
+          port: 8000
 
     # - kind: Rule
     #   match: Host(`kratos.stingalleman.dev`)
