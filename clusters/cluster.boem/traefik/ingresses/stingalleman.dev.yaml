@@ -25,6 +25,13 @@ spec:
           namespace: default
           port: 80
 
+    - kind: Rule
+      match: Host(`alles-dlp.stingalleman.dev`)
+      services:
+        - kind: Service
+          name: alles-dlp
+          namespace: default
+
     # - kind: Rule
     #   match: Host(`kratos.stingalleman.dev`)
     #   services:
