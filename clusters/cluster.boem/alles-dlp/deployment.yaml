@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alles-dlp
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alles-dlp
+  template:
+    metadata:
+      labels:
+        app: alles-dlp
+    spec:
+      containers:
+        - name: alles-dlp
+          image: ghcr.io/elisaado/alles-dlp:master@sha256:2684daa7014a4aa6c2b8901290e1821e8501243fbc6bb5c22681345d48026049
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          env:
+            - name: ALLES_DLP_PASSWORDS
+              valueFrom:
+                secretKeyRef:
+                  name: alles-dlp
+                  key: passwords
