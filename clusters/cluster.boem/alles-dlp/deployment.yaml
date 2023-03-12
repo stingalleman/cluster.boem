@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: alles-dlp
-          image: gghcr.io/elisaado/alles-dlp:master@sha256:251be2e55fafca3f11f284bb47166a2405bda680a1aa27c90daccc6aa1a104ca
+          image: ghcr.io/elisaado/alles-dlp:master@sha256:251be2e55fafca3f11f284bb47166a2405bda680a1aa27c90daccc6aa1a104ca
           resources:
             limits:
               memory: "128Mi"
