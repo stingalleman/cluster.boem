@@ -37,6 +37,11 @@ spec:
                 secretKeyRef:
                   name: yucky-rs
                   key: prefix
+            - name: ALLES_DLP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs
+                  key: alles_dlp_password
           volumeMounts:
             - name: tz-config
               mountPath: /etc/localtime
