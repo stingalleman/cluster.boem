@@ -4,7 +4,7 @@ metadata:
   name: maishond.nl
   namespace: default
 spec:
-  secretName: maishond.nl-staging-tls
+  secretName: maishond.nl-prod-tls
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
