@@ -4,5 +4,5 @@ metadata:
   name: stingalleman-website
   namespace: default
 resources:
-  - deployment.yaml
-  - service.yaml
+  # - deployment.yaml
+  # - service.yaml
