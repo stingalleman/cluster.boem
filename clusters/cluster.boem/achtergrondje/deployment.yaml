@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: achtergrondje
-          image: stingalleman/stingalleman.nl:latest
+          image: ghcr.io/dev-shit/aaaah:main
           imagePullPolicy: Always
           resources:
             limits:
