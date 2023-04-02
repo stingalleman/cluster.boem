@@ -25,5 +25,13 @@ spec:
           namespace: default
           port: 8096
 
+    - kind: Rule
+      match: Host(`leuk-achtergrondje.maishond.nl`)
+      services:
+        - kind: Service
+          name: achtergrondje
+          namespace: default
+          port: 80
+
   tls:
     secretName: maishond.nl-prod-tls
