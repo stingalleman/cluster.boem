@@ -26,6 +26,14 @@ spec:
           port: 8096
 
     - kind: Rule
+      match: Host(`request.maishond.nl`)
+      services:
+        - kind: Service
+          name: media-stingalleman-nl
+          namespace: default
+          port: 5055
+
+    - kind: Rule
       match: Host(`leuk-achtergrondje.maishond.nl`)
       services:
         - kind: Service
