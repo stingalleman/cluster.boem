@@ -92,7 +92,7 @@ spec:
     - kind: Rule
       match: Host(`netbox.cluster.boem`)
       services:
-        - name: netbox
+        - name: internals-vm
           namespace: default
           port: 8000
 
