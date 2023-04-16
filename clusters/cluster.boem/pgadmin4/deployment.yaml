@@ -21,8 +21,8 @@ spec:
             - containerPort: 5050
           resources:
             limits:
-              memory: "128Mi"
-              cpu: "500m"
+              memory: "1G"
+              cpu: "1000m"
           env:
             - name: PGADMIN_DEFAULT_EMAIL
               valueFrom:
