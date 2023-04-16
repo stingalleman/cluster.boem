@@ -90,11 +90,11 @@ spec:
           port: 5050
 
     - kind: Rule
-      match: Host(`netbox.cust.boem`)
+      match: Host(`netbox.cluster.boem`)
       services:
         - name: netbox
-          namespace: netbox
-          # port: 80
+          namespace: default
+          port: 8000
 
     # - kind: Rule
     #   match: Host(`courier.kratos.cluster.boem`)
