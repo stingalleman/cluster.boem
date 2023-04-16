@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: adminer
+  name: pgadmin4
   namespace: default
   labels:
-    app: adminer
+    app: pgadmin4
 spec:
   selector:
     matchLabels:
-      app: adminer
+      app: pgadmin4
   template:
     metadata:
       labels:
-        app: adminer
+        app: pgadmin4
     spec:
       containers:
-        - name: adminer
-          image: adminer:4.6.3
+        - name: dpage
+          image: pgadmin4:7.0
           ports:
-            - containerPort: 8080
+            - containerPort: 5050
           resources:
             limits:
               memory: "128Mi"

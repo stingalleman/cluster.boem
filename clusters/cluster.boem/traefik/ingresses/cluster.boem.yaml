@@ -83,11 +83,11 @@ spec:
           port: 80
 
     - kind: Rule
-      match: Host(`adminer.cluster.boem`)
+      match: Host(`pgadmin.cluster.boem`)
       services:
-        - name: adminer
+        - name: pgadmin4
           namespace: default
-          port: 8080
+          port: 5050
 
     # - kind: Rule
     #   match: Host(`courier.kratos.cluster.boem`)
