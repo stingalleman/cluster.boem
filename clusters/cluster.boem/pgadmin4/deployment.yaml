@@ -34,3 +34,7 @@ spec:
                 secretKeyRef:
                   name: pgadmin4
                   key: password
+            - name: PGADMIN_LISTEN_ADDRESS
+              value: "0.0.0.0"
+            - name: PGADMIN_LISTEN_PORT
+              value: "5050"
