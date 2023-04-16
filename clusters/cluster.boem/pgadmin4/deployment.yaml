@@ -23,3 +23,14 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "500m"
+          env:
+            - name: PGADMIN_DEFAULT_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: pgadmin4
+                  key: email
+            - name: PGADMIN_DEFAULT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pgadmin4
+                  key: password
