@@ -82,6 +82,13 @@ spec:
           namespace: default
           port: 80
 
+    - kind: Rule
+      match: Host(`adminer.cluster.boem`)
+      services:
+        - name: adminer
+          namespace: default
+          port: 8080
+
     # - kind: Rule
     #   match: Host(`courier.kratos.cluster.boem`)
     #   services:
