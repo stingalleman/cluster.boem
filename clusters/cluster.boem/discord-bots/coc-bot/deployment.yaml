@@ -1,50 +1,50 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: coc-bot
-#   namespace: discord-bots
-# spec:
-#   replicas: 2
-#   selector:
-#     matchLabels:
-#       app: coc-bot
-#   template:
-#     metadata:
-#       labels:
-#         app: coc-bot
-#     spec:
-#       containers:
-#         - name: coc-bot
-#           image: stingalleman/coc-bot:latest
-#           resources:
-#             limits:
-#               memory: "128Mi"
-#               cpu: "500m"
-#           ports:
-#             - containerPort: 8020
-#               protocol: TCP
-#           env:
-#             - name: DISCORD_APP_ID
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: coc-bot
-#                   key: discord_app_id
-#             - name: DISCORD_PUBLIC_KEY
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: coc-bot
-#                   key: discord_public_key
-#             - name: COC_COOKIE
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: coc-bot
-#                   key: coc_cookie
-#             - name: DISCORD_BOT_TOKEN
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: coc-bot
-#                   key: discord_bot_token
-#             - name: REDIS_HOST
-#               value: "10.10.10.15"
-#             - name: REDIS_PORT
-#               value: "6379"
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coc-bot
+  namespace: discord-bots
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: coc-bot
+  template:
+    metadata:
+      labels:
+        app: coc-bot
+    spec:
+      containers:
+        - name: coc-bot
+          image: stingalleman/coc-bot:latest
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8020
+              protocol: TCP
+          env:
+            - name: DISCORD_APP_ID
+              valueFrom:
+                secretKeyRef:
+                  name: coc-bot
+                  key: discord_app_id
+            - name: DISCORD_PUBLIC_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: coc-bot
+                  key: discord_public_key
+            - name: COC_COOKIE
+              valueFrom:
+                secretKeyRef:
+                  name: coc-bot
+                  key: coc_cookie
+            - name: DISCORD_BOT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: coc-bot
+                  key: discord_bot_token
+            - name: REDIS_HOST
+              value: "10.10.10.15"
+            - name: REDIS_PORT
+              value: "6379"
