@@ -15,7 +15,8 @@ spec:
     spec:
       containers:
         - name: yucky-rs
-          image: ghcr.io/maishond/yucky.rs:main
+          image: ghcr.io/maishond/yucky.rs@sha256:c3e5ae9d585ae990f5d01e5d7e2d787e13cfbe446b17136a85d4e4abbc84378f@sha256:18d5ce94d3156a149b3e1e8c9d13701f122d70cb5a755cd641966cbac18c7e4a
+          # image: ghcr.io/maishond/yucky.rs:main
           imagePullPolicy: Always
           resources:
             limits:
