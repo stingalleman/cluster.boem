@@ -20,7 +20,7 @@ spec:
           resources:
             limits:
               memory: "256Mi"
-              cpu: "1"
+              cpu: "500m"
           env:
             - name: TOKEN
               valueFrom:
