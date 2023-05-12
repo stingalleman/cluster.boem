@@ -16,16 +16,16 @@ spec:
     # The IPv4 cidr pool to create on startup if none exists. Pod IPs will be
     # chosen from this range.
     podCidr: "10.244.0.0/16"
-    podCidrv6: ""
+    podCidrv6: "2a07:e345:3:3::/64"
 
     flannel:
       # kube-flannel image
-      image:
-        repository: docker.io/flannel/flannel
-        tag: v0.21.5
-      image_cni:
-        repository: docker.io/flannel/flannel-cni-plugin
-        tag: v1.1.2
+      # image:
+      #   repository: docker.io/flannel/flannel
+      #   tag: v0.21.5
+      # image_cni:
+      #   repository: docker.io/flannel/flannel-cni-plugin
+      #   tag: v1.1.2
       # flannel command arguments
       args:
         - "--ip-masq"
