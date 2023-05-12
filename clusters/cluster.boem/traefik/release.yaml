@@ -64,7 +64,7 @@ spec:
 
     # Pod disruption budget
     podDisruptionBudget:
-      enabled: false
+      enabled: true
       # maxUnavailable: 1
       # maxUnavailable: 33%
       minAvailable: 2
