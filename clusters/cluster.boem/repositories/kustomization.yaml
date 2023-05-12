@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - bitnami.yaml
 - coredns.yaml
+- flannel.yaml
 - jetstack.yaml
 - k8s-at-home.yaml
 - mattermost.yaml
