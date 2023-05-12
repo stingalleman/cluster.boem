@@ -4,5 +4,5 @@ resources:
   - coc-bot
   - dailyfloppa
   - namespace.yaml
-  # - yucky-rs
+  - yucky-rs
   - yucky-php
