@@ -20,6 +20,8 @@ spec:
       labels:
         app: achtergrondje
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: kub-4
       containers:
         - name: achtergrondje
           image: ghcr.io/dev-shit/aaaah:main
