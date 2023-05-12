@@ -24,7 +24,7 @@ spec:
         kubernetes.io/hostname: kub-4
       containers:
         - name: achtergrondje
-          image: ghcr.io/dev-shit/aaaah:main
+          image: ghcr.io/maishond/aaaah:main
           imagePullPolicy: Always
           resources:
             limits:
