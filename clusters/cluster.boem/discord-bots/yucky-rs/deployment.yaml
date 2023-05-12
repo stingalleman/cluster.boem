@@ -18,10 +18,10 @@ spec:
           # image: ghcr.io/maishond/yucky.rs@sha256:c3e5ae9d585ae990f5d01e5d7e2d787e13cfbe446b17136a85d4e4abbc84378f
           image: ghcr.io/maishond/yucky.rs:main
           imagePullPolicy: Always
-          resources:
-            limits:
-              memory: "128Mi"
-              cpu: "2000m"
+          # resources:
+          #   limits:
+          #     memory: "128Mi"
+          #     cpu: "2000m"
           env:
             - name: DATABASE_URL
               valueFrom:
