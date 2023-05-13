@@ -46,18 +46,18 @@ spec:
 
 # ## Create default rules for monitoring the cluster
 # ##
-# defaultRules:
-#   create: true
-#   rules:
-#     alertmanager: true
-#     etcd: true
-#     configReloaders: true
-#     general: true
-#     k8s: true
-#     kubeApiserver: true
-#     kubeApiserverAvailability: true
-#     kubeApiserverSlos: true
-#     kubelet: false
+defaultRules:
+  create: true
+  rules:
+    kubelet: false
+    #     alertmanager: true
+    #     etcd: true
+    #     configReloaders: true
+    #     general: true
+    #     k8s: true
+    #     kubeApiserver: true
+    #     kubeApiserverAvailability: true
+    #     kubeApiserverSlos: true
 #     kubeProxy: true
 #     kubePrometheusGeneral: true
 #     kubePrometheusNodeRecording: true
