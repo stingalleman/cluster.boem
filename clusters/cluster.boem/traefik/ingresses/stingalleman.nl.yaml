@@ -20,7 +20,7 @@ spec:
     - kind: Rule
       match: Host(`grafiekjes.stingalleman.nl`)
       services:
-        - name: prometheus-stack-grafana
+        - name: monitoring-stack-grafana
           namespace: monitoring
           port: 80
           passHostHeader: true
