@@ -4,4 +4,4 @@ resources:
   # - blackbox
   # - discord-webhook
   - namespace.yaml
-  # - prometheus
+  - prometheus
