@@ -20,4 +20,4 @@ spec:
         valueFrom:
           secretKeyRef:
             name: alertmanager-discord
-            key: WEBHOOK
+            key: webhook
