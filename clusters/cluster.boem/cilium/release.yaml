@@ -23,9 +23,9 @@ spec:
     # # For example: 1.7, 1.8, 1.9
     # # upgradeCompatibility: '1.8'
 
-    # debug:
-    #   # -- Enable debug logging
-    #   enabled: false
+    debug:
+      # -- Enable debug logging
+      enabled: true
     #   # -- Configure verbosity levels for debug logging
     #   # This option is used to enable debug messages for operations related to such
     #   # sub-system such as (e.g. kvstore, envoy, datapath or policy), and flow is
