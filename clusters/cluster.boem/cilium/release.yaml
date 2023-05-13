@@ -848,330 +848,330 @@ spec:
     #   # -- Additional certgen volumeMounts.
     #   extraVolumeMounts: []
 
-    # hubble:
-    #   # -- Enable Hubble (true by default).
-    #   enabled: true
+    hubble:
+      # -- Enable Hubble (true by default).
+      enabled: true
 
-    #   # -- Buffer size of the channel Hubble uses to receive monitor events. If this
-    #   # value is not set, the queue size is set to the default monitor queue size.
-    #   # eventQueueSize: ""
+      #   # -- Buffer size of the channel Hubble uses to receive monitor events. If this
+      #   # value is not set, the queue size is set to the default monitor queue size.
+      #   # eventQueueSize: ""
 
-    #   # -- Number of recent flows for Hubble to cache. Defaults to 4095.
-    #   # Possible values are:
-    #   #   1, 3, 7, 15, 31, 63, 127, 255, 511, 1023,
-    #   #   2047, 4095, 8191, 16383, 32767, 65535
-    #   # eventBufferCapacity: "4095"
+      #   # -- Number of recent flows for Hubble to cache. Defaults to 4095.
+      #   # Possible values are:
+      #   #   1, 3, 7, 15, 31, 63, 127, 255, 511, 1023,
+      #   #   2047, 4095, 8191, 16383, 32767, 65535
+      #   # eventBufferCapacity: "4095"
 
-    #   # -- Hubble metrics configuration.
-    #   # See https://docs.cilium.io/en/stable/observability/metrics/#hubble-metrics
-    #   # for more comprehensive documentation about Hubble metrics.
-    #   metrics:
-    #     # -- Configures the list of metrics to collect. If empty or null, metrics
-    #     # are disabled.
-    #     # Example:
-    #     #
-    #     #   enabled:
-    #     #   - dns:query;ignoreAAAA
-    #     #   - drop
-    #     #   - tcp
-    #     #   - flow
-    #     #   - icmp
-    #     #   - http
-    #     #
-    #     # You can specify the list of metrics from the helm CLI:
-    #     #
-    #     #   --set metrics.enabled="{dns:query;ignoreAAAA,drop,tcp,flow,icmp,http}"
-    #     #
-    #     enabled: ~
-    #     # -- Enables exporting hubble metrics in OpenMetrics format.
-    #     enableOpenMetrics: false
-    #     # -- Configure the port the hubble metric server listens on.
-    #     port: 9965
-    #     # -- Annotations to be added to hubble-metrics service.
-    #     serviceAnnotations: {}
-    #     serviceMonitor:
-    #       # -- Create ServiceMonitor resources for Prometheus Operator.
-    #       # This requires the prometheus CRDs to be available.
-    #       # ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml)
-    #       enabled: false
-    #       # -- Labels to add to ServiceMonitor hubble
-    #       labels: {}
-    #       # -- Annotations to add to ServiceMonitor hubble
-    #       annotations: {}
-    #       # -- Interval for scrape metrics.
-    #       interval: "10s"
-    #       # -- Relabeling configs for the ServiceMonitor hubble
-    #       relabelings:
-    #         - sourceLabels:
-    #             - __meta_kubernetes_pod_node_name
-    #           targetLabel: node
-    #           replacement: ${1}
-    #       # -- Metrics relabeling configs for the ServiceMonitor hubble
-    #       metricRelabelings: ~
-    #     dashboards:
-    #       enabled: false
-    #       label: grafana_dashboard
-    #       namespace: ~
-    #       labelValue: "1"
-    #       annotations: {}
+      #   # -- Hubble metrics configuration.
+      #   # See https://docs.cilium.io/en/stable/observability/metrics/#hubble-metrics
+      #   # for more comprehensive documentation about Hubble metrics.
+      #   metrics:
+      #     # -- Configures the list of metrics to collect. If empty or null, metrics
+      #     # are disabled.
+      #     # Example:
+      #     #
+      #     #   enabled:
+      #     #   - dns:query;ignoreAAAA
+      #     #   - drop
+      #     #   - tcp
+      #     #   - flow
+      #     #   - icmp
+      #     #   - http
+      #     #
+      #     # You can specify the list of metrics from the helm CLI:
+      #     #
+      #     #   --set metrics.enabled="{dns:query;ignoreAAAA,drop,tcp,flow,icmp,http}"
+      #     #
+      #     enabled: ~
+      #     # -- Enables exporting hubble metrics in OpenMetrics format.
+      #     enableOpenMetrics: false
+      #     # -- Configure the port the hubble metric server listens on.
+      #     port: 9965
+      #     # -- Annotations to be added to hubble-metrics service.
+      #     serviceAnnotations: {}
+      #     serviceMonitor:
+      #       # -- Create ServiceMonitor resources for Prometheus Operator.
+      #       # This requires the prometheus CRDs to be available.
+      #       # ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml)
+      #       enabled: false
+      #       # -- Labels to add to ServiceMonitor hubble
+      #       labels: {}
+      #       # -- Annotations to add to ServiceMonitor hubble
+      #       annotations: {}
+      #       # -- Interval for scrape metrics.
+      #       interval: "10s"
+      #       # -- Relabeling configs for the ServiceMonitor hubble
+      #       relabelings:
+      #         - sourceLabels:
+      #             - __meta_kubernetes_pod_node_name
+      #           targetLabel: node
+      #           replacement: ${1}
+      #       # -- Metrics relabeling configs for the ServiceMonitor hubble
+      #       metricRelabelings: ~
+      #     dashboards:
+      #       enabled: false
+      #       label: grafana_dashboard
+      #       namespace: ~
+      #       labelValue: "1"
+      #       annotations: {}
 
-    #   # -- Unix domain socket path to listen to when Hubble is enabled.
-    #   socketPath: /var/run/cilium/hubble.sock
+      #   # -- Unix domain socket path to listen to when Hubble is enabled.
+      #   socketPath: /var/run/cilium/hubble.sock
 
-    #   # -- An additional address for Hubble to listen to.
-    #   # Set this field ":4244" if you are enabling Hubble Relay, as it assumes that
-    #   # Hubble is listening on port 4244.
-    #   listenAddress: ":4244"
-    #   # -- Whether Hubble should prefer to announce IPv6 or IPv4 addresses if both are available.
-    #   preferIpv6: false
-    #   # -- (bool) Skip Hubble events with unknown cgroup ids
-    #   # @default -- `true`
-    #   skipUnknownCGroupIDs: ~
+      #   # -- An additional address for Hubble to listen to.
+      #   # Set this field ":4244" if you are enabling Hubble Relay, as it assumes that
+      #   # Hubble is listening on port 4244.
+      #   listenAddress: ":4244"
+      #   # -- Whether Hubble should prefer to announce IPv6 or IPv4 addresses if both are available.
+      #   preferIpv6: false
+      #   # -- (bool) Skip Hubble events with unknown cgroup ids
+      #   # @default -- `true`
+      #   skipUnknownCGroupIDs: ~
 
-    #   peerService:
-    #     # -- Enable a K8s Service for the Peer service, so that it can be accessed
-    #     # by a non-local client. This configuration option is deprecated, the peer
-    #     # service will be non-optional starting Cilium v1.14.
-    #     enabled: true
-    #     # -- Service Port for the Peer service.
-    #     # If not set, it is dynamically assigned to port 443 if TLS is enabled and to
-    #     # port 80 if not.
-    #     # servicePort: 80
-    #     # -- Target Port for the Peer service, must match the hubble.listenAddress'
-    #     # port.
-    #     targetPort: 4244
-    #     # -- The cluster domain to use to query the Hubble Peer service. It should
-    #     # be the local cluster.
-    #     clusterDomain: cluster.local
-    #   # -- TLS configuration for Hubble
-    #   tls:
-    #     # -- Enable mutual TLS for listenAddress. Setting this value to false is
-    #     # highly discouraged as the Hubble API provides access to potentially
-    #     # sensitive network flow metadata and is exposed on the host network.
-    #     enabled: true
-    #     # -- Configure automatic TLS certificates generation.
-    #     auto:
-    #       # -- Auto-generate certificates.
-    #       # When set to true, automatically generate a CA and certificates to
-    #       # enable mTLS between Hubble server and Hubble Relay instances. If set to
-    #       # false, the certs for Hubble server need to be provided by setting
-    #       # appropriate values below.
-    #       enabled: true
-    #       # -- Set the method to auto-generate certificates. Supported values:
-    #       # - helm:         This method uses Helm to generate all certificates.
-    #       # - cronJob:      This method uses a Kubernetes CronJob the generate any
-    #       #                 certificates not provided by the user at installation
-    #       #                 time.
-    #       # - certmanager:  This method use cert-manager to generate & rotate certificates.
-    #       method: helm
-    #       # -- Generated certificates validity duration in days.
-    #       certValidityDuration: 1095
-    #       # -- Schedule for certificates regeneration (regardless of their expiration date).
-    #       # Only used if method is "cronJob". If nil, then no recurring job will be created.
-    #       # Instead, only the one-shot job is deployed to generate the certificates at
-    #       # installation time.
-    #       #
-    #       # Defaults to midnight of the first day of every fourth month. For syntax, see
-    #       # https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#schedule-syntax
-    #       schedule: "0 0 1 */4 *"
+      #   peerService:
+      #     # -- Enable a K8s Service for the Peer service, so that it can be accessed
+      #     # by a non-local client. This configuration option is deprecated, the peer
+      #     # service will be non-optional starting Cilium v1.14.
+      #     enabled: true
+      #     # -- Service Port for the Peer service.
+      #     # If not set, it is dynamically assigned to port 443 if TLS is enabled and to
+      #     # port 80 if not.
+      #     # servicePort: 80
+      #     # -- Target Port for the Peer service, must match the hubble.listenAddress'
+      #     # port.
+      #     targetPort: 4244
+      #     # -- The cluster domain to use to query the Hubble Peer service. It should
+      #     # be the local cluster.
+      #     clusterDomain: cluster.local
+      #   # -- TLS configuration for Hubble
+      #   tls:
+      #     # -- Enable mutual TLS for listenAddress. Setting this value to false is
+      #     # highly discouraged as the Hubble API provides access to potentially
+      #     # sensitive network flow metadata and is exposed on the host network.
+      #     enabled: true
+      #     # -- Configure automatic TLS certificates generation.
+      #     auto:
+      #       # -- Auto-generate certificates.
+      #       # When set to true, automatically generate a CA and certificates to
+      #       # enable mTLS between Hubble server and Hubble Relay instances. If set to
+      #       # false, the certs for Hubble server need to be provided by setting
+      #       # appropriate values below.
+      #       enabled: true
+      #       # -- Set the method to auto-generate certificates. Supported values:
+      #       # - helm:         This method uses Helm to generate all certificates.
+      #       # - cronJob:      This method uses a Kubernetes CronJob the generate any
+      #       #                 certificates not provided by the user at installation
+      #       #                 time.
+      #       # - certmanager:  This method use cert-manager to generate & rotate certificates.
+      #       method: helm
+      #       # -- Generated certificates validity duration in days.
+      #       certValidityDuration: 1095
+      #       # -- Schedule for certificates regeneration (regardless of their expiration date).
+      #       # Only used if method is "cronJob". If nil, then no recurring job will be created.
+      #       # Instead, only the one-shot job is deployed to generate the certificates at
+      #       # installation time.
+      #       #
+      #       # Defaults to midnight of the first day of every fourth month. For syntax, see
+      #       # https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#schedule-syntax
+      #       schedule: "0 0 1 */4 *"
 
-    #       # [Example]
-    #       # certManagerIssuerRef:
-    #       #   group: cert-manager.io
-    #       #   kind: ClusterIssuer
-    #       #   name: ca-issuer
-    #       # -- certmanager issuer used when hubble.tls.auto.method=certmanager.
-    #       certManagerIssuerRef: {}
+      #       # [Example]
+      #       # certManagerIssuerRef:
+      #       #   group: cert-manager.io
+      #       #   kind: ClusterIssuer
+      #       #   name: ca-issuer
+      #       # -- certmanager issuer used when hubble.tls.auto.method=certmanager.
+      #       certManagerIssuerRef: {}
 
-    #     # -- Deprecated in favor of tls.ca. To be removed in 1.13.
-    #     # base64 encoded PEM values for the Hubble CA certificate and private key.
-    #     ca:
-    #       # -- Deprecated in favor of tls.ca.cert. To be removed in 1.13.
-    #       cert: ""
-    #       # -- Deprecated in favor of tls.ca.key. To be removed in 1.13.
-    #       # The CA private key (optional). If it is provided, then it will be
-    #       # used by hubble.tls.auto.method=cronJob to generate all other certificates.
-    #       # Otherwise, a ephemeral CA is generated if hubble.tls.auto.enabled=true.
-    #       key: ""
-    #     # -- base64 encoded PEM values for the Hubble server certificate and private key
-    #     server:
-    #       cert: ""
-    #       key: ""
-    #       # -- Extra DNS names added to certificate when it's auto generated
-    #       extraDnsNames: []
-    #       # -- Extra IP addresses added to certificate when it's auto generated
-    #       extraIpAddresses: []
+      #     # -- Deprecated in favor of tls.ca. To be removed in 1.13.
+      #     # base64 encoded PEM values for the Hubble CA certificate and private key.
+      #     ca:
+      #       # -- Deprecated in favor of tls.ca.cert. To be removed in 1.13.
+      #       cert: ""
+      #       # -- Deprecated in favor of tls.ca.key. To be removed in 1.13.
+      #       # The CA private key (optional). If it is provided, then it will be
+      #       # used by hubble.tls.auto.method=cronJob to generate all other certificates.
+      #       # Otherwise, a ephemeral CA is generated if hubble.tls.auto.enabled=true.
+      #       key: ""
+      #     # -- base64 encoded PEM values for the Hubble server certificate and private key
+      #     server:
+      #       cert: ""
+      #       key: ""
+      #       # -- Extra DNS names added to certificate when it's auto generated
+      #       extraDnsNames: []
+      #       # -- Extra IP addresses added to certificate when it's auto generated
+      #       extraIpAddresses: []
 
-    #   relay:
-    #     # -- Enable Hubble Relay (requires hubble.enabled=true)
-    #     enabled: false
+      relay:
+        # -- Enable Hubble Relay (requires hubble.enabled=true)
+        enabled: true
 
-    #     # -- Roll out Hubble Relay pods automatically when configmap is updated.
-    #     rollOutPods: false
+      #     # -- Roll out Hubble Relay pods automatically when configmap is updated.
+      #     rollOutPods: false
 
-    #     # -- Hubble-relay container image.
-    #     image:
-    #       override: ~
-    #       repository: "quay.io/cilium/hubble-relay"
-    #       tag: "v1.13.2"
-    #       # hubble-relay-digest
-    #       digest: "sha256:51b772cab0724511583c3da3286439791dc67d7c35077fa30eaba3b5d555f8f4"
-    #       useDigest: true
-    #       pullPolicy: "IfNotPresent"
+      #     # -- Hubble-relay container image.
+      #     image:
+      #       override: ~
+      #       repository: "quay.io/cilium/hubble-relay"
+      #       tag: "v1.13.2"
+      #       # hubble-relay-digest
+      #       digest: "sha256:51b772cab0724511583c3da3286439791dc67d7c35077fa30eaba3b5d555f8f4"
+      #       useDigest: true
+      #       pullPolicy: "IfNotPresent"
 
-    #     # -- Specifies the resources for the hubble-relay pods
-    #     resources: {}
+      #     # -- Specifies the resources for the hubble-relay pods
+      #     resources: {}
 
-    #     # -- Number of replicas run for the hubble-relay deployment.
-    #     replicas: 1
+      #     # -- Number of replicas run for the hubble-relay deployment.
+      #     replicas: 1
 
-    #     # -- Affinity for hubble-replay
-    #     affinity:
-    #       podAffinity:
-    #         requiredDuringSchedulingIgnoredDuringExecution:
-    #         - topologyKey: kubernetes.io/hostname
-    #           labelSelector:
-    #             matchLabels:
-    #               k8s-app: cilium
+      #     # -- Affinity for hubble-replay
+      #     affinity:
+      #       podAffinity:
+      #         requiredDuringSchedulingIgnoredDuringExecution:
+      #         - topologyKey: kubernetes.io/hostname
+      #           labelSelector:
+      #             matchLabels:
+      #               k8s-app: cilium
 
-    #     # -- Pod topology spread constraints for hubble-relay
-    #     topologySpreadConstraints: []
-    #       # - maxSkew: 1
-    #       #   topologyKey: topology.kubernetes.io/zone
-    #       #   whenUnsatisfiable: DoNotSchedule
+      #     # -- Pod topology spread constraints for hubble-relay
+      #     topologySpreadConstraints: []
+      #       # - maxSkew: 1
+      #       #   topologyKey: topology.kubernetes.io/zone
+      #       #   whenUnsatisfiable: DoNotSchedule
 
-    #     # -- Node labels for pod assignment
-    #     # ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector
-    #     nodeSelector:
-    #       kubernetes.io/os: linux
+      #     # -- Node labels for pod assignment
+      #     # ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector
+      #     nodeSelector:
+      #       kubernetes.io/os: linux
 
-    #     # -- Node tolerations for pod assignment on nodes with taints
-    #     # ref: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
-    #     tolerations: []
+      #     # -- Node tolerations for pod assignment on nodes with taints
+      #     # ref: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
+      #     tolerations: []
 
-    #     # -- Additional hubble-relay environment variables.
-    #     extraEnv: []
+      #     # -- Additional hubble-relay environment variables.
+      #     extraEnv: []
 
-    #     # -- Annotations to be added to hubble-relay pods
-    #     podAnnotations: {}
+      #     # -- Annotations to be added to hubble-relay pods
+      #     podAnnotations: {}
 
-    #     # -- Labels to be added to hubble-relay pods
-    #     podLabels: {}
+      #     # -- Labels to be added to hubble-relay pods
+      #     podLabels: {}
 
-    #     # PodDisruptionBudget settings
-    #     podDisruptionBudget:
-    #       # -- enable PodDisruptionBudget
-    #       # ref: https://kubernetes.io/docs/concepts/workloads/pods/disruptions/
-    #       enabled: false
-    #       # -- Minimum number/percentage of pods that should remain scheduled.
-    #       # When it's set, maxUnavailable must be disabled by `maxUnavailable: null`
-    #       minAvailable: null
-    #       # -- Maximum number/percentage of pods that may be made unavailable
-    #       maxUnavailable: 1
+      #     # PodDisruptionBudget settings
+      #     podDisruptionBudget:
+      #       # -- enable PodDisruptionBudget
+      #       # ref: https://kubernetes.io/docs/concepts/workloads/pods/disruptions/
+      #       enabled: false
+      #       # -- Minimum number/percentage of pods that should remain scheduled.
+      #       # When it's set, maxUnavailable must be disabled by `maxUnavailable: null`
+      #       minAvailable: null
+      #       # -- Maximum number/percentage of pods that may be made unavailable
+      #       maxUnavailable: 1
 
-    #     # -- The priority class to use for hubble-relay
-    #     priorityClassName: ""
+      #     # -- The priority class to use for hubble-relay
+      #     priorityClassName: ""
 
-    #     # -- Configure termination grace period for hubble relay Deployment.
-    #     terminationGracePeriodSeconds: 1
+      #     # -- Configure termination grace period for hubble relay Deployment.
+      #     terminationGracePeriodSeconds: 1
 
-    #     # -- hubble-relay update strategy
-    #     updateStrategy:
-    #       type: RollingUpdate
-    #       rollingUpdate:
-    #         maxUnavailable: 1
+      #     # -- hubble-relay update strategy
+      #     updateStrategy:
+      #       type: RollingUpdate
+      #       rollingUpdate:
+      #         maxUnavailable: 1
 
-    #     # -- hubble-relay security context
-    #     securityContext: {}
+      #     # -- hubble-relay security context
+      #     securityContext: {}
 
-    #     # -- hubble-relay service configuration.
-    #     service:
-    #       # --- The type of service used for Hubble Relay access, either ClusterIP or NodePort.
-    #       type: ClusterIP
-    #       # --- The port to use when the service type is set to NodePort.
-    #       nodePort: 31234
+      #     # -- hubble-relay service configuration.
+      #     service:
+      #       # --- The type of service used for Hubble Relay access, either ClusterIP or NodePort.
+      #       type: ClusterIP
+      #       # --- The port to use when the service type is set to NodePort.
+      #       nodePort: 31234
 
-    #     # -- Host to listen to. Specify an empty string to bind to all the interfaces.
-    #     listenHost: ""
+      #     # -- Host to listen to. Specify an empty string to bind to all the interfaces.
+      #     listenHost: ""
 
-    #     # -- Port to listen to.
-    #     listenPort: "4245"
+      #     # -- Port to listen to.
+      #     listenPort: "4245"
 
-    #     # -- TLS configuration for Hubble Relay
-    #     tls:
-    #       # -- base64 encoded PEM values for the hubble-relay client certificate and private key
-    #       # This keypair is presented to Hubble server instances for mTLS
-    #       # authentication and is required when hubble.tls.enabled is true.
-    #       # These values need to be set manually if hubble.tls.auto.enabled is false.
-    #       client:
-    #         cert: ""
-    #         key: ""
-    #       # -- base64 encoded PEM values for the hubble-relay server certificate and private key
-    #       server:
-    #         # When set to true, enable TLS on for Hubble Relay server
-    #         # (ie: for clients connecting to the Hubble Relay API).
-    #         enabled: false
-    #         # These values need to be set manually if hubble.tls.auto.enabled is false.
-    #         cert: ""
-    #         key: ""
-    #         # -- extra DNS names added to certificate when its auto gen
-    #         extraDnsNames: []
-    #         # -- extra IP addresses added to certificate when its auto gen
-    #         extraIpAddresses: []
+      #     # -- TLS configuration for Hubble Relay
+      #     tls:
+      #       # -- base64 encoded PEM values for the hubble-relay client certificate and private key
+      #       # This keypair is presented to Hubble server instances for mTLS
+      #       # authentication and is required when hubble.tls.enabled is true.
+      #       # These values need to be set manually if hubble.tls.auto.enabled is false.
+      #       client:
+      #         cert: ""
+      #         key: ""
+      #       # -- base64 encoded PEM values for the hubble-relay server certificate and private key
+      #       server:
+      #         # When set to true, enable TLS on for Hubble Relay server
+      #         # (ie: for clients connecting to the Hubble Relay API).
+      #         enabled: false
+      #         # These values need to be set manually if hubble.tls.auto.enabled is false.
+      #         cert: ""
+      #         key: ""
+      #         # -- extra DNS names added to certificate when its auto gen
+      #         extraDnsNames: []
+      #         # -- extra IP addresses added to certificate when its auto gen
+      #         extraIpAddresses: []
 
-    #     # -- Dial timeout to connect to the local hubble instance to receive peer information (e.g. "30s").
-    #     dialTimeout: ~
+      #     # -- Dial timeout to connect to the local hubble instance to receive peer information (e.g. "30s").
+      #     dialTimeout: ~
 
-    #     # -- Backoff duration to retry connecting to the local hubble instance in case of failure (e.g. "30s").
-    #     retryTimeout: ~
+      #     # -- Backoff duration to retry connecting to the local hubble instance in case of failure (e.g. "30s").
+      #     retryTimeout: ~
 
-    #     # -- Max number of flows that can be buffered for sorting before being sent to the
-    #     # client (per request) (e.g. 100).
-    #     sortBufferLenMax: ~
+      #     # -- Max number of flows that can be buffered for sorting before being sent to the
+      #     # client (per request) (e.g. 100).
+      #     sortBufferLenMax: ~
 
-    #     # -- When the per-request flows sort buffer is not full, a flow is drained every
-    #     # time this timeout is reached (only affects requests in follow-mode) (e.g. "1s").
-    #     sortBufferDrainTimeout: ~
+      #     # -- When the per-request flows sort buffer is not full, a flow is drained every
+      #     # time this timeout is reached (only affects requests in follow-mode) (e.g. "1s").
+      #     sortBufferDrainTimeout: ~
 
-    #     # -- Port to use for the k8s service backed by hubble-relay pods.
-    #     # If not set, it is dynamically assigned to port 443 if TLS is enabled and to
-    #     # port 80 if not.
-    #     # servicePort: 80
+      #     # -- Port to use for the k8s service backed by hubble-relay pods.
+      #     # If not set, it is dynamically assigned to port 443 if TLS is enabled and to
+      #     # port 80 if not.
+      #     # servicePort: 80
 
-    #     # -- Enable prometheus metrics for hubble-relay on the configured port at
-    #     # /metrics
-    #     prometheus:
-    #       enabled: false
-    #       port: 9966
-    #       serviceMonitor:
-    #         # -- Enable service monitors.
-    #         # This requires the prometheus CRDs to be available (see https://github.com/prometheus-operator/prometheus-operator/blob/main/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml)
-    #         enabled: false
-    #         # -- Labels to add to ServiceMonitor hubble-relay
-    #         labels: {}
-    #         # -- Annotations to add to ServiceMonitor hubble-relay
-    #         annotations: {}
-    #         # -- Interval for scrape metrics.
-    #         interval: "10s"
-    #         # -- Specify the Kubernetes namespace where Prometheus expects to find
-    #         # service monitors configured.
-    #         # namespace: ""
-    #         # -- Relabeling configs for the ServiceMonitor hubble-relay
-    #         relabelings: ~
-    #         # -- Metrics relabeling configs for the ServiceMonitor hubble-relay
-    #         metricRelabelings: ~
+      #     # -- Enable prometheus metrics for hubble-relay on the configured port at
+      #     # /metrics
+      #     prometheus:
+      #       enabled: false
+      #       port: 9966
+      #       serviceMonitor:
+      #         # -- Enable service monitors.
+      #         # This requires the prometheus CRDs to be available (see https://github.com/prometheus-operator/prometheus-operator/blob/main/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml)
+      #         enabled: false
+      #         # -- Labels to add to ServiceMonitor hubble-relay
+      #         labels: {}
+      #         # -- Annotations to add to ServiceMonitor hubble-relay
+      #         annotations: {}
+      #         # -- Interval for scrape metrics.
+      #         interval: "10s"
+      #         # -- Specify the Kubernetes namespace where Prometheus expects to find
+      #         # service monitors configured.
+      #         # namespace: ""
+      #         # -- Relabeling configs for the ServiceMonitor hubble-relay
+      #         relabelings: ~
+      #         # -- Metrics relabeling configs for the ServiceMonitor hubble-relay
+      #         metricRelabelings: ~
 
-    #     pprof:
-    #       # -- Enable pprof for hubble-relay
-    #       enabled: false
-    #       # -- Configure pprof listen address for hubble-relay
-    #       address: localhost
-    #       # -- Configure pprof listen port for hubble-relay
-    #       port: 6062
+      #     pprof:
+      #       # -- Enable pprof for hubble-relay
+      #       enabled: false
+      #       # -- Configure pprof listen address for hubble-relay
+      #       address: localhost
+      #       # -- Configure pprof listen port for hubble-relay
+      #       port: 6062
 
-    #   ui:
-    #     # -- Whether to enable the Hubble UI.
-    #     enabled: false
+      ui:
+        # -- Whether to enable the Hubble UI.
+        enabled: true
 
     #     standalone:
     #       # -- When true, it will allow installing the Hubble UI only, without checking dependencies.
