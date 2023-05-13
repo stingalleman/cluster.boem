@@ -13,242 +13,242 @@ spec:
         namespace: flux-system
   interval: 24h
   values:
-    # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
+    # # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
 
-    ## Provide custom recording or alerting rules to be deployed into the cluster.
-    ##
-    additionalPrometheusRulesMap:
-      blackbox:
-        groups:
-          - name: blackbox
-            interval: 1m
-            rules:
-              - alert: EndpointOffline
-                expr: probe_success{job="blackbox"} < 1
-                for: 90s
-                labels:
-                  severity: critical
-                annotations:
-                  summary: "{{ $labels.instance }} is offline!"
-    #   blackbox-down:
-    #    groups:
-    #    - name: blackbox
-    #      rules:
-    #      - record: my_record
-    #        expr: 100 * my_record
+    # ## Provide custom recording or alerting rules to be deployed into the cluster.
+    # ##
+    # additionalPrometheusRulesMap:
+    #   blackbox:
+    #     groups:
+    #       - name: blackbox
+    #         interval: 1m
+    #         rules:
+    #           - alert: EndpointOffline
+    #             expr: probe_success{job="blackbox"} < 1
+    #             for: 90s
+    #             labels:
+    #               severity: critical
+    #             annotations:
+    #               summary: "{{ $labels.instance }} is offline!"
+    # #   blackbox-down:
+    # #    groups:
+    # #    - name: blackbox
+    # #      rules:
+    # #      - record: my_record
+    # #        expr: 100 * my_record
 
-    #  rule-name:
-    #    groups:
-    #    - name: my_group
-    #      rules:
-    #      - record: my_record
-    #        expr: 100 * my_record
+    # #  rule-name:
+    # #    groups:
+    # #    - name: my_group
+    # #      rules:
+    # #      - record: my_record
+    # #        expr: 100 * my_record
 
-    ## Create default rules for monitoring the cluster
-    ##
-    defaultRules:
-      create: true
-      rules:
-        alertmanager: true
-        etcd: true
-        configReloaders: true
-        general: true
-        k8s: true
-        kubeApiserver: true
-        kubeApiserverAvailability: true
-        kubeApiserverSlos: true
-        kubelet: false
-        kubeProxy: true
-        kubePrometheusGeneral: true
-        kubePrometheusNodeRecording: true
-        kubernetesApps: true
-        kubernetesResources: true
-        kubernetesStorage: true
-        kubernetesSystem: true
-        kubeScheduler: true
-        kubeStateMetrics: true
-        network: true
-        node: true
-        nodeExporterAlerting: true
-        nodeExporterRecording: true
-        prometheus: true
-        prometheusOperator: true
+    # ## Create default rules for monitoring the cluster
+    # ##
+    # defaultRules:
+    #   create: true
+    #   rules:
+    #     alertmanager: true
+    #     etcd: true
+    #     configReloaders: true
+    #     general: true
+    #     k8s: true
+    #     kubeApiserver: true
+    #     kubeApiserverAvailability: true
+    #     kubeApiserverSlos: true
+    #     kubelet: false
+    #     kubeProxy: true
+    #     kubePrometheusGeneral: true
+    #     kubePrometheusNodeRecording: true
+    #     kubernetesApps: true
+    #     kubernetesResources: true
+    #     kubernetesStorage: true
+    #     kubernetesSystem: true
+    #     kubeScheduler: true
+    #     kubeStateMetrics: true
+    #     network: true
+    #     node: true
+    #     nodeExporterAlerting: true
+    #     nodeExporterRecording: true
+    #     prometheus: true
+    #     prometheusOperator: true
 
-    alertmanager:
-      config:
-        global:
-          resolve_timeout: 5m
-        route:
-          group_by: ["job"]
-          group_wait: 30s
-          group_interval: 24h
-          repeat_interval: 12h
-          receiver: "default"
-          routes:
-            # - receiver: "void"
-            #   match:
-            #     alertname: etcdHighNumberOfFailedGRPCRequests
-            - receiver: "void"
-              match:
-                alertname: Watchdog
-        receivers:
-          - name: default
-            pushover_configs:
-              - token: appy6o35262deao261tap6k6bnqstz
-                user_key: u74hw2c61vg6b873a4a5tbw72iotq2
-            webhook_configs:
-              - url: http://alertmanager-discord.monitoring.svc.cluster.local:9094
-          - name: "void"
-        templates:
-          - "/etc/alertmanager/config/*.tmpl"
+    # alertmanager:
+    #   config:
+    #     global:
+    #       resolve_timeout: 5m
+    #     route:
+    #       group_by: ["job"]
+    #       group_wait: 30s
+    #       group_interval: 24h
+    #       repeat_interval: 12h
+    #       receiver: "default"
+    #       routes:
+    #         # - receiver: "void"
+    #         #   match:
+    #         #     alertname: etcdHighNumberOfFailedGRPCRequests
+    #         - receiver: "void"
+    #           match:
+    #             alertname: Watchdog
+    #     receivers:
+    #       - name: default
+    #         pushover_configs:
+    #           - token: appy6o35262deao261tap6k6bnqstz
+    #             user_key: u74hw2c61vg6b873a4a5tbw72iotq2
+    #         webhook_configs:
+    #           - url: http://alertmanager-discord.monitoring.svc.cluster.local:9094
+    #       - name: "void"
+    #     templates:
+    #       - "/etc/alertmanager/config/*.tmpl"
 
-      alertmanagerSpec:
-        storage:
-          volumeClaimTemplate:
-            spec:
-              storageClassName: nfs
-              accessModes: ["ReadWriteOnce"]
-              resources:
-                requests:
-                  storage: 3Gi
+    #   alertmanagerSpec:
+    #     storage:
+    #       volumeClaimTemplate:
+    #         spec:
+    #           storageClassName: nfs
+    #           accessModes: ["ReadWriteOnce"]
+    #           resources:
+    #             requests:
+    #               storage: 3Gi
 
-    prometheus:
-      prometheusSpec:
-        serviceMonitorSelectorNilUsesHelmValues: false
-        replicas: 1
+    # prometheus:
+    #   prometheusSpec:
+    #     serviceMonitorSelectorNilUsesHelmValues: false
+    #     replicas: 1
 
-        ## AdditionalScrapeConfigs allows specifying additional Prometheus scrape configurations. Scrape configurations
-        ## are appended to the configurations generated by the Prometheus Operator. Job configurations must have the form
-        ## as specified in the official Prometheus documentation:
-        ## https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config. As scrape configs are
-        ## appended, the user is responsible to make sure it is valid. Note that using this feature may expose the possibility
-        ## to break upgrades of Prometheus. It is advised to review Prometheus release notes to ensure that no incompatible
-        ## scrape configs are going to break Prometheus after the upgrade.
-        ## AdditionalScrapeConfigs can be defined as a list or as a templated string.
-        ##
-        ## The scrape configuration example below will find master nodes, provided they have the name .*mst.*, relabel the
-        ## port to 2379 and allow etcd scraping provided it is running on all Kubernetes master nodes
-        ##
-        additionalScrapeConfigs:
-          - job_name: "blackbox"
-            metrics_path: /probe
-            scrape_interval: 60s
-            params:
-              module: [http_2xx] # Look for a HTTP 200 response.
-            static_configs:
-              - targets:
-                  - https://stingalleman.nl
-                  - https://core.pakket.sh
-                  - https://pakket.sh
-                  - https://cdn.stingalleman.nl
-                  # - https://pve.boem
-                  # - https://ca.boem
-            relabel_configs:
-              - source_labels: [__address__]
-                target_label: __param_target
-              - source_labels: [__param_target]
-                target_label: instance
-              - target_label: __address__
-                replacement: blackbox-prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115
+    #     ## AdditionalScrapeConfigs allows specifying additional Prometheus scrape configurations. Scrape configurations
+    #     ## are appended to the configurations generated by the Prometheus Operator. Job configurations must have the form
+    #     ## as specified in the official Prometheus documentation:
+    #     ## https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config. As scrape configs are
+    #     ## appended, the user is responsible to make sure it is valid. Note that using this feature may expose the possibility
+    #     ## to break upgrades of Prometheus. It is advised to review Prometheus release notes to ensure that no incompatible
+    #     ## scrape configs are going to break Prometheus after the upgrade.
+    #     ## AdditionalScrapeConfigs can be defined as a list or as a templated string.
+    #     ##
+    #     ## The scrape configuration example below will find master nodes, provided they have the name .*mst.*, relabel the
+    #     ## port to 2379 and allow etcd scraping provided it is running on all Kubernetes master nodes
+    #     ##
+    #     additionalScrapeConfigs:
+    #       - job_name: "blackbox"
+    #         metrics_path: /probe
+    #         scrape_interval: 60s
+    #         params:
+    #           module: [http_2xx] # Look for a HTTP 200 response.
+    #         static_configs:
+    #           - targets:
+    #               - https://stingalleman.nl
+    #               - https://core.pakket.sh
+    #               - https://pakket.sh
+    #               - https://cdn.stingalleman.nl
+    #               # - https://pve.boem
+    #               # - https://ca.boem
+    #         relabel_configs:
+    #           - source_labels: [__address__]
+    #             target_label: __param_target
+    #           - source_labels: [__param_target]
+    #             target_label: instance
+    #           - target_label: __address__
+    #             replacement: blackbox-prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115
 
-          - job_name: "node-exporter"
-            scrape_interval: 5s
-            static_configs:
-              - targets: [10.10.10.2:9100]
-                labels:
-                  instance: "chernobyl"
-                  city: "Amsterdam"
-                  latitude: 52.33626806224156
-                  longitude: 4.886583946358772
-              - targets: [10.10.10.10:9100]
-                labels:
-                  instance: "internals"
-                  city: "Amsterdam"
-                  latitude: 52.33626806224156
-                  longitude: 4.886583946358772
-              - targets: [10.10.10.1:9100]
-                labels:
-                  instance: "reactor"
-                  city: "Amsterdam"
-                  latitude: 52.33626806224156
-                  longitude: 4.886583946358772
+    #       - job_name: "node-exporter"
+    #         scrape_interval: 5s
+    #         static_configs:
+    #           - targets: [10.10.10.2:9100]
+    #             labels:
+    #               instance: "chernobyl"
+    #               city: "Amsterdam"
+    #               latitude: 52.33626806224156
+    #               longitude: 4.886583946358772
+    #           - targets: [10.10.10.10:9100]
+    #             labels:
+    #               instance: "internals"
+    #               city: "Amsterdam"
+    #               latitude: 52.33626806224156
+    #               longitude: 4.886583946358772
+    #           - targets: [10.10.10.1:9100]
+    #             labels:
+    #               instance: "reactor"
+    #               city: "Amsterdam"
+    #               latitude: 52.33626806224156
+    #               longitude: 4.886583946358772
 
-          - job_name: caddy
-            static_configs:
-              # - targets: ["caddy:1990"]
-              #   labels:
-              #     instance: "gemairo"
-              #     city: "Amsterdam"
-              #     latitude: 52.33626806224156
-              #     longitude: 4.886583946358772
+    #       - job_name: caddy
+    #         static_configs:
+    #           # - targets: ["caddy:1990"]
+    #           #   labels:
+    #           #     instance: "gemairo"
+    #           #     city: "Amsterdam"
+    #           #     latitude: 52.33626806224156
+    #           #     longitude: 4.886583946358772
 
-              - targets: ["10.10.10.10:1990"]
-                labels:
-                  instance: "internals"
-                  city: "Amsterdam"
-                  latitude: 52.33626806224156
-                  longitude: 4.886583946358772
+    #           - targets: ["10.10.10.10:1990"]
+    #             labels:
+    #               instance: "internals"
+    #               city: "Amsterdam"
+    #               latitude: 52.33626806224156
+    #               longitude: 4.886583946358772
 
-          - job_name: adguard
-            static_configs:
-              - targets: ["10.10.10.10:9617"]
+    #       - job_name: adguard
+    #         static_configs:
+    #           - targets: ["10.10.10.10:9617"]
 
-          - job_name: "pve"
-            static_configs:
-              - targets:
-                  - 10.10.10.2:8008 # Proxmox VE node with PVE exporter.
-            metrics_path: /pve
-            params:
-              module: [default]
+    #       - job_name: "pve"
+    #         static_configs:
+    #           - targets:
+    #               - 10.10.10.2:8008 # Proxmox VE node with PVE exporter.
+    #         metrics_path: /pve
+    #         params:
+    #           module: [default]
 
-        ## If scrape config contains a repetitive section, you may want to use a template.
-        ## In the following example, you can see how to define `gce_sd_configs` for multiple zones
-        # additionalScrapeConfigs: |
-        #  - job_name: "node-exporter"
-        #    gce_sd_configs:
-        #    {{range $zone := .Values.gcp_zones}}
-        #    - project: "project1"
-        #      zone: "{{$zone}}"
-        #      port: 9100
-        #    {{end}}
-        #    relabel_configs:
-        #    ...
+    #     ## If scrape config contains a repetitive section, you may want to use a template.
+    #     ## In the following example, you can see how to define `gce_sd_configs` for multiple zones
+    #     # additionalScrapeConfigs: |
+    #     #  - job_name: "node-exporter"
+    #     #    gce_sd_configs:
+    #     #    {{range $zone := .Values.gcp_zones}}
+    #     #    - project: "project1"
+    #     #      zone: "{{$zone}}"
+    #     #      port: 9100
+    #     #    {{end}}
+    #     #    relabel_configs:
+    #     #    ...
 
-        ## If additional scrape configurations are already deployed in a single secret file you can use this section.
-        ## Expected values are the secret name and key
-        ## Cannot be used with additionalScrapeConfigs
-        additionalScrapeConfigsSecret:
-          {}
-          # enabled: false
-          # name:
-          # key:
+    #     ## If additional scrape configurations are already deployed in a single secret file you can use this section.
+    #     ## Expected values are the secret name and key
+    #     ## Cannot be used with additionalScrapeConfigs
+    #     additionalScrapeConfigsSecret:
+    #       {}
+    #       # enabled: false
+    #       # name:
+    #       # key:
 
-        secrets: ["etcd-client-cert"]
+    #     secrets: ["etcd-client-cert"]
 
-        ## Prometheus StorageSpec for persistent data
-        ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/user-guides/storage.md
-        ##
-        # storageSpec:
-        # volumeClaimTemplate:
-        #   spec:
-        #     storageClassName: nfs
-        #     accessModes: ["ReadWriteOnce"]
-        #     resources:
-        #       requests:
-        #         storage: 50Gi
-        #  selector: {}
-        ## Using PersistentVolumeClaim
-        ##
+    #     ## Prometheus StorageSpec for persistent data
+    #     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/user-guides/storage.md
+    #     ##
+    #     # storageSpec:
+    #     # volumeClaimTemplate:
+    #     #   spec:
+    #     #     storageClassName: nfs
+    #     #     accessModes: ["ReadWriteOnce"]
+    #     #     resources:
+    #     #       requests:
+    #     #         storage: 50Gi
+    #     #  selector: {}
+    #     ## Using PersistentVolumeClaim
+    #     ##
 
-    kubeEtcd:
-      serviceMonitor:
-        scheme: https
-        insecureSkipVerify: false
-        serverName: localhost
-        caFile: /etc/prometheus/secrets/etcd-client-cert/ca.crt
-        certFile: /etc/prometheus/secrets/etcd-client-cert/healthcheck-client.crt
-        keyFile: /etc/prometheus/secrets/etcd-client-cert/healthcheck-client.key
+    # kubeEtcd:
+    #   serviceMonitor:
+    #     scheme: https
+    #     insecureSkipVerify: false
+    #     serverName: localhost
+    #     caFile: /etc/prometheus/secrets/etcd-client-cert/ca.crt
+    #     certFile: /etc/prometheus/secrets/etcd-client-cert/healthcheck-client.crt
+    #     keyFile: /etc/prometheus/secrets/etcd-client-cert/healthcheck-client.key
 
-    prometheusOperator:
-      kubeletService:
-        enabled: false
+    # prometheusOperator:
+    #   kubeletService:
+    #     enabled: false
