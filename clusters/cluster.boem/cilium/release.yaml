@@ -25,7 +25,7 @@ spec:
 
     debug:
       # -- Enable debug logging
-      enabled: true
+      enabled: false
     #   # -- Configure verbosity levels for debug logging
     #   # This option is used to enable debug messages for operations related to such
     #   # sub-system such as (e.g. kvstore, envoy, datapath or policy), and flow is
@@ -1004,7 +1004,7 @@ spec:
 
       relay:
         # -- Enable Hubble Relay (requires hubble.enabled=true)
-        enabled: false
+        enabled: true
 
       #     # -- Roll out Hubble Relay pods automatically when configmap is updated.
       #     rollOutPods: false
