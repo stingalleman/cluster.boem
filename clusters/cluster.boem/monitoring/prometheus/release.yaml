@@ -47,7 +47,6 @@ spec:
 # ## Create default rules for monitoring the cluster
 # ##
 defaultRules:
-  create: true
   rules:
     kubelet: false
     #     alertmanager: true
