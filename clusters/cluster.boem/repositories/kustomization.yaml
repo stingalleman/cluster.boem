@@ -12,6 +12,7 @@ resources:
 - netbox.yaml
 - nfs-provisioner.yaml
 - ory.yaml
+- overheid-regels.yaml
 - podinfo.yaml
 - postgres-operator.yaml
 - prometheus-community.yaml
