@@ -4,7 +4,7 @@ metadata:
   name: coc-bot
   namespace: discord-bots
 spec:
-  replicas: 2
+  replicas: 10
   selector:
     matchLabels:
       app: coc-bot
