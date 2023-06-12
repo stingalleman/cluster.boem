@@ -1,0 +1,23 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: alertmanager-discord
+  namespace: monitoring
+spec:
+  chart:
+    spec:
+      chart: alertmanager-discord
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+  interval: 24h
+  values:
+    env:
+      DISCORD_USERNAME: "Alertmanager"
+      DISCORD_AVATAR_URL: "https://avatars3.githubusercontent.com/u/3380462"
+      DISCORD_WEBHOOK:
+        valueFrom:
+          secretKeyRef:
+            name: alertmanager-discord
+            key: webhook
