@@ -4,6 +4,10 @@ metadata:
   name: monitoring-stack
   namespace: monitoring
 spec:
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
   chart:
     spec:
       version: 45.31.1
