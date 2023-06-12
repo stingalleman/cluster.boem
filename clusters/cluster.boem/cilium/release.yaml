@@ -865,24 +865,24 @@ spec:
       #   # -- Hubble metrics configuration.
       #   # See https://docs.cilium.io/en/stable/observability/metrics/#hubble-metrics
       #   # for more comprehensive documentation about Hubble metrics.
-      #   metrics:
-      #     # -- Configures the list of metrics to collect. If empty or null, metrics
-      #     # are disabled.
-      #     # Example:
-      #     #
-      #     #   enabled:
-      #     #   - dns:query;ignoreAAAA
-      #     #   - drop
-      #     #   - tcp
-      #     #   - flow
-      #     #   - icmp
-      #     #   - http
-      #     #
-      #     # You can specify the list of metrics from the helm CLI:
-      #     #
-      #     #   --set metrics.enabled="{dns:query;ignoreAAAA,drop,tcp,flow,icmp,http}"
-      #     #
-      #     enabled: ~
+      metrics:
+        #     # -- Configures the list of metrics to collect. If empty or null, metrics
+        #     # are disabled.
+        #     # Example:
+        #     #
+        #     #   enabled:
+        #     #   - dns:query;ignoreAAAA
+        #     #   - drop
+        #     #   - tcp
+        #     #   - flow
+        #     #   - icmp
+        #     #   - http
+        #     #
+        #     # You can specify the list of metrics from the helm CLI:
+        #     #
+        #     #   --set metrics.enabled="{dns:query;ignoreAAAA,drop,tcp,flow,icmp,http}"
+        #     #
+        enabled: ~
       #     # -- Enables exporting hubble metrics in OpenMetrics format.
       #     enableOpenMetrics: false
       #     # -- Configure the port the hubble metric server listens on.
@@ -1632,8 +1632,8 @@ spec:
     #   port: 6060
 
     # # -- Configure prometheus metrics on the configured port at /metrics
-    # prometheus:
-    #   enabled: false
+    prometheus:
+      enabled: true
     #   port: 9962
     #   serviceMonitor:
     #     # -- Enable service monitors.
