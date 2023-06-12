@@ -1,18 +1,18 @@
-# apiVersion: helm.toolkit.fluxcd.io/v2beta1
-# kind: HelmRelease
-# metadata:
-#   name: alertmanager-discord2
-#   namespace: monitoring
-# spec:
-#   chart:
-#     spec:
-#       chart: alertmanager-discord
-#       sourceRef:
-#         kind: HelmRepository
-#         name: masgustavos
-#         namespace: flux-system
-#   interval: 24h
-#   values:
-#     # -- If you don't want to expose your webhooks, create the config as a secret with the key "config"
-#     configAsSecret:
-#       name: alertmanager-discord-secret
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: alertmanager-discord2
+  namespace: monitoring
+spec:
+  chart:
+    spec:
+      chart: alertmanager-discord
+      sourceRef:
+        kind: HelmRepository
+        name: masgustavos
+        namespace: flux-system
+  interval: 24h
+  values:
+    # -- If you don't want to expose your webhooks, create the config as a secret with the key "config"
+    configAsSecret:
+      name: alertmanager-discord-secret
