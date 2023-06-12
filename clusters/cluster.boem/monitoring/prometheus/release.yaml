@@ -117,12 +117,12 @@ spec:
           ## Using PersistentVolumeClaim
           ##
           volumeClaimTemplate:
-            spec:
-              storageClassName: gluster
-              accessModes: ["ReadWriteOnce"]
+            speccc:
+              storageClassName: nfs-client
+              accessModes: ["ReadWriteMany"]
               resources:
                 requests:
-                  storage: 50Gi
+                  storage: 20Gi
     #     serviceMonitorSelectorNilUsesHelmValues: false
     #     replicas: 1
 
