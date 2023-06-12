@@ -6,6 +6,7 @@ metadata:
 spec:
   chart:
     spec:
+      version: 45.31.1
       chart: kube-prometheus-stack
       sourceRef:
         kind: HelmRepository
