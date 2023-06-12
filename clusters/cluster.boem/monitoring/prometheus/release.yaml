@@ -111,8 +111,18 @@ spec:
     #             requests:
     #               storage: 3Gi
 
-    # prometheus:
-    #   prometheusSpec:
+    prometheus:
+      prometheusSpec:
+        storageSpec:
+          ## Using PersistentVolumeClaim
+          ##
+          volumeClaimTemplate:
+            spec:
+              storageClassName: gluster
+              accessModes: ["ReadWriteOnce"]
+              resources:
+                requests:
+                  storage: 50Gi
     #     serviceMonitorSelectorNilUsesHelmValues: false
     #     replicas: 1
 
@@ -224,20 +234,16 @@ spec:
 
     #     secrets: ["etcd-client-cert"]
 
-    #     ## Prometheus StorageSpec for persistent data
-    #     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/user-guides/storage.md
-    #     ##
-    #     # storageSpec:
-    #     # volumeClaimTemplate:
-    #     #   spec:
-    #     #     storageClassName: nfs
-    #     #     accessModes: ["ReadWriteOnce"]
-    #     #     resources:
-    #     #       requests:
-    #     #         storage: 50Gi
-    #     #  selector: {}
-    #     ## Using PersistentVolumeClaim
-    #     ##
+    ## Prometheus StorageSpec for persistent data
+    ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/user-guides/storage.md
+    ##
+
+    #    selector: {}
+
+    ## Using tmpfs volume
+    ##
+    #  emptyDir:
+    #    medium: Memory
 
     # kubeEtcd:
     #   serviceMonitor:
