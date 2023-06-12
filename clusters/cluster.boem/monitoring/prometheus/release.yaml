@@ -117,7 +117,7 @@ spec:
           ## Using PersistentVolumeClaim
           ##
           volumeClaimTemplate:
-            speccc:
+            spec:
               storageClassName: nfs-client
               accessModes: ["ReadWriteMany"]
               resources:
