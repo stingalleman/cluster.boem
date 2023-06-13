@@ -14,5 +14,7 @@ spec:
     receiver: discord
   receivers:
     - name: "discord"
-      discord_configs:
-        webhook_url: "https://discord.com/api/webhooks/1117989048372445205/po6Vc8EPvfs1XPpEAH7mb-tx7rOMfvNUiP1Id7RSFSqs0339bOtDu-AyX1cK5qKNs5Fr"
+      slack_configs:
+        - channel: "alerts"
+          username: "Alert"
+          api_url: "https://discord.com/api/webhooks/1117989048372445205/po6Vc8EPvfs1XPpEAH7mb-tx7rOMfvNUiP1Id7RSFSqs0339bOtDu-AyX1cK5qKNs5Fr/slack"
