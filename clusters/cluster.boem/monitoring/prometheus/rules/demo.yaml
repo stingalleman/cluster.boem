@@ -1,7 +1,9 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  # labels:
+  labels:
+    prometheus: example
+    role: alert-rules
   #   app: kube-prometheus-stack
   #   app.kubernetes.io/instance: monitoring-stack
   #   app.kubernetes.io/managed-by: Helm
