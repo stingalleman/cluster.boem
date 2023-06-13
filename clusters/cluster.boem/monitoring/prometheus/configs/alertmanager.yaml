@@ -15,8 +15,10 @@ spec:
     groupWait: 30s
     receiver: discord
   receivers:
-    - name: "discord"
-      slack_configs:
+    - name: discord
+      slackConfigs:
         - channel: "alerts"
           username: "Alert"
-          api_url: "https://discord.com/api/webhooks/1117989048372445205/po6Vc8EPvfs1XPpEAH7mb-tx7rOMfvNUiP1Id7RSFSqs0339bOtDu-AyX1cK5qKNs5Fr/slack"
+          apiURL:
+            key: "url"
+            name: "alertmanager-discord-secret"
