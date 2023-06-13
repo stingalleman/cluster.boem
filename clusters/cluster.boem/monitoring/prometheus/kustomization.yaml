@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
 - configs/alertmanager.yaml
 - release.yaml
+- rules/demo.yaml
