@@ -1,14 +1,28 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  labels:
-    prometheus: example
-    role: alert-rules
-  name: prometheus-example-rules
+  # labels:
+  #   app: kube-prometheus-stack
+  #   app.kubernetes.io/instance: monitoring-stack
+  #   app.kubernetes.io/managed-by: Helm
+  #   app.kubernetes.io/part-of: kube-prometheus-stack
+  #   app.kubernetes.io/version: 46.8.0
+  #   chart: kube-prometheus-stack-46.8.0
+  #   helm.toolkit.fluxcd.io/name: monitoring-stack
+  #   helm.toolkit.fluxcd.io/namespace: monitoring
+  #   heritage: Helm
+  #   release: monitoring-stack
+  name: demo-rule
   namespace: monitoring
 spec:
   groups:
-    - name: ./example.rules
+    - name: demo.rules
       rules:
-        - alert: ExampleAlert
+        - alert: DemoRule
+          annotations:
+            description: demo rule
+            summary: Demo rule.
           expr: vector(1)
+          for: 10s
+          labels:
+            severity: critical
