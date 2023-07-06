@@ -1,18 +1,19 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- ingresses/cluster.boem.yaml
-- ingresses/maishond.nl.yaml
-- ingresses/stingalleman.dev.yaml
-- ingresses/stingalleman.nl.yaml
-- middleware.yaml
-- middlewares/internal-whitelist.yaml
-- middlewares/mailslurper-stripprefix.yaml
-- namespace.yaml
-- release.yaml
-- serverstransport.yaml
-- services/core.pakket.stingalleman.dev.yaml
-- services/media.stingalleman.nl.yaml
-- services/netbox.cluster.boem.yml
-- services/status.stingalleman.nl.yaml
-- services/traefik.yaml
+  - ingresses/cluster.boem.yaml
+  - ingresses/maishond.nl.yaml
+  - ingresses/stingalleman.dev.yaml
+  - ingresses/stingalleman.nl.yaml
+  - middleware.yaml
+  - middlewares/internal-whitelist.yaml
+  - middlewares/mailslurper-stripprefix.yaml
+  - namespace.yaml
+  - release.yaml
+  - serverstransport.yaml
+  - services/core.pakket.stingalleman.dev.yaml
+  - services/media.stingalleman.nl.yaml
+  - services/netbox.cluster.boem.yml
+  - services/status.stingalleman.nl.yaml
+  - services/traefik.yaml
+  - services/minecraft.yaml
