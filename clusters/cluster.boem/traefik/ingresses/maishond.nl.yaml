@@ -41,5 +41,13 @@ spec:
           namespace: default
           port: 80
 
+    - kind: Rule
+      match: Host(`maismap.maishond.nl`)
+      services:
+        - kind: Service
+          name: minecraft-vm
+          namespace: default
+          port: 8080
+
   tls:
     secretName: maishond.nl-prod-tls
