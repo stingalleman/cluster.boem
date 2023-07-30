@@ -5,6 +5,7 @@ resources:
 - cilium.yaml
 - coredns.yaml
 - flannel.yaml
+- hashicorp.yaml
 - jetstack.yaml
 - k8s-at-home.yaml
 - masgustavos.yaml
