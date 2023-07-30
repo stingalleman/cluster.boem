@@ -14,3 +14,5 @@ spec:
       # version: 0.13.9
   interval: 24h
   values:
+    dev:
+      enabled: true
