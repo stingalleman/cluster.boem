@@ -6,4 +6,4 @@ metadata:
 resources:
   - gotk-components.yaml
   - gotk-sync.yaml
-  - notifications
+  # - notifications

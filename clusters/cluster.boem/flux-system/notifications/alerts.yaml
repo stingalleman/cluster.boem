@@ -1,26 +1,26 @@
-apiVersion: notification.toolkit.fluxcd.io/v1beta1
-kind: Alert
-metadata:
-  name: discord-webhook-alerts
-  namespace: flux-system
-spec:
-  providerRef:
-    name: discord-webhook
-  eventSeverity: info
-  eventSources:
-    - kind: GitRepository
-      name: '*'
-    - kind: Kustomization
-      name: '*'
-    - kind: HelmRelease
-      name: '*'
-    - kind: HelmRepository
-      name: '*'
-    - kind: HelmChart
-      name: '*'
-    - kind: ImageUpdateAutomation
-      name: '*'
-    - kind: ImageRepository
-      name: '*'
-    - kind: ImagePolicy
-      name: '*'
+# apiVersion: notification.toolkit.fluxcd.io/v1beta1
+# kind: Alert
+# metadata:
+#   name: discord-webhook-alerts
+#   namespace: flux-system
+# spec:
+#   providerRef:
+#     name: discord-webhook
+#   eventSeverity: info
+#   eventSources:
+#     - kind: GitRepository
+#       name: '*'
+#     - kind: Kustomization
+#       name: '*'
+#     - kind: HelmRelease
+#       name: '*'
+#     - kind: HelmRepository
+#       name: '*'
+#     - kind: HelmChart
+#       name: '*'
+#     - kind: ImageUpdateAutomation
+#       name: '*'
+#     - kind: ImageRepository
+#       name: '*'
+#     - kind: ImagePolicy
+#       name: '*'
