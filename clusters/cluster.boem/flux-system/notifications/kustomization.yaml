@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
   - alerts.yaml
   - discord-webhook.yaml
-# - webhook.yaml
+  - webhook.yaml
