@@ -19,3 +19,4 @@ resources:
 - postgres-operator.yaml
 - prometheus-community.yaml
 - traefik.yaml
+- weave-gitops.yaml
