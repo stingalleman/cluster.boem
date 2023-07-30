@@ -9,7 +9,7 @@ spec:
       chart: vault
       sourceRef:
         kind: HelmRepository
-        name: hashicorp
+        name: hashicor
         namespace: flux-system
       # version: 0.13.9
   interval: 24h
