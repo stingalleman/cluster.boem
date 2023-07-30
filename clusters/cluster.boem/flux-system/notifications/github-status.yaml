@@ -8,4 +8,3 @@ spec:
   address: https://github.com/stingalleman/cluster.boem
   secretRef:
     name: github
-    namespace: flux-system
