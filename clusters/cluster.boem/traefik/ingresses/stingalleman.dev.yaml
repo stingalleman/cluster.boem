@@ -33,6 +33,14 @@ spec:
           namespace: default
           port: 8000
 
+    - kind: Rule
+      match: Host(`flux.stingalleman.dev`)
+      services:
+        - kind: Service
+          name: webhook-receiver
+          namespace: flux-system
+          port: 80
+
     # - kind: Rule
     #   match: Host(`kratos.stingalleman.dev`)
     #   services:
