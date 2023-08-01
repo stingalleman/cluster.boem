@@ -16,7 +16,7 @@ spec:
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: GitRepository
 metadata:
-  name: secrets.cluster.boem
+  name: secrets-cluster-boem
   namespace: flux-system
 spec:
   interval: 1m0s
@@ -38,3 +38,20 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: secrets-cluster-boem
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  path: ./clusters/cluster.boem
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: secrets-cluster-boem
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-gpg
