@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: dailyfloppa
-          image: stingalleman/floppabot:latest
+          image: registry.hub.docker.com/stingalleman/floppabot:latest
           resources:
             limits:
               memory: "128Mi"
