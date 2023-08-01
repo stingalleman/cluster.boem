@@ -13,6 +13,19 @@ spec:
     name: flux-system
   url: ssh://git@github.com/stingalleman/cluster.boem
 ---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: secrets.cluster.boem
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  ref:
+    branch: main
+  secretRef:
+    name: flux-system
+  url: ssh://git@github.com/stingalleman/secrets.cluster.boem
+---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
