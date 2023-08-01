@@ -1,37 +1,37 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: yucky-php
-  namespace: discord-bots
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: yucky-php
-  template:
-    metadata:
-      labels:
-        app: yucky-php
-    spec:
-      containers:
-        - name: yucky-php
-          image: ghcr.io/maishond/yucky.php:main
-          imagePullPolicy: Always
-          resources:
-            limits:
-              memory: "256Mi"
-              cpu: "500m"
-          env:
-            - name: TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: yucky-php
-                  key: token
-          volumeMounts:
-            - name: tz-config
-              mountPath: /etc/localtime
-      volumes:
-        - name: tz-config
-          hostPath:
-            path: /usr/share/zoneinfo/Europe/Amsterdam
-            type: File
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: yucky-php
+#   namespace: discord-bots
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: yucky-php
+#   template:
+#     metadata:
+#       labels:
+#         app: yucky-php
+#     spec:
+#       containers:
+#         - name: yucky-php
+#           image: ghcr.io/maishond/yucky.php:main
+#           imagePullPolicy: Always
+#           resources:
+#             limits:
+#               memory: "256Mi"
+#               cpu: "500m"
+#           env:
+#             - name: TOKEN
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: yucky-php
+#                   key: token
+#           volumeMounts:
+#             - name: tz-config
+#               mountPath: /etc/localtime
+#       volumes:
+#         - name: tz-config
+#           hostPath:
+#             path: /usr/share/zoneinfo/Europe/Amsterdam
+#             type: File
