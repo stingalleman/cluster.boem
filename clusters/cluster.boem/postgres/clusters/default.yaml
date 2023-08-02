@@ -11,8 +11,8 @@ spec:
   postgresql:
     version: "15"
   numberOfInstances: 2
-  # enableConnectionPooler: true
-  # enableMasterPoolerLoadBalancer: true
+  enableConnectionPooler: true
+  enableMasterPoolerLoadBalancer: true
   volume:
     size: "25Gi"
     storageClass: "nfs-client"
