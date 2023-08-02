@@ -214,13 +214,13 @@ spec:
       # spilo_runasgroup: 103
 
       # group ID with write-access to volumes (required to run Spilo as non-root process)
-      spilo_fsgroup: 65534
+      # spilo_fsgroup: 65534
 
       # whether the Spilo container should run in privileged mode
-      spilo_privileged: true
+      # spilo_privileged: true
       #   # whether the Spilo container should run with additional permissions other than parent.
       #   # required by cron which needs setuid
-      spilo_allow_privilege_escalation: true
+      # spilo_allow_privilege_escalation: true
     #   # storage resize strategy, available options are: ebs, pvc, off or mixed
     #   storage_resize_mode: pvc
     #   # pod toleration assigned to instances of every Postgres cluster
