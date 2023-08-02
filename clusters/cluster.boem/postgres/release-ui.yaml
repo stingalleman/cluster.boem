@@ -7,9 +7,18 @@ spec:
   chart:
     spec:
       chart: postgres-operator-ui
+      version: v1.9
       sourceRef:
         kind: HelmRepository
         name: postgres-operator-ui
         namespace: flux-system
   interval: 24h
   values:
+    envs:
+      appUrl: "https://postgres.cluster.boem"
+      # operatorApiUrl: "http://postgres-operator:8080"
+      operatorClusterNameLabel: "cluster.boem"
+      # resourcesVisible: "False"
+      targetNamespace: "postgres"
+      teams:
+        - "acid"
