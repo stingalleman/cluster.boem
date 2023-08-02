@@ -11,6 +11,7 @@ spec:
         kind: HelmRepository
         name: postgres-operator
         namespace: flux-system
+      version: v1.10.0
   interval: 24h
   values:
     # image:
