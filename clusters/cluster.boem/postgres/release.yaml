@@ -211,7 +211,7 @@ spec:
       #   share_pgsocket_with_sidecars: false
       #   # set user and group for the spilo container (required to run Spilo as non-root process)
       # spilo_runasuser: 101
-      # spilo_runasgroup: 103
+      spilo_runasgroup: 65534
 
       # group ID with write-access to volumes (required to run Spilo as non-root process)
       spilo_fsgroup: 65534
