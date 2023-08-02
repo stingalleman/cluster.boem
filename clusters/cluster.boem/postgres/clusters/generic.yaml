@@ -10,9 +10,9 @@ spec:
   teamId: "acid"
   postgresql:
     version: "15"
-  numberOfInstances: 2
+  numberOfInstances: 20
   enableConnectionPooler: true
-  enableMasterPoolerLoadBalancer: true
+  enableReplicaConnectionPooler: true
   volume:
     size: "25Gi"
     storageClass: "nfs-client"
