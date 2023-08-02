@@ -4,3 +4,4 @@ resources:
   - namespace.yaml
   - release-ui.yaml
   - release.yaml
+  - teams
