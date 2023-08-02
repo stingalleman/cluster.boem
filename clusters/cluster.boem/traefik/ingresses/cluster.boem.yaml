@@ -111,11 +111,11 @@ spec:
           port: 4245
 
     - kind: Rule
-      match: Host(`vault.cluster.boem`)
+      match: Host(`postgres.cluster.boem`)
       services:
-        - name: vault
-          namespace: default
-          port: 8200
+        - name: postgres-operator-ui
+          namespace: postgres
+          port: 80
 
     # - kind: Rule
     #   match: Host(`courier.kratos.cluster.boem`)
