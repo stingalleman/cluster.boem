@@ -109,18 +109,18 @@ spec:
     #   # target Postgres major version when upgrading clusters automatically
     #   target_major_version: "15"
 
-    # configKubernetes:
-    #   # list of additional capabilities for postgres container
-    #   # additional_pod_capabilities:
-    #   # - "SYS_NICE"
+    configKubernetes:
+      #   # list of additional capabilities for postgres container
+      #   # additional_pod_capabilities:
+      #   # - "SYS_NICE"
 
-    #   # default DNS domain of K8s cluster where operator is running
-    #   cluster_domain: cluster.local
-    #   # additional labels assigned to the cluster objects
-    #   cluster_labels:
-    #     application: spilo
-    #   # label assigned to Kubernetes objects created by the operator
-    #   cluster_name_label: cluster-name
+      #   # default DNS domain of K8s cluster where operator is running
+      #   cluster_domain: cluster.local
+      #   # additional labels assigned to the cluster objects
+      #   cluster_labels:
+      #     application: spilo
+      #   # label assigned to Kubernetes objects created by the operator
+      cluster_name_label: cluster.boem
     #   # additional annotations to add to every database pod
     #   # custom_pod_annotations:
     #   #   keya: valuea
