@@ -1,35 +1,35 @@
-apiVersion: acid.zalan.do/v1
-kind: postgresql
-metadata:
-  name: default
-  namespace: postgres
-  labels:
-    team: acid
+# apiVersion: acid.zalan.do/v1
+# kind: postgresql
+# metadata:
+#   name: default
+#   namespace: postgres
+#   labels:
+#     team: acid
 
-spec:
-  teamId: "acid"
-  postgresql:
-    version: "15"
-  numberOfInstances: 2
-  enableConnectionPooler: true
-  enableMasterPoolerLoadBalancer: true
-  volume:
-    size: "25Gi"
-    storageClass: "nfs-client"
-  users:
-    yucky_rs: []
-    test: []
-  databases:
-    yucky_rs: yucky_rs
-    test: test
-  allowedSourceRanges:
-    - 10.10.11.2/32
-    # IP ranges to access your cluster go here
+# spec:
+#   teamId: "acid"
+#   postgresql:
+#     version: "15"
+#   numberOfInstances: 2
+#   enableConnectionPooler: true
+#   enableMasterPoolerLoadBalancer: true
+#   volume:
+#     size: "25Gi"
+#     storageClass: "nfs-client"
+#   users:
+#     yucky_rs: []
+#     test: []
+#   databases:
+#     yucky_rs: yucky_rs
+#     test: test
+#   allowedSourceRanges:
+#     - 10.10.11.2/32
+#     # IP ranges to access your cluster go here
 
-  resources:
-    requests:
-      cpu: 100m
-      memory: 100Mi
-    limits:
-      cpu: 500m
-      memory: 500Mi
+#   resources:
+#     requests:
+#       cpu: 100m
+#       memory: 100Mi
+#     limits:
+#       cpu: 500m
+#       memory: 500Mi
