@@ -210,14 +210,14 @@ spec:
       #   # sharing unix socket of PostgreSQL (`pg_socket`) with the sidecars
       #   share_pgsocket_with_sidecars: false
       #   # set user and group for the spilo container (required to run Spilo as non-root process)
-      # spilo_runasuser: 101
-      spilo_runasgroup: 65534
+      spilo_runasuser: 65534
+      spilo_runasgroup: 103
 
       # group ID with write-access to volumes (required to run Spilo as non-root process)
-      spilo_fsgroup: 65534
+      # spilo_fsgroup: 65534
 
       # whether the Spilo container should run in privileged mode
-      spilo_privileged: true
+      # spilo_privileged: true
     #   # whether the Spilo container should run with additional permissions other than parent.
     #   # required by cron which needs setuid
     #   spilo_allow_privilege_escalation: true
