@@ -18,8 +18,10 @@ spec:
     storageClass: "nfs-client"
   users:
     yucky_rs: []
+    test: []
   databases:
     yucky_rs: yucky_rs
+    test: test
   allowedSourceRanges:
     - 10.10.11.2/32
     # IP ranges to access your cluster go here
