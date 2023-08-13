@@ -8,14 +8,14 @@ spec:
     - web
     - websecure
   routes:
-    - kind: Rule
-      match: Host(`stingalleman.nl`)
-      services:
-        - kind: Service
-          name: stingalleman-website
-          namespace: default
-          passHostHeader: true
-          port: 80
+    # - kind: Rule
+    #   match: Host(`stingalleman.nl`)
+    #   services:
+    #     - kind: Service
+    #       name: stingalleman-website
+    #       namespace: default
+    #       passHostHeader: true
+    #       port: 80
 
     - kind: Rule
       match: Host(`grafiekjes.stingalleman.nl`)
@@ -47,13 +47,13 @@ spec:
           namespace: default
           port: 3001
 
-    - kind: Rule
-      match: Host(`mattermost.stingalleman.nl`)
-      services:
-        - kind: Service
-          name: mattermost-team-edition
-          namespace: mattermost
-          port: 8065
+    # - kind: Rule
+    #   match: Host(`mattermost.stingalleman.nl`)
+    #   services:
+    #     - kind: Service
+    #       name: mattermost-team-edition
+    #       namespace: mattermost
+    #       port: 8065
 
     - kind: Rule
       match: Host(`media.stingalleman.nl`)

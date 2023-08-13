@@ -49,31 +49,22 @@ spec:
           port: http-web
 
     # - kind: Rule
-    #   match: Host(`postgres.cluster.boem`)
+    #   match: Host(`mailslurper.cluster.boem`)
     #   middlewares:
     #     - name: internal-whitelist
     #   services:
-    #     - name: postgres-operator-ui
-    #       namespace: postgres
-    #       port: 80
+    #     - name: fake-smtp-server-ui
+    #       namespace: mailslurper
+    #       port: 4436
 
-    - kind: Rule
-      match: Host(`mailslurper.cluster.boem`)
-      middlewares:
-        - name: internal-whitelist
-      services:
-        - name: fake-smtp-server-ui
-          namespace: mailslurper
-          port: 4436
-
-    - kind: Rule
-      match: Host(`mailslurper.cluster.boem`) && PathPrefix(`/adminm`)
-      middlewares:
-        - name: mailslurper-stripprefix
-      services:
-        - name: fake-smtp-server-admin
-          namespace: mailslurper
-          port: 4437
+    # - kind: Rule
+    #   match: Host(`mailslurper.cluster.boem`) && PathPrefix(`/adminm`)
+    #   middlewares:
+    #     - name: mailslurper-stripprefix
+    #   services:
+    #     - name: fake-smtp-server-admin
+    #       namespace: mailslurper
+    # port: 4437
 
     - kind: Rule
       match: Host(`dns.cluster.boem`)

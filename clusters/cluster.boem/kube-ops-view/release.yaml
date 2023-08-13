@@ -7,11 +7,9 @@ spec:
   chart:
     spec:
       chart: kube-ops-view
+      version: "1.2.2"
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home
         namespace: flux-system
-  values:
-  interval:
-    24h
-    # values.yml
+  interval: 24h
