@@ -108,12 +108,12 @@ spec:
           namespace: postgres
           port: 80
 
-    # - kind: Rule
-    #   match: Host(`courier.kratos.cluster.boem`)
-    #   services:
-    #     - name: kratos-courier
-    #       namespace: ory
-    #       port: 80
+    - kind: Rule
+      match: Host(`vault.cluster.boem`)
+      services:
+        - name: vault
+          namespace: default
+          port: 8200
 
   tls:
     secretName: cluster.boem-certs
