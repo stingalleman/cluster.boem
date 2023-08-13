@@ -10,5 +10,8 @@ data:
       "gitAuthor": "renovate-boem <142128868+renovate-boem@users.noreply.github.com>",
       "dryRun": "true",
       "platform": "github",
-      "repositories": ["stingalleman/cluster.boem"]
+      "repositories": ["stingalleman/cluster.boem"],
+      "flux": {
+        "fileMatch": ["clusters/cluster.boem/.+\\.yaml$"]
+      }
     }
