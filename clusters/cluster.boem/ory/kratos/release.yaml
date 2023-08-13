@@ -528,7 +528,7 @@ spec:
     # -- Configuration of the watcher sidecar
     watcher:
       enabled: false
-      image: oryd/k8s-toolbox:0.0.4
+      image: oryd/k8s-toolbox:0.0.5
       mountFile: ""
       # mountFile: /etc/secrets/my-secret/foo
 
