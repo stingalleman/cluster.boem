@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: renovate-config
-  namespace: default
+  namespace: renovate
 data:
   config.json: |-
     {

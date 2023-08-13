@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: renovate-bot
-  namespace: default
+  namespace: renovate
 spec:
   successfulJobsHistoryLimit: 2
   schedule: "*/30 * * * *"
