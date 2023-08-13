@@ -1,0 +1,10 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "prHourlyLimit": 0,
+  "flux": {
+    "fileMatch": ["clusters/cluster.boem/.+\\.yaml$"]
+  },
+  "kubernetes": {
+    "fileMatch": ["clusters/cluster.boem/.+\\.yaml$"]
+  }
+}
