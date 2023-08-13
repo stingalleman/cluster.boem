@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   successfulJobsHistoryLimit: 2
-  schedule: "@hourly"
+  schedule: "*/30 * * * *"
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
