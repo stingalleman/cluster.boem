@@ -4,6 +4,7 @@ metadata:
   name: renovate-bot
   namespace: default
 spec:
+  successfulJobsHistoryLimit: 2
   schedule: "@hourly"
   concurrencyPolicy: Forbid
   jobTemplate:
