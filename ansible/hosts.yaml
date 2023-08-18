@@ -1,0 +1,12 @@
+control_planes:
+  hosts:
+    kub-adm1.local.boem:
+  vars:
+    ansible_user: server
+
+worker_nodes:
+  hosts:
+    kub-[2:4].local.boem:
+  vars:
+    ansible_user: server
+    # k8s_version: "1.25.12-00"
