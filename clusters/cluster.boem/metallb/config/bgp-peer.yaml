@@ -4,6 +4,6 @@ metadata:
   name: peer0
   namespace: metallb
 spec:
-  myASN: 65501
-  peerASN: 65500
+  myASN: 65500
+  peerASN: 216455
   peerAddress: 10.10.10.1
