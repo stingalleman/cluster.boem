@@ -10,3 +10,14 @@ worker_nodes:
   vars:
     ansible_user: server
     # k8s_version: "1.25.12-00"
+
+vyos:
+  hosts:
+    ams-rtr01.stingalleman.nl:
+  vars:
+    ansible_user: vyos
+    ansible_python_interpreter: /usr/bin/python3
+    # ansible_ssh_pass: vyos
+    ansible_network_os: vyos
+    ansible_connection: network_cli
+    netbox_url: https://netbox.cluster.boem
