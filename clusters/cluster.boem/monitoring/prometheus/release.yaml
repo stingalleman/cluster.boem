@@ -10,7 +10,7 @@ spec:
     crds: CreateReplace
   chart:
     spec:
-      version: 46.8.0
+      version: 50.3.1
       chart: kube-prometheus-stack
       sourceRef:
         kind: HelmRepository
