@@ -54,7 +54,7 @@ spec:
             - name: http-volume
               mountPath: /usr/share/caddy
       restartPolicy: Always
-    volumes:
-      - name: http-volume
-        configMap:
-          name: sting-as-html
+      volumes:
+        - name: http-volume
+          configMap:
+            name: sting-as-html
