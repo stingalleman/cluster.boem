@@ -13,7 +13,7 @@ worker_nodes:
 
 vyos:
   hosts:
-    ams-rtr01.stingalleman.nl:
+    10.10.10.1:
   vars:
     ansible_user: vyos
     ansible_python_interpreter: /usr/bin/python3
