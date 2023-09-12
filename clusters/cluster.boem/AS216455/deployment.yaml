@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sting-as-site
+  namespace: default
+  labels:
+    app: sting-as-site
+spec:
+  selector:
+    matchLabels:
+      app: sting-as-site
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: sting-as-site
+    spec:
+      containers:
+        - name: sting-as-site
+          image: caddy:latest
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
+          livenessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
+            successThreshold: 1
+            failureThreshold: 3
+            periodSeconds: 10
+          ports:
+            - containerPort: 80
+              name: http
+          volumeMounts:
+            - name: http-volume
+              mountPath: /usr/share/caddy
+      restartPolicy: Always
+    volumes:
+      - name: http-volume
+        configMap:
+          name: sting-as-html
