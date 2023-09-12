@@ -6,7 +6,7 @@ metadata:
 data:
   index.html: |
     <body>
-      <p>AS216455 in an educational hobby-net\nOpen for peering.\nContact: noc@stingalleman.nl\nAbuse: abuse@stingalleman.nl</p>
+      <p>AS216455 in an educational hobby-net\nOpen for peering.<br \>Contact: noc@stingalleman.nl<br \>Abuse: abuse@stingalleman.nl</p>
       <br />
       <br />
       <p><a href="https://www.peeringdb.com/net/33889">PeeringDB</a> | <a href="https://bgp.tools/as/216455">bgp.tools</a></p>
