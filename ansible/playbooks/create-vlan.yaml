@@ -53,6 +53,7 @@
           - set service dhcp-server listen-address {{ vlan_address_wo_prefix }}
           - set service dhcp-server shared-network-name {{ vlan_name }} authoritative
           - set service dhcp-server shared-network-name {{ vlan_name }} ping-check
+          - set service dhcp-server shared-network-name {{ vlan_name }} domain-name {{ vlan_name }}.local.boem
           - set service dhcp-server shared-network-name {{ vlan_name }} subnet {{ vlan_prefix }} default-router {{ vlan_address_wo_prefix }}
           - set service dhcp-server shared-network-name {{ vlan_name }} subnet {{ vlan_prefix }} name-server 10.10.10.1
           - set service dhcp-server shared-network-name {{ vlan_name }} subnet {{ vlan_prefix }} lease 21600
