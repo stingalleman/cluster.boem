@@ -4,8 +4,8 @@
   connection: network_cli
   serial: 1
   vars:
-    vlan: 121
-    vlan_description: "NLNOG VLAN"
+    vlan: 101
+    vlan_description: "Sting"
     vlan_interface: "eth2"
     site: "AMS"
     tenant: "Sting"
@@ -67,17 +67,25 @@
           - set firewall ipv6 name WAN-VLAN6 rule {{ vlan }} destination address {{ vlan_prefix6 }}
       when: v6_open
 
-    - name: "Allow WG"
+    - name: "Set Allow WG group"
       vyos.vyos.vyos_config:
         lines:
-          - set firewall ipv4 name WG-VLAN rule {{ vlan }}{{ loop_index }} action accept
-          - set firewall ipv4 name WG-VLAN rule {{ vlan }}{{ loop_index }} description "{{ wg_interface }} peer {{ item }} allow V{{ vlan }}"
-          - set firewall ipv4 name WG-VLAN rule {{ vlan }}{{ loop_index }} destination address {{ vlan_prefix }}
-          - set firewall ipv4 name WG-VLAN rule {{ vlan }}{{ loop_index }} source address {{ item }}
+          - set firewall group address-group {{ vlan_name }}-WG-ALLOW address {{ item }}
       when: wg_address
       loop: "{{ wg_address }}"
-      loop_control:
-        index_var: loop_index
+
+    - name: "Create Allow WG firewall rule"
+      vyos.vyos.vyos_config:
+        lines:
+          - set firewall ipv4 name WG-VLAN rule {{ vlan }}1 action accept
+          - set firewall ipv4 name WG-VLAN rule {{ vlan }}1 description "WG allow V{{ vlan }}"
+          - set firewall ipv4 name WG-VLAN rule {{ vlan }}1 destination address {{ vlan_prefix }}
+          - set firewall ipv4 name WG-VLAN rule {{ vlan }}1 source group address-group {{ vlan_name }}-WG-ALLOW
+          - set firewall ipv4 name WG-VLAN rule {{ vlan }}2 action accept
+          - set firewall ipv4 name WG-VLAN rule {{ vlan }}2 description "WG allow V{{ vlan }}"
+          - set firewall ipv4 name WG-VLAN rule {{ vlan }}2 source address {{ vlan_prefix }}
+          - set firewall ipv4 name WG-VLAN rule {{ vlan }}2 destination group address-group {{ vlan_name }}-WG-ALLOW
+      when: wg_address
 
     - name: "Save VyOS config"
       vyos.vyos.vyos_config:
