@@ -3,13 +3,15 @@ kind: Deployment
 metadata:
   name: sting-as-site
   namespace: default
+  annotations:
+    reloader.stakater.com/auto: "true"
   labels:
     app: sting-as-site
 spec:
   selector:
     matchLabels:
       app: sting-as-site
-  replicas: 2
+  replicas: 3
   strategy:
     rollingUpdate:
       maxSurge: 25%
