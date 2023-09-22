@@ -6,7 +6,7 @@ metadata:
 data:
   index.html: |
     <body>
-      <p>AS216455 is an educational hobby-net<br \>Open for peering.</p>
+      <p>AS216455 is an educational hobby-net.<br \>Open for peering.</p>
       <br />
       <p>Contact: <a href="mailto:noc@stingalleman.nl">noc@stingalleman.nl</a> | Abuse: <a href="mailto:abuse@stingalleman.nl">abuse@stingalleman.nl</a> | <a href="https://www.peeringdb.com/net/33889">PeeringDB</a> | <a href="https://bgp.tools/as/216455">bgp.tools</a></p>
     </body>
