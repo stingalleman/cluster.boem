@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: oxidized-volume
+  namespace: default
+  labels:
+    app: oxidized
+spec:
+  storageClassName: nfs-client
+  accessModes:
+    - "ReadWriteMany"
+  resources:
+    requests:
+      storage: 5G
