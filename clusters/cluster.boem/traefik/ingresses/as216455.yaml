@@ -17,4 +17,4 @@ spec:
           port: 80
 
   tls:
-    secretName: as216455.net
+    secretName: as216455.net-prod-tls
