@@ -13,10 +13,10 @@ spec:
       app: sting-as-site
   replicas: 3
   strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
     type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 2
+      maxSurge: 4
   template:
     metadata:
       labels:
