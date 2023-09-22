@@ -26,14 +26,6 @@ spec:
           port: 80
 
     - kind: Rule
-      match: Host(`alles-dlp.stingalleman.dev`)
-      services:
-        - kind: Service
-          name: alles-dlp
-          namespace: default
-          port: 8000
-
-    - kind: Rule
       match: Host(`flux.stingalleman.dev`)
       services:
         - kind: Service
