@@ -18,8 +18,8 @@ spec:
         - name: "write-config"
           image: busybox
           command:
-            - "cp /etc/oxidized-config/routers.db /etc/oxidized-volume/routers.db"
-            - "cp /etc/oxidized-config/config /etc/oxidized-volume/config"
+            ["cp", "/etc/oxidized-config/*", "/etc/oxidized-volume"]
+            # - "cp /etc/oxidized-config/config /etc/oxidized-volume/config"
           volumeMounts:
             - mountPath: "/etc/oxidized-volume"
               name: oxidized-volume
