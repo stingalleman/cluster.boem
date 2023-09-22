@@ -15,7 +15,7 @@ spec:
         app: oxidized
     spec:
       initContainers:
-        - name: "write config files"
+        - name: "write-config"
           image: busybox
           command:
             - "cp /etc/oxidized-config/* /etc/oxidized-volume"
