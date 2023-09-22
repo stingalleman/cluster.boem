@@ -1,46 +1,46 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: oxidized
-  namespace: default
-  annotations:
-    reloader.stakater.com/auto: "true"
-  labels:
-    app: oxidized
-spec:
-  selector:
-    matchLabels:
-      app: oxidized
-  template:
-    metadata:
-      labels:
-        app: oxidized
-    spec:
-      initContainers:
-        - name: "write-config"
-          image: busybox
-          command:
-            ["sh", "-c", "cp /etc/oxidized-config/* /etc/oxidized-volume"]
-            # - "cp /etc/oxidized-config/config /etc/oxidized-volume/config"
-          volumeMounts:
-            - mountPath: "/etc/oxidized-volume"
-              name: oxidized-volume
-            - mountPath: "/etc/oxidized-config"
-              name: oxidized-config
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: oxidized
+#   namespace: default
+#   annotations:
+#     reloader.stakater.com/auto: "true"
+#   labels:
+#     app: oxidized
+# spec:
+#   selector:
+#     matchLabels:
+#       app: oxidized
+#   template:
+#     metadata:
+#       labels:
+#         app: oxidized
+#     spec:
+#       initContainers:
+#         - name: "write-config"
+#           image: busybox
+#           command:
+#             ["sh", "-c", "cp /etc/oxidized-config/* /etc/oxidized-volume"]
+#             # - "cp /etc/oxidized-config/config /etc/oxidized-volume/config"
+#           volumeMounts:
+#             - mountPath: "/etc/oxidized-volume"
+#               name: oxidized-volume
+#             - mountPath: "/etc/oxidized-config"
+#               name: oxidized-config
 
-      containers:
-        - name: oxidized
-          image: oxidized/oxidized
-          volumeMounts:
-            - mountPath: "/home/oxidized/.config/oxidized"
-              name: oxidized-volume
-          ports:
-            - containerPort: 8888
+#       containers:
+#         - name: oxidized
+#           image: oxidized/oxidized
+#           volumeMounts:
+#             - mountPath: "/home/oxidized/.config/oxidized"
+#               name: oxidized-volume
+#           ports:
+#             - containerPort: 8888
 
-      volumes:
-        - name: oxidized-volume
-          persistentVolumeClaim:
-            claimName: oxidized-volume
-        - name: oxidized-config
-          configMap:
-            name: oxidized-config
+#       volumes:
+#         - name: oxidized-volume
+#           persistentVolumeClaim:
+#             claimName: oxidized-volume
+#         - name: oxidized-config
+#           configMap:
+#             name: oxidized-config
