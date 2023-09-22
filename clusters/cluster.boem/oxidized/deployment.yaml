@@ -14,14 +14,22 @@ spec:
       labels:
         app: oxidized
     spec:
+      initContainers:
+        - name: "write config files"
+          image: busybox
+          command:
+            - "cp /etc/oxidized-config/* /etc/oxidized-volume"
+          volumeMounts:
+            - mountPath: "/etc/oxidized-volume"
+              name: oxidized-volume
+            - mountPath: "/etc/oxidized-config"
+              name: oxidized-config
       containers:
         - name: oxidized
           image: oxidized/oxidized
           volumeMounts:
-            - mountPath: "/home/oxidized/.config/oxidized/"
+            - mountPath: "/home/oxidized/.config/oxidized"
               name: oxidized-volume
-            - mountPath: "/home/oxidized/.config/oxidized/"
-              name: oxidized-config
           ports:
             - containerPort: 8888
       volumes:
