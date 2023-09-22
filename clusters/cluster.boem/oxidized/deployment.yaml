@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oxidized
+  namespace: default
+  labels:
+    app: oxidized
+spec:
+  selector:
+    matchLabels:
+      app: oxidized
+  template:
+    metadata:
+      labels:
+        app: oxidized
+    spec:
+      containers:
+        - name: oxidized
+          image: oxidized/oxidized
+          volumeMounts:
+            - mountPath: "/home/oxidized/.config/oxidized/"
+              name: oxidized-volume
+            - mountPath: "/home/oxidized/.config/oxidized/"
+              name: oxidized-config
+          ports:
+            - containerPort: 8888
+      volumes:
+        - name: oxidized-volume
+          persistentVolumeClaim:
+            claimName: oxidized-volume
+        - name: oxidized-config
+          configMap:
+            name: oxidized-config
+            items:
+              - key: routers.db
+                path: routers.db
+              - key: config
+                path: config
