@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: oxidized
   namespace: default
+  annotations:
+    reloader.stakater.com/auto: "true"
   labels:
     app: oxidized
 spec:
