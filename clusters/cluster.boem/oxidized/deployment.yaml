@@ -18,12 +18,14 @@ spec:
         - name: "write-config"
           image: busybox
           command:
-            - "cp /etc/oxidized-config/* /etc/oxidized-volume"
+            - "cp /etc/oxidized-config/routers.db /etc/oxidized-volume/routers.db"
+            - "cp /etc/oxidized-config/config /etc/oxidized-volume/config"
           volumeMounts:
             - mountPath: "/etc/oxidized-volume"
               name: oxidized-volume
             - mountPath: "/etc/oxidized-config"
               name: oxidized-config
+
       containers:
         - name: oxidized
           image: oxidized/oxidized
@@ -32,6 +34,7 @@ spec:
               name: oxidized-volume
           ports:
             - containerPort: 8888
+
       volumes:
         - name: oxidized-volume
           persistentVolumeClaim:
@@ -39,8 +42,3 @@ spec:
         - name: oxidized-config
           configMap:
             name: oxidized-config
-            items:
-              - key: routers.db
-                path: routers.db
-              - key: config
-                path: config
