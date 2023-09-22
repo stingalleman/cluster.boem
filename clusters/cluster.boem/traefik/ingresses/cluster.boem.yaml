@@ -108,5 +108,12 @@ spec:
           namespace: postgres
           port: 80
 
+    - kind: Rule
+      match: Host(`oxidized.cluster.boem`)
+      services:
+        - name: oxidized
+          namespace: default
+          port: 80
+
   tls:
     secretName: cluster.boem-certs
