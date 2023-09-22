@@ -1,0 +1,20 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: as216455.net
+  namespace: default
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`as216455.net`)
+      services:
+        - kind: Service
+          name: sting-as-site
+          namespace: default
+          port: 80
+
+  tls:
+    secretName: as216455.net
