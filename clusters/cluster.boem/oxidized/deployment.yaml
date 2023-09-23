@@ -21,6 +21,7 @@ spec:
           image: busybox
           command:
             ["sh", "-c", "cp /etc/oxidized-config/* /etc/oxidized-volume"]
+
             # - "cp /etc/oxidized-config/config /etc/oxidized-volume/config"
           volumeMounts:
             - mountPath: "/etc/oxidized-volume"
@@ -34,6 +35,8 @@ spec:
           volumeMounts:
             - mountPath: "/home/oxidized/.config/oxidized"
               name: oxidized-volume
+            - mountPath: "/home/oxidized/.ssh"
+              name: oxidized-ssh-config
           ports:
             - containerPort: 8888
 
@@ -44,3 +47,6 @@ spec:
         - name: oxidized-config
           configMap:
             name: oxidized-config
+        - name: oxidized-ssh-config
+          secret:
+            secretName: oxidized-ssh-config
