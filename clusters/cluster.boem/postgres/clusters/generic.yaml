@@ -23,11 +23,11 @@ spec:
   users:
     yucky_rs: []
     test: []
-    # rsstodiscord: []
+    rsstodiscord: []
   databases:
     yucky_rs: yucky_rs
     test: test
-    # rsstodiscord: rsstodiscord
+    rsstodiscord: rsstodiscord
   allowedSourceRanges:
     - 10.10.11.2/32
     - 87.208.225.224/32
