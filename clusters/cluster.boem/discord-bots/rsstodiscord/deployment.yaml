@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rsstodiscord
+  namespace: discord-bots
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rsstodiscord
+  template:
+    metadata:
+      labels:
+        app: rsstodiscord
+    spec:
+      imagePullSecrets:
+        - name: ghcr-login-secret
+      containers:
+        - name: rsstodiscord
+          image: ghcr.io/maishond/rsstodiscord:main
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: rsstodiscord-config
+              mountPath: "/etc/rsstodiscord"
+      volumes:
+        - name: rsstodiscord-config
+          configMap:
+            name: rsstodiscord-config
