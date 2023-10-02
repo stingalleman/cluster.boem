@@ -14,3 +14,7 @@ data:
         <p>Contact: <a href="mailto:noc@stingalleman.nl">noc@stingalleman.nl</a> | Abuse: <a href="mailto:abuse@stingalleman.nl">abuse@stingalleman.nl</a> | <a href="https://www.peeringdb.com/net/33889">PeeringDB</a> | <a href="https://bgp.tools/as/216455">bgp.tools</a></p>
       </body>
     </html>
+  geofeed.csv: |
+    2a05:dfc1:8500::/40,NL,NL-NH,Amsterdam,
+    2a05:dfc1:9600::/40,NL,NL-NH,Amsterdam,
+    2a05:dfc1:858f::/48,NL,NL-NB,Eindhoven,
