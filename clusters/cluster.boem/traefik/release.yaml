@@ -67,7 +67,7 @@ spec:
       enabled: true
       # maxUnavailable: 1
       # maxUnavailable: 33%
-      minAvailable: 2
+      minAvailable: 1
       # minAvailable: 25%
 
     # Additional volumeMounts to add to the Traefik container
