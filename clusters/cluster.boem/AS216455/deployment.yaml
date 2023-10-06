@@ -59,4 +59,4 @@ spec:
       volumes:
         - name: http-volume
           configMap:
-            name: sting-as-html
+            name: sting-as-data
