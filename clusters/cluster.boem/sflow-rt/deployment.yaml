@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: sflow-rt-sflow
   namespace: default
+  annotations:
+    metallb.universe.tf/address-pool: default
 spec:
   type: LoadBalancer
   selector:
