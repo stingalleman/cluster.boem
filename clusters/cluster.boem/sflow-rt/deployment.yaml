@@ -4,7 +4,7 @@ metadata:
   name: sflow-rt-sflow
   namespace: default
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     name: sflow-rt
   ports:
