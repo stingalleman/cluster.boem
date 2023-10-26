@@ -17,7 +17,7 @@ spec:
         app: influxdb
     spec:
       containers:
-        - image: influxdb:2.0.6
+        - image: influxdb:2.7.3
           name: influxdb
           ports:
             - containerPort: 8086
