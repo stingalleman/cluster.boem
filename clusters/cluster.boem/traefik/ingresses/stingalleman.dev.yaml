@@ -34,7 +34,7 @@ spec:
           port: 80
 
     - kind: Rule
-      match: Host(`influxdb.cluster.boem`)
+      match: Host(`influxdb.stingalleman.dev`)
       services:
         - name: influxdb
           namespace: influxdb
