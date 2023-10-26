@@ -115,5 +115,12 @@ spec:
           namespace: default
           port: 80
 
+    - kind: Rule
+      match: Host(`influxdb.cluster.boem`)
+      services:
+        - name: influxdb
+          namespace: influxdb
+          port: influxdb
+
   tls:
     secretName: cluster.boem-certs
