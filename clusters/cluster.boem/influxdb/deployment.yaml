@@ -25,6 +25,9 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/influxdb2
               name: data
+          env:
+            - name: TZ
+              value: "Europe/Amsterdam"
   volumeClaimTemplates:
     - metadata:
         name: data
