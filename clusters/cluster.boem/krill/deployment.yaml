@@ -50,7 +50,7 @@ spec:
           env:
             - name: TZ
               value: "Europe/Amsterdam"
-            - name: KRILL_AUTH_TOKEN
+            - name: KRILL_ADMIN_TOKEN
               valueFrom:
                 secretKeyRef:
                   name: krill-auth-token
@@ -62,9 +62,9 @@ spec:
           ports:
             - containerPort: 3000
               name: http
-          # volumeMounts:
-          #   - name: krill-data
-          #     mountPath: /var/krill/data
+          volumeMounts:
+            - name: krill-data
+              mountPath: /var/krill/data
       volumes:
         - name: krill-data
           persistentVolumeClaim:
