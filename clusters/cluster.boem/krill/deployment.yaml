@@ -66,12 +66,9 @@ spec:
               name: http
           volumeMounts:
             - name: krill-data
-
               mountPath: /var/krill/data
       volumes:
         - name: krill-data
-          emptyDir:
-            medium: ""
-          # persistentVolumeClaim:
-          #   claimName: krill-data
+          persistentVolumeClaim:
+            claimName: krill-data
       restartPolicy: Always
