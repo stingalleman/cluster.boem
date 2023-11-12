@@ -15,10 +15,6 @@ spec:
       labels:
         app: krill
     spec:
-      securityContext:
-        runAsGroup: 0
-        runAsUser: 0
-        fsGroup: 0
       containers:
         - name: krill
           image: nlnetlabs/krill
