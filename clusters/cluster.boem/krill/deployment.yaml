@@ -58,10 +58,10 @@ spec:
             - containerPort: 3000
               name: http
           volumeMounts:
-            - name: krill_data
+            - name: krill-data
               mountPath: /var/krill/data
       volumes:
-        - name: krill_data
+        - name: krill-data
           persistentVolumeClaim:
-            claimName: krill_data
+            claimName: krill-data
       restartPolicy: Always
