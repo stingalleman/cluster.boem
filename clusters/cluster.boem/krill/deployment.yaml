@@ -25,13 +25,13 @@ spec:
         - name: krill
           image: nlnetlabs/krill
           # command: ["sh", "-c", "sleep 84000s"]
-          resources:
-            requests:
-              cpu: 100m
-              memory: 100Mi
-            limits:
-              cpu: 100m
-              memory: 100Mi
+          # resources:
+          #   requests:
+          #     cpu: 100m
+          #     memory: 100Mi
+          #   limits:
+          #     cpu: 100m
+          #     memory: 100Mi
           # livenessProbe:
           #   tcpSocket:
           #     port: 80
