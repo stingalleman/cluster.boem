@@ -59,16 +59,14 @@ spec:
                   key: token
             - name: KRILL_FQDN
               value: "rpki.as216455.net"
-            - name: KRILL_LOG_LEVEL
-              value: debug
           ports:
             - containerPort: 3000
               name: http
-          volumeMounts:
-            - name: krill-data2
-              mountPath: /var/krill/data
-            - name: krill-config
-              mountPath: /var/krill/data/krill.conf
+          # volumeMounts:
+          #   - name: krill-data2
+          #     mountPath: /var/krill/data
+          #   - name: krill-config
+          #     mountPath: /var/krill/data/krill.conf
       volumes:
         - name: krill-data2
           persistentVolumeClaim:
