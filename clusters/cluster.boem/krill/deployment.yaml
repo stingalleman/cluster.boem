@@ -15,10 +15,12 @@ spec:
       labels:
         app: krill
     spec:
+      securityContext:
+        runAsNonRoot: false
       containers:
         - name: krill
           image: nlnetlabs/krill
-          command: ["sh", "-c", "sleep 84000s"]
+          # command: ["sh", "-c", "sleep 84000s"]
           resources:
             requests:
               cpu: 100m
