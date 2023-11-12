@@ -24,7 +24,7 @@ spec:
       containers:
         - name: krill
           image: nlnetlabs/krill
-          # command: ["sh", "-c", "sleep 84000s"]
+          command: ["sh", "-c", "sleep 84000s"]
           # resources:
           #   requests:
           #     cpu: 100m
@@ -64,9 +64,10 @@ spec:
           ports:
             - containerPort: 3000
               name: http
-          # volumeMounts:
-          #   - name: krill-data
-          #     mountPath: /var/krill/data
+          volumeMounts:
+            - name: krill-data
+
+              mountPath: /var/krill/data
       volumes:
         - name: krill-data
           emptyDir:
