@@ -17,6 +17,10 @@ spec:
     spec:
       securityContext:
         runAsNonRoot: false
+        runAsUser: 0
+        runAsGroup: 0
+        fsGroup: 0
+
       containers:
         - name: krill
           image: nlnetlabs/krill
