@@ -60,6 +60,8 @@ spec:
                   key: token
             - name: KRILL_FQDN
               value: "rpki.as216455.net"
+            - name: KRILL_LOG_LEVEL
+              value: debug
           ports:
             - containerPort: 3000
               name: http
