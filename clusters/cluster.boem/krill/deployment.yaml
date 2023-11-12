@@ -15,10 +15,10 @@ spec:
       labels:
         app: krill
     spec:
-      securityContext:
-        #   runAsNonRoot: false
-        runAsUser: 0
-        runAsGroup: 0
+      # securityContext:
+      #   runAsNonRoot: false
+      # runAsUser: 0
+      # runAsGroup: 0
       #   fsGroup: 0
 
       containers:
