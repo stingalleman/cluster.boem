@@ -65,14 +65,9 @@ spec:
           volumeMounts:
             - name: krill-data2
               mountPath: /var/krill/data
-            - name: krill-config
-              mountPath: /var/krill/data
       volumes:
         - name: krill-data2
           persistentVolumeClaim:
             claimName: krill-data2
-        - name: krill-config
-          configMap:
-            name: krill-config
 
       restartPolicy: Always

@@ -1,12 +1,12 @@
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: krill-config
-  namespace: default
-data:
-  krill.conf: |
-    ip = "0.0.0.0"
-    port = 3000
-    data_dir = "/var/krill/data"
-    log_type = "debug"
-    https_mode = "disable"
+# kind: ConfigMap
+# apiVersion: v1
+# metadata:
+#   name: krill-config
+#   namespace: default
+# data:
+#   krill.conf: |
+#     ip = "0.0.0.0"
+#     port = 3000
+#     data_dir = "/var/krill/data"
+#     log_type = "debug"
+#     https_mode = "disable"
