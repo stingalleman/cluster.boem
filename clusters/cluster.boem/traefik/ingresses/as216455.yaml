@@ -15,6 +15,13 @@ spec:
           name: sting-as-site
           namespace: default
           port: 80
+    - kind: Rule
+      match: Host(`rpki.as216455.net`)
+      services:
+        - kind: Service
+          name: krill-http
+          namespace: default
+          port: 3000
 
   tls:
     secretName: as216455.net-prod-tls
