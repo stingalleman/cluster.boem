@@ -22,7 +22,6 @@ spec:
           name: krill-http
           namespace: default
           port: 3000
-          scheme: https
 
   tls:
     secretName: as216455.net-prod-tls
