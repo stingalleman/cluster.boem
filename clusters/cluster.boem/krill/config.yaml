@@ -9,3 +9,4 @@ data:
     port = 3000
     data_dir = "/var/krill/data"
     log_type = "debug"
+    https_mode = "disable"
