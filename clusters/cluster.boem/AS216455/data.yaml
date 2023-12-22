@@ -24,3 +24,4 @@ data:
     2a07:54c7:5000::/36,NL,NL-NH,Amsterdam
     2a07:54c7:5100::/40,NL,NL-NH,Amsterdam
     2a07:54c7:5100:abba::/64,NL,NL-NH,Amsterdam
+    2a07:54c7:5901::/48,FI,FI-18,Helsinki
