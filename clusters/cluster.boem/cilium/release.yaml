@@ -1368,34 +1368,34 @@ spec:
     # # is running in a managed Kubernetes environment or in a chained CNI setup.
     # installNoConntrackIptablesRules: false
 
-    # ipam:
-    #   # -- Configure IP Address Management mode.
-    #   # ref: https://docs.cilium.io/en/stable/network/concepts/ipam/
-    #   mode: "cluster-pool"
-    #   operator:
-    #     # -- Deprecated in favor of ipam.operator.clusterPoolIPv4PodCIDRList.
-    #     # IPv4 CIDR range to delegate to individual nodes for IPAM.
-    #     clusterPoolIPv4PodCIDR: "10.0.0.0/8"
-    #     # -- IPv4 CIDR list range to delegate to individual nodes for IPAM.
-    #     clusterPoolIPv4PodCIDRList: []
-    #     # -- IPv4 CIDR mask size to delegate to individual nodes for IPAM.
-    #     clusterPoolIPv4MaskSize: 24
-    #     # -- Deprecated in favor of ipam.operator.clusterPoolIPv6PodCIDRList.
-    #     # IPv6 CIDR range to delegate to individual nodes for IPAM.
-    #     clusterPoolIPv6PodCIDR: "fd00::/104"
-    #     # -- IPv6 CIDR list range to delegate to individual nodes for IPAM.
-    #     clusterPoolIPv6PodCIDRList: []
-    #     # -- IPv6 CIDR mask size to delegate to individual nodes for IPAM.
-    #     clusterPoolIPv6MaskSize: 120
-    #     # -- The maximum burst size when rate limiting access to external APIs.
-    #     # Also known as the token bucket capacity.
-    #     # @default -- `20`
-    #     externalAPILimitBurstSize: ~
-    #     # -- The maximum queries per second when rate limiting access to
-    #     # external APIs. Also known as the bucket refill rate, which is used to
-    #     # refill the bucket up to the burst size capacity.
-    #     # @default -- `4.0`
-    #     externalAPILimitQPS: ~
+    ipam:
+      # -- Configure IP Address Management mode.
+      # ref: https://docs.cilium.io/en/stable/network/concepts/ipam/
+      mode: "kubernetes"
+      # operator:
+      #   # -- Deprecated in favor of ipam.operator.clusterPoolIPv4PodCIDRList.
+      #   # IPv4 CIDR range to delegate to individual nodes for IPAM.
+      #   clusterPoolIPv4PodCIDR: "10.0.0.0/8"
+      #   # -- IPv4 CIDR list range to delegate to individual nodes for IPAM.
+      #   clusterPoolIPv4PodCIDRList: []
+      #   # -- IPv4 CIDR mask size to delegate to individual nodes for IPAM.
+      #   clusterPoolIPv4MaskSize: 24
+      #   # -- Deprecated in favor of ipam.operator.clusterPoolIPv6PodCIDRList.
+      #   # IPv6 CIDR range to delegate to individual nodes for IPAM.
+      #   clusterPoolIPv6PodCIDR: "fd00::/104"
+      #   # -- IPv6 CIDR list range to delegate to individual nodes for IPAM.
+      #   clusterPoolIPv6PodCIDRList: []
+      #   # -- IPv6 CIDR mask size to delegate to individual nodes for IPAM.
+      #   clusterPoolIPv6MaskSize: 120
+      #   # -- The maximum burst size when rate limiting access to external APIs.
+      #   # Also known as the token bucket capacity.
+      #   # @default -- `20`
+      #   externalAPILimitBurstSize: ~
+      #   # -- The maximum queries per second when rate limiting access to
+      #   # external APIs. Also known as the bucket refill rate, which is used to
+      #   # refill the bucket up to the burst size capacity.
+      #   # @default -- `4.0`
+      #   externalAPILimitQPS: ~
 
     # # -- Configure the eBPF-based ip-masq-agent
     # ipMasqAgent:
@@ -1416,15 +1416,15 @@ spec:
       # -- Enable IPv6 support.
       enabled: true
 
-    # # -- Configure Kubernetes specific configuration
+    # -- Configure Kubernetes specific configuration
     # k8s: {}
-    #   # -- requireIPv4PodCIDR enables waiting for Kubernetes to provide the PodCIDR
-    #   # range via the Kubernetes node resource
-    #   # requireIPv4PodCIDR: false
+    # -- requireIPv4PodCIDR enables waiting for Kubernetes to provide the PodCIDR
+    # range via the Kubernetes node resource
+    # requireIPv4PodCIDR: false
 
-    #   # -- requireIPv6PodCIDR enables waiting for Kubernetes to provide the PodCIDR
-    #   # range via the Kubernetes node resource
-    #   # requireIPv6PodCIDR: false
+    # -- requireIPv6PodCIDR enables waiting for Kubernetes to provide the PodCIDR
+    # range via the Kubernetes node resource
+    # requireIPv6PodCIDR: false
 
     # # -- Keep the deprecated selector labels when deploying Cilium DaemonSet.
     # keepDeprecatedLabels: false
