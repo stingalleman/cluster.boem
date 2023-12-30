@@ -3,10 +3,10 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
-  name: cluster-boem
+  name: flux-system
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 1m0s
   ref:
     branch: main
   secretRef:
@@ -16,7 +16,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-boem-kz
+  name: flux-system
   namespace: flux-system
 spec:
   interval: 10m0s
@@ -24,30 +24,4 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: cluster-boem
----
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: GitRepository
-metadata:
-  name: secrets-cluster-boem
-  namespace: flux-system
-spec:
-  interval: 10m0s
-  ref:
-    branch: main
-  secretRef:
     name: flux-system
-  url: https://github.com/stingalleman/secrets.cluster.boem.git
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: secrets-cluster-boem-kz
-  namespace: flux-system
-spec:
-  interval: 10m0s
-  path: ./clusters/cluster.boem
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: secrets-cluster-boem
