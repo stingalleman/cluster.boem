@@ -1408,13 +1408,13 @@ spec:
     # # iptablesLockTimeout defines the iptables "--wait" option when invoked from Cilium.
     # # iptablesLockTimeout: "5s"
 
-    # ipv4:
-    #   # -- Enable IPv4 support.
-    #   enabled: true
+    ipv4:
+      # -- Enable IPv4 support.
+      enabled: true
 
-    # ipv6:
-    #   # -- Enable IPv6 support.
-    #   enabled: false
+    ipv6:
+      # -- Enable IPv6 support.
+      enabled: true
 
     # # -- Configure Kubernetes specific configuration
     # k8s: {}
