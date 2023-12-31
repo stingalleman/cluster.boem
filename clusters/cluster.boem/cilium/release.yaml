@@ -25,7 +25,7 @@ spec:
 
     debug:
       # -- Enable debug logging
-      enabled: false
+      enabled: true
     #   # -- Configure verbosity levels for debug logging
     #   # This option is used to enable debug messages for operations related to such
     #   # sub-system such as (e.g. kvstore, envoy, datapath or policy), and flow is
@@ -1384,9 +1384,9 @@ spec:
         # IPv6 CIDR range to delegate to individual nodes for IPAM.
         # clusterPoolIPv6PodCIDR: ""
         # -- IPv6 CIDR list range to delegate to individual nodes for IPAM.
-        clusterPoolIPv6PodCIDRList: ["2a07:54c7:5201:706f::/64"]
+        clusterPoolIPv6PodCIDRList: ["2a07:54c7:5201:706f::/96"]
         # -- IPv6 CIDR mask size to delegate to individual nodes for IPAM.
-        clusterPoolIPv6MaskSize: 120
+        clusterPoolIPv6MaskSize: 112
         # -- The maximum burst size when rate limiting access to external APIs.
         # Also known as the token bucket capacity.
         # @default -- `20`
