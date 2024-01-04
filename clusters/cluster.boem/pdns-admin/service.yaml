@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pdns-admin
+  namespace: default
+spec:
+  selector:
+    app: pdns-admin
+  type: ClusterIP
+  # sessionAffinity:
+  ports:
+    - name: pdns-admin
+      protocol: TCP
+      port: 80
+      targetPort: 80

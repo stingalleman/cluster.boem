@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pdns-admin
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pdns-admin
+  template:
+    metadata:
+      labels:
+        app: pdns-admin
+    spec:
+      containers:
+        - name: pdns-admin
+          image: ngoduykhanh/powerdns-admin:0.3.0
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          env:
+            - name: SQLALCHEMY_DATABASE_URI
+              valueFrom:
+                secretKeyRef:
+                  name: pdns-admin
+                  key: db
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: pdns-admin
+                  key: secret
+            - name: OFFLINE_MODE
+              value: "false"
+            - name: GUNICORN_TIMEOUT
+              value: "60"
+            - name: GUNICORN_WORKERS
+              value: "2"
