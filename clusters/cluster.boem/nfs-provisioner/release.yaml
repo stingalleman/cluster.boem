@@ -16,6 +16,6 @@ spec:
   values:
     nfs:
       server: "10.10.10.20"
-      path: "/media/nfs/k8s"
+      path: "/media/nfs/kluster.boem"
     storageClass:
       defaultClass: true
