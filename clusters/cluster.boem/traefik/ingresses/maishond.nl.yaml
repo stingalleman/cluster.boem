@@ -1,0 +1,53 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: maishond.nl
+  namespace: default
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    # - kind: Rule
+    #   match: Host(`stingalleman.nl`)
+    #   services:
+    #     - kind: Service
+    #       name: stingalleman-website
+    #       namespace: default
+    #       passHostHeader: true
+    #       port: 80
+
+    - kind: Rule
+      match: Host(`media.maishond.nl`)
+      services:
+        - kind: Service
+          name: media-stingalleman-nl
+          namespace: default
+          port: 8096
+
+    - kind: Rule
+      match: Host(`request.maishond.nl`)
+      services:
+        - kind: Service
+          name: media-stingalleman-nl
+          namespace: default
+          port: 5055
+
+    - kind: Rule
+      match: Host(`leuk-achtergrondje.maishond.nl`)
+      services:
+        - kind: Service
+          name: achtergrondje
+          namespace: default
+          port: 80
+
+    - kind: Rule
+      match: Host(`maismap.maishond.nl`)
+      services:
+        - kind: Service
+          name: minecraft-vm
+          namespace: default
+          port: 8080
+
+  tls:
+    secretName: maishond.nl-prod-tls

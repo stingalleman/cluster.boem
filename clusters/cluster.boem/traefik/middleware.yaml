@@ -1,0 +1,20 @@
+# ---
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: Middleware
+# metadata:
+#   name: upgrade-scheme
+#   namespace: default
+# spec:
+#   redirectScheme:
+#     scheme: https
+#     permanent: true
+# ---
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: Middleware
+# metadata:
+#   name: upgrade-scheme-temp
+#   namespace: default
+# spec:
+#   redirectScheme:
+#     scheme: https
+#     permanent: false

@@ -1,0 +1,65 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: stingalleman.dev
+  namespace: default
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`discord.stingalleman.dev`)
+      services:
+        - kind: Service
+          name: coc-bot
+          namespace: discord-bots
+          passHostHeader: true
+          port: 8020
+
+    - kind: Rule
+      match: Host(`core-pakket.stingalleman.dev`)
+      services:
+        - kind: Service
+          name: core-pakket-stingalleman-dev
+          namespace: default
+          port: 80
+
+    - kind: Rule
+      match: Host(`flux.stingalleman.dev`)
+      services:
+        - kind: Service
+          name: webhook-receiver
+          namespace: flux-system
+          port: 80
+
+    - kind: Rule
+      match: Host(`influxdb.stingalleman.dev`)
+      services:
+        - name: influxdb
+          namespace: influxdb
+          port: influxdb
+
+    # - kind: Rule
+    #   match: Host(`kratos.stingalleman.dev`)
+    #   services:
+    #     - name: kratos-public
+    #       namespace: ory
+    #       port: 80
+
+    # - kind: Rule
+    #   match: Host(`adminkratos.stingalleman.dev`)
+    #   services:
+    #     - name: kratos-admin
+    #       namespace: ory
+    #       port: 80
+
+    # - kind: Rule
+    #   match: Host(`uikratos.stingalleman.dev`)
+    #   services:
+    #     - name: selfservice
+    #       namespace: ory
+    #       port: 3000
+
+  tls:
+    secretName: stingalleman.dev-prod-tls
