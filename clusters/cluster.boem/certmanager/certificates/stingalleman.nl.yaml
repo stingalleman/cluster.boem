@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: stingalleman.nl
+  namespace: default
+spec:
+  secretName: stingalleman.nl-prod-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: "*.stingalleman.nl"
+  dnsNames:
+    - "stingalleman.nl"
+    - "*.stingalleman.nl"
