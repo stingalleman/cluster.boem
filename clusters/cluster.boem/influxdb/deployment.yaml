@@ -6,7 +6,7 @@ metadata:
   name: influxdb
   namespace: influxdb
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: influxdb
