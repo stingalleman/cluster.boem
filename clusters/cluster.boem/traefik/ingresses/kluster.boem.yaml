@@ -1,7 +1,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: cluster.boem
+  name: kluster.boem
   namespace: default
 spec:
   entryPoints:
@@ -11,7 +11,7 @@ spec:
   #   - name: internal-whitelist
   routes:
     - kind: Rule
-      match: Host(`alerts.cluster.boem`)
+      match: Host(`alerts.kluster.boem`)
       middlewares:
         - name: internal-whitelist
       services:
@@ -22,7 +22,7 @@ spec:
           port: 9093
 
     - kind: Rule
-      match: Host(`traefik.cluster.boem`)
+      match: Host(`traefik.kluster.boem`)
       middlewares:
         - name: internal-whitelist
       services:
@@ -31,7 +31,7 @@ spec:
           port: 9000
 
     # - kind: Rule
-    # match: Host(`longhorn.cluster.boem`)
+    # match: Host(`longhorn.kluster.boem`)
     # middlewares:
     #   - name: internal-whitelist
     # services:
@@ -40,7 +40,7 @@ spec:
     #     port: 80
 
     - kind: Rule
-      match: Host(`prometheus.cluster.boem`)
+      match: Host(`prometheus.kluster.boem`)
       middlewares:
         - name: internal-whitelist
       services:
@@ -49,7 +49,7 @@ spec:
           port: http-web
 
     # - kind: Rule
-    #   match: Host(`mailslurper.cluster.boem`)
+    #   match: Host(`mailslurper.kluster.boem`)
     #   middlewares:
     #     - name: internal-whitelist
     #   services:
@@ -58,7 +58,7 @@ spec:
     #       port: 4436
 
     # - kind: Rule
-    #   match: Host(`mailslurper.cluster.boem`) && PathPrefix(`/adminm`)
+    #   match: Host(`mailslurper.kluster.boem`) && PathPrefix(`/adminm`)
     #   middlewares:
     #     - name: mailslurper-stripprefix
     #   services:
@@ -67,53 +67,53 @@ spec:
     # port: 4437
 
     - kind: Rule
-      match: Host(`dns.cluster.boem`)
+      match: Host(`dns.kluster.boem`)
       services:
         - name: pdns-admin
           namespace: default
           port: 80
 
     - kind: Rule
-      match: Host(`pgadmin.cluster.boem`)
+      match: Host(`pgadmin.kluster.boem`)
       services:
         - name: pgadmin4
           namespace: default
           port: 5050
 
     - kind: Rule
-      match: Host(`netbox.cluster.boem`)
+      match: Host(`netbox.kluster.boem`)
       services:
         - name: internals-vm
           namespace: default
           port: 8000
 
     - kind: Rule
-      match: Host(`hubble.cluster.boem`)
+      match: Host(`hubble.kluster.boem`)
       services:
         - name: hubble-ui
           namespace: kube-system
           port: 80
 
     - kind: Rule
-      match: Host(`hubble-relay.cluster.boem`)
+      match: Host(`hubble-relay.kluster.boem`)
       services:
         - name: hubble-relay-ext
           namespace: kube-system
           port: 4245
 
     - kind: Rule
-      match: Host(`postgres.cluster.boem`)
+      match: Host(`postgres.kluster.boem`)
       services:
         - name: postgres-operator-ui
           namespace: postgres
           port: 80
 
     - kind: Rule
-      match: Host(`oxidized.cluster.boem`)
+      match: Host(`oxidized.kluster.boem`)
       services:
         - name: oxidized
           namespace: default
           port: 80
 
   tls:
-    secretName: cluster.boem-certs
+    secretName: kluster.boem-certs
