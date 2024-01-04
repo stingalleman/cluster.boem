@@ -20,4 +20,4 @@ vyos:
     # ansible_ssh_pass: vyos
     ansible_network_os: vyos
     ansible_connection: network_cli
-    netbox_url: https://netbox.cluster.boem
+    netbox_url: https://netbox.kluster.boem
