@@ -1,9 +1,0 @@
-apiVersion: metallb.io/v1beta2
-kind: BGPPeer
-metadata:
-  name: peer0
-  namespace: metallb
-spec:
-  myASN: 65500
-  peerASN: 216455
-  peerAddress: 10.10.10.1
