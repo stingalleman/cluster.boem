@@ -1,0 +1,25 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: postgres-operator-ui
+  namespace: postgres
+spec:
+  chart:
+    spec:
+      chart: postgres-operator-ui
+      # version: v1.9
+      version: v1.10.0
+      sourceRef:
+        kind: HelmRepository
+        name: postgres-operator-ui
+        namespace: flux-system
+  interval: 24h
+  values:
+    envs:
+      appUrl: "https://postgres.kluster.boem"
+      # operatorApiUrl: "http://postgres-operator:8080"
+      operatorClusterNameLabel: "kluster.boem"
+      # resourcesVisible: "False"
+      targetNamespace: "postgres"
+      teams:
+        - "acid"
