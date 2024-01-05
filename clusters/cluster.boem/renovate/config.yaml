@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: renovate-config
+  namespace: renovate
+data:
+  config.json: |-
+    {
+      "username": "renovate-boem",
+      "gitAuthor": "renovate-boem <142128868+renovate-boem@users.noreply.github.com>",
+      "platform": "github",
+      "repositories": ["stingalleman/cluster.boem"],
+    }
+
+# "dryRun": "true",
