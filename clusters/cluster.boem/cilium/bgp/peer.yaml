@@ -8,7 +8,7 @@ spec:
       bgp_enabled: "true"
   virtualRouters:
     - localASN: 65500
-      exportPodCIDR: true
+      exportPodCIDR: false
       neighbors:
         - peerAddress: "2a07:54c7:5201:7377::1/128"
           peerASN: 216455
