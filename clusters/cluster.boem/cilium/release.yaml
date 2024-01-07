@@ -15,7 +15,7 @@ spec:
   interval: 24h
   values:
     bgpControlPlane:
-      enabled: true
+      enabled: false
 
     # enableIPv6Masquerade: false
     # enableIPv4Masquerade: false
