@@ -33,7 +33,8 @@ spec:
         externalTrafficPolicy: Local
         # loadBalancerIP: "45.83.205.8"
       annotations:
-        metallb.universe.tf/loadBalancerIPs: 45.83.205.8
+        io.cilium/lb-ipam-ips: "45.83.205.8"
+        # metallb.universe.tf/loadBalancerIPs: 45.83.205.8
         # ,2a07:54c7:5201:6e6f::a
       # loadBalancerSourceRanges:
       #   []
