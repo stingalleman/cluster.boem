@@ -30,11 +30,11 @@ spec:
         enabled: true
     ipam:
       mode: cluster-pool
-      # operator:
-      #   clusterPoolIPv4PodCIDRList: 10.244.0.0/16
-      #   clusterPoolIPv6PodCIDRList: "2a07:54c7:5201:706f::/104"
-      #   clusterPoolIPv4MaskSize: 24
-      #   clusterPoolIPv6MaskSize: 120
+      operator:
+        clusterPoolIPv4PodCIDRList: 10.244.0.0/16
+        clusterPoolIPv6PodCIDRList: "2a07:54c7:5201:706f::/104"
+        clusterPoolIPv4MaskSize: 24
+        clusterPoolIPv6MaskSize: 120
 
     k8sServiceHost: localhost
     k8sServicePort: 7445
