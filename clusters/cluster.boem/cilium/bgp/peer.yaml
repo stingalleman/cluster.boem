@@ -3,9 +3,9 @@ kind: CiliumBGPPeeringPolicy
 metadata:
   name: bgp-peer0
 spec:
-  # nodeSelector:
-  #   matchLabels:
-  #     bgp-policy:
+  nodeSelector:
+    matchLabels:
+      bgp_enabled: "true"
   virtualRouters:
     - localASN: 65500
       exportPodCIDR: false
