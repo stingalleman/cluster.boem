@@ -14,8 +14,8 @@ spec:
         namespace: flux-system
   interval: 24h
   values:
-    # bgpControlPlane:
-    # enabled: true
+    bgpControlPlane:
+      enabled: true
 
     # enableIPv6Masquerade: false
     # enableIPv4Masquerade: false
