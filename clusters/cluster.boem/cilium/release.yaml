@@ -24,7 +24,13 @@ spec:
       ui:
         enabled: true
     ipam:
-      mode: kubernetes
+      mode: cluster-pool
+      operator:
+        clusterPoolIPv4PodCIDRList: 10.244.0.0
+        clusterPoolIPv6PodCIDRList: "2a07:54c7:5201:706f::"
+        clusterPoolIPv4MaskSize: 16
+        clusterPoolIPv6MaskSize: 64
+
     k8sServiceHost: localhost
     k8sServicePort: 7445
     kubeProxyReplacement: true
