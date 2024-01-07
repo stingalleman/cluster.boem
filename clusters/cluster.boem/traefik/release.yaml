@@ -27,7 +27,7 @@ spec:
       # - "--accesslog=true"
 
     service:
-      enabled: false
+      enabled: true
       type: LoadBalancer
       spec:
         externalTrafficPolicy: Local
