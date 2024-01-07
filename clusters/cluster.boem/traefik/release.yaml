@@ -27,13 +27,14 @@ spec:
       # - "--accesslog=true"
 
     service:
-      enabled: false
+      enabled: true
       type: LoadBalancer
       spec:
         externalTrafficPolicy: Local
         # loadBalancerIP: "45.83.205.8"
       annotations:
-        metallb.universe.tf/loadBalancerIPs: 45.83.205.8,2a07:54c7:5201:6e6f::a
+        metallb.universe.tf/loadBalancerIPs: 45.83.205.8
+        # ,2a07:54c7:5201:6e6f::a
       # loadBalancerSourceRanges:
       #   []
       # - 192.168.0.1/32
@@ -42,12 +43,12 @@ spec:
       #   []
       # - 1.2.3.4
       # One of SingleStack, PreferDualStack, or RequireDualStack.
-      ipFamilyPolicy: RequireDualStack
+      # ipFamilyPolicy: RequireDualStack
       # List of IP families (e.g. IPv4 and/or IPv6).
       # ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/#services
-      ipFamilies:
-        - IPv4
-        - IPv6
+      # ipFamilies:
+      #   - IPv4
+      #   - IPv6
 
     deployment:
       enabled: true
