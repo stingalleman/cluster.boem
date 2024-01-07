@@ -14,8 +14,8 @@ spec:
       version: "10.33.0"
   interval: 24h
   values:
-    podSecurityPolicy:
-      enabled: true
+    # podSecurityPolicy:
+    # enabled: true
     globalArguments:
       - "--global.checknewversion"
       - "--api"
