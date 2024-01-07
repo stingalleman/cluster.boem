@@ -46,3 +46,5 @@ spec:
           - NET_ADMIN
           - SYS_ADMIN
           - SYS_RESOURCE
+    ipv6:
+      enabled: true
