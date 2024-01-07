@@ -10,7 +10,7 @@ spec:
     - localASN: 65500
       exportPodCIDR: false
       neighbors:
-        - peerAddress: "2a07:54c7:5201:7377::555/128"
+        - peerAddress: "2a07:54c7:5201:7377::999/64"
           peerASN: 216455
           # eBGPMultihopTTL: 10
           # connectRetryTimeSeconds: 120
