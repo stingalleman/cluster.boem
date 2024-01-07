@@ -43,9 +43,9 @@ spec:
       # ipFamilyPolicy: RequireDualStack
       # List of IP families (e.g. IPv4 and/or IPv6).
       # ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/#services
-      # ipFamilies:
-      # - IPv4
-      # - IPv6
+      ipFamilies:
+        - IPv4
+        - IPv6
 
     deployment:
       enabled: true
