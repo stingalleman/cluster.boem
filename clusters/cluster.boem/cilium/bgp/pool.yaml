@@ -3,7 +3,8 @@ kind: CiliumLoadBalancerIPPool
 metadata:
   name: "cilium-lb-pool-external"
 spec:
-  cidrs:
+  blocks:
     - cidr: "10.10.102.224/29"
-    - cidr: "45.83.205.8-45.83.205.9"
+    - start: "45.83.205.8"
+      stop: "45.83.205.9"
     # - cidr: "2a07:54c7:5201:6e6f::/64"
