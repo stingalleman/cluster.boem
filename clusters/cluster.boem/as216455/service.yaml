@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: sting-as-site
   namespace: default
+  annotations:
+    io.cilium/lb-ipam-ips: "45.83.205.8"
 spec:
   selector:
     app: sting-as-site
