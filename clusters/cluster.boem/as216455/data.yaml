@@ -11,7 +11,7 @@ data:
         <br />
         Open for peering.
         <br />
-        <p>Contact: <a href="mailto:noc@stingalleman.nl">noc@stingalleman.nl</a> | Abuse: <a href="mailto:abuse@stingalleman.nl">abuse@stingalleman.nl</a> | <a href="https://www.peeringdb.com/net/33889">PeeringDB</a> | <a href="https://bgp.tools/as/216455">bgp.tools</a></p>
+        <p>Contact: <a href="mailto:noc@stingalleman.nl">noc@stingalleman.nl</a> | Abuse: <a href="mailto:abuse@stingalleman.nl">abuse@stingalleman.nl</a> | <a href="https://www.peeringdb.com/net/33889">PeeringDB</a> | <a href="https://bgp.tools/as/216455">bgp.tools</a> | Geofeed: <a href="https://as216455.net/geofeed.csv">geofeed.csv</a></p>
       </body>
     </html>
   geofeed.csv: |
