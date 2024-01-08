@@ -1,9 +1,0 @@
-apiVersion: metallb.io/v1beta1
-kind: IPAddressPool
-metadata:
-  name: external
-  namespace: metallb
-spec:
-  addresses:
-    - 45.83.205.8-45.83.205.9
-    # - 2a07:54c7:5201:6e6f::/64
