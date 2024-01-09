@@ -8,10 +8,12 @@ patches:
       kind: Service
       namespace: postgres
       name: generic-pooler
+      version: v1
     patch: |-
       - op: add
-        path: "/metadata/annotations/test"
-        value: "weeeeee"
+        path: "/metadata/annotations"
+        value:
+          test: "weeeee"
 
 # apiVersion: kustomize.config.k8s.io/v1beta1
 # kind: Kustomization
