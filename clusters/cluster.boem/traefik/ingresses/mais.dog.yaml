@@ -17,4 +17,4 @@ spec:
           port: 8080
 
   tls:
-    secretName: maid.dog-prod-tls
+    secretName: mais.dog-prod-tls
