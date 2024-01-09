@@ -10,8 +10,8 @@ patches:
       name: generic-pooler
     patch: |-
       - op: add
-        path: "/metadata/annotations/\"io.cilium/lb-ipam-ips\""
-        value: "10.10.102.211"
+        path: "/metadata/annotations/test"
+        value: "weeeeee"
 
 # apiVersion: kustomize.config.k8s.io/v1beta1
 # kind: Kustomization
