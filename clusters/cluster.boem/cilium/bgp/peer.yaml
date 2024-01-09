@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=schemas/CiliumBGPPeeringPolicy.json
 apiVersion: "cilium.io/v2alpha1"
 kind: CiliumBGPPeeringPolicy
 metadata:

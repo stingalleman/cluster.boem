@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=schemas/CiliumLoadBalancerIPPool.json
 apiVersion: "cilium.io/v2alpha1"
 kind: CiliumLoadBalancerIPPool
 metadata:
