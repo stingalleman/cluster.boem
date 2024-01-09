@@ -3,17 +3,33 @@ kind: Kustomization
 metadata:
   name: generic-lb-patch
   namespace: postgres
-patches:
-  - target:
-      kind: Service
-      namespace: postgres
-      name: generic-pooler
-      version: v1
-    patch: |-
+patchesJson6902:
+  - patch: |-
       - op: add
-        path: "/metadata/annotations"
-        value:
-          test: "weeeee"
+        path: "/metadata/annotations/testtt"
+        value: "aaaaatest"
+    target:
+      kind: Service
+      name: generic-pooler
+      namespace: postgres
+      version: v1
+
+  # - target:
+  #     kind: Service
+  #     name: generic-pooler
+  #     version: v1
+  #     namespace: postgres
+# patches:
+#   - target:
+#       kind: Service
+#       namespace: postgres
+#       name: generic-pooler
+#       version: v1
+#     patch: |-
+#       - op: add
+#         path: "/metadata/annotations/io.cilium/"
+#         value:
+#           test: "weeeee"
 
 # apiVersion: kustomize.config.k8s.io/v1beta1
 # kind: Kustomization
