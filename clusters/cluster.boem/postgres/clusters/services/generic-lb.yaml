@@ -1,32 +1,66 @@
-# apiVersion: v1
-# kind: Service
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: generic-lb-patch
+  namespace: postgres
+patches:
+  - target:
+      kind: Service
+      namespace: postgres
+      name: generic-pooler
+    patch: |-
+      - op: add
+        path: "/metadata/annotations/\"io.cilium/lb-ipam-ips\""
+        value: "10.10.102.211"
+
+# apiVersion: kustomize.config.k8s.io/v1beta1
+# kind: Kustomization
 # metadata:
-#   name: generic-pooler
-#   namespace: postgres
-#   annotations:
-#     kustomize.toolkit.fluxcd.io/prune: disabled
-#     kustomize.toolkit.fluxcd.io/ssa: merge
-#     io.cilium/lb-ipam-ips: "10.10.201.211"
-# # spec:
-# #   ports:
-# #     - name: generic-pooler
-# #       protocol: TCP
-# #       port: 5432
-# #       targetPort: 5432
-# #       nodePort: 31669
-# #   selector:
-# #     connection-pooler: generic-pooler
-# #   clusterIP: 10.98.165.32
-# #   clusterIPs:
-# #     - 10.98.165.32
-# #   type: LoadBalancer
-# #   sessionAffinity: None
-# #   loadBalancerSourceRanges:
-# #     - 10.10.11.2/32
-# #     - 87.208.225.224/32
-# #   externalTrafficPolicy: Cluster
-# #   ipFamilies:
-# #     - IPv4
-# #   ipFamilyPolicy: SingleStack
-# #   allocateLoadBalancerNodePorts: true
-# #   internalTrafficPolicy: Cluster
+#   name: add-annotation
+# commonLabels:
+#   app: my-app
+# resources:
+#   - service.yaml
+# patches:
+#   - target:
+#       group: v1
+#       version: v1
+#       kind: Service
+#       name: generic-pooler
+#   patch: |-
+#     - op: add
+#       path: "/metadata/annotations/new-annotation"
+#       value: "new-value"
+
+# # apiVersion: v1
+# # kind: Service
+# # metadata:
+# #   name: generic-pooler
+# #   namespace: postgres
+# #   annotations:
+# #     kustomize.toolkit.fluxcd.io/prune: disabled
+# #     kustomize.toolkit.fluxcd.io/ssa: merge
+# #     io.cilium/lb-ipam-ips: "10.10.201.211"
+# # # spec:
+# # #   ports:
+# # #     - name: generic-pooler
+# # #       protocol: TCP
+# # #       port: 5432
+# # #       targetPort: 5432
+# # #       nodePort: 31669
+# # #   selector:
+# # #     connection-pooler: generic-pooler
+# # #   clusterIP: 10.98.165.32
+# # #   clusterIPs:
+# # #     - 10.98.165.32
+# # #   type: LoadBalancer
+# # #   sessionAffinity: None
+# # #   loadBalancerSourceRanges:
+# # #     - 10.10.11.2/32
+# # #     - 87.208.225.224/32
+# # #   externalTrafficPolicy: Cluster
+# # #   ipFamilies:
+# # #     - IPv4
+# # #   ipFamilyPolicy: SingleStack
+# # #   allocateLoadBalancerNodePorts: true
+# # #   internalTrafficPolicy: Cluster
