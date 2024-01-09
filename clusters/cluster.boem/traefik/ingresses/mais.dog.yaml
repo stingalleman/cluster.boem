@@ -1,0 +1,20 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: mais.dog
+  namespace: default
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`map.mais.dog`)
+      services:
+        - kind: Service
+          name: minecraft-vm
+          namespace: default
+          port: 8080
+
+  tls:
+    secretName: maid.dog-prod-tls
