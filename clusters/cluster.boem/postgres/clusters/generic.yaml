@@ -22,9 +22,9 @@ spec:
       endpointURL: https://generic-cluster-backup.s3.g.s4.mega.io
       s3Credentials:
         accessKeyId:
-          name: backup-creds
+          name: generic-backup-creds
           key: ACCESS_KEY_ID
         secretAccessKey:
-          name: backup-creds
+          name: generic-backup-creds
           key: ACCESS_SECRET_KEY
     retentionPolicy: "30d"
