@@ -2,7 +2,7 @@
 # kind: Cluster
 # metadata:
 #   name: generic-cluster
-#   namespace: postgres
+#   namespace: cnpg-system
 # spec:
 #   instances: 2
 #   # Example of rolling update strategy:
