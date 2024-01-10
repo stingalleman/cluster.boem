@@ -13,7 +13,7 @@ spec:
   numberOfInstances: 2
   enableConnectionPooler: true
   enableReplicaConnectionPooler: true
-  enableMasterPoolerLoadBalancer: false
+  enableMasterPoolerLoadBalancer: true
   enableReplicaPoolerLoadBalancer: false
   volume:
     size: "25Gi"
