@@ -19,7 +19,6 @@ spec:
   #   - 87.208.225.224/32
   ports:
     - name: generic-pooler-repl
-      nodePort: 31054
       port: 5432
       protocol: TCP
       targetPort: 5432
