@@ -4,7 +4,7 @@ metadata:
   # annotations:
   # external-dns.alpha.kubernetes.io/hostname: generic-pooler.postgres.db.example.com
   labels:
-    io.cilium/lb-ipam-ips: "10.10.102.206"
+    io.cilium/lb-ipam-ips: "10.10.102.204"
     # ,2a07:54c7:5201:6e6f::a"
   name: generic-pooler
   namespace: postgres
