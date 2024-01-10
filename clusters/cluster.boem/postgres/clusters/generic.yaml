@@ -15,3 +15,16 @@ spec:
   # Require 1Gi of space
   storage:
     size: 5Gi
+
+  backup:
+    barmanObjectStore:
+      destinationPath: s3://generic-cluster/
+      endpointURL: https://generic-cluster-backup.s3.g.s4.mega.io
+      s3Credentials:
+        accessKeyId:
+          name: backup-creds
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: backup-creds
+          key: ACCESS_SECRET_KEY
+    retentionPolicy: "30d"
