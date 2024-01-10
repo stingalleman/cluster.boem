@@ -14,7 +14,7 @@ spec:
   enableConnectionPooler: true
   enableReplicaConnectionPooler: true
   enableMasterPoolerLoadBalancer: false
-  enableReplicaPoolerLoadBalancer: true
+  enableReplicaPoolerLoadBalancer: false
   volume:
     size: "25Gi"
     storageClass: "nfs-client"
