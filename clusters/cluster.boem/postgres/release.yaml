@@ -1,22 +1,22 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: cloudnative-pg
-  namespace: postgres
-spec:
-  chart:
-    spec:
-      chart: cloudnative-pg
-      sourceRef:
-        kind: HelmRepository
-        name: cloudnative-pg
-        namespace: flux-system
-      version: "0.20.0"
-  interval: 24h
-  values:
-    rbac:
-    # -- Specifies whether ClusterRole and ClusterRoleBinding should be created.
-    create: false
-    # -- Aggregate ClusterRoles to Kubernetes default user-facing roles.
-    # Ref: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#user-facing-roles
-    aggregateClusterRoles: false
+# apiVersion: helm.toolkit.fluxcd.io/v2beta1
+# kind: HelmRelease
+# metadata:
+#   name: cloudnative-pg
+#   namespace: postgres
+# spec:
+#   chart:
+#     spec:
+#       chart: cloudnative-pg
+#       sourceRef:
+#         kind: HelmRepository
+#         name: cloudnative-pg
+#         namespace: flux-system
+#       version: "0.20.0"
+#   interval: 24h
+#   values:
+#     rbac:
+#     # -- Specifies whether ClusterRole and ClusterRoleBinding should be created.
+#     create: false
+#     # -- Aggregate ClusterRoles to Kubernetes default user-facing roles.
+#     # Ref: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#user-facing-roles
+#     aggregateClusterRoles: false
