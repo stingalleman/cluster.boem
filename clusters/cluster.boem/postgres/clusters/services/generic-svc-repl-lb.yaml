@@ -6,7 +6,7 @@ metadata:
   # annotations:
   # io.cilium/lb-ipam-ips: "10.10.102.204"
   # ,2a07:54c7:5201:6e6f::a"
-  name: generic-pooler
+  name: generic-pooler-repl
   namespace: postgres
 
 spec:
@@ -18,12 +18,12 @@ spec:
   #   - 10.10.11.2/32
   #   - 87.208.225.224/32
   ports:
-    - name: generic-pooler
+    - name: generic-pooler-repl
       nodePort: 31054
       port: 5432
       protocol: TCP
       targetPort: 5432
   selector:
-    connection-pooler: generic-pooler
+    connection-pooler: generic-pooler-repl
   # sessionAffinity: None
   type: LoadBalancer
