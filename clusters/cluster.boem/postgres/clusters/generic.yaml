@@ -11,6 +11,7 @@ spec:
   # - supervised: requires manual supervision to perform
   #               the switchover of the primary
   primaryUpdateStrategy: unsupervised
+  enableSuperuserAccess: true
 
   # Require 1Gi of space
   storage:
