@@ -13,8 +13,8 @@ spec:
   numberOfInstances: 2
   enableConnectionPooler: true
   enableReplicaConnectionPooler: true
-  enableMasterPoolerLoadBalancer: true
-  enableReplicaPoolerLoadBalancer: false
+  enableMasterPoolerLoadBalancer: false
+  enableReplicaPoolerLoadBalancer: true
   volume:
     size: "25Gi"
     storageClass: "nfs-client"
