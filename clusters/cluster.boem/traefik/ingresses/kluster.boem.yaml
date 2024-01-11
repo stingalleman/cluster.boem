@@ -115,5 +115,12 @@ spec:
           namespace: default
           port: 80
 
+    - kind: Rule
+      match: Host(`windmill.kluster.boem`)
+      services:
+        - name: windmill-app
+          namespace: windmill
+          port: 80
+
   tls:
     secretName: kluster.boem-certs
