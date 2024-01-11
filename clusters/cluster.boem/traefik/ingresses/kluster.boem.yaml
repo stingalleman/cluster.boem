@@ -120,7 +120,7 @@ spec:
       services:
         - name: windmill-app
           namespace: windmill
-          port: 80
+          port: 8000
 
   tls:
     secretName: kluster.boem-certs
