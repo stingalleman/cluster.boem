@@ -31,7 +31,7 @@ spec:
 
       containers:
         - name: babuck
-          image: ghcr.io/babuck/babuck
+          image: ghcr.io/babuck/babuck:main
           command:
             - "/usr/local/bin/babuck"
             - "-c /opt/babuck/config.toml"
