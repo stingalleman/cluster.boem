@@ -33,10 +33,13 @@ spec:
         - name: babuck
           image: ghcr.io/babuck/babuck:main@sha256:8584b5f40b0ebe114aed73db5233086fff063e621b6fa4adb80fc1d706fee4ac
           imagePullPolicy: Always
-          command:
-            - "/usr/local/bin/babuck"
-            - "-c /opt/babuck/config.toml"
-            - "-o /opt/babuck/files"
+          command: ["/bin/bash", "-c", "--"]
+          args: ["while true; do sleep 30; done;"]
+          # command:
+          #   - "/usr/local/bin/babuck"
+          # args:
+          #   - "-c /opt/babuck/config.toml"
+          #   - "-o /opt/babuck/files"
           volumeMounts:
             - mountPath: "/opt/babuck/files"
               name: babuck-volume
