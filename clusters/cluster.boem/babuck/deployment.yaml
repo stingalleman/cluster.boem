@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: babuck
+  namespace: default
+  annotations:
+    reloader.stakater.com/auto: "true"
+  labels:
+    app: babuck
+spec:
+  selector:
+    matchLabels:
+      app: babuck
+  template:
+    metadata:
+      labels:
+        app: babuck
+    spec:
+      # initContainers:
+      #   - name: "write-config"
+      #     image: busybox
+      #     command:
+      #       ["sh", "-c", "cp /etc/oxidized-config/* /etc/oxidized-volume"]
+
+      #       # - "cp /etc/oxidized-config/config /etc/oxidized-volume/config"
+      #     volumeMounts:
+      #       - mountPath: "/etc/oxidized-volume"
+      #         name: oxidized-volume
+      #       - mountPath: "/etc/oxidized-config"
+      #         name: oxidized-config
+
+      containers:
+        - name: babuck
+          image: ghcr.io/babuck/babuck:main@sha256:12f5b7797b6c583a8a0868e26e1814fcace268cc988bb70a44967705b3f30f50
+          command:
+            - "/usr/local/bin/babuck"
+            - "-c /opt/babuck/config.toml"
+            - "-o /opt/babuck/files"
+          volumeMounts:
+            - mountPath: "/opt/babuck/files"
+              name: babuck-volume
+            - mountPath: "/opt/babuck/config.toml"
+              name: babuck-config
+            - mountPath: "/opt/babuck/.ssh"
+              name: babuck-ssh-config
+          # ports:
+          #   - containerPort: 8888
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
+
+      imagePullSecrets:
+        - name: ghcr-registry
+
+      volumes:
+        - name: babuck-volume
+          persistentVolumeClaim:
+            claimName: babuck-volume
+        - name: babuck-config
+          configMap:
+            name: babuck-config
+        - name: babuck-ssh-config
+          secret:
+            secretName: babuck-ssh-config
