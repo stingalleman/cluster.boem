@@ -38,8 +38,10 @@ spec:
           command:
             - "/usr/local/bin/babuck"
           args:
-            - "-c /opt/babuck/config.toml"
-            - "-o /opt/babuck/files"
+            - "-c"
+            - "/opt/babuck/config.toml"
+            - "-o"
+            - "/opt/babuck/files"
           volumeMounts:
             - mountPath: "/opt/babuck/files"
               name: babuck-volume
