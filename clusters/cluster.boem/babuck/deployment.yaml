@@ -33,19 +33,18 @@ spec:
         - name: babuck
           image: ghcr.io/babuck/babuck:main@sha256:935b4f034e09a55d09fb0983777d0b76f36d30de713db50d6e79d28ad21a1899
           imagePullPolicy: Always
-          command: ["/bin/sh", "-c", "--"]
-          args: ["while true; do sleep 30; done;"]
-          # command:
-          #   - "/usr/local/bin/babuck"
-          # args:
-          #   - "-c /opt/babuck/config.toml"
-          #   - "-o /opt/babuck/files"
+          # command: ["/bin/sh", "-c", "--"]
+          # args: ["while true; do sleep 30; done;"]
+          command:
+            - "/usr/local/bin/babuck"
+            - "-c /etc/babuck/config.toml"
+            - "-o /etc/babuck/files"
           volumeMounts:
-            - mountPath: "/opt/babuck/files"
+            - mountPath: "/etc/babuck/files"
               name: babuck-volume
-            - mountPath: "/opt/babuck/config.toml"
+            - mountPath: "/etc/babuck/config.toml"
               name: babuck-config
-            - mountPath: "/opt/babuck/.ssh"
+            - mountPath: "/etc/babuck/.ssh"
               name: babuck-ssh-config
           # ports:
           #   - containerPort: 8888
