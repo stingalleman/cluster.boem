@@ -39,11 +39,12 @@ spec:
             - "/usr/local/bin/babuck"
             - "-c"
             - "/etc/babuck/config.toml"
-            # - "-o /etc/babuck/files"
+            - "-o"
+            - "/etc/babuck-files"
           volumeMounts:
-            - mountPath: "/etc/babuck/files"
+            - mountPath: "/etc/babuck-files"
               name: babuck-volume
-            - mountPath: "/etc/babuck/config.toml"
+            - mountPath: "/etc/babuck"
               name: babuck-config
             - mountPath: "/etc/babuck/.ssh"
               name: babuck-ssh-config
