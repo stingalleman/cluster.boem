@@ -37,8 +37,9 @@ spec:
           # args: ["while true; do sleep 30; done;"]
           command:
             - "/usr/local/bin/babuck"
-            - "-c /etc/babuck/config.toml"
-            - "-o /etc/babuck/files"
+            - "-c"
+            - "/etc/babuck/config.toml"
+            # - "-o /etc/babuck/files"
           volumeMounts:
             - mountPath: "/etc/babuck/files"
               name: babuck-volume
