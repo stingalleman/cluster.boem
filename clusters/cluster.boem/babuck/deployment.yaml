@@ -31,7 +31,7 @@ spec:
 
       containers:
         - name: babuck
-          image: ghcr.io/babuck/babuck:main@sha256:935b4f034e09a55d09fb0983777d0b76f36d30de713db50d6e79d28ad21a1899
+          image: ghcr.io/babuck/babuck:main@sha256:697d7ead945082df2b39d17ae498a7c08726260e785929a32fda6b3ecda61316
           imagePullPolicy: Always
           # command: ["/bin/sh", "-c", "--"]
           # args: ["while true; do sleep 30; done;"]
