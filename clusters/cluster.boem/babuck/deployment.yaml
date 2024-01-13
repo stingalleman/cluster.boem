@@ -20,7 +20,9 @@ spec:
         - name: "test"
           image: gcr.io/distroless/static:latest
           command:
-            ["sh", "-c", 'echo "$HOME"; while true; do sleep 10000; done']
+            - "echo"
+            - "$HOME"
+            # ["sh", "-c", 'echo "$HOME"; while true; do sleep 10000; done']
 
       containers:
         - name: babuck
