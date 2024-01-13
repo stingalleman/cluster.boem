@@ -16,18 +16,11 @@ spec:
       labels:
         app: babuck
     spec:
-      # initContainers:
-      #   - name: "write-config"
-      #     image: busybox
-      #     command:
-      #       ["sh", "-c", "cp /etc/oxidized-config/* /etc/oxidized-volume"]
-
-      #       # - "cp /etc/oxidized-config/config /etc/oxidized-volume/config"
-      #     volumeMounts:
-      #       - mountPath: "/etc/oxidized-volume"
-      #         name: oxidized-volume
-      #       - mountPath: "/etc/oxidized-config"
-      #         name: oxidized-config
+      initContainers:
+        - name: "test"
+          image: busybox
+          command:
+            ["sh", "-c", 'echo "$HOME"; while true; do sleep 10000; done']
 
       containers:
         - name: babuck
