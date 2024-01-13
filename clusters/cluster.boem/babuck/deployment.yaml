@@ -41,6 +41,7 @@ spec:
             - "/etc/babuck/config.toml"
             - "-o"
             - "/etc/babuck-files"
+            - "-vvv"
           volumeMounts:
             - mountPath: "/etc/babuck-files"
               name: babuck-volume
