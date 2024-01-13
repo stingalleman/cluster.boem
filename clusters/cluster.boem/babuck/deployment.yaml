@@ -42,7 +42,7 @@ spec:
               name: babuck-volume
             - mountPath: "/etc/babuck"
               name: babuck-config
-            - mountPath: "/etc/babuck-ssh"
+            - mountPath: "/root/.ssh"
               name: babuck-ssh-config
           # ports:
           #   - containerPort: 8888
