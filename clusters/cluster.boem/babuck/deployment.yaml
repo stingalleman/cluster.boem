@@ -16,17 +16,17 @@ spec:
       labels:
         app: babuck
     spec:
-      initContainers:
-        - name: "test"
-          image: gcr.io/distroless/static:latest
-          command:
-            - "echo"
-            - "$HOME"
-            # ["sh", "-c", 'echo "$HOME"; while true; do sleep 10000; done']
+      # initContainers:
+      # - name: "test"
+      #   image: gcr.io/distroless/static:latest
+      #   command:
+      #     - "echo"
+      #     - "$HOME"
+      # ["sh", "-c", 'echo "$HOME"; while true; do sleep 10000; done']
 
       containers:
         - name: babuck
-          image: ghcr.io/babuck/babuck:main@sha256:697d7ead945082df2b39d17ae498a7c08726260e785929a32fda6b3ecda61316
+          image: ghcr.io/babuck/babuck:main@sha256:13264569126f68a25eee4a69b75cc7b8a6aa594c326da5ef0d383b3a6599aa3f
           imagePullPolicy: Always
           # command: ["/bin/sh", "-c", "--"]
           # args: ["while true; do sleep 30; done;"]
