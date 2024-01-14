@@ -1,39 +1,39 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: sflow-http
-  namespace: default
-spec:
-  selector:
-    app: sflow
-  type: ClusterIP
-  # sessionAffinity: None
-  # sessionAffinityConfig:
-  #   clientIP:
-  #     timeoutSeconds: 10800
-  ports:
-    - name: http
-      protocol: TCP
-      port: 8008
-      targetPort: 8008
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: sflow-sflow-lb
-  namespace: default
-  annotations:
-    io.cilium/lb-ipam-ips: "10.10.102.201"
-spec:
-  selector:
-    app: sflow
-  type: LoadBalancer
-  # sessionAffinity: None
-  # sessionAffinityConfig:
-  #   clientIP:
-  #     timeoutSeconds: 10800
-  ports:
-    - name: sflow
-      protocol: UDP
-      port: 6343
-      targetPort: 6343
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: sflow-http
+#   namespace: default
+# spec:
+#   selector:
+#     app: sflow
+#   type: ClusterIP
+#   # sessionAffinity: None
+#   # sessionAffinityConfig:
+#   #   clientIP:
+#   #     timeoutSeconds: 10800
+#   ports:
+#     - name: http
+#       protocol: TCP
+#       port: 8008
+#       targetPort: 8008
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: sflow-sflow-lb
+#   namespace: default
+#   annotations:
+#     io.cilium/lb-ipam-ips: "10.10.102.201"
+# spec:
+#   selector:
+#     app: sflow
+#   type: LoadBalancer
+#   # sessionAffinity: None
+#   # sessionAffinityConfig:
+#   #   clientIP:
+#   #     timeoutSeconds: 10800
+#   ports:
+#     - name: sflow
+#       protocol: UDP
+#       port: 6343
+#       targetPort: 6343
