@@ -19,13 +19,13 @@ spec:
     spec:
       containers:
         - name: sflow
-          image: sflow/topology
+          image: sflow/prometheus
           args:
-            - "-Dsnmp.ifname=yes"
+            # - "-Dsnmp.ifname=yes"
             - "-Dbgp.start=yes"
-          volumeMounts:
-            - mountPath: /sflow-rt/store
-              name: sflow-store
+          # volumeMounts:
+          #   - mountPath: /sflow-rt/store
+          #     name: sflow-store
           # resources:
           #   requests:
           #     cpu: 100m
@@ -57,7 +57,7 @@ spec:
               protocol: UDP
               name: sflow
       restartPolicy: Always
-      volumes:
-        - name: sflow-store
-          persistentVolumeClaim:
-            claimName: sflow-store
+      # volumes:
+      #   - name: sflow-store
+      #     persistentVolumeClaim:
+      #       claimName: sflow-store
