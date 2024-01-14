@@ -58,7 +58,7 @@ spec:
     - IPv6
   ipFamilyPolicy: PreferDualStack
   ports:
-    - name: sflow
-      protocol: UDP
-      port: 6343
-      targetPort: 6343
+    - name: bgp
+      protocol: TCP
+      port: 1179
+      targetPort: 1179
