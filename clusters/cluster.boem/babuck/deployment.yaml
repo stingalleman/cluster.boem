@@ -46,13 +46,13 @@ spec:
               name: babuck-ssh-config
           # ports:
           #   - containerPort: 8888
-          resources:
-            requests:
-              cpu: 100m
-              memory: 100Mi
-            limits:
-              cpu: 100m
-              memory: 100Mi
+          # resources:
+          #   requests:
+          #     cpu: 100m
+          #     memory: 100Mi
+          #   limits:
+          #     cpu: 100m
+          #     memory: 100Mi
 
       imagePullSecrets:
         - name: ghcr-registry
