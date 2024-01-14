@@ -15,7 +15,7 @@ data:
 
     logInfo("hellooo");
 
-    var result = runCmd(['hostname','-f']);
+    var result = runCmd(['ip','a','s']);
     logInfo(JSON.stringify(result));
 
     // direct sFlow from sFlowAgentIP to reflectorIP routing table
