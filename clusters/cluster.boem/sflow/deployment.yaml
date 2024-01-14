@@ -1,60 +1,63 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: sflow
-#   namespace: default
-#   annotations:
-#     reloader.stakater.com/auto: "true"
-#   labels:
-#     app: sflow
-# spec:
-#   selector:
-#     matchLabels:
-#       app: sflow
-#   replicas: 1
-#   template:
-#     metadata:
-#       labels:
-#         app: sflow
-#     spec:
-#       containers:
-#         - name: sflow
-#           image: sflow/ixp-metrics
-#           volumeMounts:
-#             - mountPath: /sflow-rt/store
-#               name: sflow-store
-#           # resources:
-#           #   requests:
-#           #     cpu: 100m
-#           #     memory: 100Mi
-#           #   limits:
-#           #     cpu: 100m
-#           #     memory: 100Mi
-#           livenessProbe:
-#             tcpSocket:
-#               port: 8008
-#             initialDelaySeconds: 5
-#             timeoutSeconds: 5
-#             successThreshold: 1
-#             failureThreshold: 3
-#             periodSeconds: 10
-#           readinessProbe:
-#             httpGet:
-#               path: /
-#               port: 8008
-#             initialDelaySeconds: 5
-#             timeoutSeconds: 2
-#             successThreshold: 1
-#             failureThreshold: 3
-#             periodSeconds: 10
-#           ports:
-#             - containerPort: 8008
-#               name: http
-#             - containerPort: 6343
-#               protocol: UDP
-#               name: sflow
-#       restartPolicy: Always
-#       volumes:
-#         - name: sflow-store
-#           persistentVolumeClaim:
-#             claimName: sflow-store
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sflow
+  namespace: default
+  annotations:
+    reloader.stakater.com/auto: "true"
+  labels:
+    app: sflow
+spec:
+  selector:
+    matchLabels:
+      app: sflow
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sflow
+    spec:
+      containers:
+        - name: sflow
+          image: sflow/topology
+          args:
+            - "-Dsnmp.ifname=yes"
+            - "-Dbgp.start=yes"
+          volumeMounts:
+            - mountPath: /sflow-rt/store
+              name: sflow-store
+          # resources:
+          #   requests:
+          #     cpu: 100m
+          #     memory: 100Mi
+          #   limits:
+          #     cpu: 100m
+          #     memory: 100Mi
+          livenessProbe:
+            tcpSocket:
+              port: 8008
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8008
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
+            successThreshold: 1
+            failureThreshold: 3
+            periodSeconds: 10
+          ports:
+            - containerPort: 8008
+              name: http
+            - containerPort: 6343
+              protocol: UDP
+              name: sflow
+      restartPolicy: Always
+      volumes:
+        - name: sflow-store
+          persistentVolumeClaim:
+            claimName: sflow-store
