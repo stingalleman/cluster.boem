@@ -22,6 +22,7 @@ spec:
           image: sflow/prometheus
           args:
             # - "-Dsnmp.ifname=yes"
+            - "-Dscript.file=/sflow-scripts/bgp.js"
             - "-Dbgp.start=yes"
             - "-Dgeo.country=/sflow-geo/GeoLite2-Country.mmdb"
             - "-Dgeo.asn=/sflow-geo/GeoLite2-ASN.mmdb"
@@ -29,6 +30,8 @@ spec:
           volumeMounts:
             - mountPath: /sflow-geo
               name: sflow-geo
+            - mountPath: /sflow-scripts
+              name: sflow-scripts
           # resources:
           #   requests:
           #     cpu: 100m
@@ -64,3 +67,6 @@ spec:
         - name: sflow-geo
           persistentVolumeClaim:
             claimName: sflow-geo
+        - name: sflow-scripts
+          configMap:
+            name: sflow-scripts

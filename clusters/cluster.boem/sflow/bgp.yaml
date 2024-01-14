@@ -1,0 +1,18 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: sflow-scripts
+  namespace: default
+stringData:
+  bgp.js: |
+    var reflectorIP  = '10.0.0.1';
+    var myAS         = '65162';
+    var myID         = '10.10.102.201';
+    var sFlowAgentIP = '10.0.0.1';
+
+    // allow BGP connection from reflectorIP
+    bgpAddNeighbor(reflectorIP,myAS,myID);
+
+    // direct sFlow from sFlowAgentIP to reflectorIP routing table
+    // calculate a 60 second moving average byte rate for each route
+    bgpAddSource(sFlowAgentIP,reflectorIP,60,'bytes');
