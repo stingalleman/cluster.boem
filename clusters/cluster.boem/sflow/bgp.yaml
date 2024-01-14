@@ -7,7 +7,7 @@ data:
   bgp.js: |
     var reflectorIP  = '10.0.0.1';
     var myAS         = '65162';
-    var myID         = '10.10.102.201';
+    var myID         = '2a07:54c7:5201:7e6f::1122';
     var sFlowAgentIP = '10.0.0.1';
 
     // allow BGP connection from reflectorIP
