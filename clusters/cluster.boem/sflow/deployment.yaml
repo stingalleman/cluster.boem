@@ -23,6 +23,9 @@ spec:
           args:
             # - "-Dsnmp.ifname=yes"
             - "-Dbgp.start=yes"
+            - "-Dgeo.country=/sflow-geo/GeoLite2-Country.mmdb"
+            - "-Dgeo.asn=/sflow-geo/GeoLite2-ASN.mmdb"
+
           volumeMounts:
             - mountPath: /sflow-geo
               name: sflow-geo
