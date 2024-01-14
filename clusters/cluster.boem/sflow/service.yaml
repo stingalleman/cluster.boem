@@ -37,3 +37,28 @@ spec:
       protocol: UDP
       port: 6343
       targetPort: 6343
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sflow-bgp-lb
+  namespace: default
+  annotations:
+    io.cilium/lb-ipam-ips: "10.10.102.202,2a07:54c7:5201:7e6f::1122"
+spec:
+  selector:
+    app: sflow
+  type: LoadBalancer
+  # sessionAffinity: None
+  # sessionAffinityConfig:
+  #   clientIP:
+  #     timeoutSeconds: 10800
+  ipFamilies:
+    - IPv4
+    - IPv6
+  ipFamilyPolicy: PreferDualStack
+  ports:
+    - name: sflow
+      protocol: UDP
+      port: 6343
+      targetPort: 6343
