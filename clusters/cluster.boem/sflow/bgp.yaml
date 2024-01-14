@@ -13,6 +13,8 @@ data:
     // allow BGP connection from reflectorIP
     bgpAddNeighbor(reflectorIP,myAS,myID);
 
+    console.log("hellooo");
+
     // direct sFlow from sFlowAgentIP to reflectorIP routing table
     // calculate a 60 second moving average byte rate for each route
     bgpAddSource(sFlowAgentIP,reflectorIP,60,'bytes');
