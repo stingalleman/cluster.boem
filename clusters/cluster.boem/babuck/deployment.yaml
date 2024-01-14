@@ -1,69 +1,69 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: babuck
-  namespace: default
-  annotations:
-    reloader.stakater.com/auto: "true"
-  labels:
-    app: babuck
-spec:
-  selector:
-    matchLabels:
-      app: babuck
-  template:
-    metadata:
-      labels:
-        app: babuck
-    spec:
-      # initContainers:
-      # - name: "test"
-      #   image: gcr.io/distroless/static:latest
-      #   command:
-      #     - "echo"
-      #     - "$HOME"
-      # ["sh", "-c", 'echo "$HOME"; while true; do sleep 10000; done']
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: babuck
+#   namespace: default
+#   annotations:
+#     reloader.stakater.com/auto: "true"
+#   labels:
+#     app: babuck
+# spec:
+#   selector:
+#     matchLabels:
+#       app: babuck
+#   template:
+#     metadata:
+#       labels:
+#         app: babuck
+#     spec:
+#       # initContainers:
+#       # - name: "test"
+#       #   image: gcr.io/distroless/static:latest
+#       #   command:
+#       #     - "echo"
+#       #     - "$HOME"
+#       # ["sh", "-c", 'echo "$HOME"; while true; do sleep 10000; done']
 
-      containers:
-        - name: babuck
-          image: ghcr.io/babuck/babuck:main@sha256:13264569126f68a25eee4a69b75cc7b8a6aa594c326da5ef0d383b3a6599aa3f
-          imagePullPolicy: Always
-          # command: ["/bin/sh", "-c", "--"]
-          # args: ["while true; do sleep 30; done;"]
-          command:
-            - "/usr/local/bin/babuck"
-            - "-c"
-            - "/etc/babuck/config.toml"
-            - "-o"
-            - "/etc/babuck-files"
-            - "-vvv"
-          volumeMounts:
-            - mountPath: "/etc/babuck-files"
-              name: babuck-volume
-            - mountPath: "/etc/babuck"
-              name: babuck-config
-            - mountPath: "/root/.ssh"
-              name: babuck-ssh-config
-          # ports:
-          #   - containerPort: 8888
-          # resources:
-          #   requests:
-          #     cpu: 100m
-          #     memory: 100Mi
-          #   limits:
-          #     cpu: 100m
-          #     memory: 100Mi
+#       containers:
+#         - name: babuck
+#           image: ghcr.io/babuck/babuck:main@sha256:13264569126f68a25eee4a69b75cc7b8a6aa594c326da5ef0d383b3a6599aa3f
+#           imagePullPolicy: Always
+#           # command: ["/bin/sh", "-c", "--"]
+#           # args: ["while true; do sleep 30; done;"]
+#           command:
+#             - "/usr/local/bin/babuck"
+#             - "-c"
+#             - "/etc/babuck/config.toml"
+#             - "-o"
+#             - "/etc/babuck-files"
+#             - "-vvv"
+#           volumeMounts:
+#             - mountPath: "/etc/babuck-files"
+#               name: babuck-volume
+#             - mountPath: "/etc/babuck"
+#               name: babuck-config
+#             - mountPath: "/root/.ssh"
+#               name: babuck-ssh-config
+#           # ports:
+#           #   - containerPort: 8888
+#           # resources:
+#           #   requests:
+#           #     cpu: 100m
+#           #     memory: 100Mi
+#           #   limits:
+#           #     cpu: 100m
+#           #     memory: 100Mi
 
-      imagePullSecrets:
-        - name: ghcr-registry
+#       imagePullSecrets:
+#         - name: ghcr-registry
 
-      volumes:
-        - name: babuck-volume
-          persistentVolumeClaim:
-            claimName: babuck-volume
-        - name: babuck-config
-          configMap:
-            name: babuck-config
-        - name: babuck-ssh-config
-          secret:
-            secretName: babuck-ssh-config
+#       volumes:
+#         - name: babuck-volume
+#           persistentVolumeClaim:
+#             claimName: babuck-volume
+#         - name: babuck-config
+#           configMap:
+#             name: babuck-config
+#         - name: babuck-ssh-config
+#           secret:
+#             secretName: babuck-ssh-config
