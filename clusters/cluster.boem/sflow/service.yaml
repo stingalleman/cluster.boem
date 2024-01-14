@@ -15,7 +15,7 @@ spec:
     - name: http
       protocol: TCP
       port: 8008
-      targetPort: 80
+      targetPort: 8008
 ---
 apiVersion: v1
 kind: Service
