@@ -12,7 +12,7 @@ data:
 
     // allow BGP connection from reflectorIP
     // bgpAddNeighbor(reflectorIP,myAS,myID);
-    bgpAddNeighbor("2a07:54c7:5201:7377::1", "65162", "45.83.205.3",{'ipv6':true});
+    bgpAddNeighbor("f00d:0:0:0:a66:0:0:455b", "65162", "45.83.205.3",{'ipv6':true});
 
     // logInfo("hellooo");
 
