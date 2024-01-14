@@ -1,0 +1,27 @@
+# kind: ConfigMap
+# apiVersion: v1
+# metadata:
+#   name: sting-as-data
+#   namespace: default
+# data:
+#   index.html: |
+#     <html>
+#       <body>
+#         AS216455 is an educational hobby-net.
+#         <br />
+#         Open for peering.
+#         <br />
+#         <p>Contact: <a href="mailto:noc@stingalleman.nl">noc@stingalleman.nl</a> | Abuse: <a href="mailto:abuse@stingalleman.nl">abuse@stingalleman.nl</a> | <a href="https://www.peeringdb.com/net/33889">PeeringDB</a> | <a href="https://bgp.tools/as/216455">bgp.tools</a> | Geofeed: <a href="https://as216455.net/geofeed.csv">geofeed.csv</a></p>
+#       </body>
+#     </html>
+#   geofeed.csv: |
+#     2a05:dfc1:8500::/40,NL,NL-NH,Amsterdam,
+#     2a05:dfc1:9600::/40,NL,NL-NH,Amsterdam,
+#     2a05:dfc1:8501::/48,NL,NL-NH,Amsterdam,
+#     2a05:dfc1:8502::/48,NL,NL-NH,Amsterdam,
+#     2a05:dfc1:8510::/48,NL,NL-NH,Amsterdam,
+#     2a05:dfc1:858f::/48,NL,NL-NB,Eindhoven,
+#     2a07:54c7:5000::/36,NL,NL-NH,Amsterdam
+#     2a07:54c7:5100::/40,NL,NL-NH,Amsterdam
+#     2a07:54c7:5100:abba::/64,NL,NL-NH,Amsterdam
+#     2a07:54c7:5901::/48,FI,FI-18,Helsinki
