@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: sflow-store
+  name: sflow-geo
   namespace: default
   labels:
     app: sflow
