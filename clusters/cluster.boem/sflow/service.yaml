@@ -22,6 +22,8 @@ kind: Service
 metadata:
   name: sflow-sflow-lb
   namespace: default
+  annotations:
+    io.cilium/lb-ipam-ips: "10.10.102.201"
 spec:
   selector:
     app: sflow
