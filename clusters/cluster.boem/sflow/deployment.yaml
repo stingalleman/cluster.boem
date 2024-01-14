@@ -19,7 +19,10 @@ spec:
     spec:
       containers:
         - name: sflow
-          image: sflow/sflow-rt
+          image: sflow/ixp-metrics
+          volumeMounts:
+            - mountPath: /sflow-rt/store
+              name: sflow-store
           # resources:
           #   requests:
           #     cpu: 100m
@@ -51,3 +54,7 @@ spec:
               protocol: UDP
               name: sflow
       restartPolicy: Always
+      volumes:
+        - name: sflow-store
+          persistentVolumeClaim:
+            claimName: sflow-store

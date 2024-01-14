@@ -36,4 +36,4 @@ spec:
     - name: sflow
       protocol: UDP
       port: 6343
-      targetPort: sflow
+      targetPort: 6343
