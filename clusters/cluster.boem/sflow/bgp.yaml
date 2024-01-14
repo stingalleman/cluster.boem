@@ -3,7 +3,7 @@ apiVersion: v1
 metadata:
   name: sflow-scripts
   namespace: default
-stringData:
+data:
   bgp.js: |
     var reflectorIP  = '10.0.0.1';
     var myAS         = '65162';
