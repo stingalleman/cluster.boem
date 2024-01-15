@@ -69,6 +69,20 @@ spec:
               aggMode: ["sum"]
               minValue: ["1000"]
               maxFlows: ["100"]
+          - job_name: "sflow-rt-frysix"
+            metrics_path: /app/prometheus/scripts/export.js/flows/ALL/txt
+            static_configs:
+              - targets: ["sflow-http.default:8008"]
+            params:
+              metric: ["sflow_asn_bps"]
+              key: ["asn:ip6source", "asn:ip6destination"]
+              filter: ["vlan=821"]
+              label: ["src", "dst"]
+              value: ["bytes"]
+              scale: ["8"]
+              aggMode: ["sum"]
+              minValue: ["1000"]
+              maxFlows: ["100"]
 
         storageSpec:
           volumeClaimTemplate:
