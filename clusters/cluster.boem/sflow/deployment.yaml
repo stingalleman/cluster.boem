@@ -30,8 +30,8 @@ spec:
           volumeMounts:
             - mountPath: /sflow-geo
               name: sflow-geo
-            - mountPath: /sflow-scripts
-              name: sflow-scripts
+            # - mountPath: /sflow-scripts
+            # name: sflow-scripts
           # resources:
           #   requests:
           #     cpu: 100m
@@ -67,6 +67,6 @@ spec:
         - name: sflow-geo
           persistentVolumeClaim:
             claimName: sflow-geo
-        - name: sflow-scripts
-          configMap:
-            name: sflow-scripts
+        # - name: sflow-scripts
+        # configMap:
+        # name: sflow-scripts
