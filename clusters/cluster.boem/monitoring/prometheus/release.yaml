@@ -60,8 +60,8 @@ spec:
               metric: ["sflow_asn_bps"]
               key:
                 [
-                  "null:[asn:ipsource:both]:unknown",
-                  "null:[asn:ipdestination:both]:unknown",
+                  "null:[asn:ip6source:both]:unknown",
+                  "null:[asn:ip6destination:both]:unknown",
                 ]
               label: ["src", "dst"]
               value: ["bytes"]
