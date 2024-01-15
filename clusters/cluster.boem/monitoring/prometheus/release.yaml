@@ -75,7 +75,7 @@ spec:
               - targets: ["sflow-http.default:8008"]
             params:
               metric: ["sflow_asn_bps_frysix"]
-              key: ["asn:ip6source", "asn:ip6destination"]
+              key: ["asn:ip6source:both", "asn:ip6destination:both"]
               filter: ["vlan=821"]
               label: ["src", "dst"]
               value: ["bytes"]
