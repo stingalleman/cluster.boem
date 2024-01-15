@@ -1,0 +1,33 @@
+# apiVersion: monitoring.coreos.com/v1alpha1
+# kind: ScrapeConfig
+# metadata:
+#   name: static-config
+#   namespace: my-namespace
+#   labels:
+#     prometheus: system-monitoring-prometheus
+# spec:
+#   staticConfigs:
+#     - labels:
+#         job: cc
+
+# scrape_configs:
+#   - job_name: 'sflow-rt-analyzer'
+#     metrics_path: /prometheus/analyzer/txt
+#     static_configs:
+#       - targets: ['192.168.1.243:8008']
+#   - job_name: 'sflow-rt-metrics'
+#     metrics_path: /prometheus/metrics/ALL/ALL/txt
+#     static_configs:
+#       - targets: ['192.168.1.243:8008']
+#   - job_name: 'sflow-rt-flow-src-dst-bps'
+#     metrics_path: /app/prometheus/scripts/export.js/flows/ALL/txt
+#     static_configs:
+#       - targets: ['192.168.1.243:8008']
+#     params:
+#       metric: ['ip_src_dst_bps']
+#       key: ['ipsource','ipdestination']
+#       label: ['src','dst']
+#       value: ['bytes']
+#       scale: ['8']
+#       minValue: ['1000']
+#       maxFlows: ['100']
