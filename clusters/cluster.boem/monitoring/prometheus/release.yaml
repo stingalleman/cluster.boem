@@ -5,10 +5,10 @@ metadata:
   namespace: monitoring
 spec:
   install:
-    disableWait: true
+    # disableWait: true
     crds: CreateReplace
   upgrade:
-    disableWait: true
+    # disableWait: true
     crds: CreateReplace
   chart:
     spec:
