@@ -22,8 +22,8 @@ spec:
           image: sflow/prometheus
           args:
             # - "-Dsnmp.ifname=yes"
-            - "-Dscript.file=/sflow-scripts/bgp.js"
-            - "-Dbgp.start=yes"
+            # - "-Dscript.file=/sflow-scripts/bgp.js"
+            # - "-Dbgp.start=yes"
             - "-Dgeo.country=/sflow-geo/GeoLite2-Country.mmdb"
             - "-Dgeo.asn=/sflow-geo/GeoLite2-ASN.mmdb"
 

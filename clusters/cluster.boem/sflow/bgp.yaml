@@ -1,40 +1,40 @@
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: sflow-scripts
-  namespace: default
-data:
-  bgp.js: |
-    // var reflectorIP  = '10.0.0.1';
-    // var myAS         = '65162';
-    // var myID         = '10.10.102.202';
-    // var sFlowAgentIP = '10.0.0.1';
+# kind: ConfigMap
+# apiVersion: v1
+# metadata:
+#   name: sflow-scripts
+#   namespace: default
+# data:
+#   bgp.js: |
+#     // var reflectorIP  = '10.0.0.1';
+#     // var myAS         = '65162';
+#     // var myID         = '10.10.102.202';
+#     // var sFlowAgentIP = '10.0.0.1';
 
-    // allow BGP connection from reflectorIP
-    // bgpAddNeighbor(reflectorIP,myAS,myID);
-    bgpAddNeighbor("2a07:54c7:5201:7e6f:0:0:0:1", "65162", "45.83.205.3",{'ipv6':true});
+#     // allow BGP connection from reflectorIP
+#     // bgpAddNeighbor(reflectorIP,myAS,myID);
+#     bgpAddNeighbor("2a07:54c7:5201:7e6f:0:0:0:1", "65162", "45.83.205.3",{'ipv6':true});
 
-    // logInfo("hellooo");
+#     // logInfo("hellooo");
 
-    // var names = getSystemPropertyNames();
-    // logInfo(JSON.stringify(names,null,1));
+#     // var names = getSystemPropertyNames();
+#     // logInfo(JSON.stringify(names,null,1));
 
-    // // direct sFlow from sFlowAgentIP to reflectorIP routing table
-    // // calculate a 60 second moving average byte rate for each route
-    // bgpAddSource(sFlowAgentIP,reflectorIP,60,'bytes');
+#     // // direct sFlow from sFlowAgentIP to reflectorIP routing table
+#     // // calculate a 60 second moving average byte rate for each route
+#     // bgpAddSource(sFlowAgentIP,reflectorIP,60,'bytes');
 
-# bgp.start</<no</<Starts BGP listener</tr>
-# bgp.port</<1179</<TCP port used to listen for BGP connections</</tr>
-# arm.reflector.ip</<127.0.0.1</<IP address of route reflector</</tr>
-# arm.reflector.ip6</<::1</<IPv6 address of route reflector</</tr>
-# arm.reflector.as</<65000</<Local AS number to advertise to route reflector</</tr>
-# arm.reflector.id</<</<Local identifier (e.g. 0.0.0.1) to advertise to route reflector</</tr>
-# arm.target.ip</<</<Target router for top IP prefixes</</tr>
-# arm.target.ip6</<</<Target router for top IPv6 prefixes</</tr>
-# arm.target.as</<</<Local AS number to advertise to target router</</tr>
-# arm.target.id</<</<Local identifier (e.g. 0.0.0.2) to advertise to target router</</tr>
-# arm.target.prefixes</<20000</<Number of IP prefixes to push to target router</</tr>
-# argm.target.prefixes6</<20000</<Mumber of IPv6 prefixes to push to target router</</tr>
-# arm.target.minvalue</<0</<Traffic threshold before pushing prefix</</tr>
-# arm.sflow.ip</<</<sFlow source for traffic data (default is arm.reflector.ip)</</tr>
-# arm.sflow.t</<20</<Traffic moving average duration in seconds</</tr>
+# # bgp.start</<no</<Starts BGP listener</tr>
+# # bgp.port</<1179</<TCP port used to listen for BGP connections</</tr>
+# # arm.reflector.ip</<127.0.0.1</<IP address of route reflector</</tr>
+# # arm.reflector.ip6</<::1</<IPv6 address of route reflector</</tr>
+# # arm.reflector.as</<65000</<Local AS number to advertise to route reflector</</tr>
+# # arm.reflector.id</<</<Local identifier (e.g. 0.0.0.1) to advertise to route reflector</</tr>
+# # arm.target.ip</<</<Target router for top IP prefixes</</tr>
+# # arm.target.ip6</<</<Target router for top IPv6 prefixes</</tr>
+# # arm.target.as</<</<Local AS number to advertise to target router</</tr>
+# # arm.target.id</<</<Local identifier (e.g. 0.0.0.2) to advertise to target router</</tr>
+# # arm.target.prefixes</<20000</<Number of IP prefixes to push to target router</</tr>
+# # argm.target.prefixes6</<20000</<Mumber of IPv6 prefixes to push to target router</</tr>
+# # arm.target.minvalue</<0</<Traffic threshold before pushing prefix</</tr>
+# # arm.sflow.ip</<</<sFlow source for traffic data (default is arm.reflector.ip)</</tr>
+# # arm.sflow.t</<20</<Traffic moving average duration in seconds</</tr>
