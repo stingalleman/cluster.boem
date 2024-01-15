@@ -22,6 +22,28 @@ spec:
   values:
     prometheus:
       prometheusSpec:
+        additionalScrapeConfigs:
+          - job_name: "sflow-rt-analyzer"
+            metrics_path: /prometheus/analyzer/txt
+            static_configs:
+              - targets: ["https://sflow.kluster.boem"]
+          - job_name: "sflow-rt-metrics"
+            metrics_path: /prometheus/metrics/ALL/ALL/txt
+            static_configs:
+              - targets: ["https://sflow.kluster.boem"]
+          - job_name: "sflow-rt-flow-src-dst-bps"
+            metrics_path: /app/prometheus/scripts/export.js/flows/ALL/txt
+            static_configs:
+              - targets: ["https://sflow.kluster.boem"]
+            params:
+              metric: ["ip_src_dst_bps"]
+              key: ["ipsource", "ipdestination"]
+              label: ["src", "dst"]
+              value: ["bytes"]
+              scale: ["8"]
+              minValue: ["1000"]
+              maxFlows: ["100"]
+
         storageSpec:
           volumeClaimTemplate:
             spec:
