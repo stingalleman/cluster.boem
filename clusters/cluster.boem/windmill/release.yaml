@@ -1,85 +1,85 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: windmill
-  namespace: windmill
-spec:
-  chart:
-    spec:
-      version: "2.0.67"
-      chart: windmill
-      sourceRef:
-        kind: HelmRepository
-        name: windmill
-        namespace: flux-system
-  interval: 24h
-  values:
-    # windmill root values block
-    windmill:
-      # domain as shown in browser, this is used together with `baseProtocol` as part of the BASE_URL environment variable in app and worker container and in the ingress resource, if enabled
-      baseDomain: windmill.kluster.boem
-      baseProtocol: https
-      # -- name of the secret storing the database URI, take precedence over databaseUrl.
-      databaseUrlSecretName: "windmill-db"
-      # -- name of the key in secret storing the database URI. The default key of the url is 'url'
-      databaseUrlSecretKey: url
-      # replica for the application app
-      appReplicas: 2
-      # replicas for the workers, jobs are executed on the workers
-      lspReplicas: 2
-      workerGroups:
-        # The default worker group is the one that will execute jobs with any taggs  except the native ones. Windmill has a default worker group configuration for it
-        - name: "default"
-          replicas: 3
-          # -- Annotations to apply to the pods
-          annotations: {}
+# apiVersion: helm.toolkit.fluxcd.io/v2beta1
+# kind: HelmRelease
+# metadata:
+#   name: windmill
+#   namespace: windmill
+# spec:
+#   chart:
+#     spec:
+#       version: "2.0.67"
+#       chart: windmill
+#       sourceRef:
+#         kind: HelmRepository
+#         name: windmill
+#         namespace: flux-system
+#   interval: 24h
+#   values:
+#     # windmill root values block
+#     windmill:
+#       # domain as shown in browser, this is used together with `baseProtocol` as part of the BASE_URL environment variable in app and worker container and in the ingress resource, if enabled
+#       baseDomain: windmill.kluster.boem
+#       baseProtocol: https
+#       # -- name of the secret storing the database URI, take precedence over databaseUrl.
+#       databaseUrlSecretName: "windmill-db"
+#       # -- name of the key in secret storing the database URI. The default key of the url is 'url'
+#       databaseUrlSecretKey: url
+#       # replica for the application app
+#       appReplicas: 2
+#       # replicas for the workers, jobs are executed on the workers
+#       lspReplicas: 2
+#       workerGroups:
+#         # The default worker group is the one that will execute jobs with any taggs  except the native ones. Windmill has a default worker group configuration for it
+#         - name: "default"
+#           replicas: 3
+#           # -- Annotations to apply to the pods
+#           annotations: {}
 
-          # -- Labels to apply to the pods
-          labels: {}
+#           # -- Labels to apply to the pods
+#           labels: {}
 
-          # -- Node selector to use for scheduling the pods
-          nodeSelector: {}
+#           # -- Node selector to use for scheduling the pods
+#           nodeSelector: {}
 
-          # -- Tolerations to apply to the pods
-          tolerations: []
+#           # -- Tolerations to apply to the pods
+#           tolerations: []
 
-          # -- Affinity rules to apply to the pods
-          affinity: {}
+#           # -- Affinity rules to apply to the pods
+#           affinity: {}
 
-          # -- Resource limits and requests for the pods
-          resources:
-            requests:
-              memory: "1028Mi"
-              cpu: "500m"
-            limits:
-              memory: "2048Mi"
-              cpu: "1000m"
+#           # -- Resource limits and requests for the pods
+#           resources:
+#             requests:
+#               memory: "1028Mi"
+#               cpu: "500m"
+#             limits:
+#               memory: "2048Mi"
+#               cpu: "1000m"
 
-          # -- Extra environment variables to apply to the pods
-          extraEnv: []
+#           # -- Extra environment variables to apply to the pods
+#           extraEnv: []
 
-        # Thenative worker group will only execute native jobs. Windmill has a default worker group configuration for it
-        - name: "native"
-          replicas: 4
-          # -- Resource limits and requests for the pods
-          resources:
-            requests:
-              memory: "128Mi"
-              cpu: "100m"
-            limits:
-              memory: "256Mi"
-              cpu: "200m"
+#         # Thenative worker group will only execute native jobs. Windmill has a default worker group configuration for it
+#         - name: "native"
+#           replicas: 4
+#           # -- Resource limits and requests for the pods
+#           resources:
+#             requests:
+#               memory: "128Mi"
+#               cpu: "100m"
+#             limits:
+#               memory: "256Mi"
+#               cpu: "200m"
 
-          # -- Extra environment variables to apply to the pods
-          extraEnv: []
+#           # -- Extra environment variables to apply to the pods
+#           extraEnv: []
 
-        - name: "gpu"
-          replicas: 0
+#         - name: "gpu"
+#           replicas: 0
 
-    # enable postgres (bitnami) on kubernetes
-    postgresql:
-      enabled: false
+#     # enable postgres (bitnami) on kubernetes
+#     postgresql:
+#       enabled: false
 
-    # enable minio (bitnami) on kubernetes
-    minio:
-      enabled: false
+#     # enable minio (bitnami) on kubernetes
+#     minio:
+#       enabled: false
