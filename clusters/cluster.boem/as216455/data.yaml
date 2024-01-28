@@ -7,7 +7,7 @@ data:
   index.html: |
     <html>
       <body>
-        AS216455 is an educational hobby-net.
+        AS216455 is an educational hobby-net. Also provides IPv6 tunnels for residential users that do not receive IPv6 from their ISP.
         <br />
         Open for peering.
         <br />
@@ -24,4 +24,4 @@ data:
     2a07:54c7:5000::/36,NL,NL-NH,Amsterdam
     2a07:54c7:5100::/40,NL,NL-NH,Amsterdam
     2a07:54c7:5100:abba::/64,NL,NL-NH,Amsterdam
-    2a07:54c7:5901::/48,FI,FI-18,Helsinki
+    2a07:54c7:5901::/48,NL,NL-NH,Amsterdam
