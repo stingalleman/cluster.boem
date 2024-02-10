@@ -14,7 +14,15 @@ spec:
         - kind: Service
           name: minecraft-vm
           namespace: default
-          port: 8080
+          port: 25592
+
+    - kind: Rule
+      match: Host(`trein.mais.dog`)
+      services:
+        - kind: Service
+          name: minecraft-vm
+          namespace: default
+          port: 25591
 
   tls:
     secretName: mais.dog-prod-tls
