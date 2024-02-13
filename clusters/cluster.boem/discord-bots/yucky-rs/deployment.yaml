@@ -1,60 +1,60 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: yucky-rs
-#   namespace: discord-bots
-#   annotations:
-#     reloader.stakater.com/auto: "true"
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: yucky-rs
-#   template:
-#     metadata:
-#       labels:
-#         app: yucky-rs
-#     spec:
-#       containers:
-#         - name: yucky-rs
-#           # image: ghcr.io/maishond/yucky.rs@sha256:c3e5ae9d585ae990f5d01e5d7e2d787e13cfbe446b17136a85d4e4abbc84378f
-#           image: ghcr.io/maishond/yucky.rs:main
-#           imagePullPolicy: Always
-#           # resources:
-#           #   limits:
-#           #     memory: "128Mi"
-#           #     cpu: "2000m"
-#           env:
-#             - name: DATABASE_URL
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: yucky-rs
-#                   key: database_url
-#             - name: DISCORD_TOKEN
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: yucky-rs
-#                   key: discord_token
-#             - name: PREFIX
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: yucky-rs
-#                   key: prefix
-#             - name: ALLES_DLP_PASSWORD
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: yucky-rs
-#                   key: alles_dlp_password
-#             - name: OPENAI
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: yucky-rs
-#                   key: openai_token
-#           volumeMounts:
-#             - name: tz-config
-#               mountPath: /etc/localtime
-#       volumes:
-#         - name: tz-config
-#           hostPath:
-#             path: /usr/share/zoneinfo/Europe/Amsterdam
-#             type: File
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yucky-rs
+  namespace: discord-bots
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yucky-rs
+  template:
+    metadata:
+      labels:
+        app: yucky-rs
+    spec:
+      containers:
+        - name: yucky-rs
+          # image: ghcr.io/maishond/yucky.rs@sha256:c3e5ae9d585ae990f5d01e5d7e2d787e13cfbe446b17136a85d4e4abbc84378f
+          image: ghcr.io/maishond/yucky.rs:main@sha256:4f5d38c80da522e8f48f6f8095915cb25b67d0860516be613fb164b3477cd5e0
+          imagePullPolicy: Always
+          # resources:
+          #   limits:
+          #     memory: "128Mi"
+          #     cpu: "2000m"
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs
+                  key: database_url
+            - name: DISCORD_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs
+                  key: discord_token
+            - name: PREFIX
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs
+                  key: prefix
+            # - name: ALLES_DLP_PASSWORD
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: yucky-rs
+            #       key: alles_dlp_password
+            # - name: OPENAI
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: yucky-rs
+            #       key: openai_token
+          volumeMounts:
+            - name: tz-config
+              mountPath: /etc/localtime
+      volumes:
+        - name: tz-config
+          hostPath:
+            path: /usr/share/zoneinfo/Europe/Amsterdam
+            type: File
