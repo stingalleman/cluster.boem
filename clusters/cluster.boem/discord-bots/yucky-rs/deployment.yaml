@@ -53,6 +53,10 @@ spec:
           volumeMounts:
             - name: tz-config
               mountPath: /etc/localtime
+          securityContext:
+            capabilities:
+              drop:
+                - "ALL"
       volumes:
         - name: tz-config
           hostPath:
