@@ -1,7 +1,7 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: testtest
+  name: discord
   namespace: cnpg-system
 spec:
   instances: 1
