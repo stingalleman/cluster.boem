@@ -74,10 +74,10 @@ spec:
     - kind: Rule
       match: "(Host(`as216455.stingalleman.nl`) && PathPrefix(`/r/`))"
       services:
-        - name: monitoring-stack-grafana
-          namespace: monitoring
+        - kind: Service
+          name: achtergrondje
+          namespace: default
           port: 80
-          passHostHeader: true
 
     - kind: Rule
       match: Host(`as216455.stingalleman.nl`)
