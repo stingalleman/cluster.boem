@@ -53,11 +53,14 @@ spec:
           # volumeMounts:
           #   - name: tz-config
           #     mountPath: /etc/localtime
-      #     securityContext:
-      #       capabilities:
-      #         drop:
-      #           - "ALL"
-      #       allowPrivilegeEscalation: false
+          securityContext:
+            capabilities:
+              drop:
+                - "ALL"
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
       # volumes:
       #   - name: tz-config
       #     hostPath:
