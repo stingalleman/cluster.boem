@@ -57,6 +57,7 @@ spec:
             capabilities:
               drop:
                 - "ALL"
+            allowPrivilegeEscalation: false
       volumes:
         - name: tz-config
           hostPath:
