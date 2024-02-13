@@ -83,9 +83,9 @@ spec:
       match: Host(`as216455.stingalleman.nl`) && Path(`/r/*`)
       services:
         - kind: Service
-          name: media-stingalleman-nl
+          name: sting-as-site
           namespace: default
-          port: 8096
+          port: 80
 
   tls:
     secretName: stingalleman.nl-prod-tls
