@@ -50,16 +50,16 @@ spec:
             #     secretKeyRef:
             #       name: yucky-rs
             #       key: openai_token
-          volumeMounts:
-            - name: tz-config
-              mountPath: /etc/localtime
-          securityContext:
-            capabilities:
-              drop:
-                - "ALL"
-            allowPrivilegeEscalation: false
-      volumes:
-        - name: tz-config
-          hostPath:
-            path: /usr/share/zoneinfo/Europe/Amsterdam
-            type: File
+          # volumeMounts:
+          #   - name: tz-config
+          #     mountPath: /etc/localtime
+      #     securityContext:
+      #       capabilities:
+      #         drop:
+      #           - "ALL"
+      #       allowPrivilegeEscalation: false
+      # volumes:
+      #   - name: tz-config
+      #     hostPath:
+      #       path: /usr/share/zoneinfo/Europe/Amsterdam
+      #       type: File
