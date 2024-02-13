@@ -72,7 +72,7 @@ spec:
           port: 5055
 
     - kind: Rule
-      match: Host(`as216455.stingalleman.nl`) && Path(`/r/*`)
+      match: Host(`as216455.stingalleman.nl`) && PathPrefix(`/r/*`)
       services:
         - kind: Service
           name: sting-as-site
