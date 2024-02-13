@@ -1,31 +1,32 @@
-# apiVersion: postgresql.cnpg.io/v1
-# kind: Cluster
-# metadata:
-#   name: discord
-#   namespace: cnpg-system
-# spec:
-#   instances: 2
-#   # Example of rolling update strategy:
-#   # - unsupervised: automated update of the primary once all
-#   #                 replicas have been upgraded (default)
-#   # - supervised: requires manual supervision to perform
-#   #               the switchover of the primary
-#   primaryUpdateStrategy: unsupervised
-#   enableSuperuserAccess: true
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: testtest
+  namespace: cnpg-system
+spec:
+  instances: 1
+  # Example of rolling update strategy:
+  # - unsupervised: automated update of the primary once all
+  #                 replicas have been upgraded (default)
+  # - supervised: requires manual supervision to perform
+  #               the switchover of the primary
+  primaryUpdateStrategy: unsupervised
+  enableSuperuserAccess: true
 
-#   # Require 1Gi of space
-#   storage:
-#     size: 5Gi
+  # Require 1Gi of space
+  storage:
+    size: 5Gi
+    storageClass: nfs-client
 
-#   # backup:
-#   #   barmanObjectStore:
-#   #     destinationPath: s3://generic-cluster/
-#   #     endpointURL: https://generic-cluster-backup.s3.g.s4.mega.io
-#   #     s3Credentials:
-#   #       accessKeyId:
-#   #         name: generic-backup-creds
-#   #         key: ACCESS_KEY_ID
-#   #       secretAccessKey:
-#   #         name: generic-backup-creds
-#   #         key: ACCESS_SECRET_KEY
-#   #   retentionPolicy: "30d"
+  # backup:
+  #   barmanObjectStore:
+  #     destinationPath: s3://generic-cluster/
+  #     endpointURL: https://generic-cluster-backup.s3.g.s4.mega.io
+  #     s3Credentials:
+  #       accessKeyId:
+  #         name: generic-backup-creds
+  #         key: ACCESS_KEY_ID
+  #       secretAccessKey:
+  #         name: generic-backup-creds
+  #         key: ACCESS_SECRET_KEY
+  #   retentionPolicy: "30d"
