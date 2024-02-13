@@ -71,16 +71,16 @@ spec:
           namespace: default
           port: 5055
 
-    - kind: Rule
-      match: Host(`as216455.stingalleman.nl`) && PathPrefix(`/r`)
-      services:
-        - kind: Service
-          name: sting-as-site
-          namespace: default
-          port: 80
+    # - kind: Rule
+    #   match: "Host(`as216455.stingalleman.nl`) && PathPrefix(`/r`)"
+    #   services:
+    #     - kind: Service
+    #       name: sting-as-site
+    #       namespace: default
+    #       port: 80
 
     - kind: Rule
-      match: Host(`as216455.stingalleman.nl`)
+      match: Host(`as216455.stingalleman.nl`) || (Host(`as216455.stingalleman.nl`) && PathPrefix(`/r/`))"
       services:
         - kind: Service
           name: sting-as-site
