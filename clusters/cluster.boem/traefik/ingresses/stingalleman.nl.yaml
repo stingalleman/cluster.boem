@@ -87,5 +87,13 @@ spec:
           namespace: default
           port: 80
 
+    - kind: Rule
+      match: Host(`irc.stingalleman.nl`)
+      services:
+        - kind: Service
+          name: thelounge-http
+          namespace: default
+          port: 9000
+
   tls:
     secretName: stingalleman.nl-prod-tls
