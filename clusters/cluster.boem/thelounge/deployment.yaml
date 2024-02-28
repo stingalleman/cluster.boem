@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: thelounge
+  namespace: default
+  labels:
+    app: thelounge
+spec:
+  selector:
+    matchLabels:
+      app: thelounge
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: thelounge
+    spec:
+      # securityContext:
+      #   runAsNonRoot: false
+      # runAsUser: 0
+      # runAsGroup: 0
+      #   fsGroup: 0
+
+      containers:
+        - name: thelounge
+          image: ghcr.io/thelounge/thelounge:latest
+          livenessProbe:
+            tcpSocket:
+              port: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+          ports:
+            - containerPort: 9000
+              name: http
+          volumeMounts:
+            - name: thelounge-data
+              mountPath: /var/opt/thelounge
+      volumes:
+        - name: thelounge-data
+          persistentVolumeClaim:
+            claimName: thelounge-data
+
+      restartPolicy: Always
