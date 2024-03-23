@@ -104,7 +104,7 @@ spec:
           port: 80
 
     - kind: Rule
-      match: Host(`firefly-importer.stingalleman.nl`)
+      match: Host(`firefly-importerr.stingalleman.nl`)
       services:
         - kind: Service
           name: firefly-importer
