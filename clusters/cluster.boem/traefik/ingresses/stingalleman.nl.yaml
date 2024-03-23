@@ -103,5 +103,13 @@ spec:
           namespace: default
           port: 80
 
+    - kind: Rule
+      match: Host(`firefly-importer.stingalleman.nl`)
+      services:
+        - kind: Service
+          name: firefly-importer
+          namespace: default
+          port: 80
+
   tls:
     secretName: stingalleman.nl-prod-tls
