@@ -95,5 +95,13 @@ spec:
           namespace: default
           port: 9000
 
+    - kind: Rule
+      match: Host(`firefly.stingalleman.nl`)
+      services:
+        - kind: Service
+          name: firefly-firefly-iii
+          namespace: default
+          port: 80
+
   tls:
     secretName: stingalleman.nl-prod-tls
