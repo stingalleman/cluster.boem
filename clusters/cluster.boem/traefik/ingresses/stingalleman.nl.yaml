@@ -103,5 +103,13 @@ spec:
           namespace: default
           port: 5006
 
+    - kind: Rule
+      match: Host(`finance-emiel.stingalleman.nl`)
+      services:
+        - kind: Service
+          name: actual-budget-service-emiel
+          namespace: actual-budget
+          port: 5006
+
   tls:
     secretName: stingalleman.nl-prod-tls
