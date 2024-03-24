@@ -96,22 +96,6 @@ spec:
           port: 9000
 
     - kind: Rule
-      match: Host(`firefly.stingalleman.nl`)
-      services:
-        - kind: Service
-          name: firefly-firefly-iii
-          namespace: default
-          port: 80
-
-    - kind: Rule
-      match: Host(`firefly-importerr.stingalleman.nl`)
-      services:
-        - kind: Service
-          name: firefly-importer
-          namespace: default
-          port: 80
-
-    - kind: Rule
       match: Host(`finance.stingalleman.nl`)
       services:
         - kind: Service
