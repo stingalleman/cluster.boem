@@ -111,5 +111,13 @@ spec:
           namespace: default
           port: 80
 
+    - kind: Rule
+      match: Host(`finance.stingalleman.nl`)
+      services:
+        - kind: Service
+          name: actual-budget-service
+          namespace: default
+          port: 5006
+
   tls:
     secretName: stingalleman.nl-prod-tls
