@@ -740,7 +740,7 @@ data:
             # or by certificate fingerprint, or both. if a password hash is set, then a
             # password is required to oper up (e.g., /OPER dan mypassword). to generate
             # the hash, use `ergo genpasswd`.
-            # password: "$2a$04$0123456789abcdef0123456789abcdef0123456789abcdef01234"
+            password: "$2a$04$YWjwnyHJNDICejKH5VOTi.YViioxiSQym6DahLfO2/ZJF4hvMrMae"
 
             # if a SHA-256 certificate fingerprint is configured here, then it will be
             # required to /OPER. if you comment out the password hash above, then you can
