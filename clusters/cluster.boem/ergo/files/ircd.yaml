@@ -31,6 +31,16 @@ data:
             # The standard plaintext port for IRC is 6667. This will listen on all interfaces:
             "0.0.0.0:6667":
 
+    # datastore configuration
+    datastore:
+        # path to the datastore
+        path: /ircd/db/ircd.db
+
+        # if the database schema requires an upgrade, `autoupgrade` will attempt to
+        # perform it automatically on startup. the database will be backed
+        # up, and if the upgrade fails, the original database will be restored.
+        autoupgrade: true
+
 #         # Allowing plaintext over the public Internet poses security and privacy issues,
 #         # so if possible, we recommend that you comment out the above line and replace
 #         # it with these two, which listen only on local interfaces:
@@ -641,16 +651,6 @@ data:
 #     # if you need to access it remotely, you can use an SSH tunnel.
 #     # set to `null`, "", leave blank, or omit to disable
 #     # pprof-listener: "localhost:6060"
-
-# # datastore configuration
-# datastore:
-#     # path to the datastore
-#     path: /ircd/db/ircd.db
-
-#     # if the database schema requires an upgrade, `autoupgrade` will attempt to
-#     # perform it automatically on startup. the database will be backed
-#     # up, and if the upgrade fails, the original database will be restored.
-#     autoupgrade: true
 
 # # languages config
 # languages:
