@@ -845,14 +845,14 @@ data:
     # languages config
     languages:
         # whether to load languages
-        enabled: true
+        enabled: false
 
         # default language to use for new clients
         # 'en' is the default English language in the code
-        default: en
+        # default: en
 
         # which directory contains our language files
-        path: languages
+        # path: languages
 
     # limits - these need to be the same across the network
     limits:
