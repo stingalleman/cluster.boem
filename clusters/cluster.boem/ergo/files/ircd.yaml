@@ -50,7 +50,7 @@ data:
             # If you need to serve plaintext on public interfaces, comment out the above
             # two lines and uncomment the line below (which listens on all interfaces):
             "0.0.0.0:6667":
-              proxy: true
+                proxy: true
             # Alternately, if you have a TLS certificate issued by a recognized CA,
             # you can configure port 6667 as an STS-only listener that only serves
             # "redirects" to the TLS port, but doesn't allow chat. See the manual
