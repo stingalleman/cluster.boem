@@ -204,6 +204,7 @@ data:
         # Unless you have a good reason. you should also add these addresses to the
         # connection limits and throttling exemption lists.
         proxy-allowed-from:
+            - "0.0.0.0/0"
             - localhost
             # - "192.168.1.1"
             # - "192.168.10.1/24"
