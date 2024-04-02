@@ -28,12 +28,12 @@ spec:
               name: irc
             - containerPort: 443
               name: websocket
-          readinessProbe:
-            tcpSocket:
-              port: 6667
-          livenessProbe:
-            tcpSocket:
-              port: 6667
+          # readinessProbe:
+          #   tcpSocket:
+          #     port: 6667
+          # livenessProbe:
+          #   tcpSocket:
+          #     port: 6667
           volumeMounts:
             - mountPath: /ircd/
               name: irc-config
