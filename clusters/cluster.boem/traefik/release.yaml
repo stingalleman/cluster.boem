@@ -34,6 +34,8 @@ spec:
         # loadBalancerIP: "45.83.205.8"
       annotations:
         io.cilium/lb-ipam-ips: "45.83.205.8,2a07:54c7:5201:6e6f::a"
+        cilium/lb-ipam-sharing-key: "lb1"
+
       # -- Additional service labels (e.g. for filtering Service by custom labels)
       labels:
         lb-pool: external
