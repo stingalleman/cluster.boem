@@ -181,7 +181,7 @@ data:
 
         # motd filename
         # if you change the motd, you should move it to ircd.motd
-        motd: ergo.motd
+        motd: ircd.motd
 
         # motd formatting codes
         # if this is true, the motd is escaped using formatting codes like $c, $b, and $i
