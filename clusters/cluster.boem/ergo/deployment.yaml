@@ -38,9 +38,9 @@ spec:
             - mountPath: /ircd/
               name: irc-config
               readOnly: true
-            - mountPath: /ircd/tls
-              name: irc-certs
-              readOnly: true
+            # - mountPath: /ircd/tls
+            # name: irc-certs
+            # readOnly: true
             - mountPath: /ircd/db
               name: irc-db
         - name: config-reloader
@@ -61,16 +61,16 @@ spec:
             - mountPath: /ircd/
               name: irc-config
               readOnly: true
-            - mountPath: /ircd/tls
-              name: irc-certs
-              readOnly: true
+            # - mountPath: /ircd/tls
+            # name: irc-certs
+            # readOnly: true
       volumes:
         - name: irc-config
           configMap:
             name: irc-config
-        - name: irc-certs
-          secret:
-            secretName: irc-certs
+        # - name: irc-certs
+        # secret:
+        # secretName: irc-certs
         - name: irc-db
           persistentVolumeClaim:
             claimName: irc-db
