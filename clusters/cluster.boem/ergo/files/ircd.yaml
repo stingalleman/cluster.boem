@@ -326,7 +326,7 @@ data:
         # If you disable this, you should probably enable lookup-hostnames in its place.
         ip-cloaking:
             # whether to enable IP cloaking
-            enabled: true
+            enabled: false
 
             # whether to use these cloak settings (specifically, `netname` and `num-bits`)
             # to produce unique hostnames for always-on clients. you can enable this even if
