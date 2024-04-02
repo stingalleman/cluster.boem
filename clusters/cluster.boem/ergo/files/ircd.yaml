@@ -717,7 +717,7 @@ data:
     # ircd operators
     opers:
         # default operator named 'admin'; log in with /OPER admin <password>
-        admin:
+        sting:
             # which capabilities this oper has access to
             class: "server-admin"
 
@@ -740,7 +740,7 @@ data:
             # or by certificate fingerprint, or both. if a password hash is set, then a
             # password is required to oper up (e.g., /OPER dan mypassword). to generate
             # the hash, use `ergo genpasswd`.
-            password: "$2a$04$0123456789abcdef0123456789abcdef0123456789abcdef01234"
+            # password: "$2a$04$0123456789abcdef0123456789abcdef0123456789abcdef01234"
 
             # if a SHA-256 certificate fingerprint is configured here, then it will be
             # required to /OPER. if you comment out the password hash above, then you can
@@ -984,7 +984,7 @@ data:
         autoresize-window: 3d
 
         # number of messages to automatically play back on channel join (0 to disable):
-        autoreplay-on-join: 0
+        autoreplay-on-join: 300
 
         # maximum number of CHATHISTORY messages that can be
         # requested at once (0 disables support for CHATHISTORY)
@@ -1516,43 +1516,6 @@ data:
 #     # (0 or omit for no expiration):
 #     invite-expiration: 24h
 
-# # operator classes
-# oper-classes:
-#     # local operator
-#     "local-oper":
-#         # title shown in WHOIS
-#         title: Local Operator
-
-#         # capability names
-#         capabilities:
-#             - "kill"
-#             - "ban"
-#             - "nofakelag"
-#             - "relaymsg"
-
-#     # server admin
-#     "server-admin":
-#         # title shown in WHOIS
-#         title: Server Admin
-
-#         # oper class this extends from
-#         extends: "local-oper"
-
-#         # capability names
-#         capabilities:
-#             - "rehash"
-#             - "die"
-#             - "accreg"
-#             - "sajoin"
-#             - "samode"
-#             - "vhosts"
-#             - "chanreg"
-#             - "history"
-#             - "defcon"
-
-# # ircd operators
-# opers:
-#     lrvick:
 #         class: "server-admin"
 #         whois-line: "is a person"
 #         vhost: "staff.hashbang.sh"
