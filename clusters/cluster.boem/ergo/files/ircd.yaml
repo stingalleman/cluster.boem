@@ -29,7 +29,7 @@ data:
         # addresses to listen on
         listeners:
             # The standard plaintext port for IRC is 6667. This will listen on all interfaces:
-            - "0.0.0.0:6667"
+            "0.0.0.0:6667":
 
 #         # Allowing plaintext over the public Internet poses security and privacy issues,
 #         # so if possible, we recommend that you comment out the above line and replace
