@@ -37,9 +37,14 @@ spec:
           volumeMounts:
             - name: thelounge-data
               mountPath: /var/opt/thelounge
+            - name: thelounge-config
+              mountPath: /var/opt/thelounge
       volumes:
         - name: thelounge-data
           persistentVolumeClaim:
             claimName: thelounge-data
+        - name: thelounge-config
+          configMap:
+            name: thelounge-config
 
       restartPolicy: Always
