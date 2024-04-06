@@ -24,6 +24,12 @@ spec:
           volumeMounts:
             - name: rsstodiscord-config
               mountPath: "/etc/rss2discord"
+          env:
+            - name: RSS2DISCORD_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: rsstodiscord-database
+                  key: RSS2DISCORD_DATABASE
       volumes:
         - name: rsstodiscord-config
           configMap:
