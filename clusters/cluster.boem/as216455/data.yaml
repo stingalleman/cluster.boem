@@ -9,9 +9,9 @@ data:
       <body>
         AS216455 is an educational hobby-net. Also provides IPv6 tunnels for residential users that do not receive IPv6 from their ISP.
         <br />
-        Open for peering.
+        Open for peering. Contact <a href="mailto:noc@as216455.net">noc@as216455.net</a> for more information.
         <br />
-        <p>Contact: <a href="mailto:noc@stingalleman.nl">noc@stingalleman.nl</a> | Abuse: <a href="mailto:abuse@stingalleman.nl">abuse@stingalleman.nl</a> | <a href="https://www.peeringdb.com/net/33889">PeeringDB</a> | <a href="https://bgp.tools/as/216455">bgp.tools</a> | Geofeed: <a href="https://as216455.net/geofeed.csv">geofeed.csv</a></p>
+        <p>Contact: <a href="mailto:noc@as216455.net">noc@as216455.net</a> | Abuse: <a href="mailto:abuse@as216455.net">abuse@as216455.net</a> | <a href="https://www.peeringdb.com/net/33889">PeeringDB</a> | <a href="https://bgp.tools/as/216455">bgp.tools</a> | <a href="https://as216455.net/geofeed.csv">geofeed.csv</a></p>
       </body>
     </html>
   geofeed.csv: |
