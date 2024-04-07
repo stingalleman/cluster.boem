@@ -15,6 +15,8 @@ metadata:
   namespace: matrix
   labels:
     app: synapse
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   selector:
     matchLabels:
