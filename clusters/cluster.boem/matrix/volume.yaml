@@ -4,7 +4,7 @@ metadata:
   name: matrix-data
   namespace: matrix
   labels:
-    app: matrix
+    app: synapse
 spec:
   storageClassName: nfs-client
   accessModes:
