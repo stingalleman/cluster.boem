@@ -41,5 +41,13 @@ spec:
           namespace: default
           port: 80
 
+    - kind: Rule
+      match: Host(`chat.maishond.nl`)
+      services:
+        - kind: Service
+          name: chat.maishond.nl
+          namespace: default
+          port: 80
+
   tls:
     secretName: maishond.nl-prod-tls
