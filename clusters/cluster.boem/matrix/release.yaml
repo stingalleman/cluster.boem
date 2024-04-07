@@ -72,7 +72,7 @@ spec:
               mountPath: /secret
             - name: matrix-config
               mountPath: /config
-            - name: matrix
+            - name: matrix-data
               mountPath: /data
       volumes:
         - name: matrix-secret
