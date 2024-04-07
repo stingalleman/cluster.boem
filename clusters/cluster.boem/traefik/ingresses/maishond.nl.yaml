@@ -49,5 +49,13 @@ spec:
           namespace: default
           port: 8065
 
+    - kind: Rule
+      match: Host(`matrix.maishond.nl`)
+      services:
+        - kind: Service
+          name: synapse
+          namespace: matrix
+          port: 8008
+
   tls:
     secretName: maishond.nl-prod-tls
