@@ -286,8 +286,8 @@ spec:
     # The initial password of Harbor admin. Change it from portal after launching Harbor
     # or give an existing secret for it
     # key in secret is given via (default to HARBOR_ADMIN_PASSWORD)
-    # existingSecretAdminPassword:
-    # existingSecretAdminPasswordKey: HARBOR_ADMIN_PASSWORD
+    existingSecretAdminPassword: harbor-keys
+    existingSecretAdminPasswordKey: HARBOR_ADMIN_PASSWORD
     # harborAdminPassword: "Harbor12345"
 
     # # The internal TLS used for harbor components secure communicating. In order to enable https
@@ -375,8 +375,8 @@ spec:
 
     # # The secret key used for encryption. Must be a string of 16 chars.
     # secretKey: "not-a-secure-key"
-    # # If using existingSecretSecretKey, the key must be secretKey
-    # existingSecretSecretKey: ""
+    # If using existingSecretSecretKey, the key must be secretKey
+    existingSecretSecretKey: "harbor-keys"
 
     # # The proxy settings for updating trivy vulnerabilities from the Internet and replicating
     # # artifacts from/to the registries that cannot be reached directly
@@ -695,66 +695,66 @@ spec:
     #   # Key within the existing secret for the job service secret
     #   existingSecretKey: JOBSERVICE_SECRET
 
-    # registry:
-    #   registry:
-    #     image:
-    #       repository: goharbor/registry-photon
-    #       tag: dev
-    #     # resources:
-    #     #  requests:
-    #     #    memory: 256Mi
-    #     #    cpu: 100m
-    #     extraEnvVars: []
-    #   controller:
-    #     image:
-    #       repository: goharbor/harbor-registryctl
-    #       tag: dev
-    #     # resources:
-    #     #  requests:
-    #     #    memory: 256Mi
-    #     #    cpu: 100m
-    #     extraEnvVars: []
-    #   # set the service account to be used, default if left empty
-    #   serviceAccountName: ""
-    #   # mount the service account token
-    #   automountServiceAccountToken: false
-    #   replicas: 1
-    #   revisionHistoryLimit: 10
-    #   nodeSelector: {}
-    #   tolerations: []
-    #   affinity: {}
-    #   # Spread Pods across failure-domains like regions, availability zones or nodes
-    #   topologySpreadConstraints: []
-    #   # - maxSkew: 1
-    #   #   topologyKey: topology.kubernetes.io/zone
-    #   #   nodeTaintsPolicy: Honor
-    #   #   whenUnsatisfiable: DoNotSchedule
-    #   ## Additional deployment annotations
-    #   podAnnotations: {}
-    #   ## Additional deployment labels
-    #   podLabels: {}
-    #   ## The priority class to run the pod as
-    #   priorityClassName:
-    #   # Secret is used to secure the upload state from client
-    #   # and registry storage backend.
-    #   # See: https://github.com/distribution/distribution/blob/main/docs/configuration.md#http
-    #   # If a secret key is not specified, Helm will generate one.
-    #   # Must be a string of 16 chars.
-    #   secret: ""
-    #   # Use an existing secret resource
-    #   existingSecret: ""
-    #   # Key within the existing secret for the registry service secret
-    #   existingSecretKey: REGISTRY_HTTP_SECRET
-    #   # If true, the registry returns relative URLs in Location headers. The client is responsible for resolving the correct URL.
-    #   relativeurls: false
-    #   credentials:
-    #     username: "harbor_registry_user"
-    #     password: "harbor_registry_password"
-    #     # If using existingSecret, the key must be REGISTRY_PASSWD and REGISTRY_HTPASSWD
-    #     existingSecret: ""
-    #     # Login and password in htpasswd string format. Excludes `registry.credentials.username`  and `registry.credentials.password`. May come in handy when integrating with tools like argocd or flux. This allows the same line to be generated each time the template is rendered, instead of the `htpasswd` function from helm, which generates different lines each time because of the salt.
-    #     # htpasswdString: $apr1$XLefHzeG$Xl4.s00sMSCCcMyJljSZb0 # example string
-    #     htpasswdString: ""
+    registry:
+      # registry:
+      #     image:
+      #       repository: goharbor/registry-photon
+      #       tag: dev
+      #     # resources:
+      #     #  requests:
+      #     #    memory: 256Mi
+      #     #    cpu: 100m
+      #     extraEnvVars: []
+      #   controller:
+      #     image:
+      #       repository: goharbor/harbor-registryctl
+      #       tag: dev
+      #     # resources:
+      #     #  requests:
+      #     #    memory: 256Mi
+      #     #    cpu: 100m
+      #     extraEnvVars: []
+      #   # set the service account to be used, default if left empty
+      #   serviceAccountName: ""
+      #   # mount the service account token
+      #   automountServiceAccountToken: false
+      #   replicas: 1
+      #   revisionHistoryLimit: 10
+      #   nodeSelector: {}
+      #   tolerations: []
+      #   affinity: {}
+      #   # Spread Pods across failure-domains like regions, availability zones or nodes
+      #   topologySpreadConstraints: []
+      #   # - maxSkew: 1
+      #   #   topologyKey: topology.kubernetes.io/zone
+      #   #   nodeTaintsPolicy: Honor
+      #   #   whenUnsatisfiable: DoNotSchedule
+      #   ## Additional deployment annotations
+      #   podAnnotations: {}
+      #   ## Additional deployment labels
+      #   podLabels: {}
+      #   ## The priority class to run the pod as
+      #   priorityClassName:
+      #   # Secret is used to secure the upload state from client
+      #   # and registry storage backend.
+      #   # See: https://github.com/distribution/distribution/blob/main/docs/configuration.md#http
+      #   # If a secret key is not specified, Helm will generate one.
+      #   # Must be a string of 16 chars.
+      #   secret: ""
+      #   # Use an existing secret resource
+      #   existingSecret: ""
+      #   # Key within the existing secret for the registry service secret
+      #   existingSecretKey: REGISTRY_HTTP_SECRET
+      #   # If true, the registry returns relative URLs in Location headers. The client is responsible for resolving the correct URL.
+      #   relativeurls: false
+      credentials:
+        username: "harbor_registry_user"
+        password: "harbor_registry_password"
+        # If using existingSecret, the key must be REGISTRY_PASSWD and REGISTRY_HTPASSWD
+        existingSecret: ""
+        # Login and password in htpasswd string format. Excludes `registry.credentials.username`  and `registry.credentials.password`. May come in handy when integrating with tools like argocd or flux. This allows the same line to be generated each time the template is rendered, instead of the `htpasswd` function from helm, which generates different lines each time because of the salt.
+        # htpasswdString: $apr1$XLefHzeG$Xl4.s00sMSCCcMyJljSZb0 # example string
+        htpasswdString: ""
     #   middleware:
     #     enabled: false
     #     type: cloudFront
