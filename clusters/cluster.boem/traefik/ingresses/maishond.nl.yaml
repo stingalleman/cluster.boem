@@ -41,13 +41,13 @@ spec:
           namespace: default
           port: 80
 
-    - kind: Rule
-      match: Host(`chat.maishond.nl`)
-      services:
-        - kind: Service
-          name: mattermost-team-edition
-          namespace: default
-          port: 8065
+    # - kind: Rule
+    #   match: Host(`chat.maishond.nl`)
+    #   services:
+    #     - kind: Service
+    #       name: mattermost-team-edition
+    #       namespace: default
+    #       port: 8065
 
     - kind: Rule
       match: Host(`matrix.maishond.nl`)
