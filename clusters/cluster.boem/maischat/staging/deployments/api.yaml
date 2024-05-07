@@ -1,65 +1,65 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: api
-#   namespace: maischat
-#   labels:
-#     app: api
-# spec:
-#   selector:
-#     matchLabels:
-#       app: api
-#   replicas: 1
-#   template:
-#     metadata:
-#       labels:
-#         app: api
-#     spec:
-#       containers:
-#         - name: api
-#           image: ghcr.io/maishond/maischat/api:latest
-#           imagePullSecrets:
-#             - name: ghcr-login-secret
-#           env:
-#             - name: DB_URL
-#               value: jdbc:postgresql://maischat-rw.cnpg-system/app
-#             - name: DB_USERNAME
-#               value: app
-#             - name: DB_PASSWORD
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: maischat-staging-secrets
-#                   key: DB_PASSWORD
-#             - name: JWT_SECRET
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: maischat-staging-secrets
-#                   key: JWT_SECRET
-#           resources:
-#             requests:
-#               cpu: 500m
-#               memory: 128Mi
-#             limits:
-#               # cpu: 1 # dits niet valid @NoahvdAa
-#               memory: 256Mi
-#           livenessProbe:
-#             tcpSocket:
-#               port: 8080
-#             initialDelaySeconds: 5
-#             timeoutSeconds: 5
-#             successThreshold: 1
-#             failureThreshold: 3
-#             periodSeconds: 10
-#           readinessProbe:
-#             httpGet:
-#               path: /
-#               port: 8080
-#             initialDelaySeconds: 5
-#             timeoutSeconds: 2
-#             successThreshold: 1
-#             failureThreshold: 3
-#             periodSeconds: 10
-#           ports:
-#             - containerPort: 8080
-#               name: http
-#       restartPolicy: Always
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  namespace: maischat
+  labels:
+    app: api
+spec:
+  selector:
+    matchLabels:
+      app: api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: api
+          image: ghcr.io/maishond/maischat/api:latest
+          imagePullSecrets:
+            - name: ghcr-login-secret
+          env:
+            - name: DB_URL
+              value: jdbc:postgresql://maischat-rw.cnpg-system/app
+            - name: DB_USERNAME
+              value: app
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: maischat-staging-secrets
+                  key: DB_PASSWORD
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: maischat-staging-secrets
+                  key: JWT_SECRET
+          resources:
+            requests:
+              cpu: 500m
+              memory: 128Mi
+            limits:
+              # cpu: 1 # dits niet valid @NoahvdAa
+              memory: 256Mi
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
+            successThreshold: 1
+            failureThreshold: 3
+            periodSeconds: 10
+          ports:
+            - containerPort: 8080
+              name: http
+      restartPolicy: Always
