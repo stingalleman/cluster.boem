@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: api
-  namespace: maischat-staging
+  namespace: maischat
   labels:
     app: api
 spec:
@@ -40,7 +40,7 @@ spec:
               cpu: 500m
               memory: 128Mi
             limits:
-              cpu: 1
+              # cpu: 1 # dits niet valid @NoahvdAa
               memory: 256Mi
           livenessProbe:
             tcpSocket:
@@ -61,55 +61,5 @@ spec:
             periodSeconds: 10
           ports:
             - containerPort: 8080
-              name: http
-      restartPolicy: Always
-
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: web
-  namespace: maischat-staging
-  labels:
-    app: web
-spec:
-  selector:
-    matchLabels:
-      app: web
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: web
-    spec:
-      containers:
-        - name: web
-          image: ghcr.io/maishond/maischat/web:latest
-          resources:
-            requests:
-              cpu: 250m
-              memory: 64Mi
-            limits:
-              cpu: 500m
-              memory: 128Mi
-          livenessProbe:
-            tcpSocket:
-              port: 80
-            initialDelaySeconds: 5
-            timeoutSeconds: 5
-            successThreshold: 1
-            failureThreshold: 3
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 80
-            initialDelaySeconds: 5
-            timeoutSeconds: 2
-            successThreshold: 1
-            failureThreshold: 3
-            periodSeconds: 10
-          ports:
-            - containerPort: 80
               name: http
       restartPolicy: Always
