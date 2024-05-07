@@ -31,14 +31,14 @@ spec:
       services:
         - kind: Service
           name: api
-          namespace: maischat-staging
+          namespace: maischat
           port: 8080
     - kind: Rule
       match: Host(`staging.chat.mais.dog`)
       services:
         - kind: Service
           name: web
-          namespace: maischat-staging
+          namespace: maischat
           port: 80
 
   tls:
