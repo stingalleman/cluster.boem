@@ -24,5 +24,22 @@ spec:
           namespace: default
           port: 25591
 
+    - kind: Rule
+      match: Host(`staging.chat.mais.dog`) && (PathPrefix(`/api`) || PathPrefix(`/realtime`))
+      middlewares:
+        - name: maischat-stripprefix
+      services:
+        - kind: Service
+          name: api
+          namespace: maischat-staging
+          port: 8080
+    - kind: Rule
+      match: Host(`staging.chat.mais.dog`)
+      services:
+        - kind: Service
+          name: web
+          namespace: maischat-staging
+          port: 80
+
   tls:
     secretName: mais.dog-prod-tls
