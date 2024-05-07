@@ -15,11 +15,11 @@ spec:
       labels:
         app: api
     spec:
+      imagePullSecrets:
+        - name: ghcr-login-secret
       containers:
         - name: api
           image: ghcr.io/maishond/maischat/api:latest
-          imagePullSecrets:
-            - name: ghcr-login-secret
           env:
             - name: DB_URL
               value: jdbc:postgresql://maischat-rw.cnpg-system/app

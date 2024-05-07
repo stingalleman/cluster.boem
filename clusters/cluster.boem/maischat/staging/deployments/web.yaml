@@ -15,11 +15,11 @@ spec:
       labels:
         app: web
     spec:
+      imagePullSecrets:
+        - name: ghcr-login-secret
       containers:
         - name: web
           image: ghcr.io/maishond/maischat/web:latest
-          imagePullSecrets:
-            - name: ghcr-login-secret
           resources:
             requests:
               cpu: 250m
