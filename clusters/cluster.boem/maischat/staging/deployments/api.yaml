@@ -19,7 +19,7 @@ spec:
         - name: api
           image: ghcr.io/maishond/maischat/api:latest
           imagePullSecrets:
-            - name: ghcr-registry
+            - name: ghcr-login-secret
           env:
             - name: DB_URL
               value: jdbc:postgresql://maischat-rw.cnpg-system/app
