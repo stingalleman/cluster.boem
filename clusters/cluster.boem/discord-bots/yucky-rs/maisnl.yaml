@@ -1,117 +1,117 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: maisnl
-  namespace: default
-  annotations:
-    reloader.stakater.com/auto: "true"
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: maisnl
-  template:
-    metadata:
-      labels:
-        app: maisnl
-    spec:
-      imagePullSecrets:
-        - name: ghcr-login-secret
-      containers:
-        - name: maisnl
-          image: ghcr.io/maishond/mais.nl-bot:main
-          # image: ghcr.io/maishond/yucky.rs:main@sha256:4f5d38c80da522e8f48f6f8095915cb25b67d0860516be613fb164b3477cd5e0
-          # imagePullPolicy: Always
-          # resources:
-          #   limits:
-          #     memory: "128Mi"
-          #     cpu: "2000m"
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: maisnl
+#   namespace: default
+#   annotations:
+#     reloader.stakater.com/auto: "true"
+# spec:
+#   replicas: 2
+#   selector:
+#     matchLabels:
+#       app: maisnl
+#   template:
+#     metadata:
+#       labels:
+#         app: maisnl
+#     spec:
+#       imagePullSecrets:
+#         - name: ghcr-login-secret
+#       containers:
+#         - name: maisnl
+#           image: ghcr.io/maishond/mais.nl-bot:main
+#           # image: ghcr.io/maishond/yucky.rs:main@sha256:4f5d38c80da522e8f48f6f8095915cb25b67d0860516be613fb164b3477cd5e0
+#           # imagePullPolicy: Always
+#           # resources:
+#           #   limits:
+#           #     memory: "128Mi"
+#           #     cpu: "2000m"
 
-          env:
-            - name: TARGET_SLD
-              valueFrom:
-                secretKeyRef:
-                  name: maisnl
-                  key: TARGET_SLD
-            - name: TARGET_TLD
-              valueFrom:
-                secretKeyRef:
-                  name: maisnl
-                  key: TARGET_TLD
-            - name: RDAP_SERVER
-              valueFrom:
-                secretKeyRef:
-                  name: maisnl
-                  key: RDAP_SERVER
-            - name: REQUEST_INTERVAL_SECONDS
-              valueFrom:
-                secretKeyRef:
-                  name: maisnl
-                  key: REQUEST_INTERVAL_SECONDS
-            - name: OXXA_TEST_MODE
-              valueFrom:
-                secretKeyRef:
-                  name: maisnl
-                  key: OXXA_TEST_MODE
-            - name: OXXA_API_USER
-              valueFrom:
-                secretKeyRef:
-                  name: maisnl
-                  key: OXXA_API_USER
-            - name: OXXA_API_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: maisnl
-                  key: OXXA_API_PASSWORD
-            - name: OXXA_END_USER_IP
-              valueFrom:
-                secretKeyRef:
-                  name: maisnl
-                  key: OXXA_END_USER_IP
-            - name: OXXA_ADMIN_HANDLE
-              valueFrom:
-                secretKeyRef:
-                  name: maisnl
-                  key: OXXA_ADMIN_HANDLE
-            - name: OXXA_REGISTRANT_HANDLE
-              valueFrom:
-                secretKeyRef:
-                  name: maisnl
-                  key: OXXA_REGISTRANT_HANDLE
-            - name: OXXA_TECH_HANDLE
-              valueFrom:
-                secretKeyRef:
-                  name: maisnl
-                  key: OXXA_TECH_HANDLE
-            - name: OXXA_NSGROUP_HANDLE
-              valueFrom:
-                secretKeyRef:
-                  name: maisnl
-                  key: OXXA_NSGROUP_HANDLE
+#           env:
+#             - name: TARGET_SLD
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: maisnl
+#                   key: TARGET_SLD
+#             - name: TARGET_TLD
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: maisnl
+#                   key: TARGET_TLD
+#             - name: RDAP_SERVER
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: maisnl
+#                   key: RDAP_SERVER
+#             - name: REQUEST_INTERVAL_SECONDS
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: maisnl
+#                   key: REQUEST_INTERVAL_SECONDS
+#             - name: OXXA_TEST_MODE
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: maisnl
+#                   key: OXXA_TEST_MODE
+#             - name: OXXA_API_USER
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: maisnl
+#                   key: OXXA_API_USER
+#             - name: OXXA_API_PASSWORD
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: maisnl
+#                   key: OXXA_API_PASSWORD
+#             - name: OXXA_END_USER_IP
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: maisnl
+#                   key: OXXA_END_USER_IP
+#             - name: OXXA_ADMIN_HANDLE
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: maisnl
+#                   key: OXXA_ADMIN_HANDLE
+#             - name: OXXA_REGISTRANT_HANDLE
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: maisnl
+#                   key: OXXA_REGISTRANT_HANDLE
+#             - name: OXXA_TECH_HANDLE
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: maisnl
+#                   key: OXXA_TECH_HANDLE
+#             - name: OXXA_NSGROUP_HANDLE
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: maisnl
+#                   key: OXXA_NSGROUP_HANDLE
 
-            # - name: ALLES_DLP_PASSWORD
-            #   valueFrom:
-            #     secretKeyRef:
-            #       name: yucky-rs
-            #       key: alles_dlp_password
-            # - name: OPENAI
-            #   valueFrom:
-            #     secretKeyRef:
-            #       name: yucky-rs
-            #       key: openai_token
-          # volumeMounts:
-          #   - name: tz-config
-          #     mountPath: /etc/localtime
-          # securityContext:
-          #   capabilities:
-          #     drop:
-          #       - "ALL"
-          #   allowPrivilegeEscalation: false
-          #   runAsNonRoot: true
-          #   seccompProfile:
-          #     type: RuntimeDefault
-      # volumes:
-      #   - name: tz-config
-      #     hostPath:
-      #       path: /usr/share/zoneinfo/Europe/Amsterdam
-      #       type: File
+#             # - name: ALLES_DLP_PASSWORD
+#             #   valueFrom:
+#             #     secretKeyRef:
+#             #       name: yucky-rs
+#             #       key: alles_dlp_password
+#             # - name: OPENAI
+#             #   valueFrom:
+#             #     secretKeyRef:
+#             #       name: yucky-rs
+#             #       key: openai_token
+#           # volumeMounts:
+#           #   - name: tz-config
+#           #     mountPath: /etc/localtime
+#           # securityContext:
+#           #   capabilities:
+#           #     drop:
+#           #       - "ALL"
+#           #   allowPrivilegeEscalation: false
+#           #   runAsNonRoot: true
+#           #   seccompProfile:
+#           #     type: RuntimeDefault
+#       # volumes:
+#       #   - name: tz-config
+#       #     hostPath:
+#       #       path: /usr/share/zoneinfo/Europe/Amsterdam
+#       #       type: File
