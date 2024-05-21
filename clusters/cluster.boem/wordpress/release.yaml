@@ -15,3 +15,6 @@ spec:
   interval: 24h
   values:
     resourcesPreset: xlarge
+    wordpressConfigureCache: true
+    memcached:
+      enabled: true
