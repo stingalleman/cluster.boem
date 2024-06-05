@@ -54,10 +54,11 @@ spec:
       # generic:
       #   timezone: # The timezone to use - default: America/New_York
       # path: # Path n8n is deployed to - default: "/"
-      host: n8n.stingalleman.nl # Host name n8n can be reached - default: localhost
-      port: 443 # HTTP port n8n can be reached - default: 5678
+      # host: n8n.stingalleman.nl # Host name n8n can be reached - default: localhost
+      editorBaseUrl: https://n8n.stingalleman.nl
+      # port: # HTTP port n8n can be reached - default: 5678
       # listen_address: # IP address n8n should listen on - default: 0.0.0.0
-      protocol: https # HTTP Protocol via which n8n can be reached - possible values [http , https] - default: http
+      # protocol: # HTTP Protocol via which n8n can be reached - possible values [http , https] - default: http
       # ssl_key: # SSL Key for HTTPS Protocol - default: ''
       # ssl_cert: # SSL Cert for HTTPS Protocol - default: ''
       # security:
