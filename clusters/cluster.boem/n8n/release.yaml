@@ -14,11 +14,7 @@ spec:
         namespace: flux-system
   interval: 24h
   values:
-    # existingSecret: "n8n-config-secret"
-    secret:
-      database:
-        postgresdb:
-          password: test
+    existingSecret: "n8n-config-secret"
     config:
       database:
         type: postgresdb # Type of database to use - Other possible types ['sqlite', 'mariadb', 'mysqldb', 'postgresdb'] - default: sqlite
