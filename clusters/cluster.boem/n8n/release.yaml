@@ -87,3 +87,12 @@ spec:
       #   exclude: # Nodes not to load - default: "[]"
       #   errorTriggerType: # Node Type to use as Error Trigger - default: n8n-nodes-base.errorTrigger
       # # the list goes on...
+
+      # Set additional environment variables on the Deployment
+      extraEnv:
+        WEBHOOK_URL: "https://n8n.stingalleman.nl"
+
+      extraEnvSecrets:
+        ENCRYPTION_KEY:
+          name: n8n-encryption-key
+          key: key
