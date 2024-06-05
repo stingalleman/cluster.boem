@@ -90,9 +90,9 @@ spec:
 
     # Set additional environment variables on the Deployment
     extraEnv:
-      WEBHOOK_URL: "https://n8n.stingalleman.nl"
+      N8N_WEBHOOK_URL: "https://n8n.stingalleman.nl"
 
     extraEnvSecrets:
-      ENCRYPTION_KEY:
+      N8N_ENCRYPTION_KEY:
         name: n8n-encryption-key
         key: key
