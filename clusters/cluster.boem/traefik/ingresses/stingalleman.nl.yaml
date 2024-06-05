@@ -111,5 +111,13 @@ spec:
           namespace: actual-budget
           port: 5006
 
+    - kind: Rule
+      match: Host(`n8n.stingalleman.nl`)
+      services:
+        - kind: Service
+          name: n8n
+          namespace: n8n
+          port: 80
+
   tls:
     secretName: stingalleman.nl-prod-tls
