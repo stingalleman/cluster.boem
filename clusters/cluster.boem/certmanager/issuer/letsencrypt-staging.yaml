@@ -26,7 +26,7 @@ spec:
           dnsZones:
             - "stingalleman.nl"
             # - "pakket.sh"
-            - "stingalleman.dev"
+            # - "stingalleman.dev"
             - "maishond.nl"
             - "as216455.net"
             - "mais.dog"
