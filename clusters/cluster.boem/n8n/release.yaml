@@ -54,7 +54,7 @@ spec:
       # generic:
       #   timezone: # The timezone to use - default: America/New_York
       # path: # Path n8n is deployed to - default: "/"
-      # host: # Host name n8n can be reached - default: localhost
+      host: n8n.stingalleman.nl # Host name n8n can be reached - default: localhost
       # port: # HTTP port n8n can be reached - default: 5678
       # listen_address: # IP address n8n should listen on - default: 0.0.0.0
       # protocol: # HTTP Protocol via which n8n can be reached - possible values [http , https] - default: http
