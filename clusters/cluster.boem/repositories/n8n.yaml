@@ -6,3 +6,4 @@ metadata:
 spec:
   interval: 24h
   url: oci://8gears.container-registry.com/library
+  type: oci
