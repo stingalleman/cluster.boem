@@ -33,12 +33,21 @@ spec:
           name: api
           namespace: maischat
           port: 8080
+
     - kind: Rule
       match: Host(`staging.chat.mais.dog`)
       services:
         - kind: Service
           name: web
           namespace: maischat
+          port: 80
+
+    - kind: Rule
+      match: Host(`lt.mais.dog`)
+      services:
+        - kind: Service
+          name: languagetool-http
+          namespace: default
           port: 80
 
   tls:
