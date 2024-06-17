@@ -119,5 +119,13 @@ spec:
           namespace: n8n
           port: 80
 
+    - kind: Rule
+      match: Host(`harbor.stingalleman.nl`)
+      services:
+        - kind: Service
+          name: harbor
+          namespace: harbor
+          port: 80
+
   tls:
     secretName: stingalleman.nl-prod-tls
