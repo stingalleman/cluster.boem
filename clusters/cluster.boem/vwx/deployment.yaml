@@ -29,36 +29,31 @@ spec:
       containers:
         - name: vwx-project-sharing
           image: harbor.stingalleman.nl/library/vwx-project-sharing-server:latest
-          resources:
-            requests:
-              cpu: 100m
-              memory: 100Mi
-            limits:
-              cpu: 100m
-              memory: 100Mi
-          livenessProbe:
-            tcpSocket:
-              port: 80
-            initialDelaySeconds: 5
-            timeoutSeconds: 5
-            successThreshold: 1
-            failureThreshold: 3
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /_status/healthz
-              port: 80
-            initialDelaySeconds: 5
-            timeoutSeconds: 2
-            successThreshold: 1
-            failureThreshold: 3
-            periodSeconds: 10
-          env:
-            - name: DB_HOST
-              valueFrom:
-                configMapKeyRef:
-                  name: vwx-project-sharing
-                  key: DB_HOST
+          # resources:
+          #   requests:
+          #     cpu: 100m
+          #     memory: 100Mi
+          #   limits:
+          #     cpu: 100m
+          #     memory: 100Mi
+          # livenessProbe:
+          #   tcpSocket:
+          #     port: 80
+          #   initialDelaySeconds: 5
+          #   timeoutSeconds: 5
+          #   successThreshold: 1
+          #   failureThreshold: 3
+          #   periodSeconds: 10
+          # readinessProbe:
+          #   httpGet:
+          #     path: /_status/healthz
+          #     port: 80
+          #   initialDelaySeconds: 5
+          #   timeoutSeconds: 2
+          #   successThreshold: 1
+          #   failureThreshold: 3
+          #   periodSeconds: 10
+
           # ports:
           #   - containerPort: 80
           #     name: vwx-project-sharing
