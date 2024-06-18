@@ -62,9 +62,9 @@ spec:
           # ports:
           #   - containerPort: 80
           #     name: vwx-project-sharing
-          volumeMounts:
-            - name: localtime
-              mountPath: /etc/localtime
+          # volumeMounts:
+          #   - name: localtime
+          #     mountPath: /etc/localtime
       # volumes:
       #   - name: localtime
       #     hostPath:
