@@ -54,9 +54,11 @@ spec:
           #   failureThreshold: 3
           #   periodSeconds: 10
 
-          # ports:
-          #   - containerPort: 80
-          #     name: vwx-project-sharing
+          ports:
+            - containerPort: 22001
+          env:
+            - name: l
+              value: "1"
           # volumeMounts:
           #   - name: localtime
           #     mountPath: /etc/localtime
