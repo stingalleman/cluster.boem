@@ -59,14 +59,14 @@ spec:
                 configMapKeyRef:
                   name: vwx-project-sharing
                   key: DB_HOST
-          ports:
-            - containerPort: 80
-              name: vwx-project-sharing
+          # ports:
+          #   - containerPort: 80
+          #     name: vwx-project-sharing
           volumeMounts:
             - name: localtime
               mountPath: /etc/localtime
-      volumes:
-        - name: localtime
-          hostPath:
-            path: /usr/share/zoneinfo/Asia/Shanghai
+      # volumes:
+      #   - name: localtime
+      #     hostPath:
+      #       path: /usr/share/zoneinfo/Asia/Shanghai
       restartPolicy: Always
