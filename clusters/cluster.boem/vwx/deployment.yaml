@@ -28,7 +28,7 @@ spec:
       # - Each init container must complete successfully before the next one starts.
       containers:
         - name: vwx-project-sharing
-          image: harbor.stingalleman.nl/library/vwx-project-sharing-server:latest
+          image: harbor.stingalleman.nl/library/test:latest
           # resources:
           #   requests:
           #     cpu: 100m
