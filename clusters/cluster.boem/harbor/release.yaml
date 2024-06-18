@@ -207,9 +207,9 @@ spec:
         # Specify the type of storage: "filesystem", "azure", "gcs", "s3", "swift",
         # "oss" and fill the information needed in the corresponding section. The type
         # must be "filesystem" if you want to use persistent volumes for registry
-        type: s3
-        # filesystem:
-        #   rootdirectory: /storage
+        type: filesystem
+        filesystem:
+          rootdirectory: /storage
         #maxthreads: 100
         # azure:
         #   accountname: accountname
