@@ -21,7 +21,7 @@ spec:
       tls:
         # Enable TLS or not.
         # Delete the "ssl-redirect" annotations in "expose.ingress.annotations" when TLS is disabled and "expose.type" is "ingress"
-        # Note: if the "expose.type" is "ingress" and TLS is disabled,
+        # Note: if the "expose.qtype" is "ingress" and TLS is disabled,
         # the port must be included in the command when pulling/pushing images.
         # Refer to https://github.com/goharbor/harbor/issues/5291 for details.
         enabled: false
@@ -235,7 +235,7 @@ spec:
           bucket: harbor
           # accesskey: awsaccesskey
           # secretkey: awssecretkey
-          regionendpoint: http://s3.eu-central-1.s4.mega.io
+          regionendpoint: s3.eu-central-1.s4.mega.io
           # encrypt: false
           # keyid: mykeyid
           # secure: true
