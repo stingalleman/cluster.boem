@@ -18,15 +18,15 @@ spec:
     size: 20Gi
     storageClass: nfs-client
 
-  # backup:
-  #   barmanObjectStore:
-  #     destinationPath: s3://generic-cluster/
-  #     endpointURL: https://generic-cluster-backup.s3.g.s4.mega.io
-  #     s3Credentials:
-  #       accessKeyId:
-  #         name: generic-backup-creds
-  #         key: ACCESS_KEY_ID
-  #       secretAccessKey:
-  #         name: generic-backup-creds
-  #         key: ACCESS_SECRET_KEY
-  #   retentionPolicy: "30d"
+  backup:
+    barmanObjectStore:
+      destinationPath: s3://kluster-cnpg-backup/harbor-cluster/
+      endpointURL: https://s3.eu-central-003.backblazeb2.com
+      s3Credentials:
+        accessKeyId:
+          name: generic-backup-creds
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: generic-backup-creds
+          key: ACCESS_SECRET_KEY
+    retentionPolicy: "30d"
