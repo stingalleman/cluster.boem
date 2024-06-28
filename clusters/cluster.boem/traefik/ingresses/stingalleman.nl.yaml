@@ -127,5 +127,13 @@ spec:
           namespace: harbor
           port: 80
 
+    - kind: Rule
+      match: Host(`wp.stingalleman.nl`)
+      services:
+        - kind: Service
+          name: wordpress
+          namespace: default
+          port: 80
+
   tls:
     secretName: stingalleman.nl-prod-tls
