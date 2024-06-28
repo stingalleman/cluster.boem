@@ -21,7 +21,7 @@ spec:
   backup:
     barmanObjectStore:
       destinationPath: s3://kluster-cnpg-backup/discord-cluster/
-      endpointURL: s3.eu-central-003.backblazeb2.com
+      endpointURL: https://s3.eu-central-003.backblazeb2.com
       s3Credentials:
         accessKeyId:
           name: generic-backup-creds
