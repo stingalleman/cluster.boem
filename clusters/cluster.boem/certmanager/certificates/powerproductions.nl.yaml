@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: powerproductions.nl
+  namespace: default
+spec:
+  secretName: powerproductions.nl-prod-tls
+  issuerRef:
+    name: letsencrypt-prod-http
+    kind: ClusterIssuer
+  commonName: "*.powerproductions.nl"
+  dnsNames:
+    - "powerproductions.nl"
+    - "*.powerproductions.nl"

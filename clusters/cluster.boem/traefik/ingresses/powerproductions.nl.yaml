@@ -1,0 +1,20 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: powerproductions.nl
+  namespace: default
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`powerproductions.nl`)
+      services:
+        - kind: Service
+          name: wordpress
+          namespace: default
+          port: 80
+
+  tls:
+    secretName: powerproductions.nl-prod-tls
