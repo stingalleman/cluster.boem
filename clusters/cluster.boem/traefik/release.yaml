@@ -104,17 +104,17 @@ spec:
         # labelSelector: environment=production,method=traefik
 
       kubernetesIngress:
-        enabled: false
-        allowExternalNameServices: true
-        allowEmptyServices: true
+        enabled: true
+        # allowExternalNameServices: true
+        # allowEmptyServices: true
         ingressClass: traefik
         # labelSelector: environment=production,method=traefik
         # IP used for Kubernetes Ingress endpoints
-        publishedService:
-          enabled: false
-          # Published Kubernetes Service to copy status from. Format: namespace/servicename
-          # By default this Traefik service
-          # pathOverride: ""
+        # publishedService:
+        # enabled: false
+        # Published Kubernetes Service to copy status from. Format: namespace/servicename
+        # By default this Traefik service
+        # pathOverride: ""
 
     # Environment variables to be passed to Traefik's binary
     # env:
