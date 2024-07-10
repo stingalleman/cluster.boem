@@ -8,7 +8,7 @@ spec:
   issuerRef:
     name: letsencrypt-prod-http
     kind: ClusterIssuer
-  commonName: "*.powerproductions.nl"
+  commonName: "powerproductions.nl"
   dnsNames:
     - "powerproductions.nl"
-    - "*.powerproductions.nl"
+    - "powerproductions.nl"
