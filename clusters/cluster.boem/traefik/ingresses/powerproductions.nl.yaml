@@ -10,9 +10,9 @@ spec:
   routes:
     - kind: Rule
       match: Host(`powerproductions.nl`) || Host(`www.powerproductions.nl`)
-      middlewares:
-        - name: pp-redirect-www
-          namespace: default
+      # middlewares:
+      #   - name: pp-redirect-www
+      #     namespace: default
       services:
         - kind: Service
           name: wordpress
