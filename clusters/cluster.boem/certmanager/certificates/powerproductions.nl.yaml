@@ -11,4 +11,4 @@ spec:
   commonName: "powerproductions.nl"
   dnsNames:
     - "powerproductions.nl"
-    - "powerproductions.nl"
+    - "www.powerproductions.nl"
