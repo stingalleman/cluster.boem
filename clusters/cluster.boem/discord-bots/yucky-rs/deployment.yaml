@@ -40,6 +40,11 @@ spec:
                 secretKeyRef:
                   name: yucky-rs
                   key: prefix
+            - name: HA_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs
+                  key: ha-token
             # - name: ALLES_DLP_PASSWORD
             #   valueFrom:
             #     secretKeyRef:
