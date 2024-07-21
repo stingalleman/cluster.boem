@@ -29,4 +29,4 @@
 #   #       secretAccessKey:
 #   #         name: generic-backup-creds
 #   #         key: ACCESS_SECRET_KEY
-#   #   retentionPolicy: "30d"
+#   #   retentionPolicy: "5d"
