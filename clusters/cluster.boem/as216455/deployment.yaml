@@ -11,7 +11,7 @@ spec:
   selector:
     matchLabels:
       app: sting-as-site
-  replicas: 3
+  replicas: 100
   strategy:
     type: RollingUpdate
     rollingUpdate:
