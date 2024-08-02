@@ -1,0 +1,18 @@
+- name: debug
+  ansible.builtin.debug:
+    msg: "Hello, world!"
+# - name: Make sure primary configuration files are up2date
+#   ansible.builtin.template:
+#     src: "{{ item }}"
+#     dest: "/etc/bird/{{ item }}"
+#     mode: "0644"
+#     owner: root
+#     group: bird
+#   with_items:
+#     - definitions.conf
+#     - afi_filters.conf
+#   notify: reload bird
+#   tags:
+#     - bird
+#     - bird_configure
+#     - bird_configure_generic
