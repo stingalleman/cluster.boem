@@ -1,0 +1,4 @@
+- name: My first play
+  hosts: ams_rtr02
+  roles:
+    - bird
