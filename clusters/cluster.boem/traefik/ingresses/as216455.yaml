@@ -23,5 +23,12 @@ spec:
           namespace: default
           port: 3000
 
+    - kind: Rule
+      match: Host(`dns.as216455.net`)
+      services:
+        - name: pdns-admin
+          namespace: default
+          port: 80
+
   tls:
     secretName: as216455.net-prod-tls
