@@ -19,5 +19,13 @@ spec:
           namespace: default
           port: 80
 
+    - kind: Rule
+      match: Host(`auth.powerproductions.nl`)
+      services:
+        - kind: Service
+          name: vwx-auth
+          namespace: default
+          port: 80
+
   tls:
     secretName: powerproductions.nl-prod-tls
