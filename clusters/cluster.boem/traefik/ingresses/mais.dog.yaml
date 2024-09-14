@@ -1,54 +1,54 @@
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: mais.dog
-  namespace: default
-spec:
-  entryPoints:
-    - web
-    - websecure
-  routes:
-    - kind: Rule
-      match: Host(`map.mais.dog`)
-      services:
-        - kind: Service
-          name: minecraft-vm
-          namespace: default
-          port: 25592
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: IngressRoute
+# metadata:
+#   name: mais.dog
+#   namespace: default
+# spec:
+#   entryPoints:
+#     - web
+#     - websecure
+#   routes:
+#     - kind: Rule
+#       match: Host(`map.mais.dog`)
+#       services:
+#         - kind: Service
+#           name: minecraft-vm
+#           namespace: default
+#           port: 25592
 
-    - kind: Rule
-      match: Host(`trein.mais.dog`)
-      services:
-        - kind: Service
-          name: minecraft-vm
-          namespace: default
-          port: 25591
+#     - kind: Rule
+#       match: Host(`trein.mais.dog`)
+#       services:
+#         - kind: Service
+#           name: minecraft-vm
+#           namespace: default
+#           port: 25591
 
-    - kind: Rule
-      match: Host(`staging.chat.mais.dog`) && (PathPrefix(`/api`) || PathPrefix(`/realtime`))
-      middlewares:
-        - name: maischat-stripprefix
-      services:
-        - kind: Service
-          name: api
-          namespace: maischat
-          port: 8080
+#     - kind: Rule
+#       match: Host(`staging.chat.mais.dog`) && (PathPrefix(`/api`) || PathPrefix(`/realtime`))
+#       middlewares:
+#         - name: maischat-stripprefix
+#       services:
+#         - kind: Service
+#           name: api
+#           namespace: maischat
+#           port: 8080
 
-    - kind: Rule
-      match: Host(`staging.chat.mais.dog`)
-      services:
-        - kind: Service
-          name: web
-          namespace: maischat
-          port: 80
+#     - kind: Rule
+#       match: Host(`staging.chat.mais.dog`)
+#       services:
+#         - kind: Service
+#           name: web
+#           namespace: maischat
+#           port: 80
 
-    - kind: Rule
-      match: Host(`lt.mais.dog`)
-      services:
-        - kind: Service
-          name: languagetool-http
-          namespace: default
-          port: 80
+#     - kind: Rule
+#       match: Host(`lt.mais.dog`)
+#       services:
+#         - kind: Service
+#           name: languagetool-http
+#           namespace: default
+#           port: 80
 
-  tls:
-    secretName: mais.dog-prod-tls
+#   tls:
+#     secretName: mais.dog-prod-tls
