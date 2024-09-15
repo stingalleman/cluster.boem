@@ -12,7 +12,7 @@ spec:
           containers:
             - name: rentman-harvest
               image: harbor.stingalleman.nl/library/rentman-harvest:latest
-              imagePullPolicy: IfNotPresent
+              imagePullPolicy: Always
               env:
                 - name: HARVEST_TOKEN
                   valueFrom:
