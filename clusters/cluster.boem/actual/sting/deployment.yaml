@@ -27,6 +27,7 @@ spec:
       containers:
         - name: actual-budget
           image: actualbudget/actual-server:latest
+          imagePullPolicy: Always
           # resources:
           # requests:
           # cpu: 100m
