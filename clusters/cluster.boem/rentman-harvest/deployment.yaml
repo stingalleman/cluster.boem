@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: rentman-harvest2
+  name: rentman-harvest
   namespace: default
 spec:
   schedule: "*/5 * * * *"
@@ -10,7 +10,7 @@ spec:
       template:
         spec:
           containers:
-            - name: rentman-harvest2
+            - name: rentman-harvest
               image: harbor.stingalleman.nl/library/rentman-harvest:latest
               # image: harbor.stingalleman.nl/library/rentman-harvest:latest
               imagePullPolicy: Always
