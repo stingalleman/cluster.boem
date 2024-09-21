@@ -30,5 +30,12 @@ spec:
           namespace: default
           port: 80
 
+    - kind: Rule
+      match: Host(`minio.as216455.net`)
+      services:
+        - name: storage-console
+          namespace: minio
+          port: 9090
+
   tls:
     secretName: as216455.net-prod-tls
