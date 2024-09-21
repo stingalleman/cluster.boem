@@ -6,7 +6,7 @@ metadata:
 spec:
   chart:
     spec:
-      chart: mattermost/mattermost-operator
+      chart: mattermost-operator
       sourceRef:
         kind: HelmRepository
         name: mattermost
