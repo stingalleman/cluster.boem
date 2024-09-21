@@ -37,5 +37,12 @@ spec:
           namespace: minio
           port: 9090
 
+    - kind: Rule
+      match: Host(`s3.as216455.net`)
+      services:
+        - name: minio
+          namespace: minio
+          port: 9000
+
   tls:
     secretName: as216455.net-prod-tls
