@@ -18,15 +18,15 @@ spec:
     size: 5Gi
     storageClass: nfs-client
 
-  backup:
-    barmanObjectStore:
-      destinationPath: s3://kluster-cnpg-backup/n8n-cluster/
-      endpointURL: https://s3.eu-central-003.backblazeb2.com
-      s3Credentials:
-        accessKeyId:
-          name: generic-backup-creds
-          key: ACCESS_KEY_ID
-        secretAccessKey:
-          name: generic-backup-creds
-          key: ACCESS_SECRET_KEY
-    retentionPolicy: "5d"
+  # backup:
+  #   barmanObjectStore:
+  #     destinationPath: s3://kluster-cnpg-backup/n8n-cluster/
+  #     endpointURL: https://s3.eu-central-003.backblazeb2.com
+  #     s3Credentials:
+  #       accessKeyId:
+  #         name: generic-backup-creds
+  #         key: ACCESS_KEY_ID
+  #       secretAccessKey:
+  #         name: generic-backup-creds
+  #         key: ACCESS_SECRET_KEY
+  #   retentionPolicy: "5d"
