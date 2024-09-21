@@ -1,19 +1,19 @@
-# apiVersion: installation.mattermost.com/v1beta1
-# kind: Mattermost
-# metadata:
-#   name: maischat
-#   namespace: mattermost
-# spec:
-#   size: "100users"
-#   replicas: 1
-#   ingress:
-#     enabled: false
-#   version: "10.0.0"
-#   database:
-#     external:
-#       secret: maishond-mm-db
-#   fileStore:
-#     external:
-#       secret: maishond-mm-store
-#       bucket: maismost
-#       url: s3.as216455.net
+apiVersion: installation.mattermost.com/v1beta1
+kind: Mattermost
+metadata:
+  name: maischat
+  namespace: mattermost
+spec:
+  size: "100users"
+  replicas: 1
+  ingress:
+    enabled: false
+  version: "10.0.0"
+  database:
+    external:
+      secret: maishond-mm-db
+  fileStore:
+    external:
+      secret: maishond-mm-store
+      bucket: maismost
+      url: s3.as216455.net
