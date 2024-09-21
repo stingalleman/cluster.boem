@@ -16,4 +16,4 @@ spec:
     external:
       secret: maishond-mm-store
       bucket: maismost
-      url: s3.eu-central-003.backblazeb2.com
+      url: https://s3.eu-central-003.backblazeb2.com
