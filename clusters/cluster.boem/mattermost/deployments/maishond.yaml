@@ -5,6 +5,7 @@ metadata:
   namespace: mattermost
 spec:
   size: "100users"
+  replicas: 1
   ingress:
     enabled: false
   version: "10.0.0"
