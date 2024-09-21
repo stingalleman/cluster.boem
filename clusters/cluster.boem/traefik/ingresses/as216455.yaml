@@ -42,7 +42,7 @@ spec:
       services:
         - name: minio
           namespace: minio
-          port: 9000
+          port: 80
 
   tls:
     secretName: as216455.net-prod-tls
