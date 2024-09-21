@@ -16,4 +16,4 @@ spec:
     external:
       secret: maishond-mm-store
       bucket: maismost
-      url: 10.103.167.18:9000
+      url: s3.as216455.net
