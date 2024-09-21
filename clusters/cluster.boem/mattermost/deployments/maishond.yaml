@@ -12,8 +12,8 @@ spec:
   database:
     external:
       secret: maishond-mm-db
-  fileStore:
-    external:
-      secret: maishond-mm-store
-      bucket: maismost
-      url: maismost.minio:80
+  # fileStore:
+  #   external:
+  #     secret: maishond-mm-store
+  #     bucket: maismost
+  #     url: maismost.minio:80
