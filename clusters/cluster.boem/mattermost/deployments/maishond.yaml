@@ -16,4 +16,4 @@ spec:
     external:
       secret: maishond-mm-store
       bucket: maismost
-      url: minio.minio.svc
+      url: minio.minio
