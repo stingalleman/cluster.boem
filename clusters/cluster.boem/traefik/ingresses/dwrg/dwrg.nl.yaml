@@ -1,0 +1,20 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dwrg.nl
+  namespace: default
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`dwrg.nl`) || Host(`www.dwrg.nl`)
+      services:
+        - kind: Service
+          name: wordpress-drwg
+          namespace: default
+          port: 80
+
+  tls:
+    secretName: dwrg.nl-prod-tls

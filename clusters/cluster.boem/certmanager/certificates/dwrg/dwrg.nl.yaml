@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: dwrg.nl
+  namespace: default
+spec:
+  secretName: dwrg.nl-prod-tls
+  issuerRef:
+    name: letsencrypt-prod-http
+    kind: ClusterIssuer
+  commonName: "*.dwrg.nl"
+  dnsNames:
+    - "dwrg.nl"
+    - "*.dwrg.nl"
