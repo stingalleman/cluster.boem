@@ -128,14 +128,6 @@ spec:
           port: 80
 
     - kind: Rule
-      match: Host(`wp.stingalleman.nl`)
-      services:
-        - kind: Service
-          name: wordpress
-          namespace: default
-          port: 80
-
-    - kind: Rule
       match: Host(`home.stingalleman.nl`)
       services:
         - kind: Service
