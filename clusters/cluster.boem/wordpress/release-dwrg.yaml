@@ -19,7 +19,7 @@ spec:
     service:
       ## @param service.type WordPress service type
       ##
-      type: NodePort
+      type: ClusterPort
     resourcesPreset: xlarge
     wordpressConfigureCache: true
     wordpressTablePrefix: wpap_
