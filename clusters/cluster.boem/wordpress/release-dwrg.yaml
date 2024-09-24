@@ -14,6 +14,12 @@ spec:
         namespace: flux-system
   interval: 24h
   values:
+    ## WordPress service parameters
+    ##
+    service:
+      ## @param service.type WordPress service type
+      ##
+      type: ClusterIP
     resourcesPreset: xlarge
     wordpressConfigureCache: true
     wordpressTablePrefix: wpap_
