@@ -1,18 +1,23 @@
-# apiVersion: traefik.containo.us/v1alpha1
-# kind: IngressRoute
-# metadata:
-#   name: dutchwaterresponsegroup.com
-#   namespace: default
-# spec:
-#   entryPoints:
-#     - web
-#     - websecure
-#   routes:
-#     - kind: Rule
-#       match: Host(`dutchwaterresponsegroup.com`) || Host(`www.dutchwaterresponsegroup.com`)
-#       middlewares:
-#         - name: dwrg-redirect
-#           namespace: default
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dutchwaterresponsegroup.com
+  namespace: default
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`dutchwaterresponsegroup.com`) || Host(`www.dutchwaterresponsegroup.com`)
+      services:
+        - kind: Service
+          name: wordpress-dwrg
+          namespace: default
+          port: 80
+      middlewares:
+        - name: dwrg-redirect
+          namespace: default
 
-#   tls:
-#     secretName: dutchwaterresponsegroup.com-prod-tls
+  tls:
+    secretName: dutchwaterresponsegroup.com-prod-tls
