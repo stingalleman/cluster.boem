@@ -3,6 +3,8 @@ kind: Mattermost
 metadata:
   name: maischat
   namespace: mattermost
+  annotations:
+    kustomize.toolkit.fluxcd.io/ssa: merge
 spec:
   size: "100users"
   replicas: 1
