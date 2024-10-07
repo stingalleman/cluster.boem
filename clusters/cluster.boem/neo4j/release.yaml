@@ -1,35 +1,35 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: neo4j
-  namespace: default
-spec:
-  chart:
-    spec:
-      chart: neo4j
-      sourceRef:
-        kind: HelmRepository
-        name: neo4j
-        namespace: flux-system
-      version: "5.24.1"
-  interval: 24h
-  values:
-    neo4j:
-      name: neo4j-standalone
-      resources:
-        cpu: "12"
-        memory: "10Gi"
+# apiVersion: helm.toolkit.fluxcd.io/v2beta1
+# kind: HelmRelease
+# metadata:
+#   name: neo4j
+#   namespace: default
+# spec:
+#   chart:
+#     spec:
+#       chart: neo4j
+#       sourceRef:
+#         kind: HelmRepository
+#         name: neo4j
+#         namespace: flux-system
+#       version: "5.24.1"
+#   interval: 24h
+#   values:
+#     neo4j:
+#       name: neo4j-standalone
+#       resources:
+#         cpu: "12"
+#         memory: "10Gi"
 
-      # Uncomment to set the initial password
-      #password: "my-initial-password"
+#       # Uncomment to set the initial password
+#       #password: "my-initial-password"
 
-      # Uncomment to use enterprise edition
-      #edition: "enterprise"
-      #acceptLicenseAgreement: "yes"
+#       # Uncomment to use enterprise edition
+#       #edition: "enterprise"
+#       #acceptLicenseAgreement: "yes"
 
-    volumes:
-      data:
-        mode: defaultStorageClass
-        defaultStorageClass:
-          requests:
-            storage: 50Gi
+#     volumes:
+#       data:
+#         mode: defaultStorageClass
+#         defaultStorageClass:
+#           requests:
+#             storage: 50Gi
