@@ -16,9 +16,9 @@ spec:
   values:
     neo4j:
       name: neo4j-standalone
-      # resources:
-      # cpu: ""
-      # memory: "2Gi"
+      resources:
+        cpu: "12"
+        memory: "10Gi"
 
       # Uncomment to set the initial password
       #password: "my-initial-password"
