@@ -1,0 +1,128 @@
+---
+- name: "Set VyOS VLAN"
+  hosts: vyos
+  connection: network_cli
+  serial: 1
+  vars:
+    vlan: 101
+    vlan_description: "Sting"
+    vlan_interface: "eth2"
+    site: "AMS"
+    tenant: "Sting"
+    v6_open: false
+    # max 10!
+    wg_address:
+      - "10.10.11.2"
+      - "10.10.11.9"
+    # ----------------------------------------------
+    vlan_address: "10.10.{{ vlan }}.1/24"
+    vlan_address_wo_prefix: "10.10.{{ vlan }}.1"
+    vlan_address6: "2a05:dfc1:8502:{{ vlan }}::1/64"
+    vlan_prefix: "10.10.{{ vlan }}.0/24"
+    vlan_prefix6: "2a05:dfc1:8502:{{ vlan }}::/64"
+    vlan_name: "V{{ vlan }}"
+    vlan_dhcp_range_start: "10.10.{{ vlan }}.100"
+    vlan_dhcp_range_stop: "10.10.{{ vlan }}.200"
+    wg_interface: wg0
+
+  tasks:
+    - name: "Create vlan {{ vlan }}"
+      vyos.vyos.vyos_config:
+        lines:
+          - set interfaces ethernet {{ vlan_interface }} vif {{ vlan }} address {{ vlan_address }}
+          - set interfaces ethernet {{ vlan_interface }} vif {{ vlan }} address {{ vlan_address6 }}
+          - set interfaces ethernet {{ vlan_interface }} vif {{ vlan }} description "{{ vlan_description }}"
+
+          # - name: "Set firewall rules"
+          #   vyos.vyos.vyos_config:
+          #     lines:
+          - set firewall group interface-group VLAN interface "{{ vlan_interface }}.{{ vlan }}"
+          - set firewall ipv4 name VLAN-VLAN rule {{ vlan }} description "{{ vlan_name }}"
+          - set firewall ipv4 name VLAN-VLAN rule {{ vlan }} source address {{ vlan_prefix }}
+          - set firewall ipv4 name VLAN-VLAN rule {{ vlan }} destination  address {{ vlan_prefix }}
+          - set firewall ipv4 name VLAN-VLAN rule {{ vlan }} action accept
+
+          # - name: "Set SLAAC"
+          #   vyos.vyos.vyos_config:
+          #     lines:
+          - set service router-advert interface {{ vlan_interface }}.{{ vlan }} prefix {{ vlan_prefix6 }}
+
+          # - name: "Set DHCP"
+          #   vyos.vyos.vyos_config:
+          #     lines:
+          - set service dhcp-server listen-address {{ vlan_address_wo_prefix }}
+          - set service dhcp-server shared-network-name {{ vlan_name }} authoritative
+          - set service dhcp-server shared-network-name {{ vlan_name }} ping-check
+          - set service dhcp-server shared-network-name {{ vlan_name }} domain-name {{ vlan_name }}.local.boem
+          - set service dhcp-server shared-network-name {{ vlan_name }} subnet {{ vlan_prefix }} default-router {{ vlan_address_wo_prefix }}
+          - set service dhcp-server shared-network-name {{ vlan_name }} subnet {{ vlan_prefix }} name-server 10.10.10.1
+          - set service dhcp-server shared-network-name {{ vlan_name }} subnet {{ vlan_prefix }} lease 21600
+          - set service dhcp-server shared-network-name {{ vlan_name }} subnet {{ vlan_prefix }} range 0 start {{ vlan_dhcp_range_start }}
+          - set service dhcp-server shared-network-name {{ vlan_name }} subnet {{ vlan_prefix }} range 0 stop {{ vlan_dhcp_range_stop }}
+
+    - name: "Open v6 subnet in firewall"
+      vyos.vyos.vyos_config:
+        lines:
+          - set firewall ipv6 name WAN-VLAN6 rule {{ vlan }} action accept
+          - set firewall ipv6 name WAN-VLAN6 rule {{ vlan }} destination address {{ vlan_prefix6 }}
+      when: v6_open
+
+    - name: "Set Allow WG group"
+      vyos.vyos.vyos_config:
+        lines:
+          - set firewall group address-group {{ vlan_name }}-WG-ALLOW address {{ item }}
+      when: wg_address
+      loop: "{{ wg_address }}"
+
+    - name: "Create Allow WG firewall rule"
+      vyos.vyos.vyos_config:
+        lines:
+          - set firewall ipv4 name WG-VLAN rule {{ vlan }}1 action accept
+          - set firewall ipv4 name WG-VLAN rule {{ vlan }}1 description "WG allow V{{ vlan }}"
+          - set firewall ipv4 name WG-VLAN rule {{ vlan }}1 destination address {{ vlan_prefix }}
+          - set firewall ipv4 name WG-VLAN rule {{ vlan }}1 source group address-group {{ vlan_name }}-WG-ALLOW
+          - set firewall ipv4 name WG-VLAN rule {{ vlan }}2 action accept
+          - set firewall ipv4 name WG-VLAN rule {{ vlan }}2 description "WG allow V{{ vlan }}"
+          - set firewall ipv4 name WG-VLAN rule {{ vlan }}2 source address {{ vlan_prefix }}
+          - set firewall ipv4 name WG-VLAN rule {{ vlan }}2 destination group address-group {{ vlan_name }}-WG-ALLOW
+      when: wg_address
+
+    - name: "Save VyOS config"
+      vyos.vyos.vyos_config:
+        save: true
+
+    - name: "Set Netbox VLAN"
+      netbox.netbox.netbox_vlan:
+        netbox_url: "{{ netbox_url }}"
+        netbox_token: "{{ netbox_token }}"
+        validate_certs: false
+        data:
+          name: "{{ vlan_name }}"
+          vid: "{{ vlan }}"
+          site: "{{ site }}"
+          tenant: "{{ tenant }}"
+          description: "{{ vlan_description }}"
+
+    - name: "Set Netbox prefix"
+      netbox.netbox.netbox_prefix:
+        netbox_url: "{{ netbox_url }}"
+        netbox_token: "{{ netbox_token }}"
+        validate_certs: false
+        data:
+          prefix: "{{ vlan_prefix }}"
+          vlan: "{{ vlan_name }}"
+          tenant: "{{ tenant }}"
+          site: "{{ site }}"
+          description: "{{ vlan_description }}, {{ vlan_name }}"
+
+    - name: "Set Netbox prefix (V6)"
+      netbox.netbox.netbox_prefix:
+        netbox_url: "{{ netbox_url }}"
+        netbox_token: "{{ netbox_token }}"
+        validate_certs: false
+        data:
+          prefix: "{{ vlan_prefix6 }}"
+          vlan: "{{ vlan_name }}"
+          tenant: "{{ tenant }}"
+          site: "{{ site }}"
+          description: "{{ vlan_description }}, {{ vlan_name }} (V6)"

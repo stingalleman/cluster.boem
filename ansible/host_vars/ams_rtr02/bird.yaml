@@ -1,0 +1,10 @@
+bird_downstreams:
+  - name: sting
+    asn: 216455
+    as_set: AS216455:AS-STING
+    quarantine: no
+    address_families:
+      - inet6
+    ipv6:
+      peer: 2a07:e345:1:3001::2
+      source: 2a07:e345:1:3001::69

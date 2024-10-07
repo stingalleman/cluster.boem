@@ -1,0 +1,86 @@
+---
+- name: Upgrade worker nodes to
+  hosts: worker_nodes
+  serial: 1
+  become: true
+  # vars_prompt:
+  #   - name: k8s_version
+  #     prompt: "Kubernetes version to update to?"
+
+  tasks:
+    - name: Unhold kubeadm
+      ansible.builtin.dpkg_selections:
+        name: kubeadm
+        selection: install
+
+    - name: Upgrade kubeadm
+      ansible.builtin.apt:
+        update_cache: true
+        name: kubeadm={{ k8s_version }}
+      when: not ansible_check_mode
+      register: kubeadm_upgrade
+
+    - name: Hold kubeadm
+      ansible.builtin.dpkg_selections:
+        name: kubeadm
+        selection: hold
+
+    - name: Upgrade kubeadm node
+      ansible.builtin.command:
+        cmd: /usr/bin/kubeadm upgrade node
+      changed_when: true
+
+    - name: exit
+      ansible.builtin.meta: endplay
+
+    # - name: Drain node
+    #   kubernetes.core.k8s_drain:
+    #     name: "{{ ansible_hostname }}"
+    #     state: drain
+    #     delete_options:
+    #       ignore_daemonsets: true
+    #       delete_emptydir_data: true
+    #       wait_timeout: 0
+    #   delegate_to: "{{ groups['control_planes'][0] }}"
+    #   become_user: server
+    #   tags: ["run-this-please"]
+    # when: kubeadm_upgrade.changed # noqa: no-handler
+
+    - name: "Drain node {{ ansible_hostname }}"
+
+    - name: Unhold kubelet & kubectl
+      ansible.builtin.dpkg_selections:
+        name: "{{ item }}"
+        selection: install
+      loop:
+        - kubectl
+        - kubelet
+
+    - name: Upgrade kubeadm
+      ansible.builtin.apt:
+        update_cache: true
+        name:
+          - kubelet={{ k8s_version }}
+          - kubectl={{ k8s_version }}
+      when: not ansible_check_mode
+
+    - name: Hold kubelet & kubectl
+      ansible.builtin.dpkg_selections:
+        name: "{{ item }}"
+        selection: hold
+      loop:
+        - kubectl
+        - kubelet
+
+    - name: Restart kubelet
+      ansible.builtin.systemd:
+        name: kubelet
+        daemon_reload: true
+        state: restarted
+
+    - name: Undrain node
+      kubernetes.core.k8s_drain:
+        name: "{{ ansible_hostname }}"
+        state: uncordon
+      delegate_to: "{{ groups['control_planes'][0] }}"
+      become_user: server
