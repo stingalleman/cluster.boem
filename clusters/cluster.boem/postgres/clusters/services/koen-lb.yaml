@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: koen-lb-primary
   namespace: cnpg-system
+  labels:
+    lb-pool: external
   annotations:
     io.cilium/lb-ipam-ips: "45.83.205.10"
 spec:
