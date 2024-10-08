@@ -4,7 +4,7 @@ metadata:
   name: koen-lb-primary
   namespace: cnpg-system
   annotations:
-    io.cilium/lb-ipam-ips: "45.83.205.9"
+    io.cilium/lb-ipam-ips: "45.83.205.10"
 spec:
   type: LoadBalancer
   ports:
