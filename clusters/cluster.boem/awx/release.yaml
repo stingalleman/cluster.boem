@@ -1,0 +1,16 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: awx-operator
+  namespace: default
+spec:
+  chart:
+    spec:
+      # version: 1.15.0-rc.1
+      chart: awx-operator
+      sourceRef:
+        kind: HelmRepository
+        name: awx-operator
+        namespace: flux-system
+  interval: 24h
+  values:
