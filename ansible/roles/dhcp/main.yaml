@@ -1,0 +1,57 @@
+---
+- name: "Install and configure DHCP"
+  gather_facts: false
+  hosts: ams_rtr02
+  become: true
+  tasks:
+    - name: Install packages
+      ansible.builtin.apt:
+        name:
+          - debian-keyring
+          - apt-transport-https
+          - debian-archive-keyring
+
+    - name: Setup Cloudsmith repository
+      ansible.builtin.deb822_repository:
+        name: kea-2-6
+        types: [deb]
+        uris: "https://dl.cloudsmith.io/public/isc/kea-2-6/deb/debian"
+        components: [main]
+        suites: [bookworm]
+        signed_by: https://dl.cloudsmith.io/public/isc/kea-2-6/gpg.63D408891D8B8D01.key
+        state: present
+        enabled: true
+
+    - name: Install Kea packages
+      ansible.builtin.apt:
+        name:
+          - isc-kea-dhcp4
+          - isc-kea-dhcp-ddns
+          - isc-kea-ctrl-agent
+          - isc-kea-admin
+        update_cache: true
+
+    - name: Copy Kea configuration
+      ansible.builtin.copy:
+        src: files/kea-dhcp4.conf.jsonc
+        dest: /etc/kea/kea-dhcp4.conf
+        owner: _kea
+        group: _kea
+        mode: "0640"
+      notify:
+        - Restart & enable dhcp4
+
+  handlers:
+    - name: Restart & enable dhcp4
+      ansible.builtin.systemd:
+        name: isc-kea-dhcp4-server
+        enabled: true
+        state: restarted
+      notify: Ensure dhcp4 is healthy
+
+    - name: Ensure dhcp4 is healthy
+      ansible.builtin.systemd_service:
+        name: isc-kea-dhcp4-server
+        state: started
+      register: dhcp4_service
+      until: dhcp4_service.status.ActiveState == "active"
