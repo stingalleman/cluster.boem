@@ -135,5 +135,13 @@ spec:
           namespace: default
           port: 8123
 
+    - kind: Rule
+      match: Host(`bloembergen.stingalleman.nl`)
+      services:
+        - kind: Service
+          name: bloembergen-stingalleman-nl
+          namespace: default
+          port: 8123
+
   tls:
     secretName: stingalleman.nl-prod-tls
