@@ -1,0 +1,9 @@
+- name: Copy nftables configuration
+  ansible.builtin.template:
+    src: nftables.conf
+    dest: /etc/nftables.conf
+    owner: root
+    group: root
+    mode: "0644"
+    validate: nft -c -f %s
+  notify: Apply config
