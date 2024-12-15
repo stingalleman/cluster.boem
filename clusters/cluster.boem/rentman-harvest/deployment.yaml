@@ -1,50 +1,50 @@
-apiVersion: batch/v1
-kind: CronJob
-metadata:
-  name: rentman-harvest
-  namespace: default
-spec:
-  schedule: "*/5 * * * *"
-  jobTemplate:
-    spec:
-      template:
-        spec:
-          containers:
-            - name: rentman-harvest
-              image: harbor.stingalleman.nl/library/rentman-harvest:latest
-              # image: harbor.stingalleman.nl/library/rentman-harvest:latest
-              imagePullPolicy: Always
-              env:
-                - name: HARVEST_TOKEN
-                  valueFrom:
-                    secretKeyRef:
-                      name: rentman-harvest
-                      key: harvest_token
-                - name: HARVEST_ACCOUNT_ID
-                  valueFrom:
-                    secretKeyRef:
-                      name: rentman-harvest
-                      key: harvest_account_id
-                - name: HARVEST_NVT_CLIENT
-                  valueFrom:
-                    secretKeyRef:
-                      name: rentman-harvest
-                      key: harvest_nvt_client
-                - name: HARVEST_USER_AGENT
-                  valueFrom:
-                    secretKeyRef:
-                      name: rentman-harvest
-                      key: harvest_user_agent
-                - name: RENTMAN_TOKEN
-                  valueFrom:
-                    secretKeyRef:
-                      name: rentman-harvest
-                      key: rentman_token
-                - name: RENTMAN_BTDB_ID
-                  valueFrom:
-                    secretKeyRef:
-                      name: rentman-harvest
-                      key: rentman_btdb_id
-          imagePullSecrets:
-            - name: harbor-login-secret
-          restartPolicy: OnFailure
+# apiVersion: batch/v1
+# kind: CronJob
+# metadata:
+#   name: rentman-harvest
+#   namespace: default
+# spec:
+#   schedule: "*/5 * * * *"
+#   jobTemplate:
+#     spec:
+#       template:
+#         spec:
+#           containers:
+#             - name: rentman-harvest
+#               image: harbor.stingalleman.nl/library/rentman-harvest:latest
+#               # image: harbor.stingalleman.nl/library/rentman-harvest:latest
+#               imagePullPolicy: Always
+#               env:
+#                 - name: HARVEST_TOKEN
+#                   valueFrom:
+#                     secretKeyRef:
+#                       name: rentman-harvest
+#                       key: harvest_token
+#                 - name: HARVEST_ACCOUNT_ID
+#                   valueFrom:
+#                     secretKeyRef:
+#                       name: rentman-harvest
+#                       key: harvest_account_id
+#                 - name: HARVEST_NVT_CLIENT
+#                   valueFrom:
+#                     secretKeyRef:
+#                       name: rentman-harvest
+#                       key: harvest_nvt_client
+#                 - name: HARVEST_USER_AGENT
+#                   valueFrom:
+#                     secretKeyRef:
+#                       name: rentman-harvest
+#                       key: harvest_user_agent
+#                 - name: RENTMAN_TOKEN
+#                   valueFrom:
+#                     secretKeyRef:
+#                       name: rentman-harvest
+#                       key: rentman_token
+#                 - name: RENTMAN_BTDB_ID
+#                   valueFrom:
+#                     secretKeyRef:
+#                       name: rentman-harvest
+#                       key: rentman_btdb_id
+#           imagePullSecrets:
+#             - name: harbor-login-secret
+#           restartPolicy: OnFailure
