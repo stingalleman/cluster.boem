@@ -4,15 +4,19 @@ metadata:
   name: wordpress-dwrg
   namespace: default
 spec:
-  chart:
-    spec:
-      # version: 55.8.1
-      chart: wordpress
-      sourceRef:
-        kind: HelmRepository
-        name: bitnami
-        namespace: flux-system
+  releaseName: wordpress-dwrg
   interval: 24h
+  chartRef:
+    kind: OCIRepository
+    name: bitnami-wordpress
+  # chart:
+  #   spec:
+  #     # version: 55.8.1
+  #     chart: wordpress
+  #     sourceRef:
+  #       kind: HelmRepository
+  #       name: bitnami
+  #       namespace: flux-system
   values:
     ## WordPress service parameters
     ##
