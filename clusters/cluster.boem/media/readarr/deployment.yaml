@@ -1,0 +1,77 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: readarr
+#   namespace: media
+#   labels:
+#     app: readarr
+# spec:
+#   selector:
+#     matchLabels:
+#       app: readarr
+#   replicas: 1
+#   strategy:
+#     rollingUpdate:
+#       maxSurge: 25%
+#       maxUnavailable: 25%
+#     type: RollingUpdate
+#   template:
+#     metadata:
+#       labels:
+#         app: readarr
+#     spec:
+#       containers:
+#         - name: readarr
+#           image: lscr.io/linuxserver/readarr:develop
+#           # resources:
+#           #   requests:
+#           #     cpu: 100m
+#           #     memory: 100Mi
+#           #   limits:
+#           #     cpu: 100m
+#           #     memory: 100Mi
+#           livenessProbe:
+#             tcpSocket:
+#               port: 80
+#             initialDelaySeconds: 10
+#             timeoutSeconds: 5
+#             successThreshold: 1
+#             failureThreshold: 3
+#             periodSeconds: 10
+#           readinessProbe:
+#             httpGet:
+#               path: /
+#               port: 80
+#             initialDelaySeconds: 10
+#             timeoutSeconds: 2
+#             successThreshold: 1
+#             failureThreshold: 3
+#             periodSeconds: 10
+#           env:
+#             - name: PUID
+#               value: "1000"
+#             - name: PGID
+#               value: "1000"
+#             - name: TZ
+#               value: Europe/Amsterdam
+#           ports:
+#             - containerPort: 8787
+#               name: http
+#           volumeMounts:
+#             - name: readarr-data
+#               mountPath: /config
+#             - name: readarr-books
+#               mountPath: /books
+#             - name: media-downloads
+#               mountPath: /downloads
+#       volumes:
+#         - name: readarr-data
+#           persistentVolumeClaim:
+#             claimName: readarr-data
+#         - name: readarr-books
+#           persistentVolumeClaim:
+#             claimName: readarr-books
+#         - name: media-downloads
+#           persistentVolumeClaim:
+#             claimName: media-downloads
+#       restartPolicy: Always
