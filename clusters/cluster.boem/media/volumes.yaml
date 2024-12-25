@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: media-downloads
-  namespace: media
+  namespace: default
   labels:
     app: media-downloads
 spec:

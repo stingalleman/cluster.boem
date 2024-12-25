@@ -3,7 +3,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: readarr-data
-  namespace: media
+  namespace: default
   labels:
     app: readarr-data
 spec:
@@ -17,7 +17,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: readarr-books
-  namespace: media
+  namespace: default
   labels:
     app: readarr-books
 spec:
