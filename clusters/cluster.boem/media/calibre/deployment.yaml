@@ -63,16 +63,16 @@ spec:
               value: Europe/Amsterdam
           ports:
             - containerPort: 8080
-              name: calibre_desktop
+              name: calibre-desktop
             - containerPort: 8181
-              name: calibre_desktop-https
+              name: calibre-desktop-https
             - containerPort: 8081
-              name: calibre_webserver
+              name: calibre-webserver
           volumeMounts:
-            - name: calibre_config
+            - name: calibre-config
               mountPath: /config
       restartPolicy: Always
       volumes:
-        - name: calibre_config
+        - name: calibre-config
           persistentVolumeClaim:
-            claimName: calibre_config
+            claimName: calibre-config
