@@ -11,5 +11,5 @@ spec:
         kind: HelmRepository
         name: minio
         namespace: flux-system
-      version: "6.0.3"
+      version: "6.0.4"
   interval: 24h
