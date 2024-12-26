@@ -50,8 +50,8 @@ spec:
           env:
             - name: TZ
               value: Europe/Amsterdam
-            - name: DOCKER_MODS
-              value: linuxserver/mods:universal-calibre
+            # - name: DOCKER_MODS
+            #   value: linuxserver/mods:universal-calibre
             - name: OAUTHLIB_RELAX_TOKEN_SCOPE
               value: "1"
           ports:
