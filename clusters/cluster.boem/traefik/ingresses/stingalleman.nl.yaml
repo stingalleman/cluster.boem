@@ -139,9 +139,9 @@ spec:
       match: Host(`kobo.stingalleman.nl`)
       services:
         - kind: Service
-          name: bloembergen-stingalleman-nl
-          namespace: default
-          port: 8123
+          name: calibre-web
+          namespace: media
+          port: 8083
 
   tls:
     secretName: stingalleman.nl-prod-tls
