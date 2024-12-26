@@ -1,72 +1,76 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: calibre-web
-  namespace: media
-  labels:
-    app: calibre-web
-spec:
-  selector:
-    matchLabels:
-      app: calibre-web
-  replicas: 1
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
-  template:
-    metadata:
-      labels:
-        app: calibre-web
-    spec:
-      containers:
-        - name: calibre-web
-          image: lscr.io/linuxserver/calibre-web:latest
-          resources:
-            requests:
-              memory: "128Mi"
-              cpu: "100m"
-            limits:
-              memory: "512Mi"
-              cpu: "1000m"
-          # livenessProbe:
-          #   tcpSocket:
-          #     port: 8083
-          #   initialDelaySeconds: 5
-          #   timeoutSeconds: 5
-          #   successThreshold: 1
-          #   failureThreshold: 10
-          #   periodSeconds: 10
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 8083
-          #   initialDelaySeconds: 5
-          #   timeoutSeconds: 2
-          #   successThreshold: 1
-          #   failureThreshold: 10
-          #   periodSeconds: 10
-          env:
-            - name: TZ
-              value: Europe/Amsterdam
-            # - name: DOCKER_MODS
-            #   value: linuxserver/mods:universal-calibre
-            - name: OAUTHLIB_RELAX_TOKEN_SCOPE
-              value: "1"
-          ports:
-            - containerPort: 8083
-              name: calibre-web
-          volumeMounts:
-            - name: calibre-web-data
-              mountPath: /config
-            - name: calibre-config
-              mountPath: /books
-      volumes:
-        - name: calibre-web-data
-          persistentVolumeClaim:
-            claimName: calibre-web-data
-        - name: calibre-config
-          persistentVolumeClaim:
-            claimName: calibre-config
-      restartPolicy: Always
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: calibre-web
+#   namespace: media
+#   labels:
+#     app: calibre-web
+# spec:
+#   selector:
+#     matchLabels:
+#       app: calibre-web
+#   replicas: 1
+#   strategy:
+#     rollingUpdate:
+#       maxSurge: 25%
+#       maxUnavailable: 25%
+#     type: RollingUpdate
+#   template:
+#     metadata:
+#       labels:
+#         app: calibre-web
+#     spec:
+#       containers:
+#         - name: calibre-web
+#           image: lscr.io/linuxserver/calibre-web:latest
+#           resources:
+#             requests:
+#               memory: "128Mi"
+#               cpu: "100m"
+#             limits:
+#               memory: "512Mi"
+#               cpu: "1000m"
+#           # livenessProbe:
+#           #   tcpSocket:
+#           #     port: 8083
+#           #   initialDelaySeconds: 5
+#           #   timeoutSeconds: 5
+#           #   successThreshold: 1
+#           #   failureThreshold: 10
+#           #   periodSeconds: 10
+#           # readinessProbe:
+#           #   httpGet:
+#           #     path: /
+#           #     port: 8083
+#           #   initialDelaySeconds: 5
+#           #   timeoutSeconds: 2
+#           #   successThreshold: 1
+#           #   failureThreshold: 10
+#           #   periodSeconds: 10
+#           env:
+#             - name: TZ
+#               value: Europe/Amsterdam
+#             - name: DOCKER_MODS
+#               value: linuxserver/mods:universal-calibre
+#             - name: OAUTHLIB_RELAX_TOKEN_SCOPE
+#               value: "1"
+#             - name: PUID
+#               value: "1001"
+#             - name: PGID
+#               value: "1001"
+#           ports:
+#             - containerPort: 8083
+#               name: calibre-web
+#           volumeMounts:
+#             - name: calibre-web-data
+#               mountPath: /config
+#             - name: calibre-config
+#               mountPath: /books
+#       volumes:
+#         - name: calibre-web-data
+#           persistentVolumeClaim:
+#             claimName: calibre-web-data
+#         - name: calibre-config
+#           persistentVolumeClaim:
+#             claimName: calibre-config
+#       restartPolicy: Always
