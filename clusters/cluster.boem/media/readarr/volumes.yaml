@@ -5,7 +5,7 @@ metadata:
   name: readarr-data
   namespace: media
   labels:
-    app: readarr-data
+    app: readarr
 spec:
   accessModes:
     - ReadWriteMany
@@ -19,7 +19,7 @@ metadata:
   name: readarr-books
   namespace: media
   labels:
-    app: readarr-books
+    app: readarr
 spec:
   accessModes:
     - ReadWriteMany
