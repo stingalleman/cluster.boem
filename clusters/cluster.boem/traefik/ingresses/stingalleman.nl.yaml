@@ -112,14 +112,6 @@ spec:
           port: 5006
 
     - kind: Rule
-      match: Host(`n8n.stingalleman.nl`)
-      services:
-        - kind: Service
-          name: n8n
-          namespace: n8n
-          port: 80
-
-    - kind: Rule
       match: Host(`harbor.stingalleman.nl`)
       services:
         - kind: Service

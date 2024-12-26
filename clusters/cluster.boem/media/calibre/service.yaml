@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: calibre-
+  name: calibre_
   namespace: media
 spec:
   selector:
     app: calibre
   type: ClusterIP
   ports:
-    - name: calibre-desktop
+    - name: calibre_desktop
       protocol: TCP
       port: 8080
       targetPort: 8080
@@ -16,7 +16,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: calibre-desktop-https
+  name: calibre_desktop-https
   namespace: media
 spec:
   selector:
@@ -31,7 +31,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: calibre-webserver
+  name: calibre_webserver
   namespace: media
 spec:
   selector:

@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: calibre-config
+  name: calibre_config
   namespace: media
   labels:
     app: calibre
