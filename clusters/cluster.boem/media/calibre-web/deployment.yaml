@@ -25,28 +25,28 @@ spec:
           image: lscr.io/linuxserver/calibre-web:latest
           resources:
             requests:
-              cpu: 100m
-              memory: 100Mi
+              memory: "128Mi"
+              cpu: "100m"
             limits:
-              cpu: 100m
-              memory: 100Mi
-          livenessProbe:
-            tcpSocket:
-              port: 8083
-            initialDelaySeconds: 5
-            timeoutSeconds: 5
-            successThreshold: 1
-            failureThreshold: 10
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 8083
-            initialDelaySeconds: 5
-            timeoutSeconds: 2
-            successThreshold: 1
-            failureThreshold: 10
-            periodSeconds: 10
+              memory: "512Mi"
+              cpu: "1000m"
+          # livenessProbe:
+          #   tcpSocket:
+          #     port: 8083
+          #   initialDelaySeconds: 5
+          #   timeoutSeconds: 5
+          #   successThreshold: 1
+          #   failureThreshold: 10
+          #   periodSeconds: 10
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 8083
+          #   initialDelaySeconds: 5
+          #   timeoutSeconds: 2
+          #   successThreshold: 1
+          #   failureThreshold: 10
+          #   periodSeconds: 10
           env:
             - name: TZ
               value: Europe/Amsterdam
