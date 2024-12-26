@@ -71,8 +71,13 @@ spec:
           volumeMounts:
             - name: calibre-config
               mountPath: /config
+            - name: calibre-import
+              mountPath: /import
       restartPolicy: Always
       volumes:
         - name: calibre-config
           persistentVolumeClaim:
             claimName: calibre-config
+        - name: calibre-import
+          persistentVolumeClaim:
+            claimName: calibre-import
