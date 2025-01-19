@@ -14,8 +14,8 @@ spec:
         namespace: flux-system
   interval: 24h
   values:
-    nodeSelector:
-      kubernetes.io/hostname: k-work-1
+    # nodeSelector:
+    # kubernetes.io/hostname: k-work-1
     nfs:
       server: "10.10.102.20"
       path: "/media/nfs/kluster.boem"
