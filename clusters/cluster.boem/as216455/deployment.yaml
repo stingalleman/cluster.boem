@@ -22,11 +22,11 @@ spec:
       labels:
         app: sting-as-site
     spec:
-      imagePullSecrets:
-        - name: harbor-login-secret
+      # imagePullSecrets:
+      #   - name: harbor-login-secret
       containers:
         - name: sting-as-site
-          image: harbor.stingalleman.nl/dockerhub/caddy:latest
+          image: caddy:latest
           resources:
             requests:
               cpu: 100m
