@@ -22,6 +22,8 @@ spec:
       labels:
         app: sting-as-site
     spec:
+      imagePullSecrets:
+        - name: harbor-login-secret
       containers:
         - name: sting-as-site
           image: caddy:latest
