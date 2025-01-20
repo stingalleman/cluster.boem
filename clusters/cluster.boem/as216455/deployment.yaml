@@ -24,9 +24,7 @@ spec:
     spec:
       containers:
         - name: sting-as-site
-          image: harbor.stingalleman.nl/dockerhub_unauth/caddy:latest
-          imagePullSecrets:
-            - name: harbor-login-secret
+          image: caddy:latest
           resources:
             requests:
               cpu: 100m
