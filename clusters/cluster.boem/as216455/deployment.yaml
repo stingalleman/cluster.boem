@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: sting-as-site
-          image: caddy:latest
+          image: harbor.stingalleman.nl/dockerhub/caddy:latest
           resources:
             requests:
               cpu: 100m
