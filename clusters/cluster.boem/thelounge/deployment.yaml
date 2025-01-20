@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
       app: thelounge
-  replicas: 0
+  replicas: 1
   template:
     metadata:
       labels:
