@@ -1,0 +1,16 @@
+---
+- name: Configure nftables
+  hosts: 127.0.0.1
+  connection: local
+  vars:
+    nodes:
+      - 10.10.102.11
+      # - 10.10.102.101
+      # - 10.10.102.102
+      # - 10.10.102.103
+    version: v1.6.7
+  tasks:
+    - name: "Upgrade node {{ item }}"
+      ansible.builtin.command:
+        cmd: "talosctl upgrade -n {{ item }} --image ghcr.io/siderolabs/installer:{{ version }} --preserve"
+      loop: "{{ nodes }}"
