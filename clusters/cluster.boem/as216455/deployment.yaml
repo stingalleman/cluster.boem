@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: sting-as-site
-          image: harbor.stingalleman.nl/dockerhub/caddy:latest
+          image: harbor.stingalleman.nl/dockerhub_unauth/caddy:latest
           imagePullSecrets:
             - name: harbor-login-secret
           resources:
