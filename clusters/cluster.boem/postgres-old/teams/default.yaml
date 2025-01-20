@@ -1,6 +1,0 @@
-apiVersion: acid.zalan.do/v1
-kind: PostgresTeam
-metadata:
-  name: default
-  namespace: postgres
-spec: {}

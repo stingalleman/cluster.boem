@@ -1,47 +1,47 @@
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  labels:
-    app: influxdb
-  name: influxdb
-  namespace: influxdb
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: influxdb
-  serviceName: influxdb
-  template:
-    metadata:
-      labels:
-        app: influxdb
-    spec:
-      containers:
-        - image: influxdb:2.7.3
-          name: influxdb
-          ports:
-            - containerPort: 8086
-              name: influxdb
-          volumeMounts:
-            - mountPath: /var/lib/influxdb2
-              name: data
-          env:
-            - name: TZ
-              value: "Europe/Amsterdam"
-      resources:
-        # requests:
-        #   memory: "64Mi"
-        #   cpu: "250m"
-        limits:
-          memory: "1024Mi"
-          cpu: "500m"
-  volumeClaimTemplates:
-    - metadata:
-        name: data
-        namespace: influxdb
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 10G
+# apiVersion: apps/v1
+# kind: StatefulSet
+# metadata:
+#   labels:
+#     app: influxdb
+#   name: influxdb
+#   namespace: influxdb
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: influxdb
+#   serviceName: influxdb
+#   template:
+#     metadata:
+#       labels:
+#         app: influxdb
+#     spec:
+#       containers:
+#         - image: influxdb:2.7.3
+#           name: influxdb
+#           ports:
+#             - containerPort: 8086
+#               name: influxdb
+#           volumeMounts:
+#             - mountPath: /var/lib/influxdb2
+#               name: data
+#           env:
+#             - name: TZ
+#               value: "Europe/Amsterdam"
+#       resources:
+#         # requests:
+#         #   memory: "64Mi"
+#         #   cpu: "250m"
+#         limits:
+#           memory: "1024Mi"
+#           cpu: "500m"
+#   volumeClaimTemplates:
+#     - metadata:
+#         name: data
+#         namespace: influxdb
+#       spec:
+#         accessModes:
+#           - ReadWriteOnce
+#         resources:
+#           requests:
+#             storage: 10G
