@@ -1,18 +1,14 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: wordpress
   namespace: default
 spec:
-  chart:
-    spec:
-      # version: 55.8.1
-      chart: wordpress
-      sourceRef:
-        kind: HelmRepository
-        name: bitnami
-        namespace: flux-system
+  releaseName: wordpress-dwrg
   interval: 24h
+  chartRef:
+    kind: OCIRepository
+    name: bitnami-wordpress-oci
   values:
     resourcesPreset: xlarge
     wordpressConfigureCache: true
