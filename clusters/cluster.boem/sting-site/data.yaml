@@ -1,0 +1,23 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: sting-site-data
+  namespace: default
+data:
+  index.html: |
+    <html>
+      <body>
+        hoi dit is stingalleman.nl
+      </body>
+    </html>
+  geofeed.csv: |
+    2a05:dfc1:8500::/40,NL,NL-NH,Amsterdam,
+    2a05:dfc1:9600::/40,NL,NL-NH,Amsterdam,
+    2a05:dfc1:8501::/48,NL,NL-NH,Amsterdam,
+    2a05:dfc1:8502::/48,NL,NL-NH,Amsterdam,
+    2a05:dfc1:8510::/48,NL,NL-NH,Amsterdam,
+    2a05:dfc1:858f::/48,NL,NL-NB,Eindhoven,
+    2a07:54c7:5000::/36,NL,NL-NH,Amsterdam
+    2a07:54c7:5100::/40,NL,NL-NH,Amsterdam
+    2a07:54c7:5100:abba::/64,NL,NL-NH,Amsterdam
+    2a07:54c7:5901::/48,NL,NL-NH,Amsterdam
