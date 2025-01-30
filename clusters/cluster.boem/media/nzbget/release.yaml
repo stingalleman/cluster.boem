@@ -40,9 +40,9 @@ spec:
           #   periodSeconds: 5
           env:
             - name: PUID
-              value: "1000"
+              value: "1001"
             - name: PGID
-              value: "1000"
+              value: "1001"
             - name: TZ
               value: "Europe/Amsterdam"
             - name: NZBGET_USER
