@@ -35,23 +35,23 @@ spec:
           #   limits:
           #     cpu: 100m
           #     memory: 100Mi
-          livenessProbe:
-            tcpSocket:
-              port: 5299
-            initialDelaySeconds: 5
-            timeoutSeconds: 5
-            successThreshold: 1
-            failureThreshold: 10
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 5299
-            initialDelaySeconds: 5
-            timeoutSeconds: 2
-            successThreshold: 1
-            failureThreshold: 10
-            periodSeconds: 10
+          # livenessProbe:
+          #   tcpSocket:
+          #     port: 5299
+          #   initialDelaySeconds: 5
+          #   timeoutSeconds: 5
+          #   successThreshold: 1
+          #   failureThreshold: 10
+          #   periodSeconds: 5
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 5299
+          #   initialDelaySeconds: 5
+          #   timeoutSeconds: 2
+          #   successThreshold: 1
+          #   failureThreshold: 10
+          #   periodSeconds: 5
           env:
             - name: PUID
               value: "1000"
