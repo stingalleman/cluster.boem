@@ -7,7 +7,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: lazylibrarian
-  namespace: default
+  namespace: media
   labels:
     app: lazylibrarian
 spec:
@@ -60,7 +60,8 @@ spec:
             - name: TZ
               value: "Europe/Amsterdam"
             - name: DOCKER_MODS
-              value: "linuxserver/mods:universal-calibre|linuxserver/mods:lazylibrarian-ffmpeg"
+              value: "linuxserver/mods:universal-calibre"
+              #|linuxserver/mods:lazylibrarian-ffmpeg"
           ports:
             - containerPort: 5299
               name: http
@@ -74,10 +75,10 @@ spec:
       volumes:
         - name: downloads
           persistentVolumeClaim:
-            claimName: lazylibrarian-downloads
+            claimName: media-downloads
         - name: books
           persistentVolumeClaim:
-            claimName: lazylibrarian-books
+            claimName: calibre-config
         - name: config
           persistentVolumeClaim:
             claimName: lazylibrarian-config
