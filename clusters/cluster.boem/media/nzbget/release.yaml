@@ -24,7 +24,7 @@ spec:
               protocol: TCP
           livenessProbe:
             tcpSocket:
-              port: 5299
+              port: 6789
             initialDelaySeconds: 10
             timeoutSeconds: 2
             successThreshold: 1
@@ -33,7 +33,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /
-              port: 5299
+              port: 6789
             initialDelaySeconds: 10
             timeoutSeconds: 2
             successThreshold: 1
