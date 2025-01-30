@@ -40,7 +40,7 @@ spec:
               port: 5299
             initialDelaySeconds: 180
             timeoutSeconds: 2
-            successThreshold: 2
+            successThreshold: 1
             failureThreshold: 60
             periodSeconds: 5
           readinessProbe:
@@ -49,7 +49,7 @@ spec:
               port: 5299
             initialDelaySeconds: 180
             timeoutSeconds: 2
-            successThreshold: 2
+            successThreshold: 1
             failureThreshold: 60
             periodSeconds: 5
           env:
