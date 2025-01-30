@@ -22,23 +22,22 @@ spec:
             - name: http
               containerPort: 6789
               protocol: TCP
-          livenessProbe:
-            tcpSocket:
-              port: 6789
-            initialDelaySeconds: 10
-            timeoutSeconds: 2
-            successThreshold: 1
-            failureThreshold: 60
-            periodSeconds: 5
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 6789
-            initialDelaySeconds: 10
-            timeoutSeconds: 2
-            successThreshold: 1
-            failureThreshold: 60
-            periodSeconds: 5
+          # livenessProbe:
+          #   tcpSocket:
+          #     port: 6789
+          #   initialDelaySeconds: 10
+          #   timeoutSeconds: 2
+          #   successThreshold: 1
+          #   failureThreshold: 60
+          #   periodSeconds: 5
+          # readinessProbe:
+          #   tcpSocket:
+          #     port: 6789
+          #   initialDelaySeconds: 10
+          #   timeoutSeconds: 2
+          #   successThreshold: 1
+          #   failureThreshold: 60
+          #   periodSeconds: 5
           env:
             - name: PUID
               value: "1000"
