@@ -78,7 +78,7 @@ spec:
             claimName: media-downloads
         - name: books
           persistentVolumeClaim:
-            claimName: calibre-config
+            claimName: calibre-import
         - name: config
           persistentVolumeClaim:
             claimName: lazylibrarian-config
