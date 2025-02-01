@@ -135,14 +135,6 @@ spec:
           port: 8123
 
     - kind: Rule
-      match: Host(`kobo.stingalleman.nl`)
-      services:
-        - kind: Service
-          name: calibre-web
-          namespace: media
-          port: 8083
-
-    - kind: Rule
       match: Host(`books.stingalleman.nl`)
       services:
         - kind: Service
