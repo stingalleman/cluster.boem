@@ -142,5 +142,21 @@ spec:
           namespace: media
           port: 8083
 
+    - kind: Rule
+      match: Host(`books.stingalleman.nl`)
+      services:
+        - kind: Service
+          name: calibre-web-automated
+          namespace: media
+          port: http
+
+    - kind: Rule
+      match: Host(`request.books.stingalleman.nl`)
+      services:
+        - kind: Service
+          name: calibre-web-automated-downloader
+          namespace: media
+          port: http
+
   tls:
     secretName: stingalleman.nl-prod-tls

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudflareproxy
+  namespace: media
+  labels:
+    app: cloudflareproxy
+spec:
+  selector:
+    matchLabels:
+      app: cloudflareproxy
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: cloudflareproxy
+    spec:
+      containers:
+        - name: cloudflareproxy
+          image: ghcr.io/sarperavci/cloudflarebypassforscraping:latest
+          ports:
+            - containerPort: 80
+              name: http

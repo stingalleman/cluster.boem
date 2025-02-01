@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calibre-web-automated-downloader
+  namespace: media
+  labels:
+    app: calibre-web-automated-downloader
+spec:
+  selector:
+    matchLabels:
+      app: calibre-web-automated-downloader
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: calibre-web-automated-downloader
+    spec:
+      containers:
+        - name: calibre-web
+          image: ghcr.io/calibrain/calibre-web-automated-book-downloader:latest
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "1000m"
+          # livenessProbe:
+          #   tcpSocket:
+          #     port: 8083
+          #   initialDelaySeconds: 5
+          #   timeoutSeconds: 5
+          #   successThreshold: 1
+          #   failureThreshold: 10
+          #   periodSeconds: 10
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 8083
+          #   initialDelaySeconds: 5
+          #   timeoutSeconds: 2
+          #   successThreshold: 1
+          #   failureThreshold: 10
+          #   periodSeconds: 10
+          env:
+            - name: FLASK_PORT
+              value: "8084"
+            - name: FLASK_DEBUG
+              value: "false"
+            - name: CLOUDFLARE_PROXY_URL
+              value: "http://cloudflareproxy.media:80"
+            - name: INGEST_DIR
+              value: "/cwa-book-ingest"
+            - name: BOOK_LANGUAGE
+              value: "en"
+            # - name: PUID
+            #   value: "1000"
+            # - name: PGID
+            #   value: "1000"
+          ports:
+            - containerPort: 8084
+              name: http
+          volumeMounts:
+            - name: import
+              mountPath: /cwa-book-ingest
+      volumes:
+        - name: import
+          persistentVolumeClaim:
+            claimName: calibre-web-automated-import
+      restartPolicy: Always

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cloudflareproxy
+  namespace: media
+spec:
+  selector:
+    app: cloudflareproxy
+  type: ClusterIP
+  ports:
+    - name: cloudflareproxy
+      protocol: TCP
+      port: 80
+      targetPort: http
