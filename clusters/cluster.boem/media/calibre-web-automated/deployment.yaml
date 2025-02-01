@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calibre-web-automated
+  namespace: media
+  labels:
+    app: calibre-web-automated
+spec:
+  selector:
+    matchLabels:
+      app: calibre-web-automated
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: calibre-web-automated
+    spec:
+      containers:
+        - name: calibre-web
+          image: crocodilestick/calibre-web-automated:latest
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "1000m"
+          # livenessProbe:
+          #   tcpSocket:
+          #     port: 8083
+          #   initialDelaySeconds: 5
+          #   timeoutSeconds: 5
+          #   successThreshold: 1
+          #   failureThreshold: 10
+          #   periodSeconds: 10
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 8083
+          #   initialDelaySeconds: 5
+          #   timeoutSeconds: 2
+          #   successThreshold: 1
+          #   failureThreshold: 10
+          #   periodSeconds: 10
+          env:
+            - name: TZ
+              value: Europe/Amsterdam
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+          ports:
+            - containerPort: 8083
+              name: http
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: import
+              mountPath: /cwa-book-ingest
+            - name: library
+              mountPath: /calibre-library
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: calibre-web-automated-config
+        - name: import
+          persistentVolumeClaim:
+            claimName: calibre-web-automated-import
+        - name: library
+          persistentVolumeClaim:
+            claimName: calibre-web-automated-library
+      restartPolicy: Always
