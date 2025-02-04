@@ -1,85 +1,85 @@
-#     volumes:
-#       - /path/to/lazylibrarian/data:/config
-#       - /path/to/downloads/:/downloads
-#       - /path/to/data/:/books #optional
+# #     volumes:
+# #       - /path/to/lazylibrarian/data:/config
+# #       - /path/to/downloads/:/downloads
+# #       - /path/to/data/:/books #optional
 
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: lazylibrarian
-  namespace: media
-  labels:
-    app: lazylibrarian
-spec:
-  selector:
-    matchLabels:
-      app: lazylibrarian
-  replicas: 1
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
-  template:
-    metadata:
-      labels:
-        app: lazylibrarian
-    spec:
-      containers:
-        - name: lazylibrarian
-          image: lscr.io/linuxserver/lazylibrarian:latest
-          # resources:
-          #   requests:
-          #     cpu: 100m
-          #     memory: 100Mi
-          #   limits:
-          #     cpu: 100m
-          #     memory: 100Mi
-          livenessProbe:
-            tcpSocket:
-              port: 5299
-            initialDelaySeconds: 180
-            timeoutSeconds: 2
-            successThreshold: 1
-            failureThreshold: 60
-            periodSeconds: 5
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 5299
-            initialDelaySeconds: 180
-            timeoutSeconds: 2
-            successThreshold: 1
-            failureThreshold: 60
-            periodSeconds: 5
-          env:
-            - name: PUID
-              value: "1001"
-            - name: PGID
-              value: "1001"
-            - name: TZ
-              value: "Europe/Amsterdam"
-            - name: DOCKER_MODS
-              value: "linuxserver/mods:universal-calibre"
-              #|linuxserver/mods:lazylibrarian-ffmpeg"
-          ports:
-            - containerPort: 5299
-              name: http
-          volumeMounts:
-            - name: downloads
-              mountPath: /downloads
-            - name: books
-              mountPath: /books
-            - name: config
-              mountPath: /config
-      volumes:
-        - name: downloads
-          persistentVolumeClaim:
-            claimName: media-downloads
-        - name: books
-          persistentVolumeClaim:
-            claimName: calibre-import
-        - name: config
-          persistentVolumeClaim:
-            claimName: lazylibrarian-config
-      restartPolicy: Always
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: lazylibrarian
+#   namespace: media
+#   labels:
+#     app: lazylibrarian
+# spec:
+#   selector:
+#     matchLabels:
+#       app: lazylibrarian
+#   replicas: 1
+#   strategy:
+#     rollingUpdate:
+#       maxSurge: 25%
+#       maxUnavailable: 25%
+#     type: RollingUpdate
+#   template:
+#     metadata:
+#       labels:
+#         app: lazylibrarian
+#     spec:
+#       containers:
+#         - name: lazylibrarian
+#           image: lscr.io/linuxserver/lazylibrarian:latest
+#           # resources:
+#           #   requests:
+#           #     cpu: 100m
+#           #     memory: 100Mi
+#           #   limits:
+#           #     cpu: 100m
+#           #     memory: 100Mi
+#           livenessProbe:
+#             tcpSocket:
+#               port: 5299
+#             initialDelaySeconds: 180
+#             timeoutSeconds: 2
+#             successThreshold: 1
+#             failureThreshold: 60
+#             periodSeconds: 5
+#           readinessProbe:
+#             httpGet:
+#               path: /
+#               port: 5299
+#             initialDelaySeconds: 180
+#             timeoutSeconds: 2
+#             successThreshold: 1
+#             failureThreshold: 60
+#             periodSeconds: 5
+#           env:
+#             - name: PUID
+#               value: "1001"
+#             - name: PGID
+#               value: "1001"
+#             - name: TZ
+#               value: "Europe/Amsterdam"
+#             - name: DOCKER_MODS
+#               value: "linuxserver/mods:universal-calibre"
+#               #|linuxserver/mods:lazylibrarian-ffmpeg"
+#           ports:
+#             - containerPort: 5299
+#               name: http
+#           volumeMounts:
+#             - name: downloads
+#               mountPath: /downloads
+#             - name: books
+#               mountPath: /books
+#             - name: config
+#               mountPath: /config
+#       volumes:
+#         - name: downloads
+#           persistentVolumeClaim:
+#             claimName: media-downloads
+#         - name: books
+#           persistentVolumeClaim:
+#             claimName: calibre-import
+#         - name: config
+#           persistentVolumeClaim:
+#             claimName: lazylibrarian-config
+#       restartPolicy: Always
