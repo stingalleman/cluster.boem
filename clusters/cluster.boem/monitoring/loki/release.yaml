@@ -1,70 +1,71 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: loki-stack
+  name: loki
   namespace: monitoring
 spec:
   chart:
     spec:
       # version: 69.2.0
-      chart: loki-stack
+      chart: loki
       sourceRef:
         kind: HelmRepository
         name: grafana
         namespace: flux-system
   interval: 24h
   values:
-    # loki:
-    #   commonConfig:
-    #     replication_factor: 1
-    #   schemaConfig:
-    #     configs:
-    #       - from: "2024-04-01"
-    #         store: tsdb
-    #         object_store: s3
-    #         schema: v13
-    #         index:
-    #           prefix: loki_index_
-    #           period: 24h
-    #   pattern_ingester:
-    #     enabled: true
-    #   limits_config:
-    #     allow_structured_metadata: true
-    #     volume_enabled: true
-    #   ruler:
-    #     enable_api: true
+    loki:
+      auth_enabled: false
+      commonConfig:
+        replication_factor: 1
+      schemaConfig:
+        configs:
+          - from: "2024-04-01"
+            store: tsdb
+            object_store: s3
+            schema: v13
+            index:
+              prefix: loki_index_
+              period: 24h
+      pattern_ingester:
+        enabled: true
+      limits_config:
+        allow_structured_metadata: true
+        volume_enabled: true
+      ruler:
+        enable_api: true
 
-    # minio:
-    #   enabled: true
+    minio:
+      enabled: true
 
-    # deploymentMode: SingleBinary
+    deploymentMode: SingleBinary
 
-    # singleBinary:
-    #   replicas: 1
+    singleBinary:
+      replicas: 1
 
-    # # Zero out replica counts of other deployment modes
-    # backend:
-    #   replicas: 0
-    # read:
-    #   replicas: 0
-    # write:
-    #   replicas: 0
+    # Zero out replica counts of other deployment modes
+    backend:
+      replicas: 0
+    read:
+      replicas: 0
+    write:
+      replicas: 0
 
-    # ingester:
-    #   replicas: 0
-    # querier:
-    #   replicas: 0
-    # queryFrontend:
-    #   replicas: 0
-    # queryScheduler:
-    #   replicas: 0
-    # distributor:
-    #   replicas: 0
-    # compactor:
-    #   replicas: 0
-    # indexGateway:
-    #   replicas: 0
-    # bloomCompactor:
-    #   replicas: 0
-    # bloomGateway:
-    #   replicas: 0
+    ingester:
+      replicas: 0
+    querier:
+      replicas: 0
+    queryFrontend:
+      replicas: 0
+    queryScheduler:
+      replicas: 0
+    distributor:
+      replicas: 0
+    compactor:
+      replicas: 0
+    indexGateway:
+      replicas: 0
+    bloomCompactor:
+      replicas: 0
+    bloomGateway:
+      replicas: 0
