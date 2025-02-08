@@ -103,7 +103,7 @@ spec:
           loki.process "pod_logs" {
             stage.static_labels {
                 values = {
-                  cluster = "<cluster.boem>",
+                  cluster = "cluster.boem",
                 }
             }
 
@@ -145,7 +145,7 @@ spec:
                 __path__  = "/var/log/syslog",
                 job       = "node/syslog",
                 node_name = sys.env("HOSTNAME"),
-                cluster   = cluster.boem,
+                cluster   = "cluster.boem",
             }]
           }
 
