@@ -13,7 +13,7 @@ data:
   # 296x152
   samla.json: |
     [
-        {"text": [147, 38, "n = 3", "fonts/calibrib80", 1, 1]},
+        {"text": [147, 38, "test!", "fonts/calibrib80", 1, 1]},
     ]
 binaryData:
   samla.jpg: |
