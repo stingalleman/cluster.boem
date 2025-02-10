@@ -54,11 +54,4 @@ spec:
           ports:
             - containerPort: 80
               name: http
-          volumeMounts:
-            - name: http-volume
-              mountPath: /usr/share/caddy
       restartPolicy: Always
-      volumes:
-        - name: http-volume
-          configMap:
-            name: sting-site-data
