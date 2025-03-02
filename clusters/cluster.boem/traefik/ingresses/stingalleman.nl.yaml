@@ -151,7 +151,7 @@ spec:
     #       port: http
 
     - kind: Rule
-      match: Host(`readeck.stingalleman.nl`)
+      match: Host(`bookmarks.stingalleman.nl`)
       services:
         - kind: Service
           name: readeck
