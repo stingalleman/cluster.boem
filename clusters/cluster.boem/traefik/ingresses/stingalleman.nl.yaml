@@ -142,12 +142,20 @@ spec:
           namespace: media
           port: http
 
+    # - kind: Rule
+    #   match: Host(`request.books.stingalleman.nl`)
+    #   services:
+    #     - kind: Service
+    #       name: calibre-web-automated-downloader
+    #       namespace: media
+    #       port: http
+
     - kind: Rule
-      match: Host(`request.books.stingalleman.nl`)
+      match: Host(`readeck.stingalleman.nl`)
       services:
         - kind: Service
-          name: calibre-web-automated-downloader
-          namespace: media
+          name: readeck
+          namespace: default
           port: http
 
   tls:
