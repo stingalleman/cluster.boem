@@ -1,0 +1,26 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: cloudnative-pg
+  namespace: cnpg-system
+spec:
+  chart:
+    spec:
+      chart: readeck
+      sourceRef:
+        kind: HelmRepository
+        name: zekker6
+        namespace: flux-system
+      version: "0.10.0"
+  interval: 24h
+  values:
+    persistence:
+      data:
+        enabled: true
+        mountPath: /readeck
+        accessMode: ReadWriteOnce
+        size: 100Mi
+        emptyDir:
+          enabled: false
+    env:
+      TZ: Europe/Amsterdam
