@@ -57,6 +57,11 @@ spec:
                 secretKeyRef:
                   name: yucky-rs
                   key: ethux_model
+            - name: ETHUX_PROMPT
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs
+                  key: ethux_prompt
             # - name: ALLES_DLP_PASSWORD
             #   valueFrom:
             #     secretKeyRef:
