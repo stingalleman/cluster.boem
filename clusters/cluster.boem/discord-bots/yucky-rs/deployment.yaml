@@ -47,16 +47,16 @@ spec:
                 secretKeyRef:
                   name: yucky-rs
                   key: ha-token
-            # - name: ETHUX_TOKEN
-            #   valueFrom:
-            #     secretKeyRef:
-            #       name: yucky-rs
-            #       key: ethux_token
-            # - name: ETHUX_MODEL
-            #   valueFrom:
-            #     secretKeyRef:
-            #       name: yucky-rs
-            #       key: ethux_model
+            - name: ETHUX_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs
+                  key: ethux_token
+            - name: ETHUX_MODEL
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs
+                  key: ethux_model
             # - name: ALLES_DLP_PASSWORD
             #   valueFrom:
             #     secretKeyRef:
