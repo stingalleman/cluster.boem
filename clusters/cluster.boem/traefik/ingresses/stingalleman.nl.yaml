@@ -98,17 +98,17 @@ spec:
       match: Host(`finance.stingalleman.nl`)
       services:
         - kind: Service
-          name: actual-budget-service
+          name: maybe-http
           namespace: default
-          port: 5006
+          # port: 5006
 
-    - kind: Rule
-      match: Host(`finance-emiel.stingalleman.nl`)
-      services:
-        - kind: Service
-          name: actual-budget-service-emiel
-          namespace: actual-budget
-          port: 5006
+    # - kind: Rule
+    #   match: Host(`finance-emiel.stingalleman.nl`)
+    #   services:
+    #     - kind: Service
+    #       name: actual-budget-service-emiel
+    #       namespace: actual-budget
+    #       port: 5006
 
     - kind: Rule
       match: Host(`harbor.stingalleman.nl`)
