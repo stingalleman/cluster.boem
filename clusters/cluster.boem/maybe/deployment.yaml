@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maybe
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: maybe
+  template:
+    metadata:
+      labels:
+        app: maybe
+    spec:
+      containers:
+        - name: maybe
+          image: ghcr.io/maybe-finance/maybe:latest
+          env:
+            - name: SELF_HOSTED
+              value: "true"
+            - name: RAILS_FORCE_SSL
+              value: "false"
+            - name: RAILS_ASSUME_SSL
+              value: "false"
+            - name: GOOD_JOB_EXECUTION_MODE
+              value: "async"
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  key: secret_key_base
+                  name: maybe-secrets
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: db_host
+                  name: maybe-secrets
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  key: postgres_db
+                  name: maybe-secrets
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  key: postgres_user
+                  name: maybe-secrets
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: postgres_password
+                  name: maybe-secrets
+          volumeMounts:
+            - name: app-storage
+              mountPath: /rails/storage
+      volumes:
+        - name: app-storage
+          persistentVolumeClaim:
+            claimName: maybe-app-storage

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: maybe-http
+  namespace: default
+spec:
+  selector:
+    app: maybe-http
+  type: ClusterIP
+  ports:
+    - name: maybe-http
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
