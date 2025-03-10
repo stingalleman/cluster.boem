@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   selector:
-    app: maybe-http
+    app: maybe
   type: ClusterIP
   ports:
     - name: maybe-http

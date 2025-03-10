@@ -4,7 +4,7 @@ metadata:
   name: maybe-app-storage
   namespace: default
   labels:
-    app: maybe-app-storage
+    app: maybe
 spec:
   accessModes:
     - ReadWriteMany
