@@ -7,14 +7,7 @@ spec:
   entryPoints:
     - web
     - websecure
-  routes:
-    - kind: Rule
-      match: Host(`isaensting.nl`)
-      services:
-        - kind: Service
-          name: sting-as-site
-          namespace: default
-          port: 80
+  routes: []
 
   tls:
     secretName: isaensting.nl-prod-tls
