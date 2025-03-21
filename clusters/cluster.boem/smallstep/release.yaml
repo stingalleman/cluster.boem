@@ -6,10 +6,10 @@ metadata:
 spec:
   chart:
     spec:
-      chart: boem-ca
+      chart: step-certificates
       sourceRef:
         kind: HelmRepository
-        name: step-certificates
+        name: smallstep
         namespace: flux-system
       version: "1.28.3"
   interval: 24h
