@@ -1,0 +1,20 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: boem
+  namespace: default
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`ca.boem`)
+      services:
+        - kind: Service
+          name: ca-boem-step-certificates
+          namespace: default
+          port: 443
+
+  # tls:
+  #   secretName: as216455.net-prod-tls
