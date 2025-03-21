@@ -11,6 +11,13 @@ spec:
   #   - name: internal-whitelist
   routes:
     - kind: Rule
+      match: Host(`pve.kluster.boem`)
+      services:
+        - kind: Service
+          name: pve
+          namespace: default
+          port: 8006
+    - kind: Rule
       match: Host(`alerts.kluster.boem`)
       middlewares:
         - name: internal-whitelist
