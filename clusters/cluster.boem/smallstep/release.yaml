@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: smallstep
+  name: ca-boem
   namespace: smallstep-ca
 spec:
   chart:
