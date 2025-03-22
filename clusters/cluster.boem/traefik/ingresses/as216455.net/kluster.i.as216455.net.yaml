@@ -5,8 +5,8 @@ metadata:
   namespace: default
 spec:
   entryPoints:
-    - web
-    - websecure
+    - internal
+    - internalsecure
   routes:
     - kind: Rule
       match: Host(`netbox.kluster.i.as216455.net`)

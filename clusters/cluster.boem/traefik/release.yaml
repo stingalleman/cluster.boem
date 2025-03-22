@@ -33,7 +33,7 @@ spec:
         externalTrafficPolicy: Local
         # loadBalancerIP: "45.83.205.8"
       annotations:
-        io.cilium/lb-ipam-ips: "45.83.205.8,2a07:54c7:5201:6e6f::a,10.10.102.250,2a07:54c7:5201:7e6f::2000"
+        io.cilium/lb-ipam-ips: "45.83.205.8,2a07:54c7:5201:6e6f::a"
         # "io.cilium/lb-ipam-sharing-key": "1234"
 
       # -- Additional service labels (e.g. for filtering Service by custom labels)
@@ -46,6 +46,21 @@ spec:
       ipFamilies:
         - IPv4
         - IPv6
+
+      additionalServices:
+        internal:
+          type: LoadBalancer
+          spec:
+            externalTrafficPolicy: Local
+          annotations:
+            io.cilium/lb-ipam-ips: "10.10.102.250,2a07:54c7:5201:7e6f::2000"
+          # loadBalancerSourceRanges:
+          #   - 10.1.0.0/16
+          #   - 10.1.200.0/24
+          #   - 10.1.201.0/24
+          #   - 10.1.202.0/24
+          #   - 10.1.203.0/24
+          #   - 192.168.231.0/24
 
     deployment:
       enabled: true
@@ -197,6 +212,23 @@ spec:
           #   sans:
           #     - foo.example.com
           #     - bar.example.com
+      internal:
+        port: 9000
+        expose:
+          default: false
+          internal: true
+        exposedPort: 80
+        protocol: TCP
+        redirectTo: websecure
+      secureinternal:
+        port: 9443
+        expose:
+          default: false
+          internal: true
+        exposedPort: 443
+        protocol: TCP
+        tls:
+          enabled: true
       # metrics:
       #   port: 9100
       #   # hostPort: 9100

@@ -5,8 +5,8 @@ metadata:
   namespace: default
 spec:
   entryPoints:
-    - web
-    - websecure
+    - internal
+    - internalsecure
   routes:
     - kind: Rule
       match: Host(`i.as216455.net`) || Host(`pve.i.as216455.net`)
