@@ -33,7 +33,7 @@ spec:
         externalTrafficPolicy: Local
         # loadBalancerIP: "45.83.205.8"
       annotations:
-        io.cilium/lb-ipam-ips: "45.83.205.8,2a07:54c7:5201:6e6f::a"
+        io.cilium/lb-ipam-ips: "45.83.205.8,2a07:54c7:5201:6e6f::a,10.10.102.250,2a07:54c7:5201:7e6f::2000"
         # "io.cilium/lb-ipam-sharing-key": "1234"
 
       # -- Additional service labels (e.g. for filtering Service by custom labels)
