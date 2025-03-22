@@ -169,7 +169,9 @@ spec:
         # You SHOULD NOT expose the traefik port on production deployments.
         # If you want to access it from outside of your cluster,
         # use `kubectl port-forward` or create a secure ingress
-        expose: false
+        expose:
+          default: false
+          internal: true
         # The exposed port for this service
         exposedPort: 9000
         # The port protocol (TCP/UDP)
@@ -177,7 +179,9 @@ spec:
       web:
         port: 8000
         # hostPort: 8000
-        expose: true
+        expose:
+          default: true
+          internal: false
         exposedPort: 80
         # The port protocol (TCP/UDP)
         protocol: TCP
@@ -191,7 +195,9 @@ spec:
       websecure:
         port: 8443
         # hostPort: 8443
-        expose: true
+        expose:
+          default: true
+          internal: false
         exposedPort: 443
         # The port protocol (TCP/UDP)
         protocol: TCP
@@ -212,23 +218,23 @@ spec:
           #   sans:
           #     - foo.example.com
           #     - bar.example.com
-      # internal:
-      #   port: 9000
-      #   expose:
-      #     default: false
-      #     internal: true
-      #   exposedPort: 80
-      #   protocol: TCP
-      #   redirectTo: websecure
-      # internalsecure:
-      #   port: 9443
-      #   expose:
-      #     default: false
-      #     internal: true
-      #   exposedPort: 443
-      #   protocol: TCP
-      #   tls:
-      #     enabled: true
+      internal:
+        port: 9000
+        expose:
+          default: false
+          internal: true
+        exposedPort: 80
+        protocol: TCP
+        redirectTo: websecure
+      internalsecure:
+        port: 9443
+        expose:
+          default: false
+          internal: true
+        exposedPort: 443
+        protocol: TCP
+        tls:
+          enabled: true
       # metrics:
       #   port: 9100
       #   # hostPort: 9100

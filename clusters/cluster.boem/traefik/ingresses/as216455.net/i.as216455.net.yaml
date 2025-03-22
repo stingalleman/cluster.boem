@@ -1,20 +1,20 @@
-# apiVersion: traefik.containo.us/v1alpha1
-# kind: IngressRoute
-# metadata:
-#   name: i.as216455.net
-#   namespace: default
-# spec:
-#   entryPoints:
-#     - internal
-#     - internalsecure
-#   routes:
-#     - kind: Rule
-#       match: Host(`i.as216455.net`) || Host(`pve.i.as216455.net`)
-#       services:
-#         - kind: Service
-#           name: pve
-#           namespace: default
-#           port: 8006
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: i.as216455.net
+  namespace: default
+spec:
+  entryPoints:
+    - internal
+    - internalsecure
+  routes:
+    - kind: Rule
+      match: Host(`i.as216455.net`) || Host(`pve.i.as216455.net`)
+      services:
+        - kind: Service
+          name: pve
+          namespace: default
+          port: 8006
 
-#   tls:
-#     secretName: i.as216455.net-prod-tls
+  tls:
+    secretName: i.as216455.net-prod-tls
