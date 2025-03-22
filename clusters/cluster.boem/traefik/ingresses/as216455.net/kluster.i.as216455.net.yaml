@@ -1,19 +1,19 @@
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: kluster.i.as216455.net
-  namespace: default
-spec:
-  entryPoints:
-    - internal
-    - internalsecure
-  routes:
-    - kind: Rule
-      match: Host(`netbox.kluster.i.as216455.net`)
-      services:
-        - name: internals-vm
-          namespace: default
-          port: 8000
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: IngressRoute
+# metadata:
+#   name: kluster.i.as216455.net
+#   namespace: default
+# spec:
+#   entryPoints:
+#     - internal
+#     - internalsecure
+#   routes:
+#     - kind: Rule
+#       match: Host(`netbox.kluster.i.as216455.net`)
+#       services:
+#         - name: internals-vm
+#           namespace: default
+#           port: 8000
 
-  tls:
-    secretName: kluster.i.as216455.net-prod-tls
+#   tls:
+#     secretName: kluster.i.as216455.net-prod-tls

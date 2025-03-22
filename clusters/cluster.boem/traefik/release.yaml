@@ -212,23 +212,23 @@ spec:
           #   sans:
           #     - foo.example.com
           #     - bar.example.com
-      internal:
-        port: 9000
-        expose:
-          default: false
-          internal: true
-        exposedPort: 80
-        protocol: TCP
-        redirectTo: websecure
-      secureinternal:
-        port: 9443
-        expose:
-          default: false
-          internal: true
-        exposedPort: 443
-        protocol: TCP
-        tls:
-          enabled: true
+      # internal:
+      #   port: 9000
+      #   expose:
+      #     default: false
+      #     internal: true
+      #   exposedPort: 80
+      #   protocol: TCP
+      #   redirectTo: websecure
+      # internalsecure:
+      #   port: 9443
+      #   expose:
+      #     default: false
+      #     internal: true
+      #   exposedPort: 443
+      #   protocol: TCP
+      #   tls:
+      #     enabled: true
       # metrics:
       #   port: 9100
       #   # hostPort: 9100
