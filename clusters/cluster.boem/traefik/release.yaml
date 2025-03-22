@@ -47,22 +47,22 @@ spec:
         - IPv4
         - IPv6
 
-      additionalServices:
-        internal:
-          type: LoadBalancer
-          labels:
-            traefik-service-label: internal
-          spec:
-            externalTrafficPolicy: Local
-          annotations:
-            io.cilium/lb-ipam-ips: "10.10.102.250,2a07:54c7:5201:7e6f::2000"
-          # loadBalancerSourceRanges:
-          #   - 10.1.0.0/16
-          #   - 10.1.200.0/24
-          #   - 10.1.201.0/24
-          #   - 10.1.202.0/24
-          #   - 10.1.203.0/24
-          #   - 192.168.231.0/24
+      # additionalServices:
+      #   internal:
+      #     type: LoadBalancer
+      #     labels:
+      #       traefik-service-label: internal
+      #     spec:
+      #       externalTrafficPolicy: Local
+      #     annotations:
+      #       io.cilium/lb-ipam-ips: "10.10.102.250,2a07:54c7:5201:7e6f::2000"
+      # loadBalancerSourceRanges:
+      #   - 10.1.0.0/16
+      #   - 10.1.200.0/24
+      #   - 10.1.201.0/24
+      #   - 10.1.202.0/24
+      #   - 10.1.203.0/24
+      #   - 192.168.231.0/24
 
     deployment:
       enabled: true
@@ -171,9 +171,9 @@ spec:
         # You SHOULD NOT expose the traefik port on production deployments.
         # If you want to access it from outside of your cluster,
         # use `kubectl port-forward` or create a secure ingress
-        expose:
-          default: false
-          internal: true
+        # expose:
+        #   default: false
+        #   internal: true
         # The exposed port for this service
         exposedPort: 9000
         # The port protocol (TCP/UDP)
@@ -181,9 +181,9 @@ spec:
       web:
         port: 8000
         # hostPort: 8000
-        expose:
-          default: true
-          internal: false
+        # expose:
+        #   default: true
+        #   internal: false
         exposedPort: 80
         # The port protocol (TCP/UDP)
         protocol: TCP
@@ -197,9 +197,9 @@ spec:
       websecure:
         port: 8443
         # hostPort: 8443
-        expose:
-          default: true
-          internal: false
+        # expose:
+        #   default: true
+        #   internal: false
         exposedPort: 443
         # The port protocol (TCP/UDP)
         protocol: TCP
@@ -222,17 +222,17 @@ spec:
           #     - bar.example.com
       internal:
         port: 9000
-        expose:
-          default: false
-          internal: true
+        # expose:
+        #   default: false
+        #   internal: true
         exposedPort: 80
         protocol: TCP
         redirectTo: websecure
       internalsecure:
         port: 9443
-        expose:
-          default: false
-          internal: true
+        # expose:
+        #   default: false
+        #   internal: true
         exposedPort: 443
         protocol: TCP
         tls:
