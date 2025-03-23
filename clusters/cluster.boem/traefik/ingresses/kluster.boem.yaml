@@ -95,13 +95,6 @@ spec:
           port: 8000
 
     - kind: Rule
-      match: Host(`postgres.kluster.boem`)
-      services:
-        - name: postgres-operator-ui
-          namespace: postgres
-          port: 80
-
-    - kind: Rule
       match: Host(`oxidized.kluster.boem`)
       services:
         - name: oxidized

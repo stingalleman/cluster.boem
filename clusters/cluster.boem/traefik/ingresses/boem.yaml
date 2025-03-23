@@ -13,7 +13,7 @@ spec:
       services:
         - kind: Service
           name: ca-boem-step-certificates
-          namespace: default
+          namespace: smallstep-ca
           port: 443
 
   # tls:

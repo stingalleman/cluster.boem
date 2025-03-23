@@ -17,7 +17,7 @@ spec:
           port: 80
       middlewares:
         - name: dwrg-redirect
-          namespace: default
+          namespace: traefik
 
   tls:
     secretName: dutchwaterresponsegroup.nl-prod-tls
