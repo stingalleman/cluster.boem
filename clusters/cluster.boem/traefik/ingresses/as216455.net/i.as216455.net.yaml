@@ -13,6 +13,8 @@ spec:
       services:
         - kind: Service
           name: pve
+          scheme: https
+          serversTransport: insecure
           namespace: traefik
           port: 8006
 
