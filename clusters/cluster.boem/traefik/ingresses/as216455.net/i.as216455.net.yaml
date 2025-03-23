@@ -20,6 +20,13 @@ spec:
 
     - kind: Rule
       match: Host(`i.as216455.net`)
+      services:
+        - kind: Service
+          name: pve
+          scheme: https
+          serversTransport: insecure
+          namespace: traefik
+          port: 8006
       middlewares:
         - name: dwrg-redirect
           namespace: traefik
