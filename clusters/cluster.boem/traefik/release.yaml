@@ -11,7 +11,7 @@ spec:
         kind: HelmRepository
         name: traefik
         namespace: flux-system
-      version: "10.33.0"
+      version: "27.0.0"
   interval: 24h
   values:
     # podSecurityPolicy:
@@ -46,6 +46,17 @@ spec:
       ipFamilies:
         - IPv4
         - IPv6
+      #
+      # An additionnal and optional internal Service.
+      # Same parameters as external Service
+      # internal:
+      #   type: ClusterIP
+      #   # labels: {}
+      #   # annotations: {}
+      #   # spec: {}
+      #   # loadBalancerSourceRanges: []
+      #   # externalIPs: []
+      #   # ipFamilies: [ "IPv4","IPv6" ]
 
       # additionalServices:
       #   internal:
