@@ -2,7 +2,7 @@
 # kind: Certificate
 # metadata:
 #   name: stingalleman.dev
-#   namespace: default
+#   namespace: traefik
 # spec:
 #   secretName: stingalleman.dev-prod-tls
 #   issuerRef:

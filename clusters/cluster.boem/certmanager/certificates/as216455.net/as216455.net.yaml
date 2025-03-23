@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: as216455.net
-  namespace: default
+  namespace: traefik
 spec:
   secretName: as216455.net-prod-tls
   issuerRef:

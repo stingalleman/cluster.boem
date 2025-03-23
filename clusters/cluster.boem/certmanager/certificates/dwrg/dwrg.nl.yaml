@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: dwrg.nl
-  namespace: default
+  namespace: traefik
 spec:
   secretName: dwrg.nl-prod-tls
   issuerRef:
