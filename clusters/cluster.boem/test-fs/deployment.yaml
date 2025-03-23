@@ -18,7 +18,7 @@ spec:
         - name: fs-test
           image: hothamandcheese/docker-benchmark
           volumeMounts:
-            - name: localtime
+            - name: fs-test
               mountPath: /
       volumes:
         - name: fs-test
