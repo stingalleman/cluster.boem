@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fs-test
+  namespace: default
+  labels:
+    app: fs-test
+spec:
+  selector:
+    matchLabels:
+      app: fs-test
+  template:
+    metadata:
+      labels:
+        app: fs-test
+    spec:
+      containers:
+        - name: fs-test
+          image: hothamandcheese/docker-benchmark
+          volumeMounts:
+            - name: localtime
+              mountPath: /
+      volumes:
+        - name: fs-test
+          persistentVolumeClaim:
+            claimName: fs-test
