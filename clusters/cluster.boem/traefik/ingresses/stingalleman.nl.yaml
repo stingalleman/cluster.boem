@@ -43,7 +43,7 @@ spec:
       services:
         - kind: Service
           name: status-stingalleman-nl
-          namespace: default
+          namespace: traefik
           port: 3001
 
     # - kind: Rule
@@ -59,7 +59,7 @@ spec:
       services:
         - kind: Service
           name: media-stingalleman-nl
-          namespace: default
+          namespace: traefik
           port: 8096
 
     - kind: Rule
@@ -123,7 +123,7 @@ spec:
       services:
         - kind: Service
           name: home-stingalleman-nl
-          namespace: default
+          namespace: traefik
           port: 8123
 
     - kind: Rule
@@ -131,7 +131,7 @@ spec:
       services:
         - kind: Service
           name: bloembergen-stingalleman-nl
-          namespace: default
+          namespace: traefik
           port: 8123
 
     - kind: Rule

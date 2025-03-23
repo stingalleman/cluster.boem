@@ -15,7 +15,7 @@ spec:
       services:
         - kind: Service
           name: pve
-          namespace: default
+          namespace: traefik
           port: 8006
     - kind: Rule
       match: Host(`alerts.kluster.boem`)
@@ -91,7 +91,7 @@ spec:
       match: Host(`netbox.kluster.boem`)
       services:
         - name: internals-vm
-          namespace: default
+          namespace: traefik
           port: 8000
 
     - kind: Rule

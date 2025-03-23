@@ -12,7 +12,7 @@ spec:
       match: Host(`netbox.kluster.i.as216455.net`)
       services:
         - name: internals-vm
-          namespace: default
+          namespace: traefik
           port: 8000
 
   tls:

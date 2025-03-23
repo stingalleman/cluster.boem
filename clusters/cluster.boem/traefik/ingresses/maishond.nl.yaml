@@ -22,7 +22,7 @@ spec:
       services:
         - kind: Service
           name: media-stingalleman-nl
-          namespace: default
+          namespace: traefik
           port: 8096
 
     - kind: Rule
@@ -30,7 +30,7 @@ spec:
       services:
         - kind: Service
           name: media-stingalleman-nl
-          namespace: default
+          namespace: traefik
           port: 5055
 
     - kind: Rule

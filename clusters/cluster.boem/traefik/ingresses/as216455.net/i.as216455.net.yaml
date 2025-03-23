@@ -13,7 +13,7 @@ spec:
       services:
         - kind: Service
           name: pve
-          namespace: default
+          namespace: traefik
           port: 8006
 
   tls:
