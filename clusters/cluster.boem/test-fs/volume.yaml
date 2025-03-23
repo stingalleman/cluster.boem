@@ -7,6 +7,8 @@ metadata:
     app: fs-test
 spec:
   storageClassName: ceph-block
+  accessModes:
+    - "ReadWriteOnce"
   resources:
     requests:
       storage: 20Gi
