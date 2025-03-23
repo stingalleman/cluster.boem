@@ -2,7 +2,7 @@
 # kind: IngressRoute
 # metadata:
 #   name: stingalleman.dev
-#   namespace: default
+#   namespace: traefik
 # spec:
 #   entryPoints:
 #     - web

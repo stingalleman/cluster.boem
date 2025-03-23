@@ -2,7 +2,7 @@
 # kind: IngressRoute
 # metadata:
 #   name: mais.dog
-#   namespace: default
+#   namespace: traefik
 # spec:
 #   entryPoints:
 #     - web

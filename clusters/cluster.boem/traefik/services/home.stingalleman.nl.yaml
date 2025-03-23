@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: home-stingalleman-nl
-  namespace: default
+  namespace: traefik
 spec:
   type: ExternalName
   externalName: 10.0.0.102

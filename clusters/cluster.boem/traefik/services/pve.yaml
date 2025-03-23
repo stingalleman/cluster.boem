@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: pve
-  namespace: default
+  namespace: traefik
 spec:
   type: ExternalName
   externalName: 10.10.10.2
