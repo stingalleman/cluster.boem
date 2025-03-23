@@ -28,7 +28,7 @@ spec:
           namespace: traefik
           port: 8006
       middlewares:
-        - name: dwrg-redirect
+        - name: pve-redirect
           namespace: traefik
 
   tls:
