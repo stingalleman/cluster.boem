@@ -1,0 +1,49 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: rook-ceph-cluster
+  namespace: rook-ceph
+spec:
+  chart:
+    spec:
+      chart: rook-ceph-cluster
+      sourceRef:
+        kind: HelmRepository
+        name: rook-release
+        namespace: flux-system
+      version: "v1.16.5"
+  interval: 24h
+  values:
+    # -- Namespace of the main rook operator
+    operatorNamespace: rook-ceph
+    # # Installs a debugging toolbox deployment
+    # toolbox:
+    #   # -- Enable Ceph debugging pod deployment. See [toolbox](../Troubleshooting/ceph-toolbox.md)
+    #   enabled: false
+    #   # -- Toolbox image, defaults to the image used by the Ceph cluster
+    #   image: #quay.io/ceph/ceph:v19.2.1
+    #   # -- Toolbox tolerations
+    #   tolerations: []
+    #   # -- Toolbox affinity
+    #   affinity: {}
+    #   # -- Toolbox container security context
+    #   containerSecurityContext:
+    #     runAsNonRoot: true
+    #     runAsUser: 2016
+    #     runAsGroup: 2016
+    #     capabilities:
+    #       drop: ["ALL"]
+    #   # -- Toolbox resources
+    #   resources:
+    #     limits:
+    #       memory: "1Gi"
+    #     requests:
+    #       cpu: "100m"
+    #       memory: "128Mi"
+    #   # -- Set the priority class for the toolbox if desired
+    #   priorityClassName:
+
+    monitoring:
+      # -- Enable Prometheus integration, will also create necessary RBAC rules to allow Operator to create ServiceMonitors.
+      # Monitoring requires Prometheus to be pre-installed
+      enabled: true
