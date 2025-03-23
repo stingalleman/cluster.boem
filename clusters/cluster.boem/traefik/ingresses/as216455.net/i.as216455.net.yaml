@@ -31,5 +31,61 @@ spec:
         - name: pve-redirect
           namespace: traefik
 
+    - kind: Rule
+      match: Host(`alerts.i.as216455.net`)
+      middlewares:
+        - name: internal-whitelist
+      services:
+        - kind: Service
+          name: alertmanager-operated
+          namespace: monitoring
+          passHostHeader: true
+          port: 9093
+
+    - kind: Rule
+      match: Host(`traefik.i.as216455.net`)
+      middlewares:
+        - name: internal-whitelist
+      services:
+        - name: traefik-api
+          namespace: traefik
+          port: 9000
+
+    - kind: Rule
+      match: Host(`prometheus.i.as216455.net`)
+      middlewares:
+        - name: internal-whitelist
+      services:
+        - name: prometheus-operated
+          namespace: monitoring
+          port: http-web
+    - kind: Rule
+      match: Host(`dns.i.as216455.net`)
+      services:
+        - name: pdns-admin
+          namespace: default
+          port: 80
+
+    - kind: Rule
+      match: Host(`pgadmin.i.as216455.net`)
+      services:
+        - name: pgadmin4
+          namespace: default
+          port: 5050
+
+    - kind: Rule
+      match: Host(`netbox.i.as216455.net`)
+      services:
+        - name: internals-vm
+          namespace: traefik
+          port: 8000
+
+    - kind: Rule
+      match: Host(`oxidized.i.as216455.net`)
+      services:
+        - name: oxidized
+          namespace: default
+          port: 80
+
   tls:
     secretName: i.as216455.net-prod-tls
