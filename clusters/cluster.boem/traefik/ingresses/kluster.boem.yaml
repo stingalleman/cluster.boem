@@ -95,20 +95,6 @@ spec:
           port: 8000
 
     - kind: Rule
-      match: Host(`hubble.kluster.boem`)
-      services:
-        - name: hubble-ui
-          namespace: kube-system
-          port: 80
-
-    - kind: Rule
-      match: Host(`hubble-relay.kluster.boem`)
-      services:
-        - name: hubble-relay-ext
-          namespace: kube-system
-          port: 4245
-
-    - kind: Rule
       match: Host(`postgres.kluster.boem`)
       services:
         - name: postgres-operator-ui
@@ -121,13 +107,6 @@ spec:
         - name: oxidized
           namespace: default
           port: 80
-
-    - kind: Rule
-      match: Host(`windmill.kluster.boem`)
-      services:
-        - name: windmill-app
-          namespace: windmill
-          port: 8000
 
   tls:
     secretName: kluster.boem-certs

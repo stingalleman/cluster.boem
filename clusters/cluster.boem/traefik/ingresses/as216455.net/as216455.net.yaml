@@ -31,20 +31,6 @@ spec:
           port: 80
 
     - kind: Rule
-      match: Host(`minio.as216455.net`)
-      services:
-        - name: storage-console
-          namespace: minio
-          port: 9090
-
-    - kind: Rule
-      match: Host(`s3.as216455.net`)
-      services:
-        - name: minio
-          namespace: minio
-          port: 80
-
-    - kind: Rule
       match: Host(`nms.as216455.net`)
       services:
         - name: librenms
