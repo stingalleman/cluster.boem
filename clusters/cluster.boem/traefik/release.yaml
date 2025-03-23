@@ -232,7 +232,7 @@ spec:
           #     - foo.example.com
           #     - bar.example.com
       internal:
-        port: 9000
+        port: 9080
         # expose:
         #   default: false
         #   internal: true
