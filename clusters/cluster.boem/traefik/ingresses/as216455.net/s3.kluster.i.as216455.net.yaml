@@ -15,7 +15,7 @@ spec:
           namespace: rook-ceph
           port: 80
     - kind: Rule
-      match: Host(`*.s3.kluster.i.as216455.net`)
+      match: HostRegexp(`^.+\.s3\.kluster\.i\.as216455\.net$`)
       services:
         - name: rook-ceph-rgw-ceph-objectstore
           namespace: rook-ceph
