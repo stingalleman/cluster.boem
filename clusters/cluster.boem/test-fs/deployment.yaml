@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   # volumeMode: Filesystem
-  # volumeMode: Block
+  volumeMode: Block
   storageClassName: ceph-block
   accessModes:
     - ReadWriteOnce
@@ -63,12 +63,12 @@ spec:
               value: "30G" # must be 10% smaller than the PVC size due to filesystem also took space
             - name: CPU_IDLE_PROF
               value: "disabled" # must be "enabled" or "disabled"
-          volumeMounts:
+          # volumeMounts:
+          #   - name: vol
+          #     mountPath: /volume/
+          volumeDevices:
             - name: vol
-              mountPath: /volume/
-          #volumeDevices:
-          #- name: vol
-          #  devicePath: /volume/test
+              devicePath: /volume/test
       restartPolicy: Never
       volumes:
         - name: vol
