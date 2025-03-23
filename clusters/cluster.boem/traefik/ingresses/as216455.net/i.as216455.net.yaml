@@ -9,7 +9,7 @@ spec:
     - internalsecure
   routes:
     - kind: Rule
-      match: Host(`i.as216455.net`) || Host(`pve.i.as216455.net`)
+      match: Host(`pve.i.as216455.net`)
       services:
         - kind: Service
           name: pve
@@ -17,6 +17,12 @@ spec:
           serversTransport: insecure
           namespace: traefik
           port: 8006
+
+    - kind: Rule
+      match: Host(`i.as216455.net`)
+      middlewares:
+        - name: dwrg-redirect
+          namespace: traefik
 
   tls:
     secretName: i.as216455.net-prod-tls
