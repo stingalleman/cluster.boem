@@ -32,29 +32,6 @@ spec:
           port: 80
 
     - kind: Rule
-      match: Host(`kube.stingalleman.nl`)
-      services:
-        - name: kube-ops-view
-          namespace: kube-ops-view
-          port: 8080
-
-    - kind: Rule
-      match: Host(`status.stingalleman.nl`)
-      services:
-        - kind: Service
-          name: status-stingalleman-nl
-          namespace: traefik
-          port: 3001
-
-    # - kind: Rule
-    #   match: Host(`mattermost.stingalleman.nl`)
-    #   services:
-    #     - kind: Service
-    #       name: mattermost-team-edition
-    #       namespace: mattermost
-    #       port: 8065
-
-    - kind: Rule
       match: Host(`media.stingalleman.nl`)
       services:
         - kind: Service
@@ -71,22 +48,6 @@ spec:
           port: 5055
 
     - kind: Rule
-      match: "(Host(`as216455.stingalleman.nl`) && PathPrefix(`/r/`))"
-      services:
-        - kind: Service
-          name: achtergrondje
-          namespace: default
-          port: 80
-
-    - kind: Rule
-      match: Host(`as216455.stingalleman.nl`)
-      services:
-        - kind: Service
-          name: sting-as-site
-          namespace: default
-          port: 80
-
-    - kind: Rule
       match: Host(`irc.stingalleman.nl`)
       services:
         - kind: Service
@@ -101,14 +62,6 @@ spec:
           name: maybe-http
           namespace: default
           port: 3000
-
-    # - kind: Rule
-    #   match: Host(`finance-emiel.stingalleman.nl`)
-    #   services:
-    #     - kind: Service
-    #       name: actual-budget-service-emiel
-    #       namespace: actual-budget
-    #       port: 5006
 
     - kind: Rule
       match: Host(`harbor.stingalleman.nl`)

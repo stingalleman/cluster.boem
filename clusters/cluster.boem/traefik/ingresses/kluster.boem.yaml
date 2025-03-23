@@ -129,12 +129,5 @@ spec:
           namespace: windmill
           port: 8000
 
-    - kind: Rule
-      match: Host(`sflow.kluster.boem`)
-      services:
-        - name: sflow-http
-          namespace: default
-          port: 8008
-
   tls:
     secretName: kluster.boem-certs

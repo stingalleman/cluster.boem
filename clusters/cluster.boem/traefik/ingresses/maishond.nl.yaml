@@ -8,15 +8,6 @@ spec:
     - web
     - websecure
   routes:
-    # - kind: Rule
-    #   match: Host(`stingalleman.nl`)
-    #   services:
-    #     - kind: Service
-    #       name: stingalleman-website
-    #       namespace: default
-    #       passHostHeader: true
-    #       port: 80
-
     - kind: Rule
       match: Host(`media.maishond.nl`)
       services:
@@ -40,22 +31,6 @@ spec:
           name: achtergrondje
           namespace: default
           port: 80
-
-    - kind: Rule
-      match: Host(`chat.maishond.nl`)
-      services:
-        - kind: Service
-          name: maischat
-          namespace: mattermost
-          port: app
-
-    - kind: Rule
-      match: Host(`matrix.maishond.nl`)
-      services:
-        - kind: Service
-          name: synapse
-          namespace: matrix
-          port: 8008
 
   tls:
     secretName: maishond.nl-prod-tls
