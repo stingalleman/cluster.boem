@@ -1,0 +1,31 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: media.i.as216455.net
+  namespace: traefik
+spec:
+  entryPoints:
+    - internal
+    - internalsecure
+  routes:
+    - kind: Rule
+      match: Host(`radarr.media.i.as216455.net`)
+      services:
+        - name: media-stingalleman-nl
+          namespace: traefik
+          port: 7878
+    - kind: Rule
+      match: Host(`sonarr.media.i.as216455.net`)
+      services:
+        - name: media-stingalleman-nl
+          namespace: traefik
+          port: 8989
+    - kind: Rule
+      match: Host(`nzbget.media.i.as216455.net`)
+      services:
+        - name: media-stingalleman-nl
+          namespace: traefik
+          port: 6789
+
+  tls:
+    secretName: media.i.as216455.net-prod-tls
