@@ -186,7 +186,7 @@ spec:
         #   default: false
         #   internal: true
         # The exposed port for this service
-        exposedPort: 9000
+        # exposedPort: 9000
         # The port protocol (TCP/UDP)
         protocol: TCP
       web:
