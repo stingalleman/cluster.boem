@@ -14,20 +14,6 @@ spec:
         - name: internals-vm
           namespace: traefik
           port: 8000
-    - kind: Rule
-      match: Host(`s3.kluster.i.as216455.net`)
-      services:
-        - name: rook-ceph-rgw-ceph-objectstore
-          namespace: rook-ceph
-          port: 80
-    - kind: Rule
-      match: Host(`*.s3.kluster.i.as216455.net`)
-      services:
-        - name: rook-ceph-rgw-ceph-objectstore
-          namespace: rook-ceph
-          port: 80
-      tls:
-        secretName: s3.kluster.i.as216455.net-prod-tls
 
   tls:
     secretName: kluster.i.as216455.net-prod-tls
