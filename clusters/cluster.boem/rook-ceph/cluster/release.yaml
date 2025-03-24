@@ -47,3 +47,4 @@ spec:
       # -- Enable Prometheus integration, will also create necessary RBAC rules to allow Operator to create ServiceMonitors.
       # Monitoring requires Prometheus to be pre-installed
       enabled: true
+      rulesNamespaceOverride: monitoring
