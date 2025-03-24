@@ -14,6 +14,12 @@ spec:
         - name: internals-vm
           namespace: traefik
           port: 8000
+    - kind: Rule
+      match: Host(`ceph.kluster.i.as216455.net`)
+      services:
+        - name: rook-ceph-mgr-dashboard
+          namespace: rook-ceph
+          port: 7000
 
   tls:
     secretName: kluster.i.as216455.net-prod-tls
