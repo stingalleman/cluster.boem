@@ -40,7 +40,7 @@ spec:
           namespace: traefik
           port: 443
           scheme: https
-          # serversTransport: insecure
+          serversTransport: insecure
 
     - kind: Rule
       match: Host(`monkey.maishond.nl`)
@@ -50,7 +50,7 @@ spec:
           namespace: traefik
           port: 443
           scheme: https
-          # serversTransport: insecure
+          serversTransport: insecure
       middlewares:
         - name: monkey-redirect
           namespace: traefik
