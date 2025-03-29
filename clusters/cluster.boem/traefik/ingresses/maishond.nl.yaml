@@ -38,9 +38,9 @@ spec:
         - kind: Service
           name: rhel-aap
           namespace: traefik
-          port: 443
-          scheme: https
-          serversTransport: insecure
+          port: 8080
+          # scheme: https
+          # serversTransport: insecure
 
     - kind: Rule
       match: Host(`monkey.maishond.nl`)
@@ -48,9 +48,9 @@ spec:
         - kind: Service
           name: rhel-aap
           namespace: traefik
-          port: 443
-          scheme: https
-          serversTransport: insecure
+          port: 8080
+          # scheme: https
+          # serversTransport: insecure
       middlewares:
         - name: monkey-redirect
           namespace: traefik
