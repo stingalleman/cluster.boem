@@ -62,6 +62,13 @@ spec:
               target_label = "app"
             }
 
+            // Label creation -  "app" field from "__meta_kubernetes_pod_label_app"
+            rule {
+              source_labels = ["__meta_kubernetes_pod_label_app"]
+              action = "replace"
+              target_label = "app"
+            }
+
             // Label creation -  "job" field from "__meta_kubernetes_namespace" and "__meta_kubernetes_pod_container_name"
             // Concatenate values __meta_kubernetes_namespace/__meta_kubernetes_pod_container_name
             rule {
