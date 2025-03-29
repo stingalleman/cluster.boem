@@ -37,7 +37,7 @@ spec:
       services:
         - kind: Service
           name: rhel-aap
-          namespace: default
+          namespace: traefik
           port: 443
           scheme: https
           serversTransport: insecure
@@ -47,7 +47,7 @@ spec:
       services:
         - kind: Service
           name: rhel-aap
-          namespace: default
+          namespace: traefik
           port: 443
           scheme: https
           serversTransport: insecure
