@@ -14,6 +14,16 @@ spec:
         namespace: flux-system
   interval: 24h
   values:
+    grafana:
+      admin:
+        ## Name of the secret. Can be templated.
+        existingSecret: grafana-user
+        userKey: admin-user
+        passwordKey: admin-password
+      additionalDataSources:
+        - name: loki
+          type: loki
+          url: http://loki-gateway.monitoring
     prometheus:
       storageSpec:
         volumeClaimTemplate:
