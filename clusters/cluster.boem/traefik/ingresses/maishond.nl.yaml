@@ -38,7 +38,7 @@ spec:
         - kind: Service
           name: rhel-aap
           namespace: traefik
-          port: 8123
+          port: 8800
           # scheme: https
           # serversTransport: insecure
 
@@ -48,7 +48,7 @@ spec:
         - kind: Service
           name: rhel-aap
           namespace: traefik
-          port: 8123
+          port: 8800
           # scheme: https
           # serversTransport: insecure
       middlewares:
