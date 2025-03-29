@@ -38,8 +38,8 @@ spec:
         - kind: Service
           name: rhel-aap
           namespace: traefik
-          port: 8800
-          # scheme: https
+          port: 443
+          scheme: https
           # serversTransport: insecure
 
     - kind: Rule
@@ -48,8 +48,8 @@ spec:
         - kind: Service
           name: rhel-aap
           namespace: traefik
-          port: 8800
-          # scheme: https
+          port: 443
+          scheme: https
           # serversTransport: insecure
       middlewares:
         - name: monkey-redirect
