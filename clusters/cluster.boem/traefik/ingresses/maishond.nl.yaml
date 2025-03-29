@@ -32,5 +32,28 @@ spec:
           namespace: default
           port: 80
 
+    - kind: Rule
+      match: Host(`aap.maishond.nl`)
+      services:
+        - kind: Service
+          name: rhel-aap
+          namespace: default
+          port: 443
+          scheme: https
+          serversTransport: insecure
+
+    - kind: Rule
+      match: Host(`monkey.maishond.nl`)
+      services:
+        - kind: Service
+          name: rhel-aap
+          namespace: default
+          port: 443
+          scheme: https
+          serversTransport: insecure
+      middlewares:
+        - name: monkey-redirect
+          namespace: traefik
+
   tls:
     secretName: maishond.nl-prod-tls
