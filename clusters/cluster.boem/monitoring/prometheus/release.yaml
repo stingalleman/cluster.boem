@@ -24,6 +24,22 @@ spec:
         - name: loki
           type: loki
           url: http://loki-gateway.monitoring
+      sidecar:
+        notifiers:
+          enabled: true
+          label: grafana_notifier
+          labelValue: "1"
+          searchNamespace: ALL
+          # search in configmap, secret or both
+          resource: both
+        alerts:
+          enabled: true
+          label: grafana_alert
+          labelValue: "1"
+          searchNamespace: ALL
+          # search in configmap, secret or both
+          resource: both
+
     prometheus:
       storageSpec:
         volumeClaimTemplate:
