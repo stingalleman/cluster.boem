@@ -37,5 +37,12 @@ spec:
           namespace: default
           port: 8000
 
+    - kind: Rule
+      match: Host(`flux-webhook.as216455.net`)
+      services:
+        - name: webhook-receiver
+          namespace: flux-system
+          port: 80
+
   tls:
     secretName: as216455.net-prod-tls

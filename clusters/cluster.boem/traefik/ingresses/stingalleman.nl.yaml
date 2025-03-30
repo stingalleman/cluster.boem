@@ -25,13 +25,6 @@ spec:
           passHostHeader: true
 
     - kind: Rule
-      match: Host(`flux-webhook.stingalleman.nl`)
-      services:
-        - name: webhook-receiver
-          namespace: flux-system
-          port: 80
-
-    - kind: Rule
       match: Host(`media.stingalleman.nl`)
       services:
         - kind: Service
