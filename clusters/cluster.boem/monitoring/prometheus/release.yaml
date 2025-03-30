@@ -32,6 +32,7 @@ spec:
           searchNamespace: ALL
           # search in configmap, secret or both
           resource: both
+          reloadURL: "http://monitoring-stack-grafana.monitoring/api/admin/provisioning/alerting/reload"
         alerts:
           enabled: true
           label: grafana_alert
@@ -39,6 +40,7 @@ spec:
           searchNamespace: ALL
           # search in configmap, secret or both
           resource: both
+          reloadURL: "http://monitoring-stack-grafana.monitoring/api/admin/provisioning/alerting/reload"
 
     prometheus:
       storageSpec:
