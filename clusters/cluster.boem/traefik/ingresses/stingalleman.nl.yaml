@@ -104,5 +104,13 @@ spec:
           namespace: default
           port: http
 
+    - kind: Rule
+      match: Host(`grocy.stingalleman.nl`)
+      services:
+        - kind: Service
+          name: grocy
+          namespace: default
+          port: http
+
   tls:
     secretName: stingalleman.nl-prod-tls
