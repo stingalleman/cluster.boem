@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grocy
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: grocy
+  template:
+    metadata:
+      labels:
+        app: grocy
+    spec:
+      containers:
+        - name: grocy
+          image: lscr.io/linuxserver/grocy:latest
+          # resources:
+          #   limits:
+          #     memory: "128Mi"
+          #     cpu: "500m"
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: "Europe/Amsterdam"
+          ports:
+            - containerPort: 80
+              name: http
+          volumeMounts:
+            - name: config
+              mountPath: /config
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: grocy-config
