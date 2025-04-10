@@ -1,9 +1,12 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: cert-manager
   namespace: cert-manager
 spec:
+  update:
+    crds: CreateReplace
+    preserveValues: true
   chart:
     spec:
       chart: cert-manager
