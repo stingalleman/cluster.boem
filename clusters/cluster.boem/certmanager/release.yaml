@@ -4,6 +4,9 @@ metadata:
   name: cert-manager
   namespace: cert-manager
 spec:
+  upgrade:
+    crds: CreateReplace
+    preserveValues: true
   chart:
     spec:
       chart: cert-manager
@@ -12,9 +15,6 @@ spec:
         kind: HelmRepository
         name: jetstack
         namespace: flux-system
-    update:
-      crds: CreateReplace
-      preserveValues: true
   interval: 24h
   values:
     global:
