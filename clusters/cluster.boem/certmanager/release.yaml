@@ -4,13 +4,17 @@ metadata:
   name: cert-manager
   namespace: cert-manager
 spec:
+  install:
+    remediation:
+      retries: 3
+    crds: CreateReplace
   upgrade:
     crds: CreateReplace
-    preserveValues: true
   chart:
     spec:
       chart: cert-manager
-      version: v1.17.1
+      version: v1.12.3
+      # version: v1.17.1
       sourceRef:
         kind: HelmRepository
         name: jetstack
@@ -73,7 +77,7 @@ spec:
     featureGates: ""
 
     image:
-      repository: quay.io/jetstack/cert-manager-controller
+      # repository: quay.io/jetstack/cert-manager-controller
       # You can manage a registry with
       # registry: quay.io
       # repository: jetstack/cert-manager-controller
@@ -324,7 +328,7 @@ spec:
       serviceLabels: {}
 
       image:
-        repository: quay.io/jetstack/cert-manager-webhook
+        # repository: quay.io/jetstack/cert-manager-webhook
         # You can manage a registry with
         # registry: quay.io
         # repository: jetstack/cert-manager-webhook
@@ -439,7 +443,7 @@ spec:
       podLabels: {}
 
       image:
-        repository: quay.io/jetstack/cert-manager-cainjector
+        # repository: quay.io/jetstack/cert-manager-cainjector
         # You can manage a registry with
         # registry: quay.io
         # repository: jetstack/cert-manager-cainjector
@@ -530,7 +534,7 @@ spec:
       podLabels: {}
 
       image:
-        repository: quay.io/jetstack/cert-manager-ctl
+        # repository: quay.io/jetstack/cert-manager-ctl
         # You can manage a registry with
         # registry: quay.io
         # repository: jetstack/cert-manager-ctl
