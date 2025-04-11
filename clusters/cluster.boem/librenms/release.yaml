@@ -1,18 +1,18 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: librenms
-  namespace: default
-spec:
-  chart:
-    spec:
-      chart: librenms
-      sourceRef:
-        kind: HelmRepository
-        name: librenms
-        namespace: flux-system
-      # version: "6.6.51"
-  interval: 24h
-  values:
-    librenms:
-      appkey: base64:WINr/c2/ob9W3vJkCfZy/FSo7rY9izCs/sijKHrpU1k=
+# apiVersion: helm.toolkit.fluxcd.io/v2beta1
+# kind: HelmRelease
+# metadata:
+#   name: librenms
+#   namespace: default
+# spec:
+#   chart:
+#     spec:
+#       chart: librenms
+#       sourceRef:
+#         kind: HelmRepository
+#         name: librenms
+#         namespace: flux-system
+#       # version: "6.6.51"
+#   interval: 24h
+#   values:
+#     librenms:
+#       appkey: base64:WINr/c2/ob9W3vJkCfZy/FSo7rY9izCs/sijKHrpU1k=
