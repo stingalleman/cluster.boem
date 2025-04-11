@@ -41,6 +41,16 @@ spec:
           namespace: monitoring
           passHostHeader: true
           port: 9093
+    - kind: Rule
+      match: Host(`alertmanager.i.as216455.net`)
+      middlewares:
+        - name: internal-whitelist
+      services:
+        - kind: Service
+          name: alertmanager-operated
+          namespace: monitoring
+          passHostHeader: true
+          port: 9093
 
     - kind: Rule
       match: Host(`traefik.i.as216455.net`)
