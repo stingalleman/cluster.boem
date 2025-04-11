@@ -60,7 +60,8 @@ spec:
         # renewal of a leadership.
         # retryPeriod: 15s
 
-    installCRDs: true
+    crds:
+      enabled: true
 
     replicaCount: 2
 
