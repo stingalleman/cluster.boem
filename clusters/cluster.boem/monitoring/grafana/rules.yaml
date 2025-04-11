@@ -1,0 +1,17 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: grafana-rules
+  namespace: default
+  labels:
+    grafana_alert: "1"
+data:
+  contactpoints.yaml: |
+    apiVersion: 1
+    contactPoints:
+      - orgId: 1
+        name: chernobyl-alerts
+        receivers:
+          - type: discord
+            settings:
+              url: https://discord.com/api/webhooks/1248027308888031275/eQ8TYY6F1Hz5VT1TcHwPz80QW4hOywjGEmOCavEZuwf1KPn4UF8rnofOPbkvhZrYUkjv
