@@ -46,15 +46,15 @@ spec:
           resource: both
           reloadURL: "http://monitoring-stack-grafana.monitoring/api/admin/provisioning/alerting/reload"
 
-    prometheus:
-      storageSpec:
-        volumeClaimTemplate:
-          spec:
-            storageClassName: ceph-filesystem
-            accessModes: ["ReadWriteOnce"]
-            resources:
-              requests:
-                storage: 50Gi
+    # prometheus:
+    # storageSpec:
+    #   volumeClaimTemplate:
+    #     spec:
+    #       storageClassName: ceph-filesystem
+    #       accessModes: ["ReadWriteOnce"]
+    #       resources:
+    #         requests:
+    #           storage: 50Gi
 
     customRules:
       KubePodCrashLooping:
