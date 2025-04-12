@@ -192,7 +192,7 @@ spec:
     prometheus:
       enabled: true
       servicemonitor:
-        enabled: false
+        enabled: true
         prometheusInstance: default
         targetPort: 9402
         path: /metrics
@@ -200,6 +200,8 @@ spec:
         scrapeTimeout: 30s
         labels: {}
         honorLabels: false
+      podmonitor:
+        enabled: true
 
     # Use these variables to configure the HTTP_PROXY environment variables
     # http_proxy: "http://proxy:8080"
