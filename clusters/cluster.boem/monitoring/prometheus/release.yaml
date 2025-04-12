@@ -46,11 +46,11 @@ spec:
       storageSpec:
         volumeClaimTemplate:
           spec:
-            storageClassName: nfs-client
-            accessModes: ["ReadWriteMany"]
+            storageClassName: ceph-block
+            accessModes: ["ReadWriteOnce"]
             resources:
               requests:
-                storage: 20Gi
+                storage: 50Gi
 
     customRules:
       KubePodCrashLooping:
