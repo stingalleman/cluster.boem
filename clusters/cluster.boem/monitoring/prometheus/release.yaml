@@ -17,7 +17,7 @@ spec:
     crds:
       upgradeJob:
         enabled: true
-        forceConflicts: false
+        forceConflicts: true
     grafana:
       admin:
         ## Name of the secret. Can be templated.
