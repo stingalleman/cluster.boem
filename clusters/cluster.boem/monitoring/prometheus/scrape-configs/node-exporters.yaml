@@ -8,6 +8,6 @@ metadata:
 spec:
   staticConfigs:
     - labels:
-        job: extra-node-exporter
+        job: node-exporter
       targets:
         - 10.10.10.110:9100
