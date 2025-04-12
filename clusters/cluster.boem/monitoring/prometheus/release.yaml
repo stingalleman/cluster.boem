@@ -55,6 +55,7 @@ spec:
     customRules:
       KubePodCrashLooping:
         severity: "critical"
+        for: "2m"
     defaultRules:
       create: true
       rules:
