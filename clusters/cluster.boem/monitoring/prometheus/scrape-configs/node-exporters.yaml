@@ -4,7 +4,7 @@ metadata:
   name: node-exporters
   namespace: monitoring
   labels:
-    prometheus: monitoring-stack-kube-prom-prometheus
+    release: monitoring-stack
 spec:
   staticConfigs:
     - labels:
