@@ -14,10 +14,10 @@ spec:
         namespace: flux-system
   interval: 24h
   values:
-    # crds:
-    #   enabled: true
-    #   upgradeJob:
-    #     enabled: true
+    crds:
+      upgradeJob:
+        enabled: true
+        forceConflicts: false
     grafana:
       admin:
         ## Name of the secret. Can be templated.
