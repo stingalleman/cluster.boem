@@ -12,5 +12,3 @@ spec:
   dnsNames:
     - "isaensting.nl"
     - "*.isaensting.nl"
-  duration: 336h # 14d
-  renewBefore: 360h #7d

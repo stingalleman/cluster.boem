@@ -1,0 +1,15 @@
+# apiVersion: cert-manager.io/v1
+# kind: Certificate
+# metadata:
+#   name: mais.dog
+#   namespace: traefik
+# spec:
+#   secretName: mais.dog-prod-tls
+#   issuerRef:
+#     name: letsencrypt-prod
+#     kind: ClusterIssuer
+#   commonName: "*.mais.dog"
+#   dnsNames:
+#     - "mais.dog"
+#     - "*.mais.dog"
+#     - "staging.chat.mais.dog"
