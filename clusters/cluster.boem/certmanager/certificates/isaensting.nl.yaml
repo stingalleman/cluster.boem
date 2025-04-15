@@ -13,4 +13,4 @@ spec:
     - "isaensting.nl"
     - "*.isaensting.nl"
   duration: 336h # 14d
-  renewBefore: 360h #7d
+  renewBefore: 168h #7d

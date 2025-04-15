@@ -12,3 +12,5 @@ spec:
   dnsNames:
     - "s3.kluster.i.as216455.net"
     - "*.s3.kluster.i.as216455.net"
+  duration: 336h # 14d
+  renewBefore: 168h #7d

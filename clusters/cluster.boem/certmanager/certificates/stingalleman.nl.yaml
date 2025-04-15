@@ -14,4 +14,4 @@ spec:
     - "*.stingalleman.nl"
     - "request.books.stingalleman.nl"
   duration: 336h # 14d
-  renewBefore: 360h #7d
+  renewBefore: 168h #7d
