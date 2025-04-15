@@ -12,5 +12,3 @@ spec:
   dnsNames:
     - "i.as216455.net"
     - "*.i.as216455.net"
-  duration: 336h # 14d
-  renewBefore: 168h #7d
