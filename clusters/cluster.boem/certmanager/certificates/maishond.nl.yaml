@@ -12,3 +12,5 @@ spec:
   dnsNames:
     - "maishond.nl"
     - "*.maishond.nl"
+  duration: 336h # 14d
+  renewBefore: 360h #7d
