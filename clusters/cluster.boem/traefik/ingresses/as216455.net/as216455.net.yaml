@@ -44,5 +44,19 @@ spec:
           namespace: flux-system
           port: 80
 
+    - kind: Rule
+      match: Host(`tilesgl.as216455.net`)
+      services:
+        - name: tiles
+          namespace: traefik
+          port: 8080
+
+    - kind: Rule
+      match: Host(`tilespostserve.as216455.net`)
+      services:
+        - name: tiles
+          namespace: traefik
+          port: 8090
+
   tls:
     secretName: as216455.net-prod-tls
