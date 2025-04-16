@@ -1,32 +1,32 @@
-apiVersion: postgresql.cnpg.io/v1
-kind: Cluster
-metadata:
-  name: mattermost
-  namespace: cnpg-system
-spec:
-  instances: 1
-  # Example of rolling update strategy:
-  # - unsupervised: automated update of the primary once all
-  #                 replicas have been upgraded (default)
-  # - supervised: requires manual supervision to perform
-  #               the switchover of the primary
-  primaryUpdateStrategy: unsupervised
-  enableSuperuserAccess: true
+# apiVersion: postgresql.cnpg.io/v1
+# kind: Cluster
+# metadata:
+#   name: mattermost
+#   namespace: cnpg-system
+# spec:
+#   instances: 1
+#   # Example of rolling update strategy:
+#   # - unsupervised: automated update of the primary once all
+#   #                 replicas have been upgraded (default)
+#   # - supervised: requires manual supervision to perform
+#   #               the switchover of the primary
+#   primaryUpdateStrategy: unsupervised
+#   enableSuperuserAccess: true
 
-  # Require 1Gi of space
-  storage:
-    size: 20Gi
-    storageClass: nfs-client
+#   # Require 1Gi of space
+#   storage:
+#     size: 20Gi
+#     storageClass: nfs-client
 
-  # backup:
-  #   barmanObjectStore:
-  #     destinationPath: s3://kluster-cnpg-backup/maismost-backup/
-  #     endpointURL: https://s3.eu-central-003.backblazeb2.com
-  #     s3Credentials:
-  #       accessKeyId:
-  #         name: generic-backup-creds
-  #         key: ACCESS_KEY_ID
-  #       secretAccessKey:
-  #         name: generic-backup-creds
-  #         key: ACCESS_SECRET_KEY
-  #   retentionPolicy: "5d"
+#   # backup:
+#   #   barmanObjectStore:
+#   #     destinationPath: s3://kluster-cnpg-backup/maismost-backup/
+#   #     endpointURL: https://s3.eu-central-003.backblazeb2.com
+#   #     s3Credentials:
+#   #       accessKeyId:
+#   #         name: generic-backup-creds
+#   #         key: ACCESS_KEY_ID
+#   #       secretAccessKey:
+#   #         name: generic-backup-creds
+#   #         key: ACCESS_SECRET_KEY
+#   #   retentionPolicy: "5d"
