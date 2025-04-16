@@ -1,0 +1,39 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: [
+    "config:recommended",
+    "docker:enableMajor",
+    "helpers:pinGitHubActionDigests",
+    "github>stingalleman/cluster.boem//.renovate/autoMerge.json5",
+    "github>stingalleman/cluster.boem//.renovate/customManagers.json5",
+    "github>stingalleman/cluster.boem//.renovate/grafanaDashboards.json5",
+    "github>stingalleman/cluster.boem//.renovate/groups.json5",
+    "github>stingalleman/cluster.boem//.renovate/labels.json5",
+    "github>stingalleman/cluster.boem//.renovate/semanticCommits.json5",
+    ":automergeBranch",
+    ":disableRateLimiting",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":timezone(Europe/Amsterdam)",
+  ],
+  dependencyDashboardTitle: "Renovate Dashboard 🤖",
+  suppressNotifications: [
+    "prEditedNotification",
+    "prIgnoreNotification",
+  ],
+  ignorePaths: [
+    "**/*.sops.*",
+    "**/old-ansible/**",
+    "**/ansible/**",
+    "**/.vscode/**",
+  ],
+  flux: {
+    fileMatch: ["(^|/)kubernetes/.+\\.ya?ml$"]
+  },
+  "helm-values": {
+    fileMatch: ["(^|/)kubernetes/.+\\.ya?ml$"]
+  },
+  kubernetes: {
+    fileMatch: ["(^|/)kubernetes/.+\\.ya?ml$"]
+  },
+}
