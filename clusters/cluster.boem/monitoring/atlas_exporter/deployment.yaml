@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: atlas_exporter
+  namespace: monitoring
+  labels:
+    app: atlas_exporter
+spec:
+  selector:
+    matchLabels:
+      app: atlas_exporter
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: atlas_exporter
+    spec:
+      containers:
+        - name: atlas_exporter
+          image: czerwonk/atlas_exporter
+          livenessProbe:
+            tcpSocket:
+              port: 9400
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: 9400
+          ports:
+            - containerPort: 9400
+              name: http

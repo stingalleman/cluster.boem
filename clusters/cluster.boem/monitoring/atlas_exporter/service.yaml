@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: atlas_exporter
+  namespace: monitoring
+spec:
+  selector:
+    app: atlas_exporter
+  type: ClusterIP
+  ports:
+    - name: atlas_exporter
+      protocol: TCP
+      port: 80
+      targetPort: http
