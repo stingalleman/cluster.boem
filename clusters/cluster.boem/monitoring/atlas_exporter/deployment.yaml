@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: atlas-exporter
-          image: czerwonk/atlas-exporter
+          image: czerwonk/atlas_exporter
           livenessProbe:
             tcpSocket:
               port: 9400
