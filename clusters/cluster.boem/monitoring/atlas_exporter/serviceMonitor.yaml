@@ -6,13 +6,18 @@ metadata:
   labels:
     release: monitoring-stack
 spec:
+  endpoints:
+    - interval: 60s
+      path: /metrics
+      scrapeTimeout: 30s
+      targetPort: 9400
   jobLabel: atlas-exporter
-  selector:
-    matchLabels:
-      app: atlas-exporter
   namespaceSelector:
     matchNames:
       - monitoring
-  endpoints:
-    - port: atlas-exporter
-      interval: 1m
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - atlas-exporter
