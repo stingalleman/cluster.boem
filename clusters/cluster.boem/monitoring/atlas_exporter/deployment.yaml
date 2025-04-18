@@ -20,7 +20,7 @@ spec:
           image: czerwonk/atlas_exporter
           env:
             - name: CONFIG
-              value: /tmp/config.yml
+              value: /tmp/config.yaml
           livenessProbe:
             tcpSocket:
               port: 9400
