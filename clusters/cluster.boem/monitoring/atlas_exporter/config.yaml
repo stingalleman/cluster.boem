@@ -6,7 +6,7 @@ metadata:
   labels:
     app: atlas-exporter
 data:
-  config.yml: |
+  config.yaml: |
     measurements:
       - id: 8772164
         timeout: 120s
