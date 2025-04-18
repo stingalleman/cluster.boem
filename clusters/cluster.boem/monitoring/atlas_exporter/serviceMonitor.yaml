@@ -6,7 +6,7 @@ metadata:
   labels:
     release: monitoring-stack
 spec:
-  jobLabel: atlas_exporter
+  jobLabel: atlas-exporter
   selector:
     matchLabels:
       app: atlas-exporter
@@ -14,5 +14,5 @@ spec:
     matchNames:
       - monitoring
   endpoints:
-    - port: "80"
+    - port: atlas-exporter
       interval: 1m
