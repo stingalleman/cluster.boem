@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: atlas-exporter
   namespace: monitoring
+  labels:
+    app: atlas-exporter
 spec:
   selector:
     app: atlas-exporter
