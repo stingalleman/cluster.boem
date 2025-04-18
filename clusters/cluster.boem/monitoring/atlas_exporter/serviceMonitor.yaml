@@ -8,11 +8,11 @@ metadata:
 spec:
   jobLabel: atlas_exporter
   selector:
-    matchExpressions:
-      - { key: app, operator: In, values: ["atlas-exporter"] }
+    matchLabels:
+      app: atlas-exporter
   namespaceSelector:
     matchNames:
       - monitoring
   endpoints:
-    - port: http
+    - port: "80"
       interval: 1m
