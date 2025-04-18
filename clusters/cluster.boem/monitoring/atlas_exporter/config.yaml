@@ -8,7 +8,9 @@ metadata:
 data:
   config.yaml: |
     measurements:
-      - id: 8772164
+      - id: 97668234
+        timeout: 120s
+      - id: 97670229
         timeout: 120s
     histogram_buckets:
       ping:
