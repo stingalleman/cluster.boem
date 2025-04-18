@@ -55,8 +55,6 @@ spec:
 
     - kind: Rule
       match: Host(`traefik.i.as216455.net`)
-      middlewares:
-        - name: internal-whitelist
       services:
         - name: traefik-api
           namespace: traefik
@@ -64,8 +62,6 @@ spec:
 
     - kind: Rule
       match: Host(`prometheus.i.as216455.net`)
-      middlewares:
-        - name: internal-whitelist
       services:
         - name: prometheus-operated
           namespace: monitoring
