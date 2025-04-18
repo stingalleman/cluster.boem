@@ -1,0 +1,33 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: atlas-exporter
+  namespace: monitoring
+  labels:
+    release: monitoring-stack
+spec:
+  relabelings:
+    - action: replace
+      sourceLabels:
+        - __address__
+      regex: (.*)(:80)?
+      targetLabel: __param_measurement_id
+      replacement: ${1}
+    - action: replace
+      sourceLabels:
+        - __param_measurement_id
+      regex: (.*)
+      targetLabel: instance
+      replacement: ${1}
+    - action: replace
+      sourceLabels: []
+      regex: .*
+      targetLabel: __address__
+      replacement: atlas-exporter.monitoring
+  scrapeInterval: 1m
+  staticConfigs:
+    - labels:
+        job: atlas_exporter
+      targets:
+        - "97668234"
+        - "97670229"
