@@ -18,6 +18,9 @@ spec:
       containers:
         - name: atlas-exporter
           image: czerwonk/atlas_exporter
+          env:
+            - name: CONFIG
+              value: /tmp/config.yml
           livenessProbe:
             tcpSocket:
               port: 9400
@@ -28,3 +31,10 @@ spec:
           ports:
             - containerPort: 9400
               name: http
+          volumeMounts:
+            - mountPath: /tmp/config.yaml
+              name: config-volume
+      volumes:
+        - name: config-volume
+          configMap:
+            name: atlas-exporter-config

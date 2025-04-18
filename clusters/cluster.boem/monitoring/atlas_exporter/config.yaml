@@ -1,0 +1,21 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: atlas-exporter-config
+  namespace: monitoring
+  labels:
+    app: atlas-exporter
+data:
+  config.yml: |
+    measurements:
+      - id: 8772164
+        timeout: 120s
+    histogram_buckets:
+      ping:
+        rtt:
+          - 5.0
+          - 10.0
+          - 25.0
+          - 50.0
+          - 100.0
+    filter_invalid_results: true
