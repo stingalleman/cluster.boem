@@ -15,6 +15,9 @@ spec:
           name: sting-site
           namespace: default
           port: 80
+      middlewares:
+        - name: hsts
+          namespace: traefik
 
     - kind: Rule
       match: Host(`grafiekjes.stingalleman.nl`)
