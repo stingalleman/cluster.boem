@@ -62,5 +62,12 @@ spec:
           namespace: traefik
           port: 8090
 
+    - kind: Rule
+      match: Host(`maputnik.as216455.net`)
+      services:
+        - name: tiles
+          namespace: traefik
+          port: 8088
+
   tls:
     secretName: as216455.net-prod-tls
