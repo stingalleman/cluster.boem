@@ -26,11 +26,12 @@ spec:
               path: /
               port: 3000
           env:
-            - name: WAKAPI_PASSWORD_SALT
-              valueFrom:
-                secretKeyRef:
-                  name: wakapi
-                  key: salt
+            []
+            # - name: WAKAPI_PASSWORD_SALT
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: wakapi
+            #       key: salt
             # - name: ENVIRONMENT
             #   value: prod
             # - name: WAKAPI_SUPPORT_CONTACT
