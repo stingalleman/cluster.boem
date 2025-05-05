@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wakapi
+  namespace: default
+  labels:
+    app: wakapi
+spec:
+  selector:
+    matchLabels:
+      app: wakapi
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: wakapi
+    spec:
+      containers:
+        - name: wakapi
+          image: ghcr.io/muety/wakapi:latest
+          livenessProbe:
+            tcpSocket:
+              port: 3000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+          env:
+            - name: WAKAPI_PASSWORD_SALT
+              valueFrom:
+                secretKeyRef:
+                  name: wakapi
+                  key: salt
+            - name: ENVIRONMENT
+              value: prod
+            - name: WAKAPI_SUPPORT_CONTACT
+              value: me@stingalleman.nl
+            - name: WAKAPI_PUBLIC_URL
+              value: https://wakapi.as216455.net
+            - name: WAKAPI_EXPOSE_METRICS
+              value: "false"
+            - name: WAKAPI_MAIL_ENABLED
+              value: "true"
+            - name: WAKAPI_MAIL_SENDER
+              value: "AS216455 Wakapi <wakapi@as216455.net>"
+            - name: WAKAPI_MAIL_SMTP_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: wakapi
+                  key: smtp_server
+            - name: WAKAPI_MAIL_SMTP_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: wakapi
+                  key: smtp_port
+            - name: WAKAPI_MAIL_SMTP_USER
+              valueFrom:
+                secretKeyRef:
+                  name: wakapi
+                  key: smtp_username
+            - name: WAKAPI_MAIL_SMTP_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: wakapi
+                  key: smtp_password
+            - name: WAKAPI_MAIL_SMTP_TLS
+              value: "true"
+          ports:
+            - containerPort: 3000
+              name: http
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: wakapi
+      restartPolicy: Always
