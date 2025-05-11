@@ -1,41 +1,41 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: spoolman
-  namespace: default
-  labels:
-    app: spoolman
-spec:
-  selector:
-    matchLabels:
-      app: spoolman
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: spoolman
-    spec:
-      containers:
-        - name: spoolman
-          image: ghcr.io/donkie/spoolman:latest
-          livenessProbe:
-            tcpSocket:
-              port: 8000
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 8000
-          env:
-            - name: TZ
-              value: Europe/Amsterdam
-          ports:
-            - containerPort: 8000
-              name: http
-          volumeMounts:
-            - name: spoolman-data
-              mountPath: /home/app/.local/share/spoolman
-      volumes:
-        - name: spoolman-data
-          persistentVolumeClaim:
-            claimName: spoolman-data
-      restartPolicy: Always
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: spoolman
+#   namespace: default
+#   labels:
+#     app: spoolman
+# spec:
+#   selector:
+#     matchLabels:
+#       app: spoolman
+#   replicas: 1
+#   template:
+#     metadata:
+#       labels:
+#         app: spoolman
+#     spec:
+#       containers:
+#         - name: spoolman
+#           image: ghcr.io/donkie/spoolman:latest
+#           livenessProbe:
+#             tcpSocket:
+#               port: 8000
+#           readinessProbe:
+#             httpGet:
+#               path: /
+#               port: 8000
+#           env:
+#             - name: TZ
+#               value: Europe/Amsterdam
+#           ports:
+#             - containerPort: 8000
+#               name: http
+#           volumeMounts:
+#             - name: spoolman-data
+#               mountPath: /home/app/.local/share/spoolman
+#       volumes:
+#         - name: spoolman-data
+#           persistentVolumeClaim:
+#             claimName: spoolman-data
+#       restartPolicy: Always

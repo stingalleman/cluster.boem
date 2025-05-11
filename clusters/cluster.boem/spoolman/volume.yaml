@@ -6,7 +6,7 @@ metadata:
   labels:
     app: spoolman
 spec:
-  storageClassName: ceph-block
+  storageClassName: ceph-filesystem
   accessModes:
     - ReadWriteOnce
   resources:

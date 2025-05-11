@@ -94,5 +94,12 @@ spec:
           namespace: default
           port: 80
 
+    - kind: Rule
+      match: Host(`spoolman.i.as216455.net`)
+      services:
+        - name: spoolman
+          namespace: default
+          port: 8000
+
   tls:
     secretName: i.as216455.net-prod-tls
