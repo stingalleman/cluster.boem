@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: spoolman-data
+  name: spoolman-dataa
   namespace: default
   labels:
     app: spoolman

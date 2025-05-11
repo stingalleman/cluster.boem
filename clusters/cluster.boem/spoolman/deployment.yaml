@@ -37,5 +37,5 @@ spec:
       volumes:
         - name: spoolman-data
           persistentVolumeClaim:
-            claimName: spoolman-data
+            claimName: spoolman-dataa
       restartPolicy: Always
