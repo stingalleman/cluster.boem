@@ -28,6 +28,10 @@ spec:
           env:
             - name: TZ
               value: Europe/Amsterdam
+            - name: SPOOLMAN_HOST
+              value: 0.0.0.0
+            - name: SPOOLMAN_PORT
+              value: "8000"
           ports:
             - containerPort: 8000
               name: http
