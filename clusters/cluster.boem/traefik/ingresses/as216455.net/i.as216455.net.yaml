@@ -101,5 +101,12 @@ spec:
           namespace: default
           port: 8000
 
+    - kind: Rule
+      match: Host(`actual.i.as216455.net`)
+      services:
+        - name: actual-budget-service
+          namespace: default
+          port: 5006
+
   tls:
     secretName: i.as216455.net-prod-tls
