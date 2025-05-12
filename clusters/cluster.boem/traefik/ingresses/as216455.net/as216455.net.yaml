@@ -76,12 +76,12 @@ spec:
           namespace: default
           port: 5006
 
-    - kind: Rule
-      match: Host(`actual-lucas.as216455.net`)
-      services:
-        - name: actual-budget-lucas-service
-          namespace: default
-          port: 5006
+    # - kind: Rule
+    #   match: Host(`actual-lucas.as216455.net`)
+    #   services:
+    #     - name: actual-budget-lucas-service
+    #       namespace: default
+    #       port: 5006
 
     - kind: Rule
       match: Host(`actual-wouter.as216455.net`)
