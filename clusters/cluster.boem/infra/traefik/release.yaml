@@ -486,7 +486,8 @@ spec:
       type: LoadBalancer
       # -- Additional annotations applied to both TCP and UDP services (e.g. for cloud provider specific config)
       annotations:
-        io.cilium/lb-ipam-ips: "45.83.205.8,2a07:54c7:5201:6e6f::a"
+        lbipam.cilium.io/ips: "127.0.0.1"
+        # io.cilium/lb-ipam-ips: "45.83.205.8,2a07:54c7:5201:6e6f::a"
       # -- Additional annotations for TCP service only
       annotationsTCP: {}
       # -- Additional annotations for UDP service only
