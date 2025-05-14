@@ -1,114 +1,114 @@
-# apiVersion: helm.toolkit.fluxcd.io/v2
-# kind: HelmRelease
-# metadata:
-#   name: jitsi
-#   namespace: jitsi
-# spec:
-#   chart:
-#     spec:
-#       chart: jitsi-meet
-#       version: v1.4.1
-#       sourceRef:
-#         kind: HelmRepository
-#         name: jitsi
-#         namespace: flux-system
-#   postRenderers:
-#     - kustomize:
-#         patches:
-#           - target:
-#               version: v1
-#               kind: Service
-#               name: jitsi-jitsi-meet-jvb
-#               namespace: jitsi
-#             patch: |
-#               - op: add
-#                 path: /metadata/labels/lb-pool
-#                 value: external
-#   interval: 24h
-#   values:
-#     enableAuth: false
-#     enableGuests: true
-#     publicURL: "meet.maishond.nl"
-#     tz: Europe/Amsterdam
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: jitsi
+  namespace: jitsi
+spec:
+  chart:
+    spec:
+      chart: jitsi-meet
+      version: v1.4.1
+      sourceRef:
+        kind: HelmRepository
+        name: jitsi
+        namespace: flux-system
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              version: v1
+              kind: Service
+              name: jitsi-jitsi-meet-jvb
+              namespace: jitsi
+            patch: |
+              - op: add
+                path: /metadata/labels/lb-pool
+                value: external
+  interval: 24h
+  values:
+    enableAuth: false
+    enableGuests: true
+    publicURL: "meet.maishond.nl"
+    tz: Europe/Amsterdam
 
-#     # jicofo:
-#     #   podSecurityContext:
-#     #     securityContext:
-#     #       capabilities:
-#     #         drop:
-#     #           - ALL
-#     #       readOnlyRootFilesystem: true
-#     #       allowPrivilegeEscalation: false
+    # jicofo:
+    #   podSecurityContext:
+    #     securityContext:
+    #       capabilities:
+    #         drop:
+    #           - ALL
+    #       readOnlyRootFilesystem: true
+    #       allowPrivilegeEscalation: false
 
-#     jvb:
-#       publicIPs:
-#         - 45.83.205.8
-#       service:
-#         enabled: true
-#         type: LoadBalancer
-#         ipFamilyPolicy: PreferDualStack
-#         annotations:
-#           lbipam.cilium.io/ips: "45.83.205.8,2a07:54c7:5201:6e6f::a"
-#           lbipam.cilium.io/sharing-key: "8-share"
-#           lbipam.cilium.io/sharing-cross-namespace: "*"
-#       podSecurityContext:
-#         securityContext:
-#           capabilities:
-#             drop:
-#               - ALL
-#           readOnlyRootFilesystem: true
-#           allowPrivilegeEscalation: false
+    jvb:
+      publicIPs:
+        - 45.83.205.8
+      service:
+        enabled: true
+        type: LoadBalancer
+        ipFamilyPolicy: PreferDualStack
+        annotations:
+          lbipam.cilium.io/ips: "45.83.205.8,2a07:54c7:5201:6e6f::a"
+          lbipam.cilium.io/sharing-key: "8-share"
+          lbipam.cilium.io/sharing-cross-namespace: "*"
+      podSecurityContext:
+        securityContext:
+          capabilities:
+            drop:
+              - ALL
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
 
-#     web:
-#       replicaCount: 1
-#       podSecurityContext:
-#         securityContext:
-#           capabilities:
-#             drop:
-#               - ALL
-#           readOnlyRootFilesystem: true
-#           allowPrivilegeEscalation: false
+    web:
+      replicaCount: 1
+      podSecurityContext:
+        securityContext:
+          capabilities:
+            drop:
+              - ALL
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
 
-#     # jigasi:
-#     #   podSecurityContext:
-#     #     securityContext:
-#     #       capabilities:
-#     #         drop:
-#     #           - ALL
-#     #       readOnlyRootFilesystem: true
-#     #       allowPrivilegeEscalation: false
+    # jigasi:
+    #   podSecurityContext:
+    #     securityContext:
+    #       capabilities:
+    #         drop:
+    #           - ALL
+    #       readOnlyRootFilesystem: true
+    #       allowPrivilegeEscalation: false
 
-#     jibri:
-#       # replicaCount: 3
-#       ## Enabling Jibri will allow users to record
-#       ## and/or stream their meetings (e.g. to YouTube).
-#       enabled: false # true
+    jibri:
+      # replicaCount: 3
+      ## Enabling Jibri will allow users to record
+      ## and/or stream their meetings (e.g. to YouTube).
+      enabled: false # true
 
-#       ## Enable single-use mode for Jibri (recommended).
-#       singleUseMode: false
+      ## Enable single-use mode for Jibri (recommended).
+      singleUseMode: false
 
-#       ## Enable multiple Jibri instances.
-#       ## Secommended for single-use mode.
-#       replicaCount: 1
+      ## Enable multiple Jibri instances.
+      ## Secommended for single-use mode.
+      replicaCount: 1
 
-#       ## Enable recording service.
-#       ## Set this to true/false to enable/disable local recordings.
-#       ## Defaults to enabled (allow local recordings).
-#       recording: true
+      ## Enable recording service.
+      ## Set this to true/false to enable/disable local recordings.
+      ## Defaults to enabled (allow local recordings).
+      recording: true
 
-#       ## Enable livestreaming service.
-#       ## Set this to true/false to enable/disable live streams.
-#       ## Defaults to disabled (livestreaming is forbidden).
-#       livestreaming: true
+      ## Enable livestreaming service.
+      ## Set this to true/false to enable/disable live streams.
+      ## Defaults to disabled (livestreaming is forbidden).
+      livestreaming: true
 
-#       ## Enable persistent storage for local recordings.
-#       ## If disabled, jibri pod will use a transient
-#       ## emptyDir-backed storage instead.
-#       # persistence:
-#       #   enabled: true
-#       #   size: 32Gi
+      ## Enable persistent storage for local recordings.
+      ## If disabled, jibri pod will use a transient
+      ## emptyDir-backed storage instead.
+      # persistence:
+      #   enabled: true
+      #   size: 32Gi
 
-#       shm:
-#         ## Set to true to enable "/dev/shm" mount.
-#         ## May be required by built-in Chromium.
-#         enabled: false # true
+      shm:
+        ## Set to true to enable "/dev/shm" mount.
+        ## May be required by built-in Chromium.
+        enabled: false # true
