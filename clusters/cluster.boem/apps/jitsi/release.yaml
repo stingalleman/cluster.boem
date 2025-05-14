@@ -14,6 +14,12 @@ spec:
         namespace: flux-system
   interval: 24h
   values:
+    global:
+    enableAuth: false
+    enableGuests: true
+    publicURL: "meet.maishond.nl"
+
+    tz: Europe/Amsterdam
     jvb:
       # 1.2.3.4 being one of the IP of the ingress controller
       publicIPs:
