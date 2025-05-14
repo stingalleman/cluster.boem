@@ -33,7 +33,6 @@ spec:
 
     # jicofo:
     #   podSecurityContext:
-    #     securityContext:
     #       capabilities:
     #         drop:
     #           - ALL
@@ -52,26 +51,23 @@ spec:
           lbipam.cilium.io/sharing-key: "8-share"
           lbipam.cilium.io/sharing-cross-namespace: "*"
       podSecurityContext:
-        securityContext:
-          capabilities:
-            drop:
-              - ALL
-          readOnlyRootFilesystem: true
-          allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+        readOnlyRootFilesystem: true
+        allowPrivilegeEscalation: false
 
     web:
       replicaCount: 1
       podSecurityContext:
-        securityContext:
-          capabilities:
-            drop:
-              - ALL
-          readOnlyRootFilesystem: true
-          allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+        readOnlyRootFilesystem: true
+        allowPrivilegeEscalation: false
 
     # jigasi:
     #   podSecurityContext:
-    #     securityContext:
     #       capabilities:
     #         drop:
     #           - ALL
