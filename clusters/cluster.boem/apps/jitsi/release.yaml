@@ -54,7 +54,7 @@ spec:
         enabled: true
         type: LoadBalancer
         ipFamilyPolicy: PreferDualStack
-        ExternalTrafficPolicy: RequireDualStack
+        ExternalTrafficPolicy: Local
         annotations:
           lbipam.cilium.io/ips: "45.83.205.8,2a07:54c7:5201:6e6f::a"
           lbipam.cilium.io/sharing-key: "8-share"
