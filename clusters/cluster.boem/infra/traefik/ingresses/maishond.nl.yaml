@@ -55,5 +55,12 @@ spec:
         - name: monkey-redirect
           namespace: traefik
 
+    - kind: Rule
+      match: Host(`meet.maishond.nl`)
+      services:
+        - kind: Service
+          name: jitsi-jitsi-meet-web
+          namespace: default
+          port: 80
   tls:
     secretName: maishond.nl-prod-tls
