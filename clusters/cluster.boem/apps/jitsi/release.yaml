@@ -53,7 +53,7 @@ spec:
       service:
         enabled: true
         type: LoadBalancer
-        ipFamilyPolicy: PreferDualStack
+        ipFamilyPolicy: RequireDualStack
         ExternalTrafficPolicy: Local
         annotations:
           lbipam.cilium.io/ips: "45.83.205.8,2a07:54c7:5201:6e6f::a"
