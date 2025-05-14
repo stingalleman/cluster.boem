@@ -15,9 +15,9 @@ spec:
   interval: 24h
   values:
     global:
-    enableAuth: false
-    enableGuests: true
-    publicURL: "meet.maishond.nl"
+      enableAuth: false
+      enableGuests: true
+      publicURL: "meet.maishond.nl"
 
     tz: Europe/Amsterdam
     jvb:
