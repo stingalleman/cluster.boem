@@ -10,7 +10,7 @@ spec:
       version: v1.4.1
       sourceRef:
         kind: HelmRepository
-        name: jitsi-meet
+        name: jitsi
         namespace: flux-system
   interval: 24h
   values:
