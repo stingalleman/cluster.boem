@@ -62,20 +62,5 @@ spec:
           name: jitsi-jitsi-meet-web
           namespace: jitsi
           port: 80
-
-    - kind: Rule
-      match: Host(`meet.maishond.nl`) && PathPrefix(`/xmpp-websocket`)
-      services:
-        - kind: Service
-          name: jitsi-jitsi-meet-web
-          namespace: jitsi
-          port: 80
-
-  # location /xmpp-websocket {
-  #     proxy_pass http://localhost:8000/xmpp-websocket;
-  #     proxy_http_version 1.1;
-  #     proxy_set_header Upgrade $http_upgrade;
-  #     proxy_set_header Connection "upgrade";
-  # }
   tls:
     secretName: maishond.nl-prod-tls
