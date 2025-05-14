@@ -12,28 +12,30 @@ spec:
         kind: HelmRepository
         name: jitsi
         namespace: flux-system
+  postRenderers:
+    - kustomize:
+        patchesStrategicMerge:
+          - kind: Service
+            apiVersion: v1
+            metadata:
+              name: jitsi-jitsi-meet-jvb
+              namespace: jitsi
+              labels:
+                lb-pool: external
   interval: 24h
   values:
     enableAuth: false
     enableGuests: true
     publicURL: "meet.maishond.nl"
-
     tz: Europe/Amsterdam
+
     jvb:
-      # 1.2.3.4 being one of the IP of the ingress controller
       publicIPs:
         - 45.83.205.8
       service:
         enabled: true
         type: LoadBalancer
-        externalIPs: []
-        ## If type is set to LoadBalancer and the cluster is dual stack, ipFamilyPolicy can be set to enable dual stack
-        # addressing for the service.
-        # ipFamilyPolicy: PreferDualStack
-        ## Annotations to be added to the service (if LoadBalancer is used)
-        #  An example below is needed for DigitalOcean managed k8s setups
-        #  with a LoadBalancer service, so that DO's external LB can perform
-        #  health checks on JVB.
+        ipFamilyPolicy: PreferDualStack
         annotations:
           lbipam.cilium.io/ips: "45.83.205.8,2a07:54c7:5201:6e6f::a"
           lbipam.cilium.io/sharing-key: "8-share"
