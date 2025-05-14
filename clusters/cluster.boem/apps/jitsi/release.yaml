@@ -6,7 +6,7 @@ metadata:
 spec:
   chart:
     spec:
-      chart: jitsi/jitsi-meet
+      chart: jitsi-meet
       version: v1.4.1
       sourceRef:
         kind: HelmRepository
