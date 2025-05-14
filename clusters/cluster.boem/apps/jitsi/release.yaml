@@ -14,14 +14,16 @@ spec:
         namespace: flux-system
   postRenderers:
     - kustomize:
-        patchesStrategicMerge:
-          - kind: Service
-            apiVersion: v1
-            metadata:
+        patches:
+          - target:
+              version: v1
+              kind: Service
               name: jitsi-jitsi-meet-jvb
               namespace: jitsi
-              labels:
-                lb-pool: external
+            patch: |
+              - op: add
+                path: /metadata/labels/lb-pool
+                value: external
   interval: 24h
   values:
     enableAuth: false
