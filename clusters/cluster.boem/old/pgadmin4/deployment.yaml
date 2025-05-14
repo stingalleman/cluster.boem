@@ -1,0 +1,40 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: pgadmin4
+#   namespace: default
+#   labels:
+#     app: pgadmin4
+# spec:
+#   selector:
+#     matchLabels:
+#       app: pgadmin4
+#   template:
+#     metadata:
+#       labels:
+#         app: pgadmin4
+#     spec:
+#       containers:
+#         - name: pgadmin4
+#           image: dpage/pgadmin4:latest
+#           ports:
+#             - containerPort: 5050
+#           resources:
+#             limits:
+#               memory: "1G"
+#               cpu: "1000m"
+#           env:
+#             - name: PGADMIN_DEFAULT_EMAIL
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: pgadmin4
+#                   key: email
+#             - name: PGADMIN_DEFAULT_PASSWORD
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: pgadmin4
+#                   key: password
+#             - name: PGADMIN_LISTEN_ADDRESS
+#               value: "0.0.0.0"
+#             - name: PGADMIN_LISTEN_PORT
+#               value: "5050"
