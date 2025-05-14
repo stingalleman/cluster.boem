@@ -4,6 +4,9 @@ metadata:
   name: jitsi
   namespace: jitsi
 spec:
+  install:
+    remediation:
+      retries: -1
   chart:
     spec:
       chart: jitsi-meet
