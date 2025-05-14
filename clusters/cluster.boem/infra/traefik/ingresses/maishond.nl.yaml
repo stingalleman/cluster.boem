@@ -60,7 +60,7 @@ spec:
       services:
         - kind: Service
           name: jitsi-jitsi-meet-web
-          namespace: default
+          namespace: jitsi
           port: 80
   tls:
     secretName: maishond.nl-prod-tls
