@@ -23,6 +23,10 @@ spec:
       # 1.2.3.4 being one of the IP of the ingress controller
       publicIPs:
         - 45.83.205.8
+      service:
+        enabled: true
+        type: ClusterIP
+
     web:
       replicaCount: 1
 
