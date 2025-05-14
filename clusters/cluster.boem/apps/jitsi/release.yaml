@@ -15,18 +15,18 @@ spec:
         kind: HelmRepository
         name: jitsi
         namespace: flux-system
-  # postRenderers:
-  #   - kustomize:
-  #       patches:
-  #         - target:
-  #             version: v1
-  #             kind: Service
-  #             name: jitsi-jitsi-meet-jvb
-  #             namespace: jitsi
-  #           patch: |
-  #             - op: add
-  #               path: /metadata/labels/lb-pool
-  #               value: external
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              version: v1
+              kind: Service
+              name: jitsi-jitsi-meet-jvb
+              namespace: jitsi
+            patch: |
+              - op: add
+                path: /metadata/labels/lb-pool
+                value: external
   interval: 24h
   values:
     enableAuth: false
@@ -38,13 +38,13 @@ spec:
       publicIPs:
         - 45.83.205.8
       service:
-        enabled: false
-        # type: LoadBalancer
-        # ipFamilyPolicy: PreferDualStack
-        # annotations:
-        #   lbipam.cilium.io/ips: "45.83.205.8,2a07:54c7:5201:6e6f::a"
-        #   lbipam.cilium.io/sharing-key: "8-share"
-        #   lbipam.cilium.io/sharing-cross-namespace: "*"
+        enabled: true
+        type: LoadBalancer
+        ipFamilyPolicy: PreferDualStack
+        annotations:
+          lbipam.cilium.io/ips: "45.83.205.8,2a07:54c7:5201:6e6f::a"
+          lbipam.cilium.io/sharing-key: "8-share"
+          lbipam.cilium.io/sharing-cross-namespace: "*"
       # securityContext:
       #   capabilities:
       #     drop:
