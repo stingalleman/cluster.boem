@@ -26,6 +26,10 @@ spec:
                 namespace: jitsi
                 labels:
                   lb-pool: external
+            target:
+              name: jitsi-jitsi-meet-jvb
+              kind: Service
+              version: v1
 
           # - target:
           #     version: v1
