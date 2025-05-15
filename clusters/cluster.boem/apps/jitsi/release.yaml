@@ -47,6 +47,24 @@ spec:
     publicURL: "meet.maishond.nl"
     tz: Europe/Amsterdam
 
+    ## WebSocket configuration:
+    #
+    #  Both Colibri and XMPP WebSockets are disabled by default,
+    #  since some LoadBalancer / Reverse Proxy setups can't pass
+    #  WebSocket connections properly, which might result in breakage
+    #  for some clients.
+    #
+    #  Enable both Colibri and XMPP WebSockets to replicate the current
+    #  upstream `meet.jit.si` setup. Keep both disabled to replicate
+    #  older setups which might be more compatible in some cases.
+    websockets:
+      ## Colibri (JVB signalling):
+      colibri:
+        enabled: false
+      ## XMPP (Prosody signalling):
+      xmpp:
+        enabled: true
+
     jvb:
       publicIPs:
         - 45.83.205.8
