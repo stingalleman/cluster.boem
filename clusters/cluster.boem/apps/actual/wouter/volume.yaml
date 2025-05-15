@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: actual-budget-wouter-volume2
+  name: actual-budget-wouter-volume3
   namespace: default
   labels:
     app: actual-budget-wouter
