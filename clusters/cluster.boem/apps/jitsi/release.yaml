@@ -50,6 +50,7 @@ spec:
     jvb:
       publicIPs:
         - 45.83.205.8
+      nodePort: 10000
       service:
         enabled: true
         type: LoadBalancer
