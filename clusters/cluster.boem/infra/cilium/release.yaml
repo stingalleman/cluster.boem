@@ -6,7 +6,7 @@ metadata:
 spec:
   chart:
     spec:
-      version: 1.17.2
+      version: 1.17.4
       chart: cilium
       sourceRef:
         kind: HelmRepository
