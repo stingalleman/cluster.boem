@@ -499,7 +499,7 @@ spec:
       # -- Additional entries here will be added to the service spec.
       # -- Cannot contain type, selector or ports entries.
       spec:
-        externalTrafficPolicy: Local
+        externalTrafficPolicy: Cluster
       # loadBalancerIP: "1.2.3.4"
       # clusterIP: "2.3.4.5"
       loadBalancerSourceRanges: []
@@ -527,7 +527,7 @@ spec:
           labels:
             lb-pool: external
           spec:
-            externalTrafficPolicy: Local
+            externalTrafficPolicy: Cluster
           ipFamilyPolicy: RequireDualStack
           ipFamilies:
             - IPv4
