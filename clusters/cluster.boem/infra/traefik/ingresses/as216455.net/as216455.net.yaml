@@ -38,7 +38,7 @@ spec:
       match: Host(`nms.as216455.net`)
       services:
         - name: librenms
-          namespace: default
+          namespace: monitoring
           port: 8000
 
     - kind: Rule
