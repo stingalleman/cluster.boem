@@ -1,0 +1,20 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: jipfr.nl
+  namespace: traefik
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`hostname.jipfr.nl`)
+      services:
+        - kind: Service
+          name: jip-vm
+          namespace: traefik
+          port: 80
+
+  tls:
+    secretName: jipfr.nl-prod-tls
