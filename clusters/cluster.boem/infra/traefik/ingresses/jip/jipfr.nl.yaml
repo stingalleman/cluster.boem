@@ -9,12 +9,39 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`hostname.jipfr.nl`)
+      match: Host(`adolla-wonder.jipfr.nl`)
       services:
         - kind: Service
           name: jip-vm
           namespace: traefik
-          port: 80
-
+          port: 8082
+    - kind: Rule
+      match: Host(`api-bsl.jipfr.nl`)
+      services:
+        - kind: Service
+          name: jip-vm
+          namespace: traefik
+          port: 1057
+    - kind: Rule
+      match: Host(`api-mvlist.jipfr.nl`)
+      services:
+        - kind: Service
+          name: jip-vm
+          namespace: traefik
+          port: 1055
+    - kind: Rule
+      match: Host(`push-api.jipfr.nl`)
+      services:
+        - kind: Service
+          name: jip-vm
+          namespace: traefik
+          port: 1222
+    - kind: Rule
+      match: Host(`work.jipfr.nl`)
+      services:
+        - kind: Service
+          name: jip-vm
+          namespace: traefik
+          port: 2188
   tls:
     secretName: jipfr.nl-prod-tls
