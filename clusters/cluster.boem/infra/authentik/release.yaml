@@ -1,18 +1,18 @@
-# apiVersion: helm.toolkit.fluxcd.io/v2beta1
-# kind: HelmRelease
-# metadata:
-#   name: authentik
-#   namespace: authentik
-# spec:
-#   chart:
-#     spec:
-#       chart: authentik
-#       sourceRef:
-#         kind: HelmRepository
-#         name: authentik
-#         namespace: flux-system
-#       version: "2025.6.3"
-#   interval: 24h
-#   valuesFrom:
-#     - kind: Secret
-#       name: authentik-values
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: authentik
+  namespace: authentik
+spec:
+  chart:
+    spec:
+      chart: authentik
+      sourceRef:
+        kind: HelmRepository
+        name: authentik
+        namespace: flux-system
+      version: "2025.6.3"
+  interval: 24h
+  valuesFrom:
+    - kind: Secret
+      name: authentik-values
