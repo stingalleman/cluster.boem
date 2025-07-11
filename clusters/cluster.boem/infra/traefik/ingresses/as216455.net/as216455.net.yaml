@@ -100,5 +100,12 @@ spec:
           namespace: default
           port: 5006
 
+    - kind: Rule
+      match: Host(`auth.as216455.net`)
+      services:
+        - name: authentik-server
+          namespace: authentik
+          port: 80
+
   tls:
     secretName: as216455.net-prod-tls
