@@ -463,6 +463,20 @@ spec:
         protocol: TCP
         tls:
           enabled: true
+      ldap:
+        port: 9383
+        expose:
+          default: false
+          internal: true
+        exposedPort: 389
+        protocol: TCP
+      ldapsecure:
+        port: 9636
+        expose:
+          default: false
+          internal: true
+        exposedPort: 636
+        protocol: TCP
       metrics:
         # -- When using hostNetwork, use another port to avoid conflict with node exporter:
         # https://github.com/prometheus/prometheus/wiki/Default-port-allocations
