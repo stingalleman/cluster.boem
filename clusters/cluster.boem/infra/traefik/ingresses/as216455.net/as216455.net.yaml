@@ -18,6 +18,16 @@ spec:
       middlewares:
         - name: hsts
           namespace: traefik
+    - kind: Rule
+      match: Host(`www.as216455.net`)
+      services:
+        - kind: Service
+          name: sting-as-site
+          namespace: default
+          port: 80
+      middlewares:
+        - name: hsts
+          namespace: traefik
 
     - kind: Rule
       match: Host(`rpki.as216455.net`)
