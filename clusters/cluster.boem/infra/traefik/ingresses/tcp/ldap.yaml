@@ -1,0 +1,25 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: ldap-ingress
+spec:
+  entryPoints:
+    - ldap
+  routes:
+    - match: HostSNI(`*`)
+      services:
+        - name: ak-outpost-ldap-outpost
+          port: 389
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: ldapsecure-ingress
+spec:
+  entryPoints:
+    - ldapsecure
+  routes:
+    - match: HostSNI(`*`)
+      services:
+        - name: ak-outpost-ldap-outpost
+          port: 636
