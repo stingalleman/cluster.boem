@@ -10,6 +10,7 @@ spec:
     - match: HostSNI(`*`)
       services:
         - name: ak-outpost-ldap-outpost
+          namespace: authentik
           port: 389
 ---
 apiVersion: traefik.io/v1alpha1
@@ -24,4 +25,5 @@ spec:
     - match: HostSNI(`*`)
       services:
         - name: ak-outpost-ldap-outpost
+          namespace: authentik
           port: 636
