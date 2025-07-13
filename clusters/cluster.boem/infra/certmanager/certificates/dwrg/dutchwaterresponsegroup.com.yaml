@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: dutchwaterresponsegroup.com-prod-tls
   issuerRef:
-    name: letsencrypt-prod-http
+    name: letsencrypt-prod-cf
     kind: ClusterIssuer
   commonName: "dutchwaterresponsegroup.com"
   dnsNames:
