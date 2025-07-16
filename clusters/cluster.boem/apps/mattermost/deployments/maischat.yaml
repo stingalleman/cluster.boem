@@ -19,8 +19,8 @@ spec:
       secret: maischat-store-secrets
   probes:
     livenessProbe:
-      failureThreshold: 1000
-      initialDelaySeconds: 180
+      failureThreshold: 10
+      initialDelaySeconds: 120
     readinessProbe:
-      failureThreshold: 1000
-      initialDelaySeconds: 180
+      failureThreshold: 10
+      initialDelaySeconds: 120

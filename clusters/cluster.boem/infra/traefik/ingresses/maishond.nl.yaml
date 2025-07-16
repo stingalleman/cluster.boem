@@ -62,5 +62,13 @@ spec:
           name: jitsi-jitsi-meet-web
           namespace: jitsi
           port: 80
+
+    - kind: Rule
+      match: Host(`chat.maishond.nl`)
+      services:
+        - kind: Service
+          name: maischat
+          namespace: mattermost
+          port: 8065
   tls:
     secretName: maishond.nl-prod-tls
