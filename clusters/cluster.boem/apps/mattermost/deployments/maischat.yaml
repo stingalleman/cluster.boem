@@ -1,19 +1,19 @@
-apiVersion: installation.mattermost.com/v1beta1
-kind: Mattermost
-metadata:
-  name: maischat
-  namespace: mattermost
-spec:
-  size: "100users"
-  replicas: 1
-  ingress:
-    enabled: false
-  version: 10.10.1
-  database:
-    external:
-      secret: maischat-db-secrets
-  fileStore:
-    external:
-      url: rook-ceph-rgw-ceph-objectstore.rook-ceph
-      bucket: maischat
-      secret: maischat-store-secrets
+# apiVersion: installation.mattermost.com/v1beta1
+# kind: Mattermost
+# metadata:
+#   name: maischat
+#   namespace: mattermost
+# spec:
+#   size: "100users"
+#   replicas: 1
+#   ingress:
+#     enabled: false
+#   version: 10.10.1
+#   database:
+#     external:
+#       secret: maischat-db-secrets
+#   fileStore:
+#     external:
+#       url: rook-ceph-rgw-ceph-objectstore.rook-ceph
+#       bucket: maischat
+#       secret: maischat-store-secrets
