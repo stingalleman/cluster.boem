@@ -9,6 +9,9 @@ spec:
   ingress:
     enabled: false
   version: 10.10.1
+  mattermostEnv:
+    - name: MM_FILESETTINGS_AMAZONS3SSL
+      value: "false"
   database:
     external:
       secret: maischat-db-secrets
