@@ -14,7 +14,7 @@ spec:
       secret: maischat-db-secrets
   fileStore:
     external:
-      url: rook-ceph-rgw-ceph-objectstore.rook-ceph
+      url: http://rook-ceph-rgw-ceph-objectstore.rook-ceph:80
       bucket: maischat
       secret: maischat-store-secrets
   probes:
