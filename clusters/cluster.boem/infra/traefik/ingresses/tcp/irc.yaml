@@ -33,4 +33,4 @@ spec:
           namespace: default
           port: 6697
           proxyProtocol:
-            version: 2
+            version: 1
