@@ -148,7 +148,7 @@ spec:
           # -- Set minDuration, to keep access logs when requests take longer than the specified duration
           minduration: ""
         # -- Enables accessLogs for internal resources. Default: false.
-        addInternals: true
+        addInternals: false
         fields:
           general:
             # -- Set default mode for fields.names
@@ -158,8 +158,11 @@ spec:
           # -- [Limit logged fields or headers](https://doc.traefik.io/traefik/observability/access-logs/#limiting-the-fieldsincluding-headers)
           headers:
             # -- Set default mode for fields.headers
-            defaultmode: drop # @schema enum:[keep, drop, redact]; default: drop
-            names: {}
+            defaultmode: keep # @schema enum:[keep, drop, redact]; default: drop
+            names:
+              User-Agent: redact
+              Authorization: drop
+              Content-Type: keep
 
     metrics:
       # -- Enable metrics for internal resources. Default: false
