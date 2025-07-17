@@ -669,8 +669,8 @@ data:
         # channels that new clients will automatically join. this should be used with
         # caution, since traditional IRC users will likely view it as an antifeature.
         # it may be useful in small community networks that have a single "primary" channel:
-        #auto-join:
-        #    - "#lounge"
+        auto-join:
+           - "#general"
 
     # operator classes:
     # an operator has a single "class" (defining a privilege level), which can include
@@ -724,7 +724,7 @@ data:
 
             # traditionally, operator status is visible to unprivileged users in
             # WHO and WHOIS responses. this can be disabled with 'hidden'.
-            hidden: true
+            hidden: false
 
             # custom whois line (if `hidden` is enabled, visible only to other operators)
             whois-line: is the server administrator
@@ -741,7 +741,7 @@ data:
             # or by certificate fingerprint, or both. if a password hash is set, then a
             # password is required to oper up (e.g., /OPER dan mypassword). to generate
             # the hash, use `ergo genpasswd`.
-            password: "$2a$04$YWjwnyHJNDICejKH5VOTi.YViioxiSQym6DahLfO2/ZJF4hvMrMae"
+            password: "$2a$04$Gtmb/piGqZ02RhRGEZOkL.UtemDN501kg5qlw/0h3inHKXHjZl4p2"
 
             # if a SHA-256 certificate fingerprint is configured here, then it will be
             # required to /OPER. if you comment out the password hash above, then you can
@@ -901,7 +901,7 @@ data:
     # fakelag: prevents clients from spamming commands too rapidly
     fakelag:
         # whether to enforce fakelag
-        enabled: true
+        enabled: false
 
         # time unit for counting command rates
         window: 1s
