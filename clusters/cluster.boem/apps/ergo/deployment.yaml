@@ -5,8 +5,8 @@ metadata:
   namespace: default
   labels:
     app: irc
-  annotations:
-    reloader.stakater.com/auto: "true"
+  # annotations:
+  #   reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   strategy:
