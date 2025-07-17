@@ -1,20 +1,20 @@
-apiVersion: traefik.io/v1alpha1
-kind: IngressRouteTCP
-metadata:
-  name: irc-ingress
-  namespace: traefik
-spec:
-  entryPoints:
-    - irc
-  routes:
-    - match: HostSNI(`*`)
-      services:
-        - name: irc
-          namespace: default
-          port: 6667
-          proxyProtocol:
-            version: 2
----
+# apiVersion: traefik.io/v1alpha1
+# kind: IngressRouteTCP
+# metadata:
+#   name: irc-ingress
+#   namespace: traefik
+# spec:
+#   entryPoints:
+#     - irc
+#   routes:
+#     - match: HostSNI(`*`)
+#       services:
+#         - name: irc
+#           namespace: default
+#           port: 6667
+#           proxyProtocol:
+#             version: 2
+# ---
 apiVersion: traefik.io/v1alpha1
 kind: IngressRouteTCP
 metadata:
@@ -31,6 +31,6 @@ spec:
       services:
         - name: irc
           namespace: default
-          port: 6667
+          port: 6697
           proxyProtocol:
-            version: 2
+            version: 1

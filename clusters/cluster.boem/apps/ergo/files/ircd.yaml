@@ -49,8 +49,8 @@ data:
             # "[::1]:6667":     # (loopback ipv6, localhost-only)
             # If you need to serve plaintext on public interfaces, comment out the above
             # two lines and uncomment the line below (which listens on all interfaces):
-            ":6667":
-                proxy: true
+            # ":6667":
+                # proxy: fal
             # Alternately, if you have a TLS certificate issued by a recognized CA,
             # you can configure port 6667 as an STS-only listener that only serves
             # "redirects" to the TLS port, but doesn't allow chat. See the manual
@@ -66,7 +66,7 @@ data:
                 # 'proxy' should typically be false. It's for cloud load balancers that
                 # always send a PROXY protocol header ahead of the connection. See the
                 # manual ("Reverse proxies") for more details.
-                proxy: true
+                proxy: false
                 # set the minimum TLS version:
                 # min-tls-version: 1.2
 
