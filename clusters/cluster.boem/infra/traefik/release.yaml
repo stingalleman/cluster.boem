@@ -477,6 +477,20 @@ spec:
           internal: true
         exposedPort: 636
         protocol: TCP
+      irc:
+        port: 6667
+        expose:
+          default: true
+          internal: false
+        exposedPort: 6667
+        protocol: TCP
+      ircsecure:
+        port: 6697
+        expose:
+          default: true
+          internal: false
+        exposedPort: 6697
+        protocol: TCP
       metrics:
         # -- When using hostNetwork, use another port to avoid conflict with node exporter:
         # https://github.com/prometheus/prometheus/wiki/Default-port-allocations
