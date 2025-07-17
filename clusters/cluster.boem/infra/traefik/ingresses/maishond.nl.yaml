@@ -71,13 +71,5 @@ spec:
           namespace: mattermost
           port: 8065
 
-    - kind: Rule
-      match: Host(`irc.maishond.nl`)
-      services:
-        - kind: Service
-          name: irc-http
-          namespace: default
-          port: 6667
-
   tls:
     secretName: maishond.nl-prod-tls
