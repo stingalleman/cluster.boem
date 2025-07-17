@@ -1,58 +1,58 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: irc
-#   namespace: default
-#   labels:
-#     app: irc
-#   annotations:
-#     reloader.stakater.com/auto: "true"
-# spec:
-#   replicas: 1
-#   strategy:
-#     type: Recreate
-#   selector:
-#     matchLabels:
-#       app: irc
-#   template:
-#     metadata:
-#       labels:
-#         app: irc
-#     spec:
-#       shareProcessNamespace: true
-#       containers:
-#         - name: irc
-#           image: ghcr.io/ergochat/ergo
-#           ports:
-#             - containerPort: 6697
-#               name: irc-ssl
-#             - containerPort: 6667
-#               name: irc
-#             - containerPort: 443
-#               name: websocket
-#           # readinessProbe:
-#           #   tcpSocket:
-#           #     port: 6667
-#           # livenessProbe:
-#           #   tcpSocket:
-#           #     port: 6667
-#           volumeMounts:
-#             - mountPath: /ircd/
-#               name: irc-config
-#               readOnly: true
-#             # - mountPath: /ircd/tls
-#             # name: irc-certs
-#             # readOnly: true
-#             - mountPath: /ircd/db
-#               name: irc-db
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: irc
+  namespace: default
+  labels:
+    app: irc
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: irc
+  template:
+    metadata:
+      labels:
+        app: irc
+    spec:
+      shareProcessNamespace: true
+      containers:
+        - name: irc
+          image: ghcr.io/ergochat/ergo
+          ports:
+            - containerPort: 6697
+              name: irc-ssl
+            - containerPort: 6667
+              name: irc
+            - containerPort: 443
+              name: websocket
+          # readinessProbe:
+          #   tcpSocket:
+          #     port: 6667
+          # livenessProbe:
+          #   tcpSocket:
+          #     port: 6667
+          volumeMounts:
+            - mountPath: /ircd/
+              name: irc-config
+              readOnly: true
+            # - mountPath: /ircd/tls
+            # name: irc-certs
+            # readOnly: true
+            - mountPath: /ircd/db
+              name: irc-db
 
-#       volumes:
-#         - name: irc-config
-#           configMap:
-#             name: irc-config
-#         # - name: irc-certs
-#         # secret:
-#         # secretName: irc-certs
-#         - name: irc-db
-#           persistentVolumeClaim:
-#             claimName: irc-db
+      volumes:
+        - name: irc-config
+          configMap:
+            name: irc-config
+        # - name: irc-certs
+        # secret:
+        # secretName: irc-certs
+        - name: irc-db
+          persistentVolumeClaim:
+            claimName: irc-db
