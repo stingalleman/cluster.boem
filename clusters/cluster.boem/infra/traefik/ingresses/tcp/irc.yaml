@@ -12,6 +12,8 @@ spec:
         - name: irc
           namespace: default
           port: 6667
+          proxyProtocol:
+            version: 2
 ---
 apiVersion: traefik.io/v1alpha1
 kind: IngressRouteTCP
@@ -27,3 +29,5 @@ spec:
         - name: irc
           namespace: default
           port: 6697
+          proxyProtocol:
+            version: 2
