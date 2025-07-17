@@ -50,7 +50,7 @@ data:
             # If you need to serve plaintext on public interfaces, comment out the above
             # two lines and uncomment the line below (which listens on all interfaces):
             ":6667":
-                proxy: false
+                proxy: true
             # Alternately, if you have a TLS certificate issued by a recognized CA,
             # you can configure port 6667 as an STS-only listener that only serves
             # "redirects" to the TLS port, but doesn't allow chat. See the manual
@@ -205,10 +205,9 @@ data:
         # Unless you have a good reason. you should also add these addresses to the
         # connection limits and throttling exemption lists.
         proxy-allowed-from:
-            - "0.0.0.0/0"
-            - localhost
-            # - "192.168.1.1"
-            # - "192.168.10.1/24"
+            - "localhost"
+            - 10.0.0.0/8
+            - 2a07:54c7:5201::/48
 
         # controls the use of the WEBIRC command (by IRC<->web interfaces, bouncers and similar)
         webirc:
@@ -277,6 +276,8 @@ data:
             # IPs/networks which are exempted from connection limits
             exempted:
                 - "localhost"
+                - 2a07:54c7:5201::/48
+                - 10.0.0.0/8
                 # - "192.168.1.1"
                 # - "2001:0db8::/32"
 

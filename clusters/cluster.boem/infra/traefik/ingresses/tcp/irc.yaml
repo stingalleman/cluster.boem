@@ -13,7 +13,7 @@ spec:
           namespace: default
           port: 6667
           proxyProtocol:
-            version: 2
+            version: 1
 ---
 apiVersion: traefik.io/v1alpha1
 kind: IngressRouteTCP
@@ -23,11 +23,14 @@ metadata:
 spec:
   entryPoints:
     - ircsecure
+  tls:
+    # passthrough: true
+    secretName: maishond.nl-prod-tls
   routes:
     - match: HostSNI(`*`)
       services:
         - name: irc
           namespace: default
-          port: 6697
+          port: 6667
           proxyProtocol:
-            version: 2
+            version: 1
