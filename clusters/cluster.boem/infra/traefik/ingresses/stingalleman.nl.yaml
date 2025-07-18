@@ -52,7 +52,7 @@ spec:
           port: 9000
 
     - kind: Rule
-      match: Host(`staging.irc.stingalleman.nl`)
+      match: Host(`staging-irc.stingalleman.nl`)
       services:
         - kind: Service
           name: thelounge-staging-http
