@@ -52,6 +52,14 @@ spec:
           port: 9000
 
     - kind: Rule
+      match: Host(`staging.irc.stingalleman.nl`)
+      services:
+        - kind: Service
+          name: thelounge-staging-http
+          namespace: default
+          port: 9000
+
+    - kind: Rule
       match: Host(`finance.stingalleman.nl`)
       services:
         - kind: Service
