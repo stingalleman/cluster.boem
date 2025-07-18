@@ -1,46 +1,46 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: thelounge-staging
-  namespace: default
-  labels:
-    app: thelounge-staging
-spec:
-  selector:
-    matchLabels:
-      app: thelounge-staging
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: thelounge-staging
-    spec:
-      # securityContext:
-      #   runAsNonRoot: false
-      # runAsUser: 0
-      # runAsGroup: 0
-      #   fsGroup: 0
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: thelounge-staging
+#   namespace: default
+#   labels:
+#     app: thelounge-staging
+# spec:
+#   selector:
+#     matchLabels:
+#       app: thelounge-staging
+#   replicas: 1
+#   template:
+#     metadata:
+#       labels:
+#         app: thelounge-staging
+#     spec:
+#       # securityContext:
+#       #   runAsNonRoot: false
+#       # runAsUser: 0
+#       # runAsGroup: 0
+#       #   fsGroup: 0
 
-      containers:
-        - name: thelounge
-          image: ghcr.io/thelounge/thelounge:4.4.3
-          # livenessProbe:
-          #   tcpSocket:
-          #     port: 9000
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 9000
-          ports:
-            - containerPort: 9000
-              name: http
-          volumeMounts:
-            - name: thelounge-staging-data
-              mountPath: /var/opt/thelounge
+#       containers:
+#         - name: thelounge
+#           image: ghcr.io/thelounge/thelounge:4.4.3
+#           # livenessProbe:
+#           #   tcpSocket:
+#           #     port: 9000
+#           # readinessProbe:
+#           #   httpGet:
+#           #     path: /
+#           #     port: 9000
+#           ports:
+#             - containerPort: 9000
+#               name: http
+#           volumeMounts:
+#             - name: thelounge-staging-data
+#               mountPath: /var/opt/thelounge
 
-      volumes:
-        - name: thelounge-staging-data
-          persistentVolumeClaim:
-            claimName: thelounge-staging-data
+#       volumes:
+#         - name: thelounge-staging-data
+#           persistentVolumeClaim:
+#             claimName: thelounge-staging-data
 
-      restartPolicy: Always
+#       restartPolicy: Always
