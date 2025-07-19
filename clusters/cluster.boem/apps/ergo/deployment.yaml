@@ -45,6 +45,8 @@ spec:
             # readOnly: true
             - mountPath: /ircd/db
               name: irc-db
+            - mountPath: /ldap
+              name: irc-ldap
 
       volumes:
         - name: irc-config
@@ -56,3 +58,6 @@ spec:
         - name: irc-db
           persistentVolumeClaim:
             claimName: irc-db
+        - name: irc-ldap
+          persistentVolumeClaim:
+            claimName: irc-ldap
