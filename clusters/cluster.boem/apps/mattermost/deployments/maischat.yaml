@@ -1,29 +1,29 @@
-apiVersion: installation.mattermost.com/v1beta1
-kind: Mattermost
-metadata:
-  name: maischat
-  namespace: mattermost
-spec:
-  size: "100users"
-  replicas: 1
-  ingress:
-    enabled: false
-  version: 10.10.1
-  mattermostEnv:
-    - name: MM_FILESETTINGS_AMAZONS3SSL
-      value: "false"
-  database:
-    external:
-      secret: maischat-db-secrets
-  fileStore:
-    external:
-      url: rook-ceph-rgw-ceph-objectstore.rook-ceph:80
-      bucket: maischat
-      secret: maischat-store-secrets
-  probes:
-    livenessProbe:
-      failureThreshold: 10
-      initialDelaySeconds: 120
-    readinessProbe:
-      failureThreshold: 10
-      initialDelaySeconds: 120
+# apiVersion: installation.mattermost.com/v1beta1
+# kind: Mattermost
+# metadata:
+#   name: maischat
+#   namespace: mattermost
+# spec:
+#   size: "100users"
+#   replicas: 1
+#   ingress:
+#     enabled: false
+#   version: 10.10.1
+#   mattermostEnv:
+#     - name: MM_FILESETTINGS_AMAZONS3SSL
+#       value: "false"
+#   database:
+#     external:
+#       secret: maischat-db-secrets
+#   fileStore:
+#     external:
+#       url: rook-ceph-rgw-ceph-objectstore.rook-ceph:80
+#       bucket: maischat
+#       secret: maischat-store-secrets
+#   probes:
+#     livenessProbe:
+#       failureThreshold: 10
+#       initialDelaySeconds: 120
+#     readinessProbe:
+#       failureThreshold: 10
+#       initialDelaySeconds: 120
