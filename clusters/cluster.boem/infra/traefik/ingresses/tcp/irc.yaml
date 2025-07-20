@@ -27,7 +27,7 @@ spec:
     # passthrough: true
     secretName: maishond.nl-prod-tls
   routes:
-    - match: HostSNI(`*`)
+    - match: HostSNI(`irc.maishond.nl`)
       services:
         - name: irc
           namespace: default
