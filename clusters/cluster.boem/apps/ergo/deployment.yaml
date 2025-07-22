@@ -19,7 +19,9 @@ spec:
       labels:
         app: irc
     spec:
-      shareProcessNamespace: true
+      # shareProcessNamespace: true
+      imagePullSecrets:
+        - name: harbor-login-secret
       containers:
         - name: irc
           image: images.as216455.net/library/ergo:22_07_25
