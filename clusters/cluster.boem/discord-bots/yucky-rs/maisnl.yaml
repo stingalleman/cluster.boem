@@ -99,9 +99,6 @@
 #             #     secretKeyRef:
 #             #       name: yucky-rs
 #             #       key: openai_token
-#           # volumeMounts:
-#           #   - name: tz-config
-#           #     mountPath: /etc/localtime
 #           # securityContext:
 #           #   capabilities:
 #           #     drop:
@@ -110,8 +107,3 @@
 #           #   runAsNonRoot: true
 #           #   seccompProfile:
 #           #     type: RuntimeDefault
-#       # volumes:
-#       #   - name: tz-config
-#       #     hostPath:
-#       #       path: /usr/share/zoneinfo/Europe/Amsterdam
-#       #       type: File

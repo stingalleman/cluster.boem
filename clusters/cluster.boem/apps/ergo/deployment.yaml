@@ -49,8 +49,6 @@ spec:
               name: irc-db
             - mountPath: /ldap
               name: irc-ldap
-            - name: localtime
-              mountPath: /etc/localtime
 
       volumes:
         - name: irc-config
@@ -65,6 +63,3 @@ spec:
         - name: irc-ldap
           persistentVolumeClaim:
             claimName: irc-ldap
-        - name: localtime
-          hostPath:
-            path: /usr/share/zoneinfo/Europe/Amsterdam

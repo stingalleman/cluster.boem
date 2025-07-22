@@ -27,11 +27,3 @@
 #                 secretKeyRef:
 #                   name: yucky-php
 #                   key: token
-#           volumeMounts:
-#             - name: tz-config
-#               mountPath: /etc/localtime
-#       volumes:
-#         - name: tz-config
-#           hostPath:
-#             path: /usr/share/zoneinfo/Europe/Amsterdam
-#             type: File

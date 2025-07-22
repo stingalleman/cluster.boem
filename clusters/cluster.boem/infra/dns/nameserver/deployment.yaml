@@ -54,16 +54,11 @@ spec:
             - containerPort: 53
               name: dns
           volumeMounts:
-            - name: localtime
-              mountPath: /etc/localtime
             - name: storage
               mountPath: /storage
             - name: config
               mountPath: /config
       volumes:
-        - name: localtime
-          hostPath:
-            path: /usr/share/zoneinfo/Europe/Amsterdam
         - name: storage
           persistentVolumeClaim:
             claimName: nameserver-storage
