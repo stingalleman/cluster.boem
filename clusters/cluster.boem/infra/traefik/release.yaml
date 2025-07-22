@@ -524,7 +524,7 @@ spec:
         protocol: TCP
 
     service:
-      enabled: true
+      enabled: false
       ## -- Single service is using `MixedProtocolLBService` feature gate.
       ## -- When set to false, it will create two Service, one for TCP and one for UDP.
       single: true
