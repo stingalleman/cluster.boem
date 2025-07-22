@@ -7,8 +7,7 @@ spec:
   entryPoints:
     - dns_udp
   routes:
-    - match: HostSNI(`*`)
-      services:
+    - services:
         - name: nameserver
           namespace: dns
           port: 53
