@@ -5,7 +5,7 @@ metadata:
   namespace: traefik
 spec:
   entryPoints:
-    - dns_tcp
+    - dns-tcp
   routes:
     - match: HostSNI(`*`)
       services:
