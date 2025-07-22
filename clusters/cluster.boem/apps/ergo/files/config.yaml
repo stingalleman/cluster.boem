@@ -1070,3 +1070,51 @@ data:
     # whether to allow customization of the config at runtime using environment variables,
     # e.g., ERGO__SERVER__MAX_SENDQ=128k. see the manual for more details.
     allow-environment-overrides: true
+
+    # metadata support for setting key/value data on channels and nicknames.
+    metadata:
+        # can clients store metadata?
+        enabled: true
+        # how many keys can a client subscribe to?
+        max-subs: 100
+        # how many keys can be stored per entity?
+        max-keys: 100
+
+    # experimental support for mobile push notifications
+    # see the manual for potential security, privacy, and performance implications.
+    # DO NOT enable if you are running a Tor or I2P hidden service (i.e. one
+    # with no public IP listeners, only Tor/I2P listeners).
+    webpush:
+        # are push notifications enabled at all?
+        enabled: false
+        # request timeout for POST'ing the http notification
+        timeout: 10s
+        # delay sending the notification for this amount of time, then suppress it
+        # if the client sent MARKREAD to indicate that it was read on another device
+        delay: 0s
+        # subscriber field for the VAPID JWT authorization:
+        #subscriber: "https://your-website.com/"
+        # maximum number of push subscriptions per user
+        max-subscriptions: 4
+        # expiration time for a push subscription; it must be renewed within this time
+        # by the client reconnecting to IRC. we also detect whether the client is no longer
+        # successfully receiving push messages.
+        expiration: 14d
+
+    # HTTP API. we strongly recommend leaving this disabled unless you have a specific
+    # need for it.
+    api:
+        # is the API enabled at all?
+        enabled: false
+        # listen address:
+        listener: "0.0.0.0:8089"
+        # serve over TLS (strongly recommended if the listener is public):
+        #tls:
+            #cert: fullchain.pem
+            #key: privkey.pem
+        # one or more static bearer tokens accepted for HTTP bearer authentication.
+        # these must be strong, unique, high-entropy printable ASCII strings.
+        # to generate a new token, use `ergo gentoken` or:
+        # python3 -c "import secrets; print(secrets.token_urlsafe(32))"
+        bearer-tokens:
+            - "example"
