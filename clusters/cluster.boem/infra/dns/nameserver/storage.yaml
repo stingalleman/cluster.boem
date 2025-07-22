@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: nameserver-storage
-  namespace: default
+  namespace: dns
   labels:
     app: nameserver-storage
 spec:
