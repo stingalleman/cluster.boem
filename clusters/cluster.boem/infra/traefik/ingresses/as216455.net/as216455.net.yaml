@@ -119,5 +119,13 @@ spec:
           namespace: authentik
           port: 80
 
+    - kind: Rule
+      match: Host(`images.as216455.net`)
+      services:
+        - kind: Service
+          name: harbor
+          namespace: harbor
+          port: 80
+
   tls:
     secretName: as216455.net-prod-tls
