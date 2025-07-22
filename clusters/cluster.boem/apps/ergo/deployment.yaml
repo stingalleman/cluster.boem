@@ -22,7 +22,7 @@ spec:
       shareProcessNamespace: true
       containers:
         - name: irc
-          image: ghcr.io/ergochat/ergo
+          image: images.as216455.net/library/ergo:22_07_25
           ports:
             - containerPort: 6697
               name: irc-ssl
