@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: synapse
+  namespace: matrix
+spec:
+  selector:
+    app: synapse
+  type: ClusterIP
+  # sessionAffinity: None
+  # sessionAffinityConfig:
+  #   clientIP:
+  #     timeoutSeconds: 10800
+  ports:
+    - name: synapse
+      protocol: TCP
+      port: 8008
+      targetPort: 8008
