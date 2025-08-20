@@ -1,46 +1,56 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: thelounge
-#   namespace: default
-#   labels:
-#     app: thelounge
-# spec:
-#   selector:
-#     matchLabels:
-#       app: thelounge
-#   replicas: 1
-#   template:
-#     metadata:
-#       labels:
-#         app: thelounge
-#     spec:
-#       # securityContext:
-#       #   runAsNonRoot: false
-#       # runAsUser: 0
-#       # runAsGroup: 0
-#       #   fsGroup: 0
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: thelounge
+  namespace: default
+  labels:
+    app: thelounge
+spec:
+  selector:
+    matchLabels:
+      app: thelounge
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: thelounge
+    spec:
+      # securityContext:
+      #   runAsNonRoot: false
+      # runAsUser: 0
+      # runAsGroup: 0
+      #   fsGroup: 0
+      initContainers:
+        - name: thelounge-set-all-servers-to-disconnected
+          image: endeveit/docker-jq:latest
+          command:
+            - /bin/sh
+            - -c
+            - 'for f in /var/opt/thelounge/users/*.json; do jq ".networks |= map(.userDisconnected = true)" "$f" > "$f.tmp" && mv "$f.tmp" "$f"; done'
+          volumeMounts:
+            - name: thelounge-data
+              mountPath: /var/opt/thelounge
 
-#       containers:
-#         - name: thelounge
-#           image: ghcr.io/thelounge/thelounge:4.4.3
-#           # livenessProbe:
-#           #   tcpSocket:
-#           #     port: 9000
-#           # readinessProbe:
-#           #   httpGet:
-#           #     path: /
-#           #     port: 9000
-#           ports:
-#             - containerPort: 9000
-#               name: http
-#           volumeMounts:
-#             - name: thelounge-data
-#               mountPath: /var/opt/thelounge
+      containers:
+        - name: thelounge
+          image: ghcr.io/thelounge/thelounge:4.4.3
+          # livenessProbe:
+          #   tcpSocket:
+          #     port: 9000
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 9000
+          ports:
+            - containerPort: 9000
+              name: http
+          volumeMounts:
+            - name: thelounge-data
+              mountPath: /var/opt/thelounge
 
-#       volumes:
-#         - name: thelounge-data
-#           persistentVolumeClaim:
-#             claimName: thelounge-data
+      volumes:
+        - name: thelounge-data
+          persistentVolumeClaim:
+            claimName: thelounge-data
 
-#       restartPolicy: Always
+      restartPolicy: Always
