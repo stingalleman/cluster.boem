@@ -60,14 +60,6 @@ spec:
           port: 9000
 
     - kind: Rule
-      match: Host(`finance.stingalleman.nl`)
-      services:
-        - kind: Service
-          name: maybe-http
-          namespace: default
-          port: 3000
-
-    - kind: Rule
       match: Host(`harbor.stingalleman.nl`)
       services:
         - kind: Service
