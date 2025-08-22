@@ -1,0 +1,7 @@
+---
+- name: Configure router
+  hosts: ams_rtr02
+  become: true
+  roles:
+    # - nftables
+    - bird

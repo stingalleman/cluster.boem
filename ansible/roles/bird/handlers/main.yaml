@@ -1,0 +1,9 @@
+- name: Apply config
+  ansible.builtin.command:
+    cmd: "birdc configure"
+# TODO: check return code of birdc configure when changed
+
+- name: Hold bird3
+  ansible.builtin.dpkg_selections:
+    name: bird3
+    selection: hold
