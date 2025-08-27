@@ -108,5 +108,20 @@ spec:
           namespace: default
           port: 5006
 
+    - kind: Rule
+      match: Host(`routinator.i.as216455.net`)
+      services:
+        - name: routinator-vm
+          namespace: traefik
+          port: 8323
+
+    - kind: Rule
+      match: Host(`krill.i.as216455.net`)
+      services:
+        - kind: Service
+          name: krill-http
+          namespace: default
+          port: 3000
+
   tls:
     secretName: i.as216455.net-prod-tls

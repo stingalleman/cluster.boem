@@ -41,13 +41,13 @@ spec:
         - name: authentik
           namespace: traefik
 
-    - kind: Rule
-      match: Host(`rpki.as216455.net`)
-      services:
-        - kind: Service
-          name: krill-http
-          namespace: default
-          port: 3000
+    # - kind: Rule
+    #   match: Host(`rpki.as216455.net`)
+    #   services:
+    #     - kind: Service
+    #       name: krill-http
+    #       namespace: default
+    #       port: 3000
 
     - kind: Rule
       match: Host(`dns.as216455.net`)

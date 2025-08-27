@@ -59,7 +59,7 @@ spec:
                   name: krill-auth-token
                   key: token
             - name: KRILL_FQDN
-              value: "rpki.as216455.net"
+              value: "krill.i.as216455.net"
             - name: KRILL_LOG_LEVEL
               value: debug
           ports:
