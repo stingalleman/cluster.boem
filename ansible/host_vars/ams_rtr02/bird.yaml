@@ -12,17 +12,53 @@
 router_id: 45.83.205.3
 local_as: 216455
 
+types:
+  customer:
+    local_pref: 7000
+  transit:
+    local_pref: 3000
+  peer:
+    local_pref: 6000
+  ix_peer:
+    local_pref: 5000
+  routeserver:
+    local_pref: 4000
+
+# Customers 7000
+# Private Peers 6000
+# IXP Peers 5000
+#   AMSIX 5100
+#   FrysIX 5200
+# RS Peers 4000
+#   AMSIX 4100
+#   FrysIX 4200
+# Transit 3000
+#  PP 3500
+#  Yvan 3100
+
+# peers:
+#   - name: "AMSIX RS #1"
+#     neighbors:
+#       - ip: 2001:7f8:1::a500:6777:1
+#         id: 1
+#         local_pref: 0 #overrules all
+#         disabled: true
+#     as: 6777
+#     local_pref: 4100 #overrules type
+#     type: routeserver
+#     disabled: true
+
 ix:
   amsix:
     prefixes:
       - 80.249.208.0/21
       - 2001:7f8:1::/64
-    localpref: 100
+    local_pref: 5100
   frysix:
     prefixes:
       - 185.1.160.0/23
       - 2001:7f8:10f::/64
-    localpref: 200
+    local_pref: 5200
 
 peers:
   - name: "ams-rtr01"
@@ -30,43 +66,54 @@ peers:
       - ip: 2a07:e345:1:3001::2
     as: 216455
     type: transit
-    localpref: 5
+    local_pref: 5
+    disabled: true
   - name: "AMSIX RS #1"
     neighbors:
       - ip: 2001:7f8:1::a500:6777:1
         id: 1
     as: 6777
-    localpref: 1000
+    local_pref: 4100
     type: routeserver
-    disabled: true
   - name: "AMSIX RS #2"
     neighbors:
       - ip: 2001:7f8:1::a500:6777:2
         id: 2
     as: 6777
-    localpref: 1000
+    local_pref: 4100
     type: routeserver
-    disabled: true
+  - name: NetOne
+    as: 200132
+    type: transit
+    local_pref: 3500
+    neighbors:
+      - ip: 2001:7f8:1:0:a500:20:132:1 # AMS-IX
   - name: Jelle Luteijn
     as: 212855
     neighbors:
       - ip: 2001:7f8:1:0:a500:21:2855:1 # AMS-IX
       - ip: 2001:7f8:10f::3:3f95:152 # FrysIX
-    disabled: true
+        disabled: true
+  - name: Frumentum Media
+    as: 216107
+    neighbors:
+      - ip: 2001:7f8:1:0:a500:21:6107:1 # AMS-IX
+      - ip: 2001:7f8:10f::3:4c2b:64 # FrysIX
+        disabled: true
 
 prefixlists:
   - name: as216455_inet6
     prefixes:
-      - 2a05:dfc1:6200::/40
-      - 2a05:dfc1:6201::/48
-      - 2a05:dfc1:8500::/40
+      # - 2a05:dfc1:6200::/40
+      # - 2a05:dfc1:6201::/48
+      # - 2a05:dfc1:8500::/40
       - 2a05:dfc1:9600::/40
-      - 2a07:54c2:b00b::/48
-      - 2a07:54c7:5000::/36
-      - 2a07:54c7:5999::/48
-      - 2a07:54c7:5f00::/44
-      - 2a07:54c7:5f10::/48
-      - 2a07:54c7:5ffe::/48
-      - 2a07:e345:200::/48
-      - 2a0e:b107:27c8::/45
-      - 2a14:6f44:b00b::/48
+      # - 2a07:54c2:b00b::/48
+      # - 2a07:54c7:5000::/36
+      # - 2a07:54c7:5999::/48
+      # - 2a07:54c7:5f00::/44
+      # - 2a07:54c7:5f10::/48
+      # - 2a07:54c7:5ffe::/48
+      # - 2a07:e345:200::/48
+      # - 2a0e:b107:27c8::/45
+      # - 2a14:6f44:b00b::/48

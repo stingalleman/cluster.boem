@@ -48,7 +48,6 @@
   loop:
     - "filters/customer_export.conf"
     - "filters/customer_import.conf"
-    - "filters/filters.conf"
     - "filters/ixp_export.conf"
     - "filters/ixp_import.conf"
     - "filters/peer_export.conf"
@@ -81,6 +80,8 @@
     - "peers.conf"
     - "static.conf"
     - "prefixlists.conf"
+    - "filters.conf"
+    - "rpki.conf"
   notify: Apply config
   tags:
     - bird
