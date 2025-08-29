@@ -1,0 +1,4188 @@
+# Copyright 2024-2025 New Vector Ltd
+#
+# SPDX-License-Identifier: AGPL-3.0-only
+
+# This file is generated. Do not edit directly. Edit source/values.yaml.j2 instead to make changes
+
+## Common configuration that impacts all components in the chart
+
+## The matrix-tools image, used in multiple components
+matrixTools:
+  # Details of the image to be used
+  image:
+    ## The host and (optional) port of the container image registry for this component.
+    ## If not specified Docker Hub is implied
+    registry: ghcr.io
+
+    ## The path in the registry where the container image is located
+    repository: element-hq/ess-helm/matrix-tools
+
+    ## The tag of the container image to use.
+    ## One of tag or digest must be provided.
+    tag: "0.5.5"
+
+    ## Container digest to use. Used to pull the image instead of the image tag if set
+    ## The tag will still be set as the app.kubernetes.io/version label
+    # digest:
+
+    ## Whether the image should be pulled on container startup. Valid values are Always, IfNotPresent and Never
+    ## If this isn't provided it defaults to Always when using the image tag or IfNotPresent if using a digest
+    # pullPolicy:
+
+    ## A list of pull secrets to use for this image
+    ## e.g.
+    ## pullSecrets:
+    ## - name: dockerhub
+    pullSecrets: []
+
+## CertManager Issuer to configure by default automatically on all ingresses
+## If configured, the chart will automatically generate the tlsSecret name for all ingresses
+certManager:
+  {}
+  ## Choose one of clusterIssuer or issuer
+  # clusterIssuer:
+  # issuer:
+
+## The server name of the Matrix Stack. This gets embedded in user IDs & room IDs
+## It can not change after the initial deployment.
+# serverName: ess.localhost
+
+## Labels to add to all manifest for all components in this chart
+labels: {}
+
+## How all ingresses should be constructed by default, unless overridden
+ingress:
+  ## Annotations to be added to all Ingresses. Will be merged with component specific Ingress annotations
+  annotations: {}
+
+  ## What Ingress Class Name that should be used for all Ingresses by default
+  # className:
+
+  ## Disable TLS configuration by setting it to false
+  tlsEnabled: true
+
+  ## The name of the Secret containing the TLS certificate and the key that should be used for all Ingresses by default
+  # tlsSecret:
+
+  ## How the Services behind all Ingresses is constructed by default
+  service:
+    type: ClusterIP
+  ## If set, some tweaks will be applied automatically to ingresses based on the controller type here.
+  ## This can be set to `ingress-nginx`.
+  # controllerType:
+
+## A list of Secrets in this namespace to use as pull Secrets.
+## Ignored if a given component specifies its own pull Secrets.
+## e.g.
+## imagePullSecrets:
+## - name: ess-pull-secret
+imagePullSecrets: []
+
+## Workload tolerations allows Pods that are part of a (sub)component to 'tolerate' any taint that matches the triple <key,value,effect> using the matching operator <operator>.
+##
+## * effect indicates the taint effect to match. Empty means match all taint effects. When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
+## * key is the taint key that the toleration applies to. Empty means match all taint keys. If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+## * operator represents a key's relationship to the value. Valid operators are Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for value, so that a pod can tolerate all taints of a particular category.
+## * value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
+##
+## * tolerationSeconds represents the period of time the toleration (which must be of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default, it is not set, which means tolerate the taint forever (do not evict). Zero and negative values will be treated as 0 (evict immediately) by the system.
+## e.g.
+## tolerations:
+## - effect:
+##   key:
+##   operator:
+##   value:
+
+tolerations: []
+
+## TopologySpreadConstraints describes how Pods for a component should be spread between nodes.
+## https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/ for in-depth details
+## labelSelector can be omitted and the chart will populate a sensible value for each component.
+## Similarly `pod-template-hash` will be aded to `matchLabelKeys` if appropriate for each component.
+## If any TopologySpreadConstraints are provided for a component any global TopologySpreadConstraints are ignored for that component.
+## e.g.
+## topologySpreadConstraints:
+## - maxSkew: 1
+##   topologyKey: topology.kubernetes.io/zone
+##   # nodeAffinityPolicy: Honor/Ignore
+##   # nodeTaintsPolicy: Honor/Ignore
+##   # whenUnsatisfiable: DoNotSchedule/ScheduleAnyway
+topologySpreadConstraints: []
+
+## The cluster's domain name which will be appended to URLs of internal Services (<name>.<namespace>.svc.<clusterDomain>).
+## It is unusual to need to change this but if you do need to change it,
+## strongly consider having a trailing dot to prevent multiple search domains being queried.
+clusterDomain: "cluster.local."
+
+## Components
+initSecrets:
+  enabled: true
+
+  rbac:
+    create: true
+  ## Labels to add to all manifest for this component
+  labels: {}
+  ## Defines the annotations to add to the workload
+  # annotations: {}
+  ## A subset of SecurityContext. ContainersSecurityContext holds pod-level security attributes and common container settings
+  containersSecurityContext:
+    ## Controls whether a process can gain more privileges than its parent process.
+    ## This bool directly controls whether the no_new_privs flag gets set on the container process.
+    ## allowPrivilegeEscalation is always true when the container is run as privileged, or has CAP_SYS_ADMIN
+    allowPrivilegeEscalation: false
+
+    ## Give a process some privileges, but not all the privileges of the root user.
+    capabilities:
+      ## Privileges to add.
+      # add: []
+      ## Privileges to drop.
+      drop:
+        - ALL
+
+    ## Mounts the container's root filesystem as read-only.
+    readOnlyRootFilesystem: true
+
+    ## To set the Seccomp profile for a Container, include the seccompProfile field in the securityContext section of your Pod or Container manifest.
+    ## The seccompProfile field is a SeccompProfile object consisting of type and localhostProfile. Valid options for type include RuntimeDefault, Unconfined, and Localhost.
+    ## localhostProfile must only be set set if type Localhost. It indicates the path of the pre-configured profile on the node, relative to the kubelet's configured Seccomp profile location (configured with the --root-dir flag).
+    # seccompProfile:
+    #  type: RuntimeDefault
+  ## Defines additional environment variables to be injected onto this workload
+  ## e.g.
+  ## extraEnv:
+  ## - name: FOO
+  ##   value: "bar"
+  extraEnv: []
+  ## NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+  nodeSelector: {}
+  ## A subset of PodSecurityContext. PodSecurityContext holds pod-level security attributes and common container settings
+  podSecurityContext:
+    ## A special supplemental group that applies to all containers in a pod. Some volume types allow the Kubelet to
+    ## change the ownership of that volume to be owned by the pod:
+    ##
+    ## 1. The owning GID will be the FSGroup
+    ## 2. The setgid bit is set (new files created in the volume will be owned by FSGroup)## 3. The permission bits are OR'd with rw-rw----
+    ##
+    ## If unset, the Kubelet will not modify the ownership and permissions of any volume.
+    fsGroup: 10010
+
+    ## fsGroupChangePolicy defines behavior of changing ownership and permission of the volume before being exposed inside Pod.
+    ## This field will only apply to volume types which support fsGroup based ownership(and permissions).
+    ## It will have no effect on ephemeral volume types such as: secret, configmaps and emptydir. Valid values are "OnRootMismatch" and "Always". If not specified, "Always" is used.
+    # fsGroupChangePolicy:
+
+    ## The GID to run the entrypoint of the container process. Uses runtime default if unset.
+    runAsGroup: 10010
+
+    ## Indicates that the container must run as a non-root user. If true, the Kubelet will validate the image at runtime to ensure that it does not run as UID 0 (root) and fail to start the container if it does. If unset or false, no such validation will be performed.
+    runAsNonRoot: true
+
+    ## The UID to run the entrypoint of the container process. Defaults to user specified in image metadata if unspecified.
+    runAsUser: 10010
+
+    ## SELinuxOptions are the labels to be applied to all the pod containers
+    # seLinuxOptions:
+    ## Level is SELinux level label that applies to the container.
+    # level:
+
+    ## Role is a SELinux role label that applies to the container.
+    # role:
+
+    ## Type is a SELinux type label that applies to the container.
+    # type:
+
+    ## User is a SELinux user label that applies to the container.
+    # user:
+
+    ## "To set the Seccomp profile for a Container, include the seccompProfile field in the securityContext section of your Pod or Container manifest.
+    ## The seccompProfile field is a SeccompProfile object consisting of type and localhostProfile.
+    ## Valid options for type include RuntimeDefault, Unconfined, and Localhost. localhostProfile must only be set set if type Localhost.
+    ## It indicates the path of the pre-configured profile on the node, relative to the kubelet's configured Seccomp profile location (configured with the --root-dir flag).
+    seccompProfile:
+      # localhostProfile:
+      type: RuntimeDefault
+
+    ## A list of groups applied to the first process run in each container, in addition to the container's primary GID.
+    ## If unspecified, no groups will be added to any container.
+    supplementalGroups: []
+  ## Kubernetes resources to allocate to each instance.
+  resources:
+    ## Requests describes the minimum amount of compute resources required. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+    requests:
+      memory: 50Mi
+      cpu: 50m
+
+    ## Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+    limits:
+      memory: 200Mi
+  ## Controls configuration of the ServiceAccount for this component
+  serviceAccount:
+    ## Whether a ServiceAccount should be created by the chart or not
+    create: true
+
+    ## What name to give the ServiceAccount. If not provided the chart will provide the name automatically
+    name: ""
+
+    ## Annotations to add to the service account
+    annotations: {}
+  ## Workload tolerations allows Pods that are part of this (sub)component to 'tolerate' any taint that matches the triple <key,value,effect> using the matching operator <operator>.
+  ##
+  ## * effect indicates the taint effect to match. Empty means match all taint effects. When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
+  ## * key is the taint key that the toleration applies to. Empty means match all taint keys. If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+  ## * operator represents a key's relationship to the value. Valid operators are Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for value, so that a pod can tolerate all taints of a particular category.
+  ## * value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
+  ##
+  ## * tolerationSeconds represents the period of time the toleration (which must be of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default, it is not set, which means tolerate the taint forever (do not evict). Zero and negative values will be treated as 0 (evict immediately) by the system.
+  ## e.g.
+  ## tolerations:
+  ## - effect:
+  ##   key:
+  ##   operator:
+  ##   value:
+
+  tolerations: []
+
+deploymentMarkers:
+  enabled: true
+
+  rbac:
+    create: true
+  ## Labels to add to all manifest for this component
+  labels: {}
+  ## Defines the annotations to add to the workload
+  # annotations: {}
+  ## A subset of SecurityContext. ContainersSecurityContext holds pod-level security attributes and common container settings
+  containersSecurityContext:
+    ## Controls whether a process can gain more privileges than its parent process.
+    ## This bool directly controls whether the no_new_privs flag gets set on the container process.
+    ## allowPrivilegeEscalation is always true when the container is run as privileged, or has CAP_SYS_ADMIN
+    allowPrivilegeEscalation: false
+
+    ## Give a process some privileges, but not all the privileges of the root user.
+    capabilities:
+      ## Privileges to add.
+      # add: []
+      ## Privileges to drop.
+      drop:
+        - ALL
+
+    ## Mounts the container's root filesystem as read-only.
+    readOnlyRootFilesystem: true
+
+    ## To set the Seccomp profile for a Container, include the seccompProfile field in the securityContext section of your Pod or Container manifest.
+    ## The seccompProfile field is a SeccompProfile object consisting of type and localhostProfile. Valid options for type include RuntimeDefault, Unconfined, and Localhost.
+    ## localhostProfile must only be set set if type Localhost. It indicates the path of the pre-configured profile on the node, relative to the kubelet's configured Seccomp profile location (configured with the --root-dir flag).
+    # seccompProfile:
+    #  type: RuntimeDefault
+  ## Defines additional environment variables to be injected onto this workload
+  ## e.g.
+  ## extraEnv:
+  ## - name: FOO
+  ##   value: "bar"
+  extraEnv: []
+  ## NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+  nodeSelector: {}
+  ## A subset of PodSecurityContext. PodSecurityContext holds pod-level security attributes and common container settings
+  podSecurityContext:
+    ## A special supplemental group that applies to all containers in a pod. Some volume types allow the Kubelet to
+    ## change the ownership of that volume to be owned by the pod:
+    ##
+    ## 1. The owning GID will be the FSGroup
+    ## 2. The setgid bit is set (new files created in the volume will be owned by FSGroup)## 3. The permission bits are OR'd with rw-rw----
+    ##
+    ## If unset, the Kubelet will not modify the ownership and permissions of any volume.
+    fsGroup: 10010
+
+    ## fsGroupChangePolicy defines behavior of changing ownership and permission of the volume before being exposed inside Pod.
+    ## This field will only apply to volume types which support fsGroup based ownership(and permissions).
+    ## It will have no effect on ephemeral volume types such as: secret, configmaps and emptydir. Valid values are "OnRootMismatch" and "Always". If not specified, "Always" is used.
+    # fsGroupChangePolicy:
+
+    ## The GID to run the entrypoint of the container process. Uses runtime default if unset.
+    runAsGroup: 10010
+
+    ## Indicates that the container must run as a non-root user. If true, the Kubelet will validate the image at runtime to ensure that it does not run as UID 0 (root) and fail to start the container if it does. If unset or false, no such validation will be performed.
+    runAsNonRoot: true
+
+    ## The UID to run the entrypoint of the container process. Defaults to user specified in image metadata if unspecified.
+    runAsUser: 10010
+
+    ## SELinuxOptions are the labels to be applied to all the pod containers
+    # seLinuxOptions:
+    ## Level is SELinux level label that applies to the container.
+    # level:
+
+    ## Role is a SELinux role label that applies to the container.
+    # role:
+
+    ## Type is a SELinux type label that applies to the container.
+    # type:
+
+    ## User is a SELinux user label that applies to the container.
+    # user:
+
+    ## "To set the Seccomp profile for a Container, include the seccompProfile field in the securityContext section of your Pod or Container manifest.
+    ## The seccompProfile field is a SeccompProfile object consisting of type and localhostProfile.
+    ## Valid options for type include RuntimeDefault, Unconfined, and Localhost. localhostProfile must only be set set if type Localhost.
+    ## It indicates the path of the pre-configured profile on the node, relative to the kubelet's configured Seccomp profile location (configured with the --root-dir flag).
+    seccompProfile:
+      # localhostProfile:
+      type: RuntimeDefault
+
+    ## A list of groups applied to the first process run in each container, in addition to the container's primary GID.
+    ## If unspecified, no groups will be added to any container.
+    supplementalGroups: []
+  ## Kubernetes resources to allocate to each instance.
+  resources:
+    ## Requests describes the minimum amount of compute resources required. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+    requests:
+      memory: 50Mi
+      cpu: 50m
+
+    ## Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+    limits:
+      memory: 200Mi
+  ## Controls configuration of the ServiceAccount for this component
+  serviceAccount:
+    ## Whether a ServiceAccount should be created by the chart or not
+    create: true
+
+    ## What name to give the ServiceAccount. If not provided the chart will provide the name automatically
+    name: ""
+
+    ## Annotations to add to the service account
+    annotations: {}
+  ## Workload tolerations allows Pods that are part of this (sub)component to 'tolerate' any taint that matches the triple <key,value,effect> using the matching operator <operator>.
+  ##
+  ## * effect indicates the taint effect to match. Empty means match all taint effects. When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
+  ## * key is the taint key that the toleration applies to. Empty means match all taint keys. If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+  ## * operator represents a key's relationship to the value. Valid operators are Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for value, so that a pod can tolerate all taints of a particular category.
+  ## * value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
+  ##
+  ## * tolerationSeconds represents the period of time the toleration (which must be of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default, it is not set, which means tolerate the taint forever (do not evict). Zero and negative values will be treated as 0 (evict immediately) by the system.
+  ## e.g.
+  ## tolerations:
+  ## - effect:
+  ##   key:
+  ##   operator:
+  ##   value:
+
+  tolerations: []
+
+matrixRTC:
+  enabled: true
+
+  # Allows restricting room creation to local users only
+  # Remote federated users can still join the room
+  # Defaults to false for now until clients are upgraded to support the new mechanism
+  restrictRoomCreationToLocalUsers: false
+
+  # LiveKit Authentication Configuration
+  # This section allows you to configure authentication for the LiveKit SFU.
+  # You can either use an existing keys.yaml file or provide a key and secret.
+  # livekitAuth:
+  ## The keys.yaml file for the LiveKit SFU
+  ## This is required if `sfu.enabled` is set to `false`.
+  ## It can either be provided inline in the Helm chart e.g.:
+  ## keysYaml:
+  ##   value: SecretValue
+  ##
+  ## Or it can be provided via an existing Secret e.g.:
+  ## keysYaml:
+  ##   secret: existing-secret
+  ##   secretKey: key-in-secret
+  # keysYaml: {}
+  ## Provide a key and secret if not using an existing keys.yaml
+  # key: ""
+  ## The secret for the LiveKit SFU.
+  ## This is required if `sfu.enabled` and `keysYaml` is not used. It will be generated by the `initSecrets` job if it is empty.
+  ## It can either be provided inline in the Helm chart e.g.:
+  ## secret:
+  ##   value: SecretValue
+  ##
+  ## Or it can be provided via an existing Secret e.g.:
+  ## secret:
+  ##   secret: existing-secret
+  ##   secretKey: key-in-secret
+  # secret: {}
+
+  replicas: 1
+  ## How this ingress should be constructed
+  ingress:
+    ## What hostname should be used for this Ingress
+    # host:
+
+    ## Annotations to be added to this Ingress
+    annotations: {}
+
+    ## What Ingress Class Name that should be used for this Ingress
+    # className:
+
+    ## Disable TLS configuration by setting it to false
+    tlsEnabled: true
+
+    ## The name of the Secret containing the TLS certificate and the key that should be used for this Ingress
+    # tlsSecret:
+
+    ## How the Service behind this Ingress is constructed
+    service: {}
+    ## If set, some tweaks will be applied automatically to ingresses based on the controller type here.
+    ## This can be set to `ingress-nginx`.
+    # controllerType:
+  # Details of the image to be used
+  image:
+    ## The host and (optional) port of the container image registry for this component.
+    ## If not specified Docker Hub is implied
+    registry: ghcr.io
+
+    ## The path in the registry where the container image is located
+    repository: element-hq/lk-jwt-service
+
+    ## The tag of the container image to use.
+    ## One of tag or digest must be provided.
+    tag: "0.3.0"
+
+    ## Container digest to use. Used to pull the image instead of the image tag if set
+    ## The tag will still be set as the app.kubernetes.io/version label
+    # digest:
+
+    ## Whether the image should be pulled on container startup. Valid values are Always, IfNotPresent and Never
+    ## If this isn't provided it defaults to Always when using the image tag or IfNotPresent if using a digest
+    # pullPolicy:
+
+    ## A list of pull secrets to use for this image
+    ## e.g.
+    ## pullSecrets:
+    ## - name: dockerhub
+    pullSecrets: []
+  ## Labels to add to all manifest for this component
+  labels: {}
+  ## Defines the annotations to add to the workload
+  # annotations: {}
+  ## A subset of SecurityContext. ContainersSecurityContext holds pod-level security attributes and common container settings
+  containersSecurityContext:
+    ## Controls whether a process can gain more privileges than its parent process.
+    ## This bool directly controls whether the no_new_privs flag gets set on the container process.
+    ## allowPrivilegeEscalation is always true when the container is run as privileged, or has CAP_SYS_ADMIN
+    allowPrivilegeEscalation: false
+
+    ## Give a process some privileges, but not all the privileges of the root user.
+    capabilities:
+      ## Privileges to add.
+      # add: []
+      ## Privileges to drop.
+      drop:
+        - ALL
+
+    ## Mounts the container's root filesystem as read-only.
+    readOnlyRootFilesystem: true
+
+    ## To set the Seccomp profile for a Container, include the seccompProfile field in the securityContext section of your Pod or Container manifest.
+    ## The seccompProfile field is a SeccompProfile object consisting of type and localhostProfile. Valid options for type include RuntimeDefault, Unconfined, and Localhost.
+    ## localhostProfile must only be set set if type Localhost. It indicates the path of the pre-configured profile on the node, relative to the kubelet's configured Seccomp profile location (configured with the --root-dir flag).
+    # seccompProfile:
+    #  type: RuntimeDefault
+  ## The list of hosts aliases to configure on the pod spec.
+  ## It should be avoid as much as possible to use this feature.
+  ## Please prefer using an DNS entry to resolve your hostnames.
+  ## This can be used as a workaround when entries cannot be resolved using DNS, for example for our automated testings.
+  ## e.g.
+  ## hostAliases:
+  ## - ip: 192.0.2.1  # An IP resolution to add to /etc/hosts
+  ##   # A list of hostnames to be associated with the above IP
+  ##   hostnames:
+  ##   - ess.localhost
+  ##   - synapse.ess.localhost
+  hostAliases: []
+  ## Defines additional environment variables to be injected onto this workload
+  ## e.g.
+  ## extraEnv:
+  ## - name: FOO
+  ##   value: "bar"
+  extraEnv: []
+  ## NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+  nodeSelector: {}
+  ## A subset of PodSecurityContext. PodSecurityContext holds pod-level security attributes and common container settings
+  podSecurityContext:
+    ## A special supplemental group that applies to all containers in a pod. Some volume types allow the Kubelet to
+    ## change the ownership of that volume to be owned by the pod:
+    ##
+    ## 1. The owning GID will be the FSGroup
+    ## 2. The setgid bit is set (new files created in the volume will be owned by FSGroup)## 3. The permission bits are OR'd with rw-rw----
+    ##
+    ## If unset, the Kubelet will not modify the ownership and permissions of any volume.
+    fsGroup: 10033
+
+    ## fsGroupChangePolicy defines behavior of changing ownership and permission of the volume before being exposed inside Pod.
+    ## This field will only apply to volume types which support fsGroup based ownership(and permissions).
+    ## It will have no effect on ephemeral volume types such as: secret, configmaps and emptydir. Valid values are "OnRootMismatch" and "Always". If not specified, "Always" is used.
+    # fsGroupChangePolicy:
+
+    ## The GID to run the entrypoint of the container process. Uses runtime default if unset.
+    runAsGroup: 10033
+
+    ## Indicates that the container must run as a non-root user. If true, the Kubelet will validate the image at runtime to ensure that it does not run as UID 0 (root) and fail to start the container if it does. If unset or false, no such validation will be performed.
+    runAsNonRoot: true
+
+    ## The UID to run the entrypoint of the container process. Defaults to user specified in image metadata if unspecified.
+    runAsUser: 10033
+
+    ## SELinuxOptions are the labels to be applied to all the pod containers
+    # seLinuxOptions:
+    ## Level is SELinux level label that applies to the container.
+    # level:
+
+    ## Role is a SELinux role label that applies to the container.
+    # role:
+
+    ## Type is a SELinux type label that applies to the container.
+    # type:
+
+    ## User is a SELinux user label that applies to the container.
+    # user:
+
+    ## "To set the Seccomp profile for a Container, include the seccompProfile field in the securityContext section of your Pod or Container manifest.
+    ## The seccompProfile field is a SeccompProfile object consisting of type and localhostProfile.
+    ## Valid options for type include RuntimeDefault, Unconfined, and Localhost. localhostProfile must only be set set if type Localhost.
+    ## It indicates the path of the pre-configured profile on the node, relative to the kubelet's configured Seccomp profile location (configured with the --root-dir flag).
+    seccompProfile:
+      # localhostProfile:
+      type: RuntimeDefault
+
+    ## A list of groups applied to the first process run in each container, in addition to the container's primary GID.
+    ## If unspecified, no groups will be added to any container.
+    supplementalGroups: []
+  ## Kubernetes resources to allocate to each instance.
+  resources:
+    ## Requests describes the minimum amount of compute resources required. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+    requests:
+      memory: 20Mi
+      cpu: 50m
+
+    ## Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+    limits:
+      memory: 20Mi
+  ## Whether to deploy ServiceMonitors into the cluster for this component
+  ## Requires the ServiceMonitor CRDs to be in the cluster
+  serviceMonitors:
+    enabled: true
+  ## Controls configuration of the ServiceAccount for this component
+  serviceAccount:
+    ## Whether a ServiceAccount should be created by the chart or not
+    create: true
+
+    ## What name to give the ServiceAccount. If not provided the chart will provide the name automatically
+    name: ""
+
+    ## Annotations to add to the service account
+    annotations: {}
+  ## Workload tolerations allows Pods that are part of this (sub)component to 'tolerate' any taint that matches the triple <key,value,effect> using the matching operator <operator>.
+  ##
+  ## * effect indicates the taint effect to match. Empty means match all taint effects. When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
+  ## * key is the taint key that the toleration applies to. Empty means match all taint keys. If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+  ## * operator represents a key's relationship to the value. Valid operators are Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for value, so that a pod can tolerate all taints of a particular category.
+  ## * value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
+  ##
+  ## * tolerationSeconds represents the period of time the toleration (which must be of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default, it is not set, which means tolerate the taint forever (do not evict). Zero and negative values will be treated as 0 (evict immediately) by the system.
+  ## e.g.
+  ## tolerations:
+  ## - effect:
+  ##   key:
+  ##   operator:
+  ##   value:
+
+  tolerations: []
+  ## Configuration of the thresholds and frequencies of the livenessProbe
+  livenessProbe:
+    ## How many consecutive failures for the probe to be considered failed
+    failureThreshold: 3
+
+    ## Number of seconds after the container has started before the probe starts
+    initialDelaySeconds: 0
+
+    ## How often (in seconds) to perform the probe
+    periodSeconds: 10
+
+    ## How many consecutive successes for the probe to be consider successful after having failed
+    successThreshold: 1
+
+    ## Number of seconds after which the probe times out
+    timeoutSeconds: 1
+  ## Configuration of the thresholds and frequencies of the readinessProbe
+  readinessProbe:
+    ## How many consecutive failures for the probe to be considered failed
+    failureThreshold: 3
+
+    ## Number of seconds after the container has started before the probe starts
+    initialDelaySeconds: 0
+
+    ## How often (in seconds) to perform the probe
+    periodSeconds: 10
+
+    ## How many consecutive successes for the probe to be consider successful after having failed
+    successThreshold: 1
+
+    ## Number of seconds after which the probe times out
+    timeoutSeconds: 1
+  ## Configuration of the thresholds and frequencies of the startupProbe
+  startupProbe:
+    ## How many consecutive failures for the probe to be considered failed
+    failureThreshold: 3
+
+    ## Number of seconds after the container has started before the probe starts
+    initialDelaySeconds: 0
+
+    ## How often (in seconds) to perform the probe
+    periodSeconds: 10
+
+    ## How many consecutive successes for the probe to be consider successful after having failed
+    successThreshold: 1
+
+    ## Number of seconds after which the probe times out
+    timeoutSeconds: 1
+
+  sfu:
+    enabled: true
+
+    # LiveKit Logging level
+    logging:
+      # log level, valid values: debug, info, warn, error
+      level: info
+      # log level for pion, default error
+      pionLevel: error
+      # when set to true, emit json fields
+      json: false
+
+    ## Additional configuration to provide to all LiveKit processes.
+    ## This should be provided as yaml-string and will be merged into the default configuration.
+    ## Each key under additional is an additional config to merge into LiveKit config.yaml
+    ## Full details on available configuration options can be found at https://docs.livekit.io/home/self-hosting/deployment/#configuration
+    ## This can be provided in-line in the Helm Chart and/or via an existing Secret
+    ## e.g.
+    ## additional:
+    ##   0-customConfig:
+    ##     config: |
+    ##       <any valid configuration>
+    ##   1-customConfig:
+    ##     configSecret: custom-config
+    ##     configSecretKey: shared.yaml
+    ##
+    ## Most settings are configurable but some settings are owned by the chart and can't overwritten
+    additional: {}
+
+    # Whether to start the SFU in host network mode or not
+    hostNetwork: false
+    exposedServices:
+      rtcTcp:
+        enabled: true
+        # Either a NodePort or a HostPort
+        portType: NodePort
+        port: 30881
+      rtcMuxedUdp:
+        enabled: true
+        # Either a NodePort or a HostPort
+        portType: NodePort
+        port: 30882
+      rtcUdp:
+        enabled: false
+        # Either a NodePort or a HostPort
+        portType: NodePort
+        portRange:
+          # The beginning port of the range
+          startPort: 31000
+          # The last port of the range
+          endPort: 32000
+    # Details of the image to be used
+    image:
+      ## The host and (optional) port of the container image registry for this component.
+      ## If not specified Docker Hub is implied
+      registry: docker.io
+
+      ## The path in the registry where the container image is located
+      repository: livekit/livekit-server
+
+      ## The tag of the container image to use.
+      ## One of tag or digest must be provided.
+      tag: "v1.9.0"
+
+      ## Container digest to use. Used to pull the image instead of the image tag if set
+      ## The tag will still be set as the app.kubernetes.io/version label
+      # digest:
+
+      ## Whether the image should be pulled on container startup. Valid values are Always, IfNotPresent and Never
+      ## If this isn't provided it defaults to Always when using the image tag or IfNotPresent if using a digest
+      # pullPolicy:
+
+      ## A list of pull secrets to use for this image
+      ## e.g.
+      ## pullSecrets:
+      ## - name: dockerhub
+      pullSecrets: []
+    ## Defines additional environment variables to be injected onto this workload
+    ## e.g.
+    ## extraEnv:
+    ## - name: FOO
+    ##   value: "bar"
+    extraEnv: []
+    ## Labels to add to all manifest for this component
+    labels: {}
+    ## Defines the annotations to add to the workload
+    # annotations: {}
+    ## A subset of SecurityContext. ContainersSecurityContext holds pod-level security attributes and common container settings
+    containersSecurityContext:
+      ## Controls whether a process can gain more privileges than its parent process.
+      ## This bool directly controls whether the no_new_privs flag gets set on the container process.
+      ## allowPrivilegeEscalation is always true when the container is run as privileged, or has CAP_SYS_ADMIN
+      allowPrivilegeEscalation: false
+
+      ## Give a process some privileges, but not all the privileges of the root user.
+      capabilities:
+        ## Privileges to add.
+        # add: []
+        ## Privileges to drop.
+        drop:
+          - ALL
+
+      ## Mounts the container's root filesystem as read-only.
+      readOnlyRootFilesystem: true
+
+      ## To set the Seccomp profile for a Container, include the seccompProfile field in the securityContext section of your Pod or Container manifest.
+      ## The seccompProfile field is a SeccompProfile object consisting of type and localhostProfile. Valid options for type include RuntimeDefault, Unconfined, and Localhost.
+      ## localhostProfile must only be set set if type Localhost. It indicates the path of the pre-configured profile on the node, relative to the kubelet's configured Seccomp profile location (configured with the --root-dir flag).
+      # seccompProfile:
+      #  type: RuntimeDefault
+    ## NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+    nodeSelector: {}
+    ## A subset of PodSecurityContext. PodSecurityContext holds pod-level security attributes and common container settings
+    podSecurityContext:
+      ## A special supplemental group that applies to all containers in a pod. Some volume types allow the Kubelet to
+      ## change the ownership of that volume to be owned by the pod:
+      ##
+      ## 1. The owning GID will be the FSGroup
+      ## 2. The setgid bit is set (new files created in the volume will be owned by FSGroup)## 3. The permission bits are OR'd with rw-rw----
+      ##
+      ## If unset, the Kubelet will not modify the ownership and permissions of any volume.
+      fsGroup: 10030
+
+      ## fsGroupChangePolicy defines behavior of changing ownership and permission of the volume before being exposed inside Pod.
+      ## This field will only apply to volume types which support fsGroup based ownership(and permissions).
+      ## It will have no effect on ephemeral volume types such as: secret, configmaps and emptydir. Valid values are "OnRootMismatch" and "Always". If not specified, "Always" is used.
+      # fsGroupChangePolicy:
+
+      ## The GID to run the entrypoint of the container process. Uses runtime default if unset.
+      runAsGroup: 10030
+
+      ## Indicates that the container must run as a non-root user. If true, the Kubelet will validate the image at runtime to ensure that it does not run as UID 0 (root) and fail to start the container if it does. If unset or false, no such validation will be performed.
+      runAsNonRoot: true
+
+      ## The UID to run the entrypoint of the container process. Defaults to user specified in image metadata if unspecified.
+      runAsUser: 10030
+
+      ## SELinuxOptions are the labels to be applied to all the pod containers
+      # seLinuxOptions:
+      ## Level is SELinux level label that applies to the container.
+      # level:
+
+      ## Role is a SELinux role label that applies to the container.
+      # role:
+
+      ## Type is a SELinux type label that applies to the container.
+      # type:
+
+      ## User is a SELinux user label that applies to the container.
+      # user:
+
+      ## "To set the Seccomp profile for a Container, include the seccompProfile field in the securityContext section of your Pod or Container manifest.
+      ## The seccompProfile field is a SeccompProfile object consisting of type and localhostProfile.
+      ## Valid options for type include RuntimeDefault, Unconfined, and Localhost. localhostProfile must only be set set if type Localhost.
+      ## It indicates the path of the pre-configured profile on the node, relative to the kubelet's configured Seccomp profile location (configured with the --root-dir flag).
+      seccompProfile:
+        # localhostProfile:
+        type: RuntimeDefault
+
+      ## A list of groups applied to the first process run in each container, in addition to the container's primary GID.
+      ## If unspecified, no groups will be added to any container.
+      supplementalGroups: []
+    ## Kubernetes resources to allocate to each instance.
+    resources:
+      ## Requests describes the minimum amount of compute resources required. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+      requests:
+        memory: 150Mi
+        cpu: 100m
+
+      ## Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+      limits:
+        memory: 4Gi
+    ## Controls configuration of the ServiceAccount for this component
+    serviceAccount:
+      ## Whether a ServiceAccount should be created by the chart or not
+      create: true
+
+      ## What name to give the ServiceAccount. If not provided the chart will provide the name automatically
+      name: ""
+
+      ## Annotations to add to the service account
+      annotations: {}
+    ## Whether to deploy ServiceMonitors into the cluster for this component
+    ## Requires the ServiceMonitor CRDs to be in the cluster
+    serviceMonitors:
+      enabled: true
+    ## Workload tolerations allows Pods that are part of this (sub)component to 'tolerate' any taint that matches the triple <key,value,effect> using the matching operator <operator>.
+    ##
+    ## * effect indicates the taint effect to match. Empty means match all taint effects. When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
+    ## * key is the taint key that the toleration applies to. Empty means match all taint keys. If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+    ## * operator represents a key's relationship to the value. Valid operators are Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for value, so that a pod can tolerate all taints of a particular category.
+    ## * value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
+    ##
+    ## * tolerationSeconds represents the period of time the toleration (which must be of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default, it is not set, which means tolerate the taint forever (do not evict). Zero and negative values will be treated as 0 (evict immediately) by the system.
+    ## e.g.
+    ## tolerations:
+    ## - effect:
+    ##   key:
+    ##   operator:
+    ##   value:
+
+    tolerations: []
+    ## Configuration of the thresholds and frequencies of the livenessProbe
+    livenessProbe:
+      ## How many consecutive failures for the probe to be considered failed
+      failureThreshold: 3
+
+      ## Number of seconds after the container has started before the probe starts
+      initialDelaySeconds: 0
+
+      ## How often (in seconds) to perform the probe
+      periodSeconds: 10
+
+      ## How many consecutive successes for the probe to be consider successful after having failed
+      successThreshold: 1
+
+      ## Number of seconds after which the probe times out
+      timeoutSeconds: 1
+    ## Configuration of the thresholds and frequencies of the readinessProbe
+    readinessProbe:
+      ## How many consecutive failures for the probe to be considered failed
+      failureThreshold: 3
+
+      ## Number of seconds after the container has started before the probe starts
+      initialDelaySeconds: 0
+
+      ## How often (in seconds) to perform the probe
+      periodSeconds: 10
+
+      ## How many consecutive successes for the probe to be consider successful after having failed
+      successThreshold: 1
+
+      ## Number of seconds after which the probe times out
+      timeoutSeconds: 1
+    ## Configuration of the thresholds and frequencies of the startupProbe
+    startupProbe:
+      ## How many consecutive failures for the probe to be considered failed
+      failureThreshold: 3
+
+      ## Number of seconds after the container has started before the probe starts
+      initialDelaySeconds: 0
+
+      ## How often (in seconds) to perform the probe
+      periodSeconds: 10
+
+      ## How many consecutive successes for the probe to be consider successful after having failed
+      successThreshold: 1
+
+      ## Number of seconds after which the probe times out
+      timeoutSeconds: 1
+
+elementWeb:
+  enabled: true
+
+  ## Arbitrary extra config to inject into Element Web's config.json.
+  ## Each key under additional is an additional config to merge into Element Web's config.json.
+  ##
+  ## Full details on available configuration options can be found at https://github.com/element-hq/element-web/blob/develop/docs/config.md
+  ## Most settings are configurable but some settings are owned by the chart and can't be overwritten
+  additional: {}
+
+  # Number of Element Web replicas to start up
+  replicas: 1
+  # Details of the image to be used
+  image:
+    ## The host and (optional) port of the container image registry for this component.
+    ## If not specified Docker Hub is implied
+    registry: ghcr.io
+
+    ## The path in the registry where the container image is located
+    repository: element-hq/element-web
+
+    ## The tag of the container image to use.
+    ## One of tag or digest must be provided.
+    tag: "v1.11.110"
+
+    ## Container digest to use. Used to pull the image instead of the image tag if set
+    ## The tag will still be set as the app.kubernetes.io/version label
+    # digest:
+
+    ## Whether the image should be pulled on container startup. Valid values are Always, IfNotPresent and Never
+    ## If this isn't provided it defaults to Always when using the image tag or IfNotPresent if using a digest
+    # pullPolicy:
+
+    ## A list of pull secrets to use for this image
+    ## e.g.
+    ## pullSecrets:
+    ## - name: dockerhub
+    pullSecrets: []
+  ## How this ingress should be constructed
+  ingress:
+    ## What hostname should be used for this Ingress
+    # host:
+
+    ## Annotations to be added to this Ingress
+    annotations: {}
+
+    ## What Ingress Class Name that should be used for this Ingress
+    # className:
+
+    ## Disable TLS configuration by setting it to false
+    tlsEnabled: true
+
+    ## The name of the Secret containing the TLS certificate and the key that should be used for this Ingress
+    # tlsSecret:
+
+    ## How the Service behind this Ingress is constructed
+    service: {}
+    ## If set, some tweaks will be applied automatically to ingresses based on the controller type here.
+    ## This can be set to `ingress-nginx`.
+    # controllerType:
+  ## Labels to add to all manifest for this component
+  labels: {}
+  ## Defines the annotations to add to the workload
+  # annotations: {}
+  ## Defines additional environment variables to be injected onto this workload
+  ## e.g.
+  ## extraEnv:
+  ## - name: FOO
+  ##   value: "bar"
+  extraEnv: []
+  ## A subset of SecurityContext. ContainersSecurityContext holds pod-level security attributes and common container settings
+  containersSecurityContext:
+    ## Controls whether a process can gain more privileges than its parent process.
+    ## This bool directly controls whether the no_new_privs flag gets set on the container process.
+    ## allowPrivilegeEscalation is always true when the container is run as privileged, or has CAP_SYS_ADMIN
+    allowPrivilegeEscalation: false
+
+    ## Give a process some privileges, but not all the privileges of the root user.
+    capabilities:
+      ## Privileges to add.
+      # add: []
+      ## Privileges to drop.
+      drop:
+        - ALL
+
+    ## Mounts the container's root filesystem as read-only.
+    readOnlyRootFilesystem: true
+
+    ## To set the Seccomp profile for a Container, include the seccompProfile field in the securityContext section of your Pod or Container manifest.
+    ## The seccompProfile field is a SeccompProfile object consisting of type and localhostProfile. Valid options for type include RuntimeDefault, Unconfined, and Localhost.
+    ## localhostProfile must only be set set if type Localhost. It indicates the path of the pre-configured profile on the node, relative to the kubelet's configured Seccomp profile location (configured with the --root-dir flag).
+    # seccompProfile:
+    #  type: RuntimeDefault
+  ## NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+  nodeSelector: {}
+  ## A subset of PodSecurityContext. PodSecurityContext holds pod-level security attributes and common container settings
+  podSecurityContext:
+    ## A special supplemental group that applies to all containers in a pod. Some volume types allow the Kubelet to
+    ## change the ownership of that volume to be owned by the pod:
+    ##
+    ## 1. The owning GID will be the FSGroup
+    ## 2. The setgid bit is set (new files created in the volume will be owned by FSGroup)## 3. The permission bits are OR'd with rw-rw----
+    ##
+    ## If unset, the Kubelet will not modify the ownership and permissions of any volume.
+    fsGroup: 10004
+
+    ## fsGroupChangePolicy defines behavior of changing ownership and permission of the volume before being exposed inside Pod.
+    ## This field will only apply to volume types which support fsGroup based ownership(and permissions).
+    ## It will have no effect on ephemeral volume types such as: secret, configmaps and emptydir. Valid values are "OnRootMismatch" and "Always". If not specified, "Always" is used.
+    # fsGroupChangePolicy:
+
+    ## The GID to run the entrypoint of the container process. Uses runtime default if unset.
+    runAsGroup: 10004
+
+    ## Indicates that the container must run as a non-root user. If true, the Kubelet will validate the image at runtime to ensure that it does not run as UID 0 (root) and fail to start the container if it does. If unset or false, no such validation will be performed.
+    runAsNonRoot: true
+
+    ## The UID to run the entrypoint of the container process. Defaults to user specified in image metadata if unspecified.
+    runAsUser: 10004
+
+    ## SELinuxOptions are the labels to be applied to all the pod containers
+    # seLinuxOptions:
+    ## Level is SELinux level label that applies to the container.
+    # level:
+
+    ## Role is a SELinux role label that applies to the container.
+    # role:
+
+    ## Type is a SELinux type label that applies to the container.
+    # type:
+
+    ## User is a SELinux user label that applies to the container.
+    # user:
+
+    ## "To set the Seccomp profile for a Container, include the seccompProfile field in the securityContext section of your Pod or Container manifest.
+    ## The seccompProfile field is a SeccompProfile object consisting of type and localhostProfile.
+    ## Valid options for type include RuntimeDefault, Unconfined, and Localhost. localhostProfile must only be set set if type Localhost.
+    ## It indicates the path of the pre-configured profile on the node, relative to the kubelet's configured Seccomp profile location (configured with the --root-dir flag).
+    seccompProfile:
+      # localhostProfile:
+      type: RuntimeDefault
+
+    ## A list of groups applied to the first process run in each container, in addition to the container's primary GID.
+    ## If unspecified, no groups will be added to any container.
+    supplementalGroups: []
+  ## Kubernetes resources to allocate to each instance.
+  resources:
+    ## Requests describes the minimum amount of compute resources required. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+    requests:
+      memory: 50Mi
+      cpu: 50m
+
+    ## Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+    limits:
+      memory: 200Mi
+  ## Controls configuration of the ServiceAccount for this component
+  serviceAccount:
+    ## Whether a ServiceAccount should be created by the chart or not
+    create: true
+
+    ## What name to give the ServiceAccount. If not provided the chart will provide the name automatically
+    name: ""
+
+    ## Annotations to add to the service account
+    annotations: {}
+  ## Workload tolerations allows Pods that are part of this (sub)component to 'tolerate' any taint that matches the triple <key,value,effect> using the matching operator <operator>.
+  ##
+  ## * effect indicates the taint effect to match. Empty means match all taint effects. When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
+  ## * key is the taint key that the toleration applies to. Empty means match all taint keys. If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+  ## * operator represents a key's relationship to the value. Valid operators are Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for value, so that a pod can tolerate all taints of a particular category.
+  ## * value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
+  ##
+  ## * tolerationSeconds represents the period of time the toleration (which must be of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default, it is not set, which means tolerate the taint forever (do not evict). Zero and negative values will be treated as 0 (evict immediately) by the system.
+  ## e.g.
+  ## tolerations:
+  ## - effect:
+  ##   key:
+  ##   operator:
+  ##   value:
+
+  tolerations: []
+  ## TopologySpreadConstraints describes how Pods for this component should be spread between nodes.
+  ## https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/ for in-depth details
+  ## labelSelector can be omitted and the chart will populate a sensible value for this component.
+  ## Similarly `pod-template-hash` will be aded to `matchLabelKeys` if appropriate for this component.
+  ## If any TopologySpreadConstraints are provided for a component any global TopologySpreadConstraints are ignored for that component.
+  ## e.g.
+  ## topologySpreadConstraints:
+  ## - maxSkew: 1
+  ##   topologyKey: topology.kubernetes.io/zone
+  ##   # nodeAffinityPolicy: Honor/Ignore
+  ##   # nodeTaintsPolicy: Honor/Ignore
+  ##   # whenUnsatisfiable: DoNotSchedule/ScheduleAnyway
+  topologySpreadConstraints: []
+  ## Configuration of the thresholds and frequencies of the livenessProbe
+  livenessProbe:
+    ## How many consecutive failures for the probe to be considered failed
+    failureThreshold: 3
+
+    ## Number of seconds after the container has started before the probe starts
+    initialDelaySeconds: 0
+
+    ## How often (in seconds) to perform the probe
+    periodSeconds: 10
+
+    ## How many consecutive successes for the probe to be consider successful after having failed
+    successThreshold: 1
+
+    ## Number of seconds after which the probe times out
+    timeoutSeconds: 1
+  ## Configuration of the thresholds and frequencies of the readinessProbe
+  readinessProbe:
+    ## How many consecutive failures for the probe to be considered failed
+    failureThreshold: 3
+
+    ## Number of seconds after the container has started before the probe starts
+    initialDelaySeconds: 0
+
+    ## How often (in seconds) to perform the probe
+    periodSeconds: 3
+
+    ## How many consecutive successes for the probe to be consider successful after having failed
+    successThreshold: 1
+
+    ## Number of seconds after which the probe times out
+    timeoutSeconds: 1
+  ## Configuration of the thresholds and frequencies of the startupProbe
+  startupProbe:
+    ## How many consecutive failures for the probe to be considered failed
+    failureThreshold: 4
+
+    ## Number of seconds after the container has started before the probe starts
+    initialDelaySeconds: 0
+
+    ## How often (in seconds) to perform the probe
+    periodSeconds: 3
+
+    ## How many consecutive successes for the probe to be consider successful after having failed
+    successThreshold: 1
+
+    ## Number of seconds after which the probe times out
+    timeoutSeconds: 1
+
+haproxy:
+  replicas: 1
+  # Details of the image to be used
+  image:
+    ## The host and (optional) port of the container image registry for this component.
+    ## If not specified Docker Hub is implied
+    registry: docker.io
+
+    ## The path in the registry where the container image is located
+    repository: library/haproxy
+
+    ## The tag of the container image to use.
+    ## One of tag or digest must be provided.
+    tag: "3.1-alpine"
+
+    ## Container digest to use. Used to pull the image instead of the image tag if set
+    ## The tag will still be set as the app.kubernetes.io/version label
+    # digest:
+
+    ## Whether the image should be pulled on container startup. Valid values are Always, IfNotPresent and Never
+    ## If this isn't provided it defaults to Always when using the image tag or IfNotPresent if using a digest
+    # pullPolicy:
+
+    ## A list of pull secrets to use for this image
+    ## e.g.
+    ## pullSecrets:
+    ## - name: dockerhub
+    pullSecrets: []
+  ## Labels to add to all manifest for this component
+  labels: {}
+  ## Defines the annotations to add to the workload
+  # annotations: {}
+  ## A subset of SecurityContext. ContainersSecurityContext holds pod-level security attributes and common container settings
+  containersSecurityContext:
+    ## Controls whether a process can gain more privileges than its parent process.
+    ## This bool directly controls whether the no_new_privs flag gets set on the container process.
+    ## allowPrivilegeEscalation is always true when the container is run as privileged, or has CAP_SYS_ADMIN
+    allowPrivilegeEscalation: false
+
+    ## Give a process some privileges, but not all the privileges of the root user.
+    capabilities:
+      ## Privileges to add.
+      # add: []
+      ## Privileges to drop.
+      drop:
+        - ALL
+
+    ## Mounts the container's root filesystem as read-only.
+    readOnlyRootFilesystem: true
+
+    ## To set the Seccomp profile for a Container, include the seccompProfile field in the securityContext section of your Pod or Container manifest.
+    ## The seccompProfile field is a SeccompProfile object consisting of type and localhostProfile. Valid options for type include RuntimeDefault, Unconfined, and Localhost.
+    ## localhostProfile must only be set set if type Localhost. It indicates the path of the pre-configured profile on the node, relative to the kubelet's configured Seccomp profile location (configured with the --root-dir flag).
+    # seccompProfile:
+    #  type: RuntimeDefault
+  ## Defines additional environment variables to be injected onto this workload
+  ## e.g.
+  ## extraEnv:
+  ## - name: FOO
+  ##   value: "bar"
+  extraEnv: []
+  ## NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+  nodeSelector: {}
+  ## A subset of PodSecurityContext. PodSecurityContext holds pod-level security attributes and common container settings
+  podSecurityContext:
+    ## A special supplemental group that applies to all containers in a pod. Some volume types allow the Kubelet to
+    ## change the ownership of that volume to be owned by the pod:
+    ##
+    ## 1. The owning GID will be the FSGroup
+    ## 2. The setgid bit is set (new files created in the volume will be owned by FSGroup)## 3. The permission bits are OR'd with rw-rw----
+    ##
+    ## If unset, the Kubelet will not modify the ownership and permissions of any volume.
+    fsGroup: 10001
+
+    ## fsGroupChangePolicy defines behavior of changing ownership and permission of the volume before being exposed inside Pod.
+    ## This field will only apply to volume types which support fsGroup based ownership(and permissions).
+    ## It will have no effect on ephemeral volume types such as: secret, configmaps and emptydir. Valid values are "OnRootMismatch" and "Always". If not specified, "Always" is used.
+    # fsGroupChangePolicy:
+
+    ## The GID to run the entrypoint of the container process. Uses runtime default if unset.
+    runAsGroup: 10001
+
+    ## Indicates that the container must run as a non-root user. If true, the Kubelet will validate the image at runtime to ensure that it does not run as UID 0 (root) and fail to start the container if it does. If unset or false, no such validation will be performed.
+    runAsNonRoot: true
+
+    ## The UID to run the entrypoint of the container process. Defaults to user specified in image metadata if unspecified.
+    runAsUser: 10001
+
+    ## SELinuxOptions are the labels to be applied to all the pod containers
+    # seLinuxOptions:
+    ## Level is SELinux level label that applies to the container.
+    # level:
+
+    ## Role is a SELinux role label that applies to the container.
+    # role:
+
+    ## Type is a SELinux type label that applies to the container.
+    # type:
+
+    ## User is a SELinux user label that applies to the container.
+    # user:
+
+    ## "To set the Seccomp profile for a Container, include the seccompProfile field in the securityContext section of your Pod or Container manifest.
+    ## The seccompProfile field is a SeccompProfile object consisting of type and localhostProfile.
+    ## Valid options for type include RuntimeDefault, Unconfined, and Localhost. localhostProfile must only be set set if type Localhost.
+    ## It indicates the path of the pre-configured profile on the node, relative to the kubelet's configured Seccomp profile location (configured with the --root-dir flag).
+    seccompProfile:
+      # localhostProfile:
+      type: RuntimeDefault
+
+    ## A list of groups applied to the first process run in each container, in addition to the container's primary GID.
+    ## If unspecified, no groups will be added to any container.
+    supplementalGroups: []
+  ## Kubernetes resources to allocate to each instance.
+  resources:
+    ## Requests describes the minimum amount of compute resources required. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+    requests:
+      memory: 100Mi
+      cpu: 100m
+
+    ## Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+    limits:
+      memory: 200Mi
+  ## Controls configuration of the ServiceAccount for this component
+  serviceAccount:
+    ## Whether a ServiceAccount should be created by the chart or not
+    create: true
+
+    ## What name to give the ServiceAccount. If not provided the chart will provide the name automatically
+    name: ""
+
+    ## Annotations to add to the service account
+    annotations: {}
+  ## Whether to deploy ServiceMonitors into the cluster for this component
+  ## Requires the ServiceMonitor CRDs to be in the cluster
+  serviceMonitors:
+    enabled: true
+  ## Workload tolerations allows Pods that are part of this (sub)component to 'tolerate' any taint that matches the triple <key,value,effect> using the matching operator <operator>.
+  ##
+  ## * effect indicates the taint effect to match. Empty means match all taint effects. When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
+  ## * key is the taint key that the toleration applies to. Empty means match all taint keys. If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+  ## * operator represents a key's relationship to the value. Valid operators are Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for value, so that a pod can tolerate all taints of a particular category.
+  ## * value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
+  ##
+  ## * tolerationSeconds represents the period of time the toleration (which must be of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default, it is not set, which means tolerate the taint forever (do not evict). Zero and negative values will be treated as 0 (evict immediately) by the system.
+  ## e.g.
+  ## tolerations:
+  ## - effect:
+  ##   key:
+  ##   operator:
+  ##   value:
+
+  tolerations: []
+  ## TopologySpreadConstraints describes how Pods for this component should be spread between nodes.
+  ## https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/ for in-depth details
+  ## labelSelector can be omitted and the chart will populate a sensible value for this component.
+  ## Similarly `pod-template-hash` will be aded to `matchLabelKeys` if appropriate for this component.
+  ## If any TopologySpreadConstraints are provided for a component any global TopologySpreadConstraints are ignored for that component.
+  ## e.g.
+  ## topologySpreadConstraints:
+  ## - maxSkew: 1
+  ##   topologyKey: topology.kubernetes.io/zone
+  ##   # nodeAffinityPolicy: Honor/Ignore
+  ##   # nodeTaintsPolicy: Honor/Ignore
+  ##   # whenUnsatisfiable: DoNotSchedule/ScheduleAnyway
+  topologySpreadConstraints: []
+  ## Configuration of the thresholds and frequencies of the livenessProbe
+  livenessProbe:
+    ## How many consecutive failures for the probe to be considered failed
+    failureThreshold: 3
+
+    ## Number of seconds after the container has started before the probe starts
+    initialDelaySeconds: 0
+
+    ## How often (in seconds) to perform the probe
+    periodSeconds: 10
+
+    ## How many consecutive successes for the probe to be consider successful after having failed
+    successThreshold: 1
+
+    ## Number of seconds after which the probe times out
+    timeoutSeconds: 5
+  ## Configuration of the thresholds and frequencies of the readinessProbe
+  readinessProbe:
+    ## How many consecutive failures for the probe to be considered failed
+    failureThreshold: 3
+
+    ## Number of seconds after the container has started before the probe starts
+    initialDelaySeconds: 0
+
+    ## How often (in seconds) to perform the probe
+    periodSeconds: 10
+
+    ## How many consecutive successes for the probe to be consider successful after having failed
+    successThreshold: 1
+
+    ## Number of seconds after which the probe times out
+    timeoutSeconds: 5
+  # The failureThreshold here is tweaked towards Synapse being ready
+  # If Synapse isn't being deployed, unsetting this or setting it to 3 maybe more appropriate
+  ## Configuration of the thresholds and frequencies of the startupProbe
+  startupProbe:
+    ## How many consecutive failures for the probe to be considered failed
+    failureThreshold: 150
+
+    ## Number of seconds after the container has started before the probe starts
+    initialDelaySeconds: 0
+
+    ## How often (in seconds) to perform the probe
+    periodSeconds: 2
+
+    ## How many consecutive successes for the probe to be consider successful after having failed
+    successThreshold: 1
+
+    ## Number of seconds after which the probe times out
+    timeoutSeconds: 1
+
+matrixAuthenticationService:
+  enabled: true
+  # Details of the image to be used
+  image:
+    ## The host and (optional) port of the container image registry for this component.
+    ## If not specified Docker Hub is implied
+    registry: ghcr.io
+
+    ## The path in the registry where the container image is located
+    repository: element-hq/matrix-authentication-service
+
+    ## The tag of the container image to use.
+    ## One of tag or digest must be provided.
+    tag: "1.1.0"
+
+    ## Container digest to use. Used to pull the image instead of the image tag if set
+    ## The tag will still be set as the app.kubernetes.io/version label
+    # digest:
+
+    ## Whether the image should be pulled on container startup. Valid values are Always, IfNotPresent and Never
+    ## If this isn't provided it defaults to Always when using the image tag or IfNotPresent if using a digest
+    # pullPolicy:
+
+    ## A list of pull secrets to use for this image
+    ## e.g.
+    ## pullSecrets:
+    ## - name: dockerhub
+    pullSecrets: []
+
+  replicas: 1
+
+  ## Details of the external Postgres Database to use
+  ## Does not need to be set if postgres.enabled=True
+  # postgres:
+  ## PostgreSQL database host
+  # host:
+
+  ## PostgreSQL port
+  # port: 5432
+
+  ## PostgreSQL username
+  # user:
+
+  ## PostgreSQL database name
+  # database:
+
+  ## TLS settings to use for the PostgreSQL connection
+  # sslMode: prefer
+
+  ## PostgreSQL password.
+  ## It can either be provided inline in the Helm chart e.g.:
+  ## password:
+  ##   value: SecretValue
+  ##
+  ## Or it can be provided via an existing Secret e.g.:
+  ## password:
+  ##   secret: existing-secret
+  ##   secretKey: key-in-secret
+  # password: {}
+
+  ## Encryption secret.
+  ## This secret is optional, and will be generated by the `initSecrets` job
+  ## if it is empty.
+  ## It can either be provided inline in the Helm chart e.g.:
+  ## encryptionSecret:
+  ##   value: SecretValue
+  ##
+  ## Or it can be provided via an existing Secret e.g.:
+  ## encryptionSecret:
+  ##   secret: existing-secret
+  ##   secretKey: key-in-secret
+  encryptionSecret: {}
+
+  ## Synapse - MAS Shared Secret.
+  ## This secret is optional, and will be generated by the `initSecrets` job
+  ## if it is empty.
+  ## It can either be provided inline in the Helm chart e.g.:
+  ## synapseSharedSecret:
+  ##   value: SecretValue
+  ##
+  ## Or it can be provided via an existing Secret e.g.:
+  ## synapseSharedSecret:
+  ##   secret: existing-secret
+  ##   secretKey: key-in-secret
+  synapseSharedSecret: {}
+
+  ## Additional configuration to provide to Matrix Authentication Service.
+  ## Each key under additional is an additional config to merge into Matrix Authentication Service config.yaml
+  ## Full details on available configuration options can be found at https://element-hq.github.io/matrix-authentication-service/reference/configuration.html
+  ## This can be provided in-line in the Helm Chart and/or via an existing Secret
+  ## e.g.
+  ## additional:
+  ##   0-customConfig:
+  ##     config: |
+  ##       <any valid configuration>
+  ##   1-customConfig:
+  ##     configSecret: custom-config
+  ##     configSecretKey: shared.yaml
+  ##
+  ## Most settings are configurable but some settings are owned by the chart and can't overwritten
+  additional: {}
+
+  privateKeys:
+    ## RSA Private Key.
+    ## This secret is optional, and will be generated by the `initSecrets` job
+    ## if it is empty.
+    ## It can either be provided inline in the Helm chart e.g.:
+    ## rsa:
+    ##   value: SecretValue
+    ##
+    ## Or it can be provided via an existing Secret e.g.:
+    ## rsa:
+    ##   secret: existing-secret
+    ##   secretKey: key-in-secret
+    rsa: {}
+
+    ## ECDSA Prime256v1 Private Key.
+    ## This secret is optional, and will be generated by the `initSecrets` job
+    ## if it is empty.
+    ## It can either be provided inline in the Helm chart e.g.:
+    ## ecdsaPrime256v1:
+    ##   value: SecretValue
+    ##
+    ## Or it can be provided via an existing Secret e.g.:
+    ## ecdsaPrime256v1:
+    ##   secret: existing-secret
+    ##   secretKey: key-in-secret
+    ecdsaPrime256v1: {}
+
+    ## ECDSA Secp256k1 Private Key.
+    ## It can either be provided inline in the Helm chart e.g.:
+    ## ecdsaSecp256k1:
+    ##   value: SecretValue
+    ##
+    ## Or it can be provided via an existing Secret e.g.:
+    ## ecdsaSecp256k1:
+    ##   secret: existing-secret
+    ##   secretKey: key-in-secret
+    ecdsaSecp256k1: {}
+
+    ## ECDSA Secp384r1 Private Key.
+    ## It can either be provided inline in the Helm chart e.g.:
+    ## ecdsaSecp384r1:
+    ##   value: SecretValue
+    ##
+    ## Or it can be provided via an existing Secret e.g.:
+    ## ecdsaSecp384r1:
+    ##   secret: existing-secret
+    ##   secretKey: key-in-secret
+    ecdsaSecp384r1: {}
+
+  ## How this ingress should be constructed
+  ingress:
+    ## What hostname should be used for this Ingress
+    # host:
+
+    ## Annotations to be added to this Ingress
+    annotations: {}
+
+    ## What Ingress Class Name that should be used for this Ingress
+    # className:
+
+    ## Disable TLS configuration by setting it to false
+    tlsEnabled: true
+
+    ## The name of the Secret containing the TLS certificate and the key that should be used for this Ingress
+    # tlsSecret:
+
+    ## How the Service behind this Ingress is constructed
+    service: {}
+    ## If set, some tweaks will be applied automatically to ingresses based on the controller type here.
+    ## This can be set to `ingress-nginx`.
+    # controllerType:
+
+  ## Kubernetes resources to allocate to each instance.
+  resources:
+    ## Requests describes the minimum amount of compute resources required. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+    requests:
+      memory: 50Mi
+      cpu: 50m
+
+    ## Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+    limits:
+      memory: 350Mi
+
+  ## Labels to add to all manifest for this component
+  labels: {}
+
+  ## Controls configuration of the ServiceAccount for this component
+  serviceAccount:
+    ## Whether a ServiceAccount should be created by the chart or not
+    create: true
+
+    ## What name to give the ServiceAccount. If not provided the chart will provide the name automatically
+    name: ""
+
+    ## Annotations to add to the service account
+    annotations: {}
+
+  ## NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+  nodeSelector: {}
+
+  ## Workload tolerations allows Pods that are part of this (sub)component to 'tolerate' any taint that matches the triple <key,value,effect> using the matching operator <operator>.
+  ##
+  ## * effect indicates the taint effect to match. Empty means match all taint effects. When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
+  ## * key is the taint key that the toleration applies to. Empty means match all taint keys. If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+  ## * operator represents a key's relationship to the value. Valid operators are Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for value, so that a pod can tolerate all taints of a particular category.
+  ## * value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
+  ##
+  ## * tolerationSeconds represents the period of time the toleration (which must be of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default, it is not set, which means tolerate the taint forever (do not evict). Zero and negative values will be treated as 0 (evict immediately) by the system.
+  ## e.g.
+  ## tolerations:
+  ## - effect:
+  ##   key:
+  ##   operator:
+  ##   value:
+
+  tolerations: []
+
+  ## The list of hosts aliases to configure on the pod spec.
+  ## It should be avoid as much as possible to use this feature.
+  ## Please prefer using an DNS entry to resolve your hostnames.
+  ## This can be used as a workaround when entries cannot be resolved using DNS, for example for our automated testings.
+  ## e.g.
+  ## hostAliases:
+  ## - ip: 192.0.2.1  # An IP resolution to add to /etc/hosts
+  ##   # A list of hostnames to be associated with the above IP
+  ##   hostnames:
+  ##   - ess.localhost
+  ##   - synapse.ess.localhost
+  hostAliases: []
+
+  ## TopologySpreadConstraints describes how Pods for this component should be spread between nodes.
+  ## https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/ for in-depth details
+  ## labelSelector can be omitted and the chart will populate a sensible value for this component.
+  ## Similarly `pod-template-hash` will be aded to `matchLabelKeys` if appropriate for this component.
+  ## If any TopologySpreadConstraints are provided for a component any global TopologySpreadConstraints are ignored for that component.
+  ## e.g.
+  ## topologySpreadConstraints:
+  ## - maxSkew: 1
+  ##   topologyKey: topology.kubernetes.io/zone
+  ##   # nodeAffinityPolicy: Honor/Ignore
+  ##   # nodeTaintsPolicy: Honor/Ignore
+  ##   # whenUnsatisfiable: DoNotSchedule/ScheduleAnyway
+  topologySpreadConstraints: []
+
+  ## A subset of PodSecurityContext. PodSecurityContext holds pod-level security attributes and common container settings
+  podSecurityContext:
+    ## A special supplemental group that applies to all containers in a pod. Some volume types allow the Kubelet to
+    ## change the ownership of that volume to be owned by the pod:
+    ##
+    ## 1. The owning GID will be the FSGroup
+    ## 2. The setgid bit is set (new files created in the volume will be owned by FSGroup)## 3. The permission bits are OR'd with rw-rw----
+    ##
+    ## If unset, the Kubelet will not modify the ownership and permissions of any volume.
+    fsGroup: 10005
+
+    ## fsGroupChangePolicy defines behavior of changing ownership and permission of the volume before being exposed inside Pod.
+    ## This field will only apply to volume types which support fsGroup based ownership(and permissions).
+    ## It will have no effect on ephemeral volume types such as: secret, configmaps and emptydir. Valid values are "OnRootMismatch" and "Always". If not specified, "Always" is used.
+    # fsGroupChangePolicy:
+
+    ## The GID to run the entrypoint of the container process. Uses runtime default if unset.
+    runAsGroup: 10005
+
+    ## Indicates that the container must run as a non-root user. If true, the Kubelet will validate the image at runtime to ensure that it does not run as UID 0 (root) and fail to start the container if it does. If unset or false, no such validation will be performed.
+    runAsNonRoot: true
+
+    ## The UID to run the entrypoint of the container process. Defaults to user specified in image metadata if unspecified.
+    runAsUser: 10005
+
+    ## SELinuxOptions are the labels to be applied to all the pod containers
+    # seLinuxOptions:
+    ## Level is SELinux level label that applies to the container.
+    # level:
+
+    ## Role is a SELinux role label that applies to the container.
+    # role:
+
+    ## Type is a SELinux type label that applies to the container.
+    # type:
+
+    ## User is a SELinux user label that applies to the container.
+    # user:
+
+    ## "To set the Seccomp profile for a Container, include the seccompProfile field in the securityContext section of your Pod or Container manifest.
+    ## The seccompProfile field is a SeccompProfile object consisting of type and localhostProfile.
+    ## Valid options for type include RuntimeDefault, Unconfined, and Localhost. localhostProfile must only be set set if type Localhost.
+    ## It indicates the path of the pre-configured profile on the node, relative to the kubelet's configured Seccomp profile location (configured with the --root-dir flag).
+    seccompProfile:
+      # localhostProfile:
+      type: RuntimeDefault
+
+    ## A list of groups applied to the first process run in each container, in addition to the container's primary GID.
+    ## If unspecified, no groups will be added to any container.
+    supplementalGroups: []
+
+  ## A subset of SecurityContext. ContainersSecurityContext holds pod-level security attributes and common container settings
+  containersSecurityContext:
+    ## Controls whether a process can gain more privileges than its parent process.
+    ## This bool directly controls whether the no_new_privs flag gets set on the container process.
+    ## allowPrivilegeEscalation is always true when the container is run as privileged, or has CAP_SYS_ADMIN
+    allowPrivilegeEscalation: false
+
+    ## Give a process some privileges, but not all the privileges of the root user.
+    capabilities:
+      ## Privileges to add.
+      # add: []
+      ## Privileges to drop.
+      drop:
+        - ALL
+
+    ## Mounts the container's root filesystem as read-only.
+    readOnlyRootFilesystem: true
+
+    ## To set the Seccomp profile for a Container, include the seccompProfile field in the securityContext section of your Pod or Container manifest.
+    ## The seccompProfile field is a SeccompProfile object consisting of type and localhostProfile. Valid options for type include RuntimeDefault, Unconfined, and Localhost.
+    ## localhostProfile must only be set set if type Localhost. It indicates the path of the pre-configured profile on the node, relative to the kubelet's configured Seccomp profile location (configured with the --root-dir flag).
+    # seccompProfile:
+    #  type: RuntimeDefault
+
+  ## Defines the annotations to add to the workload
+  # annotations: {}
+
+  ## Whether to deploy ServiceMonitors into the cluster for this component
+  ## Requires the ServiceMonitor CRDs to be in the cluster
+  serviceMonitors:
+    enabled: true
+
+  ## Defines additional environment variables to be injected onto this workload
+  ## e.g.
+  ## extraEnv:
+  ## - name: FOO
+  ##   value: "bar"
+  extraEnv: []
+
+  ## Configuration of the thresholds and frequencies of the livenessProbe
+  livenessProbe:
+    ## How many consecutive failures for the probe to be considered failed
+    failureThreshold: 3
+
+    ## Number of seconds after the container has started before the probe starts
+    initialDelaySeconds: 0
+
+    ## How often (in seconds) to perform the probe
+    periodSeconds: 10
+
+    ## How many consecutive successes for the probe to be consider successful after having failed
+    successThreshold: 1
+
+    ## Number of seconds after which the probe times out
+    timeoutSeconds: 1
+
+  ## Configuration of the thresholds and frequencies of the readinessProbe
+  readinessProbe:
+    ## How many consecutive failures for the probe to be considered failed
+    failureThreshold: 3
+
+    ## Number of seconds after the container has started before the probe starts
+    initialDelaySeconds: 0
+
+    ## How often (in seconds) to perform the probe
+    periodSeconds: 10
+
+    ## How many consecutive successes for the probe to be consider successful after having failed
+    successThreshold: 1
+
+    ## Number of seconds after which the probe times out
+    timeoutSeconds: 1
+
+  ## Configuration of the thresholds and frequencies of the startupProbe
+  startupProbe:
+    ## How many consecutive failures for the probe to be considered failed
+    failureThreshold: 4
+
+    ## Number of seconds after the container has started before the probe starts
+    initialDelaySeconds: 0
+
+    ## How often (in seconds) to perform the probe
+    periodSeconds: 10
+
+    ## How many consecutive successes for the probe to be consider successful after having failed
+    successThreshold: 1
+
+    ## Number of seconds after which the probe times out
+    timeoutSeconds: 1
+
+  ## Enables synapse to Matrix Authentication Service migration
+  ## The migration process must follow the following steps:
+  ## 1. Set `matrixAuthenticationService.enabled: true` and `matrixAuthenticationService.syn2mas.enable: true`, run the  helm upgrade command, check the result of the pre-upgrade hook job
+  ## 2. Set `matrixAuthenticationService.syn2mas.dryRun`: false, run the helm upgrade command, check the result of the pre-upgrade hook job
+  ## 3. Set `matrixAuthenticationService.syn2mas.enabled: false` to disable syn2mas and allow running `helm upgrade` again.
+  ##
+  ## If `deploymentMarkers` are enabled, following the steps above will cause the following `MATRIX_STACK_MSC3861` marker transitions :
+  ## 1. Stay on `legacy_auth`
+  ## 2. `legacy_auth` -> `syn2mas_migrated`
+  ## 3. `syn2mas_migrated` -> `delegated_auth`
+  ## The marker will effectively prevent :
+  ## - Running syn2mas migration again after it has run successfully and is in `syn2mas_migrated` state
+  ## - Downgrading from `syn2mas_migrated`/`delegated_auth` to `legacy_auth`
+  syn2mas:
+    enabled: false
+
+    # Syn2Mas relies on the debug image to copy mas-cli to the matrix-tools container
+    # Details of the image to be used
+    image:
+      ## The host and (optional) port of the container image registry for this component.
+      ## If not specified Docker Hub is implied
+      registry: ghcr.io
+
+      ## The path in the registry where the container image is located
+      repository: element-hq/matrix-authentication-service
+
+      ## The tag of the container image to use.
+      ## One of tag or digest must be provided.
+      tag: "1.1.0-debug"
+
+      ## Container digest to use. Used to pull the image instead of the image tag if set
+      ## The tag will still be set as the app.kubernetes.io/version label
+      # digest:
+
+      ## Whether the image should be pulled on container startup. Valid values are Always, IfNotPresent and Never
+      ## If this isn't provided it defaults to Always when using the image tag or IfNotPresent if using a digest
+      # pullPolicy:
+
+      ## A list of pull secrets to use for this image
+      ## e.g.
+      ## pullSecrets:
+      ## - name: dockerhub
+      pullSecrets: []
+    ## Labels to add to all manifest for this component
+    labels: {}
+    ## Defines the annotations to add to the workload
+    # annotations: {}
+    ## A subset of SecurityContext. ContainersSecurityContext holds pod-level security attributes and common container settings
+    containersSecurityContext:
+      ## Controls whether a process can gain more privileges than its parent process.
+      ## This bool directly controls whether the no_new_privs flag gets set on the container process.
+      ## allowPrivilegeEscalation is always true when the container is run as privileged, or has CAP_SYS_ADMIN
+      allowPrivilegeEscalation: false
+
+      ## Give a process some privileges, but not all the privileges of the root user.
+      capabilities:
+        ## Privileges to add.
+        # add: []
+        ## Privileges to drop.
+        drop:
+          - ALL
+
+      ## Mounts the container's root filesystem as read-only.
+      readOnlyRootFilesystem: true
+
+      ## To set the Seccomp profile for a Container, include the seccompProfile field in the securityContext section of your Pod or Container manifest.
+      ## The seccompProfile field is a SeccompProfile object consisting of type and localhostProfile. Valid options for type include RuntimeDefault, Unconfined, and Localhost.
+      ## localhostProfile must only be set set if type Localhost. It indicates the path of the pre-configured profile on the node, relative to the kubelet's configured Seccomp profile location (configured with the --root-dir flag).
+      # seccompProfile:
+      #  type: RuntimeDefault
+    ## NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+    nodeSelector: {}
+    ## A subset of PodSecurityContext. PodSecurityContext holds pod-level security attributes and common container settings
+    podSecurityContext:
+      ## A special supplemental group that applies to all containers in a pod. Some volume types allow the Kubelet to
+      ## change the ownership of that volume to be owned by the pod:
+      ##
+      ## 1. The owning GID will be the FSGroup
+      ## 2. The setgid bit is set (new files created in the volume will be owned by FSGroup)## 3. The permission bits are OR'd with rw-rw----
+      ##
+      ## If unset, the Kubelet will not modify the ownership and permissions of any volume.
+      fsGroup: 10005
+
+      ## fsGroupChangePolicy defines behavior of changing ownership and permission of the volume before being exposed inside Pod.
+      ## This field will only apply to volume types which support fsGroup based ownership(and permissions).
+      ## It will have no effect on ephemeral volume types such as: secret, configmaps and emptydir. Valid values are "OnRootMismatch" and "Always". If not specified, "Always" is used.
+      # fsGroupChangePolicy:
+
+      ## The GID to run the entrypoint of the container process. Uses runtime default if unset.
+      runAsGroup: 10005
+
+      ## Indicates that the container must run as a non-root user. If true, the Kubelet will validate the image at runtime to ensure that it does not run as UID 0 (root) and fail to start the container if it does. If unset or false, no such validation will be performed.
+      runAsNonRoot: true
+
+      ## The UID to run the entrypoint of the container process. Defaults to user specified in image metadata if unspecified.
+      runAsUser: 10005
+
+      ## SELinuxOptions are the labels to be applied to all the pod containers
+      # seLinuxOptions:
+      ## Level is SELinux level label that applies to the container.
+      # level:
+
+      ## Role is a SELinux role label that applies to the container.
+      # role:
+
+      ## Type is a SELinux type label that applies to the container.
+      # type:
+
+      ## User is a SELinux user label that applies to the container.
+      # user:
+
+      ## "To set the Seccomp profile for a Container, include the seccompProfile field in the securityContext section of your Pod or Container manifest.
+      ## The seccompProfile field is a SeccompProfile object consisting of type and localhostProfile.
+      ## Valid options for type include RuntimeDefault, Unconfined, and Localhost. localhostProfile must only be set set if type Localhost.
+      ## It indicates the path of the pre-configured profile on the node, relative to the kubelet's configured Seccomp profile location (configured with the --root-dir flag).
+      seccompProfile:
+        # localhostProfile:
+        type: RuntimeDefault
+
+      ## A list of groups applied to the first process run in each container, in addition to the container's primary GID.
+      ## If unspecified, no groups will be added to any container.
+      supplementalGroups: []
+    ## Kubernetes resources to allocate to each instance.
+    resources:
+      ## Requests describes the minimum amount of compute resources required. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+      requests:
+        memory: 50Mi
+        cpu: 50m
+
+      ## Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+      limits:
+        memory: 350Mi
+    ## Controls configuration of the ServiceAccount for this component
+    serviceAccount:
+      ## Whether a ServiceAccount should be created by the chart or not
+      create: true
+
+      ## What name to give the ServiceAccount. If not provided the chart will provide the name automatically
+      name: ""
+
+      ## Annotations to add to the service account
+      annotations: {}
+    ## Defines additional environment variables to be injected onto this workload
+    ## e.g.
+    ## extraEnv:
+    ## - name: FOO
+    ##   value: "bar"
+    extraEnv: []
+    ## Workload tolerations allows Pods that are part of this (sub)component to 'tolerate' any taint that matches the triple <key,value,effect> using the matching operator <operator>.
+    ##
+    ## * effect indicates the taint effect to match. Empty means match all taint effects. When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
+    ## * key is the taint key that the toleration applies to. Empty means match all taint keys. If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+    ## * operator represents a key's relationship to the value. Valid operators are Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for value, so that a pod can tolerate all taints of a particular category.
+    ## * value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
+    ##
+    ## * tolerationSeconds represents the period of time the toleration (which must be of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default, it is not set, which means tolerate the taint forever (do not evict). Zero and negative values will be treated as 0 (evict immediately) by the system.
+    ## e.g.
+    ## tolerations:
+    ## - effect:
+    ##   key:
+    ##   operator:
+    ##   value:
+
+    tolerations: []
+
+    ## Runs the syn2mas process in dryRun mode.
+    ## Force the authentication to happen with legacy authentication.
+    ## This can be used to deploy Matrix Authentication Service and keeping auth on Synapse.
+    ## This must be set to false and never switch again after the migration to MAS has been run or the deployment markers hooks will prevent redeploying.
+    dryRun: true
+
+postgres:
+  enabled: true
+
+  postgresExporter:
+    # Details of the image to be used
+    image:
+      ## The host and (optional) port of the container image registry for this component.
+      ## If not specified Docker Hub is implied
+      registry: docker.io
+
+      ## The path in the registry where the container image is located
+      repository: prometheuscommunity/postgres-exporter
+
+      ## The tag of the container image to use.
+      ## One of tag or digest must be provided.
+      tag: "v0.17.0"
+
+      ## Container digest to use. Used to pull the image instead of the image tag if set
+      ## The tag will still be set as the app.kubernetes.io/version label
+      # digest:
+
+      ## Whether the image should be pulled on container startup. Valid values are Always, IfNotPresent and Never
+      ## If this isn't provided it defaults to Always when using the image tag or IfNotPresent if using a digest
+      # pullPolicy:
+
+      ## A list of pull secrets to use for this image
+      ## e.g.
+      ## pullSecrets:
+      ## - name: dockerhub
+      pullSecrets: []
+    ## Kubernetes resources to allocate to each instance.
+    resources:
+      ## Requests describes the minimum amount of compute resources required. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+      requests:
+        memory: 10Mi
+        cpu: 10m
+
+      ## Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+      limits:
+        memory: 500Mi
+    ## A subset of SecurityContext. ContainersSecurityContext holds pod-level security attributes and common container settings
+    containersSecurityContext:
+      ## Controls whether a process can gain more privileges than its parent process.
+      ## This bool directly controls whether the no_new_privs flag gets set on the container process.
+      ## allowPrivilegeEscalation is always true when the container is run as privileged, or has CAP_SYS_ADMIN
+      allowPrivilegeEscalation: false
+
+      ## Give a process some privileges, but not all the privileges of the root user.
+      capabilities:
+        ## Privileges to add.
+        # add: []
+        ## Privileges to drop.
+        drop:
+          - ALL
+
+      ## Mounts the container's root filesystem as read-only.
+      readOnlyRootFilesystem: true
+
+      ## To set the Seccomp profile for a Container, include the seccompProfile field in the securityContext section of your Pod or Container manifest.
+      ## The seccompProfile field is a SeccompProfile object consisting of type and localhostProfile. Valid options for type include RuntimeDefault, Unconfined, and Localhost.
+      ## localhostProfile must only be set set if type Localhost. It indicates the path of the pre-configured profile on the node, relative to the kubelet's configured Seccomp profile location (configured with the --root-dir flag).
+      # seccompProfile:
+      #  type: RuntimeDefault
+    ## Defines additional environment variables to be injected onto this workload
+    ## e.g.
+    ## extraEnv:
+    ## - name: FOO
+    ##   value: "bar"
+    extraEnv: []
+    ## Configuration of the thresholds and frequencies of the livenessProbe
+    livenessProbe:
+      ## How many consecutive failures for the probe to be considered failed
+      failureThreshold: 3
+
+      ## Number of seconds after the container has started before the probe starts
+      initialDelaySeconds: 0
+
+      ## How often (in seconds) to perform the probe
+      periodSeconds: 6
+
+      ## How many consecutive successes for the probe to be consider successful after having failed
+      successThreshold: 1
+
+      ## Number of seconds after which the probe times out
+      timeoutSeconds: 2
+    ## Configuration of the thresholds and frequencies of the readinessProbe
+    readinessProbe:
+      ## How many consecutive failures for the probe to be considered failed
+      failureThreshold: 3
+
+      ## Number of seconds after the container has started before the probe starts
+      initialDelaySeconds: 0
+
+      ## How often (in seconds) to perform the probe
+      periodSeconds: 2
+
+      ## How many consecutive successes for the probe to be consider successful after having failed
+      successThreshold: 2
+
+      ## Number of seconds after which the probe times out
+      timeoutSeconds: 2
+    ## Configuration of the thresholds and frequencies of the startupProbe
+    startupProbe:
+      ## How many consecutive failures for the probe to be considered failed
+      failureThreshold: 20
+
+      ## Number of seconds after the container has started before the probe starts
+      initialDelaySeconds: 0
+
+      ## How often (in seconds) to perform the probe
+      periodSeconds: 2
+
+      ## How many consecutive successes for the probe to be consider successful after having failed
+      successThreshold: 1
+
+      ## Number of seconds after which the probe times out
+      timeoutSeconds: 1
+  ## Postgres Admin Password.
+  ## This secret is optional, and will be generated by the `initSecrets` job
+  ## if it is empty.
+  ## It can either be provided inline in the Helm chart e.g.:
+  ## adminPassword:
+  ##   value: SecretValue
+  ##
+  ## Or it can be provided via an existing Secret e.g.:
+  ## adminPassword:
+  ##   secret: existing-secret
+  ##   secretKey: key-in-secret
+  adminPassword: {}
+
+  essPasswords:
+    ## Synapse DB Password.
+    ## This secret is optional, and will be generated by the `initSecrets` job
+    ## if it is empty.
+    ## It can either be provided inline in the Helm chart e.g.:
+    ## synapse:
+    ##   value: SecretValue
+    ##
+    ## Or it can be provided via an existing Secret e.g.:
+    ## synapse:
+    ##   secret: existing-secret
+    ##   secretKey: key-in-secret
+    synapse: {}
+    ## Matrix Authentication Service DB Password.
+    ## This secret is optional, and will be generated by the `initSecrets` job
+    ## if it is empty.
+    ## It can either be provided inline in the Helm chart e.g.:
+    ## matrixAuthenticationService:
+    ##   value: SecretValue
+    ##
+    ## Or it can be provided via an existing Secret e.g.:
+    ## matrixAuthenticationService:
+    ##   secret: existing-secret
+    ##   secretKey: key-in-secret
+    matrixAuthenticationService: {}
+  ## Configures the PersistentVolumeClaim to be used for storage
+  storage:
+    ## Name of an existing PersistentVolumeClaim in this namespace that should be used
+    # existingClaim:
+
+    ## The size of a PersistentVolumeClaim to be constructed
+    ## Ignored if existingClaim is provided
+    size: 10Gi
+
+    ## The StorageClass to be used by the constructed PersistentVolumeClaim.
+    ## Will use the cluster default if not provided.
+    ## If changed after initial usage the PersistentVolumeClaim could be recreated causing data-loss.
+    ## Ignored if existingClaim is provided
+    # storageClassName:
+
+    ## Whether to instruct Helm to keep or delete the constructed PersistentVolumeClaim when uninstalling the chart
+    ## Ignored if existingClaim is provided
+    resourcePolicy: keep
+  # Details of the image to be used
+  image:
+    ## The host and (optional) port of the container image registry for this component.
+    ## If not specified Docker Hub is implied
+    registry: docker.io
+
+    ## The path in the registry where the container image is located
+    repository: postgres
+
+    ## The tag of the container image to use.
+    ## One of tag or digest must be provided.
+    tag: "17-alpine"
+
+    ## Container digest to use. Used to pull the image instead of the image tag if set
+    ## The tag will still be set as the app.kubernetes.io/version label
+    # digest:
+
+    ## Whether the image should be pulled on container startup. Valid values are Always, IfNotPresent and Never
+    ## If this isn't provided it defaults to Always when using the image tag or IfNotPresent if using a digest
+    # pullPolicy:
+
+    ## A list of pull secrets to use for this image
+    ## e.g.
+    ## pullSecrets:
+    ## - name: dockerhub
+    pullSecrets: []
+  ## Defines additional environment variables to be injected onto this workload
+  ## e.g.
+  ## extraEnv:
+  ## - name: FOO
+  ##   value: "bar"
+  extraEnv: []
+  ## Labels to add to all manifest for this component
+  labels: {}
+  ## Defines the annotations to add to the workload
+  # annotations: {}
+  ## A subset of SecurityContext. ContainersSecurityContext holds pod-level security attributes and common container settings
+  containersSecurityContext:
+    ## Controls whether a process can gain more privileges than its parent process.
+    ## This bool directly controls whether the no_new_privs flag gets set on the container process.
+    ## allowPrivilegeEscalation is always true when the container is run as privileged, or has CAP_SYS_ADMIN
+    allowPrivilegeEscalation: false
+
+    ## Give a process some privileges, but not all the privileges of the root user.
+    capabilities:
+      ## Privileges to add.
+      # add: []
+      ## Privileges to drop.
+      drop:
+        - ALL
+
+    ## Mounts the container's root filesystem as read-only.
+    readOnlyRootFilesystem: true
+
+    ## To set the Seccomp profile for a Container, include the seccompProfile field in the securityContext section of your Pod or Container manifest.
+    ## The seccompProfile field is a SeccompProfile object consisting of type and localhostProfile. Valid options for type include RuntimeDefault, Unconfined, and Localhost.
+    ## localhostProfile must only be set set if type Localhost. It indicates the path of the pre-configured profile on the node, relative to the kubelet's configured Seccomp profile location (configured with the --root-dir flag).
+    # seccompProfile:
+    #  type: RuntimeDefault
+  ## NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+  nodeSelector: {}
+  ## A subset of PodSecurityContext. PodSecurityContext holds pod-level security attributes and common container settings
+  podSecurityContext:
+    ## A special supplemental group that applies to all containers in a pod. Some volume types allow the Kubelet to
+    ## change the ownership of that volume to be owned by the pod:
+    ##
+    ## 1. The owning GID will be the FSGroup
+    ## 2. The setgid bit is set (new files created in the volume will be owned by FSGroup)## 3. The permission bits are OR'd with rw-rw----
+    ##
+    ## If unset, the Kubelet will not modify the ownership and permissions of any volume.
+    fsGroup: 10091
+
+    ## fsGroupChangePolicy defines behavior of changing ownership and permission of the volume before being exposed inside Pod.
+    ## This field will only apply to volume types which support fsGroup based ownership(and permissions).
+    ## It will have no effect on ephemeral volume types such as: secret, configmaps and emptydir. Valid values are "OnRootMismatch" and "Always". If not specified, "Always" is used.
+    # fsGroupChangePolicy:
+
+    ## The GID to run the entrypoint of the container process. Uses runtime default if unset.
+    runAsGroup: 10091
+
+    ## Indicates that the container must run as a non-root user. If true, the Kubelet will validate the image at runtime to ensure that it does not run as UID 0 (root) and fail to start the container if it does. If unset or false, no such validation will be performed.
+    runAsNonRoot: true
+
+    ## The UID to run the entrypoint of the container process. Defaults to user specified in image metadata if unspecified.
+    runAsUser: 10091
+
+    ## SELinuxOptions are the labels to be applied to all the pod containers
+    # seLinuxOptions:
+    ## Level is SELinux level label that applies to the container.
+    # level:
+
+    ## Role is a SELinux role label that applies to the container.
+    # role:
+
+    ## Type is a SELinux type label that applies to the container.
+    # type:
+
+    ## User is a SELinux user label that applies to the container.
+    # user:
+
+    ## "To set the Seccomp profile for a Container, include the seccompProfile field in the securityContext section of your Pod or Container manifest.
+    ## The seccompProfile field is a SeccompProfile object consisting of type and localhostProfile.
+    ## Valid options for type include RuntimeDefault, Unconfined, and Localhost. localhostProfile must only be set set if type Localhost.
+    ## It indicates the path of the pre-configured profile on the node, relative to the kubelet's configured Seccomp profile location (configured with the --root-dir flag).
+    seccompProfile:
+      # localhostProfile:
+      type: RuntimeDefault
+
+    ## A list of groups applied to the first process run in each container, in addition to the container's primary GID.
+    ## If unspecified, no groups will be added to any container.
+    supplementalGroups: []
+  ## Kubernetes resources to allocate to each instance.
+  resources:
+    ## Requests describes the minimum amount of compute resources required. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+    requests:
+      memory: 100Mi
+      cpu: 100m
+
+    ## Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+    limits:
+      memory: 4Gi
+  ## Controls configuration of the ServiceAccount for this component
+  serviceAccount:
+    ## Whether a ServiceAccount should be created by the chart or not
+    create: true
+
+    ## What name to give the ServiceAccount. If not provided the chart will provide the name automatically
+    name: ""
+
+    ## Annotations to add to the service account
+    annotations: {}
+  ## Whether to deploy ServiceMonitors into the cluster for this component
+  ## Requires the ServiceMonitor CRDs to be in the cluster
+  serviceMonitors:
+    enabled: true
+  ## Workload tolerations allows Pods that are part of this (sub)component to 'tolerate' any taint that matches the triple <key,value,effect> using the matching operator <operator>.
+  ##
+  ## * effect indicates the taint effect to match. Empty means match all taint effects. When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
+  ## * key is the taint key that the toleration applies to. Empty means match all taint keys. If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+  ## * operator represents a key's relationship to the value. Valid operators are Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for value, so that a pod can tolerate all taints of a particular category.
+  ## * value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
+  ##
+  ## * tolerationSeconds represents the period of time the toleration (which must be of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default, it is not set, which means tolerate the taint forever (do not evict). Zero and negative values will be treated as 0 (evict immediately) by the system.
+  ## e.g.
+  ## tolerations:
+  ## - effect:
+  ##   key:
+  ##   operator:
+  ##   value:
+
+  tolerations: []
+  ## TopologySpreadConstraints describes how Pods for this component should be spread between nodes.
+  ## https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/ for in-depth details
+  ## labelSelector can be omitted and the chart will populate a sensible value for this component.
+  ## Similarly `pod-template-hash` will be aded to `matchLabelKeys` if appropriate for this component.
+  ## If any TopologySpreadConstraints are provided for a component any global TopologySpreadConstraints are ignored for that component.
+  ## e.g.
+  ## topologySpreadConstraints:
+  ## - maxSkew: 1
+  ##   topologyKey: topology.kubernetes.io/zone
+  ##   # nodeAffinityPolicy: Honor/Ignore
+  ##   # nodeTaintsPolicy: Honor/Ignore
+  ##   # whenUnsatisfiable: DoNotSchedule/ScheduleAnyway
+  topologySpreadConstraints: []
+  ## Configuration of the thresholds and frequencies of the livenessProbe
+  livenessProbe:
+    ## How many consecutive failures for the probe to be considered failed
+    failureThreshold: 3
+
+    ## Number of seconds after the container has started before the probe starts
+    initialDelaySeconds: 0
+
+    ## How often (in seconds) to perform the probe
+    periodSeconds: 10
+
+    ## How many consecutive successes for the probe to be consider successful after having failed
+    successThreshold: 1
+
+    ## Number of seconds after which the probe times out
+    timeoutSeconds: 2
+  ## Configuration of the thresholds and frequencies of the readinessProbe
+  readinessProbe:
+    ## How many consecutive failures for the probe to be considered failed
+    failureThreshold: 3
+
+    ## Number of seconds after the container has started before the probe starts
+    initialDelaySeconds: 0
+
+    ## How often (in seconds) to perform the probe
+    periodSeconds: 10
+
+    ## How many consecutive successes for the probe to be consider successful after having failed
+    successThreshold: 1
+
+    ## Number of seconds after which the probe times out
+    timeoutSeconds: 2
+  ## Configuration of the thresholds and frequencies of the startupProbe
+  startupProbe:
+    ## How many consecutive failures for the probe to be considered failed
+    failureThreshold: 8
+
+    ## Number of seconds after the container has started before the probe starts
+    initialDelaySeconds: 0
+
+    ## How often (in seconds) to perform the probe
+    periodSeconds: 10
+
+    ## How many consecutive successes for the probe to be consider successful after having failed
+    successThreshold: 1
+
+    ## Number of seconds after which the probe times out
+    timeoutSeconds: 1
+
+synapse:
+  enabled: true
+
+  ## A hook job will make sure that Synapse config is valid before continuing
+  checkConfigHook:
+    enabled: true
+    ## Labels to add to all manifest for this component
+    labels: {}
+    ## Defines the annotations to add to the workload
+    # annotations: {}
+    ## Controls configuration of the ServiceAccount for this component
+    serviceAccount:
+      ## Whether a ServiceAccount should be created by the chart or not
+      create: true
+
+      ## What name to give the ServiceAccount. If not provided the chart will provide the name automatically
+      name: ""
+
+      ## Annotations to add to the service account
+      annotations: {}
+  ## Details of the external Postgres Database to use
+  ## Does not need to be set if postgres.enabled=True
+  # postgres:
+  ## PostgreSQL database host
+  # host:
+
+  ## PostgreSQL port
+  # port: 5432
+
+  ## PostgreSQL username
+  # user:
+
+  ## PostgreSQL database name
+  # database:
+
+  ## TLS settings to use for the PostgreSQL connection
+  # sslMode: prefer
+
+  ## PostgreSQL password.
+  ## It can either be provided inline in the Helm chart e.g.:
+  ## password:
+  ##   value: SecretValue
+  ##
+  ## Or it can be provided via an existing Secret e.g.:
+  ## password:
+  ##   secret: existing-secret
+  ##   secretKey: key-in-secret
+  # password: {}
+  ## Configures the media store for Synapse
+  media:
+    ## Configures the PersistentVolumeClaim to be used for storage
+    storage:
+      ## Name of an existing PersistentVolumeClaim in this namespace that should be used
+      # existingClaim:
+
+      ## The size of a PersistentVolumeClaim to be constructed
+      ## Ignored if existingClaim is provided
+      size: 10Gi
+
+      ## The StorageClass to be used by the constructed PersistentVolumeClaim.
+      ## Will use the cluster default if not provided.
+      ## If changed after initial usage the PersistentVolumeClaim could be recreated causing data-loss.
+      ## Ignored if existingClaim is provided
+      # storageClassName:
+
+      ## Whether to instruct Helm to keep or delete the constructed PersistentVolumeClaim when uninstalling the chart
+      ## Ignored if existingClaim is provided
+      resourcePolicy: keep
+
+    ## The maximum size (in bytes ending in M or K) that Synapse will accept for media uploads
+    ## You may need to adjust your ingress controller to also allow uploads of this size
+    maxUploadSize: 100M
+  ## Key used to sign events and federation requests.
+  ## This needs to be the full signing key starting `ed25519 ...`.
+  ## This secret is optional, and will be generated by the `initSecrets` job
+  ## if it is empty.
+  ## It can either be provided inline in the Helm chart e.g.:
+  ## signingKey:
+  ##   value: SecretValue
+  ##
+  ## Or it can be provided via an existing Secret e.g.:
+  ## signingKey:
+  ##   secret: existing-secret
+  ##   secretKey: key-in-secret
+  signingKey: {}
+  ## Shared Secret to registering users without having any users provisioned.
+  ## This secret is optional, and will be generated by the `initSecrets` job
+  ## if it is empty.
+  ## It can either be provided inline in the Helm chart e.g.:
+  ## registrationSharedSecret:
+  ##   value: SecretValue
+  ##
+  ## Or it can be provided via an existing Secret e.g.:
+  ## registrationSharedSecret:
+  ##   secret: existing-secret
+  ##   secretKey: key-in-secret
+  registrationSharedSecret: {}
+  ## Secret used to sign Synapse issued tokens.
+  ## This secret is optional, and will be generated by the `initSecrets` job
+  ## if it is empty.
+  ## It can either be provided inline in the Helm chart e.g.:
+  ## macaroon:
+  ##   value: SecretValue
+  ##
+  ## Or it can be provided via an existing Secret e.g.:
+  ## macaroon:
+  ##   secret: existing-secret
+  ##   secretKey: key-in-secret
+  macaroon: {}
+
+  ## Additional configuration to provide to all Synapse processes.
+  ## Each key under additional is an additional config to merge into synapse homeserver.yaml
+  ## Full details on available configuration options can be found at https://element-hq.github.io/synapse/latest/usage/configuration/config_documentation.html
+  ## This can be provided in-line in the Helm Chart and/or via an existing Secret
+  ## e.g.
+  ## additional:
+  ##   0-customConfig:
+  ##     config: |
+  ##       <any valid configuration>
+  ##   1-customConfig:
+  ##     configSecret: custom-config
+  ##     configSecretKey: shared.yaml
+  ##
+  ## Most settings are configurable but some settings are owned by the chart and can't overwritten
+  additional: {}
+
+  ## Details of Application Service registration files to give to Synapse
+  ## e.g.
+  ## appservices:
+  ## - configMap: test-appservice
+  ##   configMapKey: registration.yaml
+  ## - secret: test-appservice
+  ##   secretKey: registration.yaml
+  appservices: []
+
+  ## Additional Synapse processes managed by this chart
+  ## e.g.
+  ## workers:
+  ##   client-reader:
+  ##     enabled: true
+  ##     replicas: 2
+  ##   event-creator:
+  ##     enabled: true
+  workers:
+    account-data:
+      ## Set to true to deploy this worker
+      enabled: false
+
+      ## Resources for this worker.
+      ## If omitted the global Synapse resources are used
+      # resources: {}
+      ## Configuration of the thresholds and frequencies of the livenessProbe
+      livenessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 8
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 6
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the readinessProbe
+      readinessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 8
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 2
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the startupProbe
+      startupProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 54
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 1
+    appservice:
+      ## Set to true to deploy this worker
+      enabled: false
+
+      ## Resources for this worker.
+      ## If omitted the global Synapse resources are used
+      # resources: {}
+      ## Configuration of the thresholds and frequencies of the livenessProbe
+      livenessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 8
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 6
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the readinessProbe
+      readinessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 8
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 2
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the startupProbe
+      startupProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 54
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 1
+    background:
+      ## Set to true to deploy this worker
+      enabled: false
+
+      ## Resources for this worker.
+      ## If omitted the global Synapse resources are used
+      # resources: {}
+      ## Configuration of the thresholds and frequencies of the livenessProbe
+      livenessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 8
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 6
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the readinessProbe
+      readinessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 8
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 2
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the startupProbe
+      startupProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 54
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 1
+    client-reader:
+      ## Set to true to deploy this worker
+      enabled: false
+
+      ## The number of replicas of this worker to run
+      replicas: 1
+
+      ## Resources for this worker.
+      ## If omitted the global Synapse resources are used
+      # resources: {}
+      ## Configuration of the thresholds and frequencies of the livenessProbe
+      livenessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 6
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the readinessProbe
+      readinessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 2
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the startupProbe
+      startupProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 21
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 1
+    device-lists:
+      ## Set to true to deploy this worker
+      enabled: false
+
+      ## The number of replicas of this worker to run
+      replicas: 1
+
+      ## Resources for this worker.
+      ## If omitted the global Synapse resources are used
+      # resources: {}
+      ## Configuration of the thresholds and frequencies of the livenessProbe
+      livenessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 6
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the readinessProbe
+      readinessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 2
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the startupProbe
+      startupProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 21
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 1
+    encryption:
+      ## Set to true to deploy this worker
+      enabled: false
+
+      ## Resources for this worker.
+      ## If omitted the global Synapse resources are used
+      # resources: {}
+      ## Configuration of the thresholds and frequencies of the livenessProbe
+      livenessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 8
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 6
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the readinessProbe
+      readinessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 8
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 2
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the startupProbe
+      startupProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 54
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 1
+    event-creator:
+      ## Set to true to deploy this worker
+      enabled: false
+
+      ## The number of replicas of this worker to run
+      replicas: 1
+
+      ## Resources for this worker.
+      ## If omitted the global Synapse resources are used
+      # resources: {}
+      ## Configuration of the thresholds and frequencies of the livenessProbe
+      livenessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 6
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the readinessProbe
+      readinessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 2
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the startupProbe
+      startupProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 21
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 1
+    event-persister:
+      ## Set to true to deploy this worker
+      enabled: false
+
+      ## The number of replicas of this worker to run
+      replicas: 1
+
+      ## Resources for this worker.
+      ## If omitted the global Synapse resources are used
+      # resources: {}
+      ## Configuration of the thresholds and frequencies of the livenessProbe
+      livenessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 6
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the readinessProbe
+      readinessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 2
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the startupProbe
+      startupProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 21
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 1
+    federation-inbound:
+      ## Set to true to deploy this worker
+      enabled: false
+
+      ## The number of replicas of this worker to run
+      replicas: 1
+
+      ## Resources for this worker.
+      ## If omitted the global Synapse resources are used
+      # resources: {}
+      ## Configuration of the thresholds and frequencies of the livenessProbe
+      livenessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 6
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the readinessProbe
+      readinessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 2
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the startupProbe
+      startupProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 21
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 1
+    federation-reader:
+      ## Set to true to deploy this worker
+      enabled: false
+
+      ## The number of replicas of this worker to run
+      replicas: 1
+
+      ## Resources for this worker.
+      ## If omitted the global Synapse resources are used
+      # resources: {}
+      ## Configuration of the thresholds and frequencies of the livenessProbe
+      livenessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 6
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the readinessProbe
+      readinessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 2
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the startupProbe
+      startupProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 21
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 1
+    federation-sender:
+      ## Set to true to deploy this worker
+      enabled: false
+
+      ## The number of replicas of this worker to run
+      replicas: 1
+
+      ## Resources for this worker.
+      ## If omitted the global Synapse resources are used
+      # resources: {}
+      ## Configuration of the thresholds and frequencies of the livenessProbe
+      livenessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 6
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the readinessProbe
+      readinessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 2
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the startupProbe
+      startupProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 21
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 1
+    initial-synchrotron:
+      ## Set to true to deploy this worker
+      enabled: false
+
+      ## The number of replicas of this worker to run
+      replicas: 1
+
+      ## Resources for this worker.
+      ## If omitted the global Synapse resources are used
+      # resources: {}
+      ## Configuration of the thresholds and frequencies of the livenessProbe
+      livenessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 6
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the readinessProbe
+      readinessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 2
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the startupProbe
+      startupProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 21
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 1
+    media-repository:
+      ## Set to true to deploy this worker
+      enabled: false
+
+      ## Resources for this worker.
+      ## If omitted the global Synapse resources are used
+      # resources: {}
+      ## Configuration of the thresholds and frequencies of the livenessProbe
+      livenessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 8
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 6
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the readinessProbe
+      readinessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 8
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 2
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the startupProbe
+      startupProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 54
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 1
+    presence-writer:
+      ## Set to true to deploy this worker
+      enabled: false
+
+      ## Resources for this worker.
+      ## If omitted the global Synapse resources are used
+      # resources: {}
+      ## Configuration of the thresholds and frequencies of the livenessProbe
+      livenessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 8
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 6
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the readinessProbe
+      readinessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 8
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 2
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the startupProbe
+      startupProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 54
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 1
+    push-rules:
+      ## Set to true to deploy this worker
+      enabled: false
+
+      ## Resources for this worker.
+      ## If omitted the global Synapse resources are used
+      # resources: {}
+      ## Configuration of the thresholds and frequencies of the livenessProbe
+      livenessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 8
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 6
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the readinessProbe
+      readinessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 8
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 2
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the startupProbe
+      startupProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 54
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 1
+    pusher:
+      ## Set to true to deploy this worker
+      enabled: false
+
+      ## The number of replicas of this worker to run
+      replicas: 1
+
+      ## Resources for this worker.
+      ## If omitted the global Synapse resources are used
+      # resources: {}
+      ## Configuration of the thresholds and frequencies of the livenessProbe
+      livenessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 6
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the readinessProbe
+      readinessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 2
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the startupProbe
+      startupProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 21
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 1
+    receipts:
+      ## Set to true to deploy this worker
+      enabled: false
+
+      ## The number of replicas of this worker to run
+      replicas: 1
+
+      ## Resources for this worker.
+      ## If omitted the global Synapse resources are used
+      # resources: {}
+      ## Configuration of the thresholds and frequencies of the livenessProbe
+      livenessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 6
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the readinessProbe
+      readinessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 2
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the startupProbe
+      startupProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 21
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 1
+    sliding-sync:
+      ## Set to true to deploy this worker
+      enabled: false
+
+      ## The number of replicas of this worker to run
+      replicas: 1
+
+      ## Resources for this worker.
+      ## If omitted the global Synapse resources are used
+      # resources: {}
+      ## Configuration of the thresholds and frequencies of the livenessProbe
+      livenessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 6
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the readinessProbe
+      readinessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 2
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the startupProbe
+      startupProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 21
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 1
+    sso-login:
+      ## Set to true to deploy this worker
+      enabled: false
+
+      ## Resources for this worker.
+      ## If omitted the global Synapse resources are used
+      # resources: {}
+      ## Configuration of the thresholds and frequencies of the livenessProbe
+      livenessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 8
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 6
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the readinessProbe
+      readinessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 8
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 2
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the startupProbe
+      startupProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 54
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 1
+    synchrotron:
+      ## Set to true to deploy this worker
+      enabled: false
+
+      ## The number of replicas of this worker to run
+      replicas: 1
+
+      ## Resources for this worker.
+      ## If omitted the global Synapse resources are used
+      # resources: {}
+      ## Configuration of the thresholds and frequencies of the livenessProbe
+      livenessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 6
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the readinessProbe
+      readinessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 3
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 2
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the startupProbe
+      startupProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 21
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 1
+    typing-persister:
+      ## Set to true to deploy this worker
+      enabled: false
+
+      ## Resources for this worker.
+      ## If omitted the global Synapse resources are used
+      # resources: {}
+      ## Configuration of the thresholds and frequencies of the livenessProbe
+      livenessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 8
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 6
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the readinessProbe
+      readinessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 8
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 2
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the startupProbe
+      startupProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 54
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 1
+    user-dir:
+      ## Set to true to deploy this worker
+      enabled: false
+
+      ## Resources for this worker.
+      ## If omitted the global Synapse resources are used
+      # resources: {}
+      ## Configuration of the thresholds and frequencies of the livenessProbe
+      livenessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 8
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 6
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the readinessProbe
+      readinessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 8
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 2
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the startupProbe
+      startupProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 54
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 1
+
+  ## Synapse's logging settings
+  logging:
+    ## The maximum level of Synapse log output before any overrides
+    rootLevel: INFO
+
+    ## Override the log level of specific loggers
+    ## e.g.
+    ## levelOverrides:
+    ##   synapse.util.caches.lrucache: WARNING
+    levelOverrides: {}
+  # Details of the image to be used
+  image:
+    ## The host and (optional) port of the container image registry for this component.
+    ## If not specified Docker Hub is implied
+    registry: ghcr.io
+
+    ## The path in the registry where the container image is located
+    repository: element-hq/synapse
+
+    ## The tag of the container image to use.
+    ## One of tag or digest must be provided.
+    tag: "v1.137.0"
+
+    ## Container digest to use. Used to pull the image instead of the image tag if set
+    ## The tag will still be set as the app.kubernetes.io/version label
+    # digest:
+
+    ## Whether the image should be pulled on container startup. Valid values are Always, IfNotPresent and Never
+    ## If this isn't provided it defaults to Always when using the image tag or IfNotPresent if using a digest
+    # pullPolicy:
+
+    ## A list of pull secrets to use for this image
+    ## e.g.
+    ## pullSecrets:
+    ## - name: dockerhub
+    pullSecrets: []
+  ## How this ingress should be constructed
+  ingress:
+    ## What hostname should be used for this Ingress
+    # host:
+
+    ## Annotations to be added to this Ingress
+    annotations: {}
+
+    ## What Ingress Class Name that should be used for this Ingress
+    # className:
+
+    ## Disable TLS configuration by setting it to false
+    tlsEnabled: true
+
+    ## The name of the Secret containing the TLS certificate and the key that should be used for this Ingress
+    # tlsSecret:
+
+    ## How the Service behind this Ingress is constructed
+    service: {}
+    ## If set, some tweaks will be applied automatically to ingresses based on the controller type here.
+    ## This can be set to `ingress-nginx`.
+    # controllerType:
+  ## Labels to add to all manifest for this component
+  labels: {}
+  ## Defines the annotations to add to the workload
+  # annotations: {}
+  ## A subset of SecurityContext. ContainersSecurityContext holds pod-level security attributes and common container settings
+  containersSecurityContext:
+    ## Controls whether a process can gain more privileges than its parent process.
+    ## This bool directly controls whether the no_new_privs flag gets set on the container process.
+    ## allowPrivilegeEscalation is always true when the container is run as privileged, or has CAP_SYS_ADMIN
+    allowPrivilegeEscalation: false
+
+    ## Give a process some privileges, but not all the privileges of the root user.
+    capabilities:
+      ## Privileges to add.
+      # add: []
+      ## Privileges to drop.
+      drop:
+        - ALL
+
+    ## Mounts the container's root filesystem as read-only.
+    readOnlyRootFilesystem: true
+
+    ## To set the Seccomp profile for a Container, include the seccompProfile field in the securityContext section of your Pod or Container manifest.
+    ## The seccompProfile field is a SeccompProfile object consisting of type and localhostProfile. Valid options for type include RuntimeDefault, Unconfined, and Localhost.
+    ## localhostProfile must only be set set if type Localhost. It indicates the path of the pre-configured profile on the node, relative to the kubelet's configured Seccomp profile location (configured with the --root-dir flag).
+    # seccompProfile:
+    #  type: RuntimeDefault
+  ## Defines additional environment variables to be injected onto this workload
+  ## e.g.
+  ## extraEnv:
+  ## - name: FOO
+  ##   value: "bar"
+  extraEnv: []
+  ## The list of hosts aliases to configure on the pod spec.
+  ## It should be avoid as much as possible to use this feature.
+  ## Please prefer using an DNS entry to resolve your hostnames.
+  ## This can be used as a workaround when entries cannot be resolved using DNS, for example for our automated testings.
+  ## e.g.
+  ## hostAliases:
+  ## - ip: 192.0.2.1  # An IP resolution to add to /etc/hosts
+  ##   # A list of hostnames to be associated with the above IP
+  ##   hostnames:
+  ##   - ess.localhost
+  ##   - synapse.ess.localhost
+  hostAliases: []
+  ## NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+  nodeSelector: {}
+  ## A subset of PodSecurityContext. PodSecurityContext holds pod-level security attributes and common container settings
+  podSecurityContext:
+    ## A special supplemental group that applies to all containers in a pod. Some volume types allow the Kubelet to
+    ## change the ownership of that volume to be owned by the pod:
+    ##
+    ## 1. The owning GID will be the FSGroup
+    ## 2. The setgid bit is set (new files created in the volume will be owned by FSGroup)## 3. The permission bits are OR'd with rw-rw----
+    ##
+    ## If unset, the Kubelet will not modify the ownership and permissions of any volume.
+    fsGroup: 10091
+
+    ## fsGroupChangePolicy defines behavior of changing ownership and permission of the volume before being exposed inside Pod.
+    ## This field will only apply to volume types which support fsGroup based ownership(and permissions).
+    ## It will have no effect on ephemeral volume types such as: secret, configmaps and emptydir. Valid values are "OnRootMismatch" and "Always". If not specified, "Always" is used.
+    # fsGroupChangePolicy:
+
+    ## The GID to run the entrypoint of the container process. Uses runtime default if unset.
+    runAsGroup: 10091
+
+    ## Indicates that the container must run as a non-root user. If true, the Kubelet will validate the image at runtime to ensure that it does not run as UID 0 (root) and fail to start the container if it does. If unset or false, no such validation will be performed.
+    runAsNonRoot: true
+
+    ## The UID to run the entrypoint of the container process. Defaults to user specified in image metadata if unspecified.
+    runAsUser: 10091
+
+    ## SELinuxOptions are the labels to be applied to all the pod containers
+    # seLinuxOptions:
+    ## Level is SELinux level label that applies to the container.
+    # level:
+
+    ## Role is a SELinux role label that applies to the container.
+    # role:
+
+    ## Type is a SELinux type label that applies to the container.
+    # type:
+
+    ## User is a SELinux user label that applies to the container.
+    # user:
+
+    ## "To set the Seccomp profile for a Container, include the seccompProfile field in the securityContext section of your Pod or Container manifest.
+    ## The seccompProfile field is a SeccompProfile object consisting of type and localhostProfile.
+    ## Valid options for type include RuntimeDefault, Unconfined, and Localhost. localhostProfile must only be set set if type Localhost.
+    ## It indicates the path of the pre-configured profile on the node, relative to the kubelet's configured Seccomp profile location (configured with the --root-dir flag).
+    seccompProfile:
+      # localhostProfile:
+      type: RuntimeDefault
+
+    ## A list of groups applied to the first process run in each container, in addition to the container's primary GID.
+    ## If unspecified, no groups will be added to any container.
+    supplementalGroups: []
+  ## Kubernetes resources to allocate to each instance.
+  resources:
+    ## Requests describes the minimum amount of compute resources required. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+    requests:
+      memory: 100Mi
+      cpu: 100m
+
+    ## Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+    limits:
+      memory: 4Gi
+  ## Controls configuration of the ServiceAccount for this component
+  serviceAccount:
+    ## Whether a ServiceAccount should be created by the chart or not
+    create: true
+
+    ## What name to give the ServiceAccount. If not provided the chart will provide the name automatically
+    name: ""
+
+    ## Annotations to add to the service account
+    annotations: {}
+  ## Whether to deploy ServiceMonitors into the cluster for this component
+  ## Requires the ServiceMonitor CRDs to be in the cluster
+  serviceMonitors:
+    enabled: true
+  ## Workload tolerations allows Pods that are part of this (sub)component to 'tolerate' any taint that matches the triple <key,value,effect> using the matching operator <operator>.
+  ##
+  ## * effect indicates the taint effect to match. Empty means match all taint effects. When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
+  ## * key is the taint key that the toleration applies to. Empty means match all taint keys. If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+  ## * operator represents a key's relationship to the value. Valid operators are Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for value, so that a pod can tolerate all taints of a particular category.
+  ## * value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
+  ##
+  ## * tolerationSeconds represents the period of time the toleration (which must be of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default, it is not set, which means tolerate the taint forever (do not evict). Zero and negative values will be treated as 0 (evict immediately) by the system.
+  ## e.g.
+  ## tolerations:
+  ## - effect:
+  ##   key:
+  ##   operator:
+  ##   value:
+
+  tolerations: []
+  ## TopologySpreadConstraints describes how Pods for this component should be spread between nodes.
+  ## https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/ for in-depth details
+  ## labelSelector can be omitted and the chart will populate a sensible value for this component.
+  ## Similarly `pod-template-hash` will be aded to `matchLabelKeys` if appropriate for this component.
+  ## If any TopologySpreadConstraints are provided for a component any global TopologySpreadConstraints are ignored for that component.
+  ## e.g.
+  ## topologySpreadConstraints:
+  ## - maxSkew: 1
+  ##   topologyKey: topology.kubernetes.io/zone
+  ##   # nodeAffinityPolicy: Honor/Ignore
+  ##   # nodeTaintsPolicy: Honor/Ignore
+  ##   # whenUnsatisfiable: DoNotSchedule/ScheduleAnyway
+  topologySpreadConstraints: []
+  ## Configuration of the thresholds and frequencies of the livenessProbe
+  livenessProbe:
+    ## How many consecutive failures for the probe to be considered failed
+    failureThreshold: 8
+
+    ## Number of seconds after the container has started before the probe starts
+    initialDelaySeconds: 0
+
+    ## How often (in seconds) to perform the probe
+    periodSeconds: 6
+
+    ## How many consecutive successes for the probe to be consider successful after having failed
+    successThreshold: 1
+
+    ## Number of seconds after which the probe times out
+    timeoutSeconds: 2
+  ## Configuration of the thresholds and frequencies of the readinessProbe
+  readinessProbe:
+    ## How many consecutive failures for the probe to be considered failed
+    failureThreshold: 8
+
+    ## Number of seconds after the container has started before the probe starts
+    initialDelaySeconds: 0
+
+    ## How often (in seconds) to perform the probe
+    periodSeconds: 2
+
+    ## How many consecutive successes for the probe to be consider successful after having failed
+    successThreshold: 2
+
+    ## Number of seconds after which the probe times out
+    timeoutSeconds: 2
+  ## Configuration of the thresholds and frequencies of the startupProbe
+  startupProbe:
+    ## How many consecutive failures for the probe to be considered failed
+    failureThreshold: 54
+
+    ## Number of seconds after the container has started before the probe starts
+    initialDelaySeconds: 0
+
+    ## How often (in seconds) to perform the probe
+    periodSeconds: 2
+
+    ## How many consecutive successes for the probe to be consider successful after having failed
+    successThreshold: 1
+
+    ## Number of seconds after which the probe times out
+    timeoutSeconds: 1
+
+  ## Extra command line arguments to provide to Synapse
+  extraArgs: []
+
+  redis:
+    # Details of the image to be used
+    image:
+      ## The host and (optional) port of the container image registry for this component.
+      ## If not specified Docker Hub is implied
+      registry: docker.io
+
+      ## The path in the registry where the container image is located
+      repository: library/redis
+
+      ## The tag of the container image to use.
+      ## One of tag or digest must be provided.
+      tag: "7.4-alpine"
+
+      ## Container digest to use. Used to pull the image instead of the image tag if set
+      ## The tag will still be set as the app.kubernetes.io/version label
+      # digest:
+
+      ## Whether the image should be pulled on container startup. Valid values are Always, IfNotPresent and Never
+      ## If this isn't provided it defaults to Always when using the image tag or IfNotPresent if using a digest
+      # pullPolicy:
+
+      ## A list of pull secrets to use for this image
+      ## e.g.
+      ## pullSecrets:
+      ## - name: dockerhub
+      pullSecrets: []
+    ## Labels to add to all manifest for this component
+    labels: {}
+    ## Defines the annotations to add to the workload
+    # annotations: {}
+    ## A subset of SecurityContext. ContainersSecurityContext holds pod-level security attributes and common container settings
+    containersSecurityContext:
+      ## Controls whether a process can gain more privileges than its parent process.
+      ## This bool directly controls whether the no_new_privs flag gets set on the container process.
+      ## allowPrivilegeEscalation is always true when the container is run as privileged, or has CAP_SYS_ADMIN
+      allowPrivilegeEscalation: false
+
+      ## Give a process some privileges, but not all the privileges of the root user.
+      capabilities:
+        ## Privileges to add.
+        # add: []
+        ## Privileges to drop.
+        drop:
+          - ALL
+
+      ## Mounts the container's root filesystem as read-only.
+      readOnlyRootFilesystem: true
+
+      ## To set the Seccomp profile for a Container, include the seccompProfile field in the securityContext section of your Pod or Container manifest.
+      ## The seccompProfile field is a SeccompProfile object consisting of type and localhostProfile. Valid options for type include RuntimeDefault, Unconfined, and Localhost.
+      ## localhostProfile must only be set set if type Localhost. It indicates the path of the pre-configured profile on the node, relative to the kubelet's configured Seccomp profile location (configured with the --root-dir flag).
+      # seccompProfile:
+      #  type: RuntimeDefault
+    ## Defines additional environment variables to be injected onto this workload
+    ## e.g.
+    ## extraEnv:
+    ## - name: FOO
+    ##   value: "bar"
+    extraEnv: []
+    ## NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+    nodeSelector: {}
+    ## A subset of PodSecurityContext. PodSecurityContext holds pod-level security attributes and common container settings
+    podSecurityContext:
+      ## A special supplemental group that applies to all containers in a pod. Some volume types allow the Kubelet to
+      ## change the ownership of that volume to be owned by the pod:
+      ##
+      ## 1. The owning GID will be the FSGroup
+      ## 2. The setgid bit is set (new files created in the volume will be owned by FSGroup)## 3. The permission bits are OR'd with rw-rw----
+      ##
+      ## If unset, the Kubelet will not modify the ownership and permissions of any volume.
+      fsGroup: 10002
+
+      ## fsGroupChangePolicy defines behavior of changing ownership and permission of the volume before being exposed inside Pod.
+      ## This field will only apply to volume types which support fsGroup based ownership(and permissions).
+      ## It will have no effect on ephemeral volume types such as: secret, configmaps and emptydir. Valid values are "OnRootMismatch" and "Always". If not specified, "Always" is used.
+      # fsGroupChangePolicy:
+
+      ## The GID to run the entrypoint of the container process. Uses runtime default if unset.
+      runAsGroup: 10002
+
+      ## Indicates that the container must run as a non-root user. If true, the Kubelet will validate the image at runtime to ensure that it does not run as UID 0 (root) and fail to start the container if it does. If unset or false, no such validation will be performed.
+      runAsNonRoot: true
+
+      ## The UID to run the entrypoint of the container process. Defaults to user specified in image metadata if unspecified.
+      runAsUser: 10002
+
+      ## SELinuxOptions are the labels to be applied to all the pod containers
+      # seLinuxOptions:
+      ## Level is SELinux level label that applies to the container.
+      # level:
+
+      ## Role is a SELinux role label that applies to the container.
+      # role:
+
+      ## Type is a SELinux type label that applies to the container.
+      # type:
+
+      ## User is a SELinux user label that applies to the container.
+      # user:
+
+      ## "To set the Seccomp profile for a Container, include the seccompProfile field in the securityContext section of your Pod or Container manifest.
+      ## The seccompProfile field is a SeccompProfile object consisting of type and localhostProfile.
+      ## Valid options for type include RuntimeDefault, Unconfined, and Localhost. localhostProfile must only be set set if type Localhost.
+      ## It indicates the path of the pre-configured profile on the node, relative to the kubelet's configured Seccomp profile location (configured with the --root-dir flag).
+      seccompProfile:
+        # localhostProfile:
+        type: RuntimeDefault
+
+      ## A list of groups applied to the first process run in each container, in addition to the container's primary GID.
+      ## If unspecified, no groups will be added to any container.
+      supplementalGroups: []
+    ## Kubernetes resources to allocate to each instance.
+    resources:
+      ## Requests describes the minimum amount of compute resources required. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+      requests:
+        memory: 50Mi
+        cpu: 50m
+
+      ## Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+      limits:
+        memory: 50Mi
+    ## Controls configuration of the ServiceAccount for this component
+    serviceAccount:
+      ## Whether a ServiceAccount should be created by the chart or not
+      create: true
+
+      ## What name to give the ServiceAccount. If not provided the chart will provide the name automatically
+      name: ""
+
+      ## Annotations to add to the service account
+      annotations: {}
+    ## Workload tolerations allows Pods that are part of this (sub)component to 'tolerate' any taint that matches the triple <key,value,effect> using the matching operator <operator>.
+    ##
+    ## * effect indicates the taint effect to match. Empty means match all taint effects. When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
+    ## * key is the taint key that the toleration applies to. Empty means match all taint keys. If the key is empty, operator must be Exists; this combination means to match all values and all keys.
+    ## * operator represents a key's relationship to the value. Valid operators are Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for value, so that a pod can tolerate all taints of a particular category.
+    ## * value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
+    ##
+    ## * tolerationSeconds represents the period of time the toleration (which must be of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default, it is not set, which means tolerate the taint forever (do not evict). Zero and negative values will be treated as 0 (evict immediately) by the system.
+    ## e.g.
+    ## tolerations:
+    ## - effect:
+    ##   key:
+    ##   operator:
+    ##   value:
+
+    tolerations: []
+    ## Configuration of the thresholds and frequencies of the livenessProbe
+    livenessProbe:
+      ## How many consecutive failures for the probe to be considered failed
+      failureThreshold: 3
+
+      ## Number of seconds after the container has started before the probe starts
+      initialDelaySeconds: 0
+
+      ## How often (in seconds) to perform the probe
+      periodSeconds: 10
+
+      ## How many consecutive successes for the probe to be consider successful after having failed
+      successThreshold: 1
+
+      ## Number of seconds after which the probe times out
+      timeoutSeconds: 1
+    ## Configuration of the thresholds and frequencies of the readinessProbe
+    readinessProbe:
+      ## How many consecutive failures for the probe to be considered failed
+      failureThreshold: 3
+
+      ## Number of seconds after the container has started before the probe starts
+      initialDelaySeconds: 0
+
+      ## How often (in seconds) to perform the probe
+      periodSeconds: 10
+
+      ## How many consecutive successes for the probe to be consider successful after having failed
+      successThreshold: 1
+
+      ## Number of seconds after which the probe times out
+      timeoutSeconds: 1
+    ## Configuration of the thresholds and frequencies of the startupProbe
+    startupProbe:
+      ## How many consecutive failures for the probe to be considered failed
+      failureThreshold: 5
+
+      ## Number of seconds after the container has started before the probe starts
+      initialDelaySeconds: 0
+
+      ## How often (in seconds) to perform the probe
+      periodSeconds: 10
+
+      ## How many consecutive successes for the probe to be consider successful after having failed
+      successThreshold: 1
+
+      ## Number of seconds after which the probe times out
+      timeoutSeconds: 1
+
+wellKnownDelegation:
+  enabled: true
+
+  ## Labels to add to all manifest for this component
+  labels: {}
+
+  ## How this ingress should be constructed
+  ingress:
+    ## What hostname should be used for this Ingress
+    # host:
+
+    ## Annotations to be added to this Ingress
+    annotations: {}
+
+    ## What Ingress Class Name that should be used for this Ingress
+    # className:
+
+    ## Disable TLS configuration by setting it to false
+    tlsEnabled: true
+
+    ## The name of the Secret containing the TLS certificate and the key that should be used for this Ingress
+    # tlsSecret:
+
+    ## How the Service behind this Ingress is constructed
+    service: {}
+    ## If set, some tweaks will be applied automatically to ingresses based on the controller type here.
+    ## This can be set to `ingress-nginx`.
+    # controllerType:
+
+  ## If ElementWeb is deployed, the base domain will redirect to it's ingress host by default
+  ## If ElementWeb is not deployed or this is disabled, no base domain URL redirect will be set.
+  baseDomainRedirect:
+    enabled: true
+    ## You can override with another redirect URL here.
+    url: ""
+
+  ## Additional configuration to provide to all WellKnown static file
+  ## Configuration should be provided as JSON strings
+  additional:
+    client: "{}"
+    server: "{}"
+    support: "{}"

@@ -1,0 +1,8 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: ess
+  namespace: default
+spec:
+  interval: 10m
+  url: oci://ghcr.io/element-hq/ess-helm/matrix-stack
