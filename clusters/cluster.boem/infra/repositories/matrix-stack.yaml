@@ -9,3 +9,5 @@ spec:
   provider: generic
   secretRef:
     name: ghcr-auth
+  ref:
+    semver: "25.8.3"
