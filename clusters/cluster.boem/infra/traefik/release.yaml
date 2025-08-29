@@ -11,7 +11,7 @@ spec:
         kind: HelmRepository
         name: traefik
         namespace: flux-system
-      version: "34.4.1"
+      version: "37.0.0"
   interval: 24h
   values:
     deployment:
@@ -79,7 +79,7 @@ spec:
         # -- Load Kubernetes Ingress provider
         enabled: true
         # -- Allows to reference ExternalName services in Ingress
-        allowExternalNameServices: false
+        allowExternalNameServices: true
         # -- Allows to return 503 when there is no endpoints available
         allowEmptyServices: true
         # -- When ingressClass is set, only Ingresses containing an annotation with the same value are processed. Otherwise, Ingresses missing the annotation, having an empty value, or the value traefik are processed.
@@ -99,7 +99,7 @@ spec:
 
       kubernetesGateway:
         # -- Enable Traefik Gateway provider for Gateway API
-        enabled: false
+        enabled: true
         # -- Toggles support for the Experimental Channel resources (Gateway API release channels documentation).
         # This option currently enables support for TCPRoute and TLSRoute.
         experimentalChannel: false
