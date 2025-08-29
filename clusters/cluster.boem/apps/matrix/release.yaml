@@ -1,53 +1,53 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: ess-stack
-  namespace: matrix
-spec:
-  chart:
-    spec:
-      chart: ess
-      sourceRef:
-        kind: HelmRepository
-        name: ess
-        namespace: flux-system
-      version: "25.8.3"
-  interval: 24h
-  values:
-    serverName: maishond.nl
-    ingress:
-      className: traefik-ingress
-      # annotations:
-      # kubernetes.io/ingress.class: traefik-ingress
-      # cert-manager.io/cluster-issuer: letsencrypt-prod
-      tlsSecret: maishond.nl-prod-tls
+# apiVersion: helm.toolkit.fluxcd.io/v2beta1
+# kind: HelmRelease
+# metadata:
+#   name: ess-stack
+#   namespace: matrix
+# spec:
+#   chart:
+#     spec:
+#       chart: ess
+#       sourceRef:
+#         kind: HelmRepository
+#         name: ess
+#         namespace: flux-system
+#       version: "25.8.3"
+#   interval: 24h
+#   values:
+#     serverName: maishond.nl
+#     ingress:
+#       className: traefik-ingress
+#       # annotations:
+#       # kubernetes.io/ingress.class: traefik-ingress
+#       # cert-manager.io/cluster-issuer: letsencrypt-prod
+#       tlsSecret: maishond.nl-prod-tls
 
-    synapse:
-      enabled: true
-      media:
-        storage:
-          storageClassName: ceph-block
-      ingress:
-        host: matrix.maishond.nl
+#     synapse:
+#       enabled: true
+#       media:
+#         storage:
+#           storageClassName: ceph-block
+#       ingress:
+#         host: matrix.maishond.nl
 
-    matrixAuthenticationService:
-      enabled: true
-      ingress:
-        host: auth-matrix.maishond.nl
+#     matrixAuthenticationService:
+#       enabled: true
+#       ingress:
+#         host: auth-matrix.maishond.nl
 
-    matrixRTC:
-      enabled: true
-      ingress:
-        host: mrtc-matrix.maishond.nl
+#     matrixRTC:
+#       enabled: true
+#       ingress:
+#         host: mrtc-matrix.maishond.nl
 
-    elementWeb:
-      enabled: true
-      ingress:
-        host: chat.maishond.nl
+#     elementWeb:
+#       enabled: true
+#       ingress:
+#         host: chat.maishond.nl
 
-    postgres:
-      storage:
-        storageClassName: ceph-block
+#     postgres:
+#       storage:
+#         storageClassName: ceph-block
 
-    wellKnownDelegation:
-      enabled: false
+#     wellKnownDelegation:
+#       enabled: false
