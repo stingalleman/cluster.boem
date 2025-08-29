@@ -3,5 +3,19 @@
   hosts: ams_rtr02
   become: true
   roles:
-    # - nftables
     - bird
+  tasks:
+    - name: Make sure nftables configuration is present
+      ansible.builtin.copy:
+        src: ams_rtr/nftables.conf
+        dest: /etc/nftables.conf
+        owner: root
+        group: root
+        mode: "0644"
+      notify: Apply nftables
+  handlers:
+    - name: Apply nftables
+      ansible.builtin.systemd_service:
+        name: nftables
+        state: reloaded
+        enabled: true

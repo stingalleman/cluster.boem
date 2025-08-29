@@ -9,6 +9,18 @@
 #       peer: 2a07:e345:1:3001::2
 #       source: 2a07:e345:1:3001::69
 
+# peers:
+#   - name: "AMSIX RS #1"
+#     neighbors:
+#       - ip: 2001:7f8:1::a500:6777:1
+#         id: 1
+#         local_pref: 0 #overrules all
+#         disabled: true
+#     as: 6777
+#     local_pref: 4100 #overrules type
+#     type: routeserver
+#     disabled: true
+
 router_id: 45.83.205.3
 local_as: 216455
 
@@ -23,30 +35,6 @@ types:
     local_pref: 5000
   routeserver:
     local_pref: 4000
-
-# Customers 7000
-# Private Peers 6000
-# IXP Peers 5000
-#   AMSIX 5100
-#   FrysIX 5200
-# RS Peers 4000
-#   AMSIX 4100
-#   FrysIX 4200
-# Transit 3000
-#  PP 3500
-#  Yvan 3100
-
-# peers:
-#   - name: "AMSIX RS #1"
-#     neighbors:
-#       - ip: 2001:7f8:1::a500:6777:1
-#         id: 1
-#         local_pref: 0 #overrules all
-#         disabled: true
-#     as: 6777
-#     local_pref: 4100 #overrules type
-#     type: routeserver
-#     disabled: true
 
 ix:
   amsix:
@@ -68,37 +56,74 @@ peers:
     type: transit
     local_pref: 5
     disabled: true
+
   - name: "AMSIX RS #1"
     neighbors:
       - ip: 2001:7f8:1::a500:6777:1
         id: 1
+      - ip: 80.249.208.255
+        id: 1
     as: 6777
     local_pref: 4100
     type: routeserver
+
   - name: "AMSIX RS #2"
     neighbors:
       - ip: 2001:7f8:1::a500:6777:2
         id: 2
+      - ip: 80.249.209.0
+        id: 2
     as: 6777
     local_pref: 4100
     type: routeserver
+
   - name: NetOne
     as: 200132
     type: transit
     local_pref: 3500
     neighbors:
       - ip: 2001:7f8:1:0:a500:20:132:1 # AMS-IX
+      - ip: 80.249.211.17
+
   - name: Jelle Luteijn
     as: 212855
     neighbors:
       - ip: 2001:7f8:1:0:a500:21:2855:1 # AMS-IX
+      - ip: 80.249.214.252 # AMS-IX
       - ip: 2001:7f8:10f::3:3f95:152 # FrysIX
         disabled: true
+
   - name: Frumentum Media
     as: 216107
     neighbors:
       - ip: 2001:7f8:1:0:a500:21:6107:1 # AMS-IX
       - ip: 2001:7f8:10f::3:4c2b:64 # FrysIX
+        disabled: true
+
+  - name: Cloudflare
+    as: 13335
+    neighbors:
+      - ip: 2001:7f8:1::a501:3335:1 # AMS-IX
+        id: 1
+      - ip: 2001:7f8:1::a501:3335:2 # AMS-IX
+        id: 2
+
+  - name: Tim de Boer
+    as: 214380
+    as_set: 214380:AS-TIM427
+    neighbors:
+      - ip: 2001:7f8:1:0:a500:21:4380:1 # AMS-IX
+      - ip: 80.249.210.60
+      - ip: 2001:7f8:10f::3:456c:81 # FrysIX
+        disabled: true
+
+  - name: Nick Bouwhuis
+    as: 202585
+    as_set: AS-NICK
+    neighbors:
+      - ip: 2001:7f8:1:0:a500:20:2585:1 # AMS-IX
+      - ip: 80.249.212.222
+      - ip: 2001:7f8:10f::3:1759:195 # FriesIX
         disabled: true
 
 prefixlists:
@@ -117,3 +142,7 @@ prefixlists:
       # - 2a07:e345:200::/48
       # - 2a0e:b107:27c8::/45
       # - 2a14:6f44:b00b::/48
+
+bird_extra_route6:
+  - subnet: 2a05:dfc1:8511::/48
+  - subnet: 2a05:dfc1:9600::/40

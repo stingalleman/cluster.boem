@@ -1,9 +1,18 @@
-- name: Copy nftables configuration
-  ansible.builtin.template:
-    src: nftables.conf
-    dest: /etc/nftables.conf
-    owner: root
-    group: root
-    mode: "0644"
-    validate: nft -c -f %s
-  notify: Apply config
+# - name: Make sure nftables configuration is present
+#   ansible.builtin.copy:
+#     src: nftables.conf
+#     dest: /etc/nftables.conf
+#     owner: root
+#     group: root
+#     mode: "0644"
+#     # validate: nft -c -f %s
+#   notify: Apply config
+# # - name: Copy nftables configuration
+# #   ansible.builtin.template:
+# #     src: nftables.conf
+# #     dest: /etc/nftables.conf
+# #     owner: root
+# #     group: root
+# #     mode: "0644"
+# #     validate: nft -c -f %s
+# #   notify: Apply config
