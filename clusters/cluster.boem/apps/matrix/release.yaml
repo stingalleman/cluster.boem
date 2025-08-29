@@ -13,7 +13,8 @@ spec:
     serverName: maishond.nl
     ingress:
       className: traefik-ingress
-      # annotations:
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
       # kubernetes.io/ingress.class: traefik-ingress
       # cert-manager.io/cluster-issuer: letsencrypt-prod
       tlsSecret: maishond.nl-prod-tls
