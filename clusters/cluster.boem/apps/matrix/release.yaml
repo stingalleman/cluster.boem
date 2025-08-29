@@ -1,17 +1,13 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: ess-stack
+  name: matrix-stack
   namespace: matrix
 spec:
-  chart:
-    spec:
-      chart: ess
-      sourceRef:
-        kind: HelmRepository
-        name: ess
-        namespace: flux-system
-      version: "25.8.3"
+  chartRef:
+    kind: OCIRepository
+    name: matrix-stack
+    namespace: flux-sytsem
   interval: 24h
   values:
     serverName: maishond.nl
