@@ -2,9 +2,10 @@ apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: OCIRepository
 metadata:
   name: matrix-stack
-  namespace: default
+  namespace: flux-system
 spec:
   interval: 10m
   url: oci://ghcr.io/element-hq/ess-helm/matrix-stack
+  provider: generic
   secretRef:
-    name: ghcr-registry
+    name: ghcr-auth
