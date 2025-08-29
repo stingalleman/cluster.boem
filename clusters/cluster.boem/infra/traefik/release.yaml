@@ -20,13 +20,14 @@ spec:
     ingressRoute:
       dashboard:
         # -- Create an IngressRoute for the dashboard
-        enabled: false
+        enabled: true
         # -- Additional ingressRoute annotations (e.g. for kubernetes.io/ingress.class)
         annotations: {}
         # -- Additional ingressRoute labels (e.g. for filtering IngressRoute by custom labels)
         labels: {}
         # -- The router match rule used for the dashboard ingressRoute
-        matchRule: PathPrefix(`/dashboard`) || PathPrefix(`/api`)
+        # matchRule: PathPrefix(`/dashboard`) || PathPrefix(`/api`)
+        matchRule: "Host(`traefik.kluster.i.as216455.net`)"
         # -- The internal service used for the dashboard ingressRoute
         services:
           - name: api@internal
@@ -34,7 +35,7 @@ spec:
         # -- Specify the allowed entrypoints to use for the dashboard ingress route, (e.g. traefik, web, websecure).
         # By default, it's using traefik entrypoint, which is not exposed.
         # /!\ Do not expose your dashboard without any protection over the internet /!\
-        entryPoints: ["traefik"]
+        entryPoints: ["internalsecure"]
         # -- Additional ingressRoute middlewares (e.g. for authentication)
         middlewares: []
         # -- TLS options (e.g. secret containing certificate)
