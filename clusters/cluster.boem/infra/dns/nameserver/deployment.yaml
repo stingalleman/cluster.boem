@@ -23,7 +23,7 @@ spec:
       containers:
         # docker run --rm -v /tmp/storage:/storage -v /tmp/rundir:/rundir --network host --name knot -d cznic/knot knotd
         - name: nameserver
-          image: cznic/knot:v3.4.7
+          image: cznic/knot:v3.4.8
           command:
             - knotd
           # resources:
