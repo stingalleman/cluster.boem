@@ -24,11 +24,10 @@ spec:
       secret:
         name: immich-postgres-user
       postInitSQL:
-        - ALTER SYSTEM SET search_path TO "immich", public, vectors;
-        - CREATE EXTENSION IF NOT EXISTS "vectors";
+        - CREATE EXTENSION IF NOT EXISTS "vchord" CASCADE;
+        - CREATE EXTENSION IF NOT EXISTS "earthdistance" CASCADE;
         #------
         # - CREATE EXTENSION IF NOT EXISTS "cube" CASCADE;
-        # - CREATE EXTENSION IF NOT EXISTS "earthdistance" CASCADE;
 
   storage:
     size: 4Gi
