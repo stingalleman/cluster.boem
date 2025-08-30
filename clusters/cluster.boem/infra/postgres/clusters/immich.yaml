@@ -7,9 +7,9 @@ spec:
   imageName: ghcr.io/tensorchord/cloudnative-vectorchord:16-0.4.2
   instances: 1
 
-  postgresql:
-    shared_preload_libraries:
-      - "vectors.so"
+  # postgresql:
+  #   shared_preload_libraries:
+  #     - "vectors.so"
 
   managed:
     roles:
