@@ -21,8 +21,6 @@ spec:
     initdb:
       database: immich
       owner: immich
-      secret:
-        name: immich-postgres-user
       postInitSQL:
         - CREATE EXTENSION IF NOT EXISTS "vchord" CASCADE;
         - CREATE EXTENSION IF NOT EXISTS "earthdistance" CASCADE;
