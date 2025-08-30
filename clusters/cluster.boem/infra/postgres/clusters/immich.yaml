@@ -32,4 +32,4 @@ spec:
 
   storage:
     size: 4Gi
-    storageClass: immich-postgres
+    storageClass: ceph-block
