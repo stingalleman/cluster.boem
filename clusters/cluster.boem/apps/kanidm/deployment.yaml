@@ -33,7 +33,7 @@ spec:
             - name: certificates
               mountPath: /tls
             - name: config
-              mountPath: /data
+              mountPath: /data/server.toml
               readOnly: true
               subPath: server.toml
       volumes:
