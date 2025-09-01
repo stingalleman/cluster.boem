@@ -17,7 +17,8 @@ spec:
     spec:
       containers:
         - name: kanidm
-          image: kanidm/server:1.7.3
+          image: busybox
+          # image: kanidm/server:1.7.3
           # livenessProbe:
           # readinessProbe:
           ports:
