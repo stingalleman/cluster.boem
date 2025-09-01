@@ -33,7 +33,7 @@ spec:
             - name: config
               mountPath: /data
             - name: storage
-              mountPath: /storage
+              mountPath: /data
       volumes:
         - name: certificates
           secret:
