@@ -19,7 +19,8 @@ spec:
         - name: kanidm
           image: busybox
           command:
-            - sleep 1000000
+            - /bin/sleep
+            - 1d
           # image: kanidm/server:1.7.3
           # livenessProbe:
           # readinessProbe:
