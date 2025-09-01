@@ -17,11 +17,11 @@ spec:
     spec:
       containers:
         - name: kanidm
-          image: busybox
-          command:
-            - /bin/sleep
-            - 1d
-          # image: kanidm/server:1.7.3
+          # image: busybox
+          # command:
+          #   - /bin/sleep
+          #   - 1d
+          image: kanidm/server:1.7.3
           # livenessProbe:
           # readinessProbe:
           ports:
@@ -31,7 +31,7 @@ spec:
             - name: certificates
               mountPath: /tls
             - name: config
-              mountPath: /data/config
+              mountPath: /data
             - name: storage
               mountPath: /storage
       volumes:
