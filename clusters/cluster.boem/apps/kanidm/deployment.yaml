@@ -32,6 +32,7 @@ spec:
               mountPath: /tls
             - name: config
               mountPath: /data
+              readOnly: true
             - name: storage
               mountPath: /data
       volumes:
@@ -43,9 +44,13 @@ spec:
                 path: fullchain.pem
               - key: tls.key
                 path: privkey.pem
+            defaultMode: 0400
         - name: config
           configMap:
             name: kanidm-config
+            items:
+              - key: config.toml
+                path: config.toml
         - name: storage
           persistentVolumeClaim:
             claimName: kanidm-storage
