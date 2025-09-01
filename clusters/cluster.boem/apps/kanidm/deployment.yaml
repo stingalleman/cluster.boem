@@ -28,14 +28,14 @@ spec:
             - containerPort: 8443
               name: http
           volumeMounts:
+            - name: storage
+              mountPath: /data
             - name: certificates
               mountPath: /tls
             - name: config
               mountPath: /data
               readOnly: true
               subPath: server.toml
-            - name: storage
-              mountPath: /data
       volumes:
         - name: certificates
           secret:
