@@ -33,6 +33,7 @@ spec:
             - name: config
               mountPath: /data
               readOnly: true
+              subPath: server.toml
             - name: storage
               mountPath: /data
       volumes:
@@ -49,8 +50,8 @@ spec:
           configMap:
             name: kanidm-config
             items:
-              - key: config.toml
-                path: config.toml
+              - key: server.toml
+                path: server.toml
         - name: storage
           persistentVolumeClaim:
             claimName: kanidm-storage
