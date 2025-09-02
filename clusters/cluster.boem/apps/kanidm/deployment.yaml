@@ -39,7 +39,7 @@ spec:
       volumes:
         - name: certificates
           secret:
-            secretName: auth.as216455.net-prod-tls
+            secretName: login.as216455.net-prod-tls
             items:
               - key: tls.crt
                 path: fullchain.pem
