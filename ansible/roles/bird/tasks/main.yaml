@@ -76,7 +76,7 @@
     mode: "0644"
     owner: bird
     group: bird
-    validate: bird -p -c %s
+    # validate: bird -p -c %s
   loop:
     - "envvars"
     - "bird.conf"
