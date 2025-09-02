@@ -126,7 +126,7 @@ spec:
           namespace: kanidm
           port: 80
           scheme: https
-          # serversTransport: insecure
+          serversTransport: insecure
 
     - kind: Rule
       match: Host(`images.as216455.net`)
