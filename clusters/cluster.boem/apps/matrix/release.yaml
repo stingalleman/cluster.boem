@@ -31,9 +31,10 @@ spec:
       enabled: true
       ingress:
         host: auth-matrix.maishond.nl
-      2-custom-config:
-        configSecret: mas-config
-        configSecretKey: confg.yaml
+      additional:
+        1-custom-config:
+          configSecret: mas-config
+          configSecretKey: confg.yaml
 
     matrixRTC:
       enabled: true
