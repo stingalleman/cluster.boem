@@ -34,7 +34,7 @@ spec:
       additional:
         1-custom-config:
           configSecret: mas-config
-          configSecretKey: confg.yaml
+          configSecretKey: shared.yaml
 
     matrixRTC:
       enabled: true
