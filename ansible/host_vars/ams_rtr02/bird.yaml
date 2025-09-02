@@ -126,6 +126,14 @@ peers:
       - ip: 2001:7f8:10f::3:1759:195 # FriesIX
         disabled: true
 
+  - name: Lucas van Beek
+    as: 215577
+    as_set: AS215577:AS-LUCAS
+    neighbors:
+      - ip: 2001:7f8:10f::3:4a19:254 # FrysIX
+        disabled: true
+      - ip: 2001:7f8:1:0:a500:21:5577:1 # AMS-IX
+
 prefixlists:
   - name: as216455_inet6
     prefixes:
