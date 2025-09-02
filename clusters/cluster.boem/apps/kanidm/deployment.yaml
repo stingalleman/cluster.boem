@@ -1,57 +1,57 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: kanidm
-  namespace: kanidm
-  labels:
-    app: kanidm
-spec:
-  selector:
-    matchLabels:
-      app: kanidm
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: kanidm
-    spec:
-      containers:
-        - name: kanidm
-          # image: busybox
-          # command:
-          #   - /bin/sleep
-          #   - 1d
-          image: kanidm/server:1.7.3
-          # livenessProbe:
-          # readinessProbe:
-          ports:
-            - containerPort: 8443
-              name: http
-          volumeMounts:
-            - name: storage
-              mountPath: /data
-            - name: certificates
-              mountPath: /tls
-            - name: config
-              mountPath: /data/server.toml
-              readOnly: true
-              subPath: server.toml
-      volumes:
-        - name: certificates
-          secret:
-            secretName: login.as216455.net-prod-tls
-            items:
-              - key: tls.crt
-                path: fullchain.pem
-              - key: tls.key
-                path: privkey.pem
-            defaultMode: 0400
-        - name: config
-          configMap:
-            name: kanidm-config
-            items:
-              - key: server.toml
-                path: server.toml
-        - name: storage
-          persistentVolumeClaim:
-            claimName: kanidm-storage
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: kanidm
+#   namespace: kanidm
+#   labels:
+#     app: kanidm
+# spec:
+#   selector:
+#     matchLabels:
+#       app: kanidm
+#   replicas: 1
+#   template:
+#     metadata:
+#       labels:
+#         app: kanidm
+#     spec:
+#       containers:
+#         - name: kanidm
+#           # image: busybox
+#           # command:
+#           #   - /bin/sleep
+#           #   - 1d
+#           image: kanidm/server:1.7.3
+#           # livenessProbe:
+#           # readinessProbe:
+#           ports:
+#             - containerPort: 8443
+#               name: http
+#           volumeMounts:
+#             - name: storage
+#               mountPath: /data
+#             - name: certificates
+#               mountPath: /tls
+#             - name: config
+#               mountPath: /data/server.toml
+#               readOnly: true
+#               subPath: server.toml
+#       volumes:
+#         - name: certificates
+#           secret:
+#             secretName: login.as216455.net-prod-tls
+#             items:
+#               - key: tls.crt
+#                 path: fullchain.pem
+#               - key: tls.key
+#                 path: privkey.pem
+#             defaultMode: 0400
+#         - name: config
+#           configMap:
+#             name: kanidm-config
+#             items:
+#               - key: server.toml
+#                 path: server.toml
+#         - name: storage
+#           persistentVolumeClaim:
+#             claimName: kanidm-storage
