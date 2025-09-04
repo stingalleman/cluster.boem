@@ -26,6 +26,11 @@ spec:
           storageClassName: ceph-block
       ingress:
         host: matrix.maishond.nl
+      # additional:
+      #   ## Either reference config to inject by:
+      #   1-custom-config:
+      #     config: |
+      #       admin_contact: "mailto:admin@example.com"
 
     matrixAuthenticationService:
       enabled: true
@@ -42,7 +47,7 @@ spec:
         host: mrtc-matrix.maishond.nl
 
     elementWeb:
-      enabled: true
+      enabled: false
       ingress:
         host: chat.maishond.nl
 
