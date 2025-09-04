@@ -15,8 +15,6 @@ spec:
       className: traefik-ingress
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-      # kubernetes.io/ingress.class: traefik-ingress
-      # cert-manager.io/cluster-issuer: letsencrypt-prod
       tlsSecret: maishond.nl-prod-tls
 
     synapse:
@@ -56,4 +54,4 @@ spec:
         storageClassName: ceph-block
 
     wellKnownDelegation:
-      enabled: false
+      enabled: true
