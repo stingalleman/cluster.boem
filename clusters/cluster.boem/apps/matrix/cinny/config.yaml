@@ -9,7 +9,6 @@ data:
       "defaultHomeserver": 0,
       "homeserverList": [
         "maishond.nl",
-        "matrix.maishond.nl"
       ],
       "allowCustomHomeservers": false,
 
