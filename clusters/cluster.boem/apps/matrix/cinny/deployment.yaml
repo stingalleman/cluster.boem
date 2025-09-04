@@ -23,7 +23,7 @@ spec:
               name: http
           volumeMounts:
             - name: config
-              mountPath: /config.json
+              mountPath: /usr/share/nginx/html/config.json
               readOnly: true
               subPath: config.json
       volumes:
