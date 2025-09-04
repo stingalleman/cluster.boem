@@ -23,7 +23,7 @@ spec:
               name: http
           volumeMounts:
             - name: config
-              mountPath: /
+              mountPath: /config.json
               readOnly: true
               subPath: config.json
       volumes:
