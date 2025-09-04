@@ -29,6 +29,55 @@ spec:
       #   1-custom-config:
       #     config: |
       #       admin_contact: "mailto:admin@example.com"
+      workers:
+        account-data:
+          enabled: true
+        appservice:
+          enabled: true
+        background:
+          enabled: true
+        client-reader:
+          enabled: true
+        device-lists:
+          enabled: true
+        encryption:
+          enabled: true
+        event-creator:
+          enabled: true
+        event-persister:
+          enabled: true
+          replicas: 3
+        federation-inbound:
+          enabled: true
+          replicas: 3
+        federation-reader:
+          enabled: true
+          replicas: 2
+        federation-sender:
+          enabled: true
+        initial-synchrotron:
+          enabled: true
+        media-repository:
+          enabled: true
+        presence-writer:
+          enabled: true
+        push-rules:
+          enabled: true
+        pusher:
+          enabled: true
+          replicas: 3
+        receipts:
+          enabled: true
+        sliding-sync:
+          enabled: true
+        sso-login:
+          enabled: true
+        synchrotron:
+          enabled: true
+        typing-persister:
+          enabled: true
+        user-dir:
+          enabled: true
 
     matrixAuthenticationService:
       enabled: true
