@@ -8,7 +8,7 @@ data:
     {
       "defaultHomeserver": 0,
       "homeserverList": [
-        "matrix.maishond.nl"
+        "maishond.nl"
       ],
       "allowCustomHomeservers": false,
 
@@ -18,7 +18,7 @@ data:
         ],
         "rooms": [
         ],
-        "servers": ["matrix.maishond.nl"]
+        "servers": ["maishond.nl"]
       },
 
       "hashRouter": {
