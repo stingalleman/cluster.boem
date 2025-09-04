@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cinny
+  namespace: matrix
+  labels:
+    app: cinny
+spec:
+  selector:
+    matchLabels:
+      app: cinny
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cinny
+    spec:
+      containers:
+        - name: cinny
+          image: ghcr.io/cinnyapp/cinny:v4.10.0
+          ports:
+            - containerPort: 80
+              name: http
+          volumeMounts:
+            - name: config
+              mountPath: /
+              readOnly: true
+              subPath: config.json
+      volumes:
+        - name: config
+          configMap:
+            name: cinny-config
+            defaultMode: 0444
+            items:
+              - key: config.json
+                path: config.json
+      restartPolicy: Always

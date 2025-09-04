@@ -1,0 +1,28 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: cinny-config
+  namespace: matrix
+data:
+  config.json: |
+    {
+      "defaultHomeserver": 0,
+      "homeserverList": [
+        "matrix.maishond.nl"
+      ],
+      "allowCustomHomeservers": false,
+
+      "featuredCommunities": {
+        "openAsDefault": false,
+        "spaces": [
+        ],
+        "rooms": [
+        ],
+        "servers": ["matrix.maishond.nl"]
+      },
+
+      "hashRouter": {
+        "enabled": false,
+        "basename": "/"
+      }
+    }

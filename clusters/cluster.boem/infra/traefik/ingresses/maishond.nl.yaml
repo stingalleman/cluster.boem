@@ -67,9 +67,9 @@ spec:
       match: Host(`chat.maishond.nl`)
       services:
         - kind: Service
-          name: maischat
-          namespace: mattermost
-          port: 8065
+          name: cinny
+          namespace: matrix
+          port: 80
 
   tls:
     secretName: maishond.nl-prod-tls
