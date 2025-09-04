@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maishond-site
+  namespace: default
+  labels:
+    app: maishond-site
+spec:
+  selector:
+    matchLabels:
+      app: maishond-site
+  replicas: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: maishond-site
+    spec:
+      containers:
+        - name: maishond-site
+          image: ghcr.io/maishond/maishond.nl:sha256-d55b81a551eeb72a217ae815a81968abcc4c2d993a20928998e8ee8e9db33960
+          ports:
+            - containerPort: 8080
+              name: http
+      restartPolicy: Always

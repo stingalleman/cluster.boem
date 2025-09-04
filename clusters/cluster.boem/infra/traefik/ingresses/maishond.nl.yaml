@@ -9,6 +9,14 @@ spec:
     - websecure
   routes:
     - kind: Rule
+      match: Host(`maishond.nl`)
+      services:
+        - kind: Service
+          name: maishond-site
+          namespace: default
+          port: http
+
+    - kind: Rule
       match: Host(`media.maishond.nl`)
       services:
         - kind: Service
