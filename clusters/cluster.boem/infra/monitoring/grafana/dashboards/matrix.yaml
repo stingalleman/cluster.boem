@@ -6,7 +6,7 @@ metadata:
   name: matrix-dashboard
   namespace: monitoring
 data:
-  dashboard.json: |
+  synapse.json: |
     {
       "__elements": {},
       "__requires": [

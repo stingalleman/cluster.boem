@@ -3,10 +3,10 @@ kind: ConfigMap
 metadata:
   labels:
     grafana_dashboard: "1"
-  name: ceph-ods-dashboard
+  name: ceph-osd-dashboard
   namespace: monitoring
 data:
-  dashboard.json: |
+  ceph-osd.json: |
     {
       "__inputs": [],
       "__elements": {},

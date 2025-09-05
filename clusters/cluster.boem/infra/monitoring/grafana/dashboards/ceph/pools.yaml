@@ -6,7 +6,7 @@ metadata:
   name: ceph-pools-dashboard
   namespace: monitoring
 data:
-  dashboard.json: |
+  ceph-pools.json: |
     {
       "__inputs": [],
       "__elements": {},
