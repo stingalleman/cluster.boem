@@ -1,13 +1,13 @@
-apiVersion: monitoring.coreos.com/v1alpha1
-kind: ScrapeConfig
-metadata:
-  name: node-exporters
-  namespace: monitoring
-  labels:
-    release: monitoring-stack
-spec:
-  staticConfigs:
-    - labels:
-        job: node-exporter
-      targets:
-        - 10.10.10.110:9100
+# apiVersion: monitoring.coreos.com/v1alpha1
+# kind: ScrapeConfig
+# metadata:
+#   name: node-exporters
+#   namespace: monitoring
+#   labels:
+#     release: monitoring-stack
+# spec:
+#   staticConfigs:
+#     - labels:
+#         job: node-exporter
+#       targets:
+#         - 10.10.10.110:9100
