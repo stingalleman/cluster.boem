@@ -38,7 +38,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: yucky-rs-matrix
-                  key: matrix_
+                  key: matrix_homeserver
             - name: MATRIX_USERNAME
               valueFrom:
                 secretKeyRef:
