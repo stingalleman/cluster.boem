@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yucky-rs-matrix
+  namespace: discord-bots
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yucky-rs-matrix
+  template:
+    metadata:
+      labels:
+        app: yucky-rs-matrix
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: k-work-3
+      containers:
+        - name: yucky-rs-matrix
+          image: ghcr.io/maishond/yucky.rs-matrix:main
+          # image: ghcr.io/maishond/yucky.rs:main@sha256:4f5d38c80da522e8f48f6f8095915cb25b67d0860516be613fb164b3477cd5e0
+          imagePullPolicy: Always
+          # resources:
+          #   limits:
+          #     memory: "128Mi"
+          #     cpu: "2000m"
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs-matrix
+                  key: database_url
+            - name: MATRIX_HOMESERVER
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs-matrix
+                  key: matrix_
+            - name: MATRIX_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs-matrix
+                  key: matrix_username
+            - name: MATRIX_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs-matrix
+                  key: matrix_password
+            - name: PREFIX
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs-matrix
+                  key: prefix
+            - name: HA_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs-matrix
+                  key: ha-token
+            - name: ETHUX_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs-matrix
+                  key: ethux_token
+            - name: ETHUX_MODEL
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs-matrix
+                  key: ethux_model
+            - name: ETHUX_PROMPT
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs-matrix
+                  key: ethux_prompt
+            # - name: ALLES_DLP_PASSWORD
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: yucky-rs-matrix
+            #       key: alles_dlp_password
+            # - name: OPENAI
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: yucky-rs-matrix
+            #       key: openai_token
+          # volumeMounts:
+          #   - name: tz-config
+          #     mountPath: /etc/localtime
+          # securityContext:
+          #   capabilities:
+          #     drop:
+          #       - "ALL"
+          #   allowPrivilegeEscalation: false
+          #   runAsNonRoot: true
+          #   seccompProfile:
+          #     type: RuntimeDefault
+      # volumes:
+      #   - name: tz-config
+      #     hostPath:
+      #       path: /usr/share/zoneinfo/Europe/Amsterdam
+      #       type: File
