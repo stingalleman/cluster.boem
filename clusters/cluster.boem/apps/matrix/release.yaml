@@ -29,6 +29,7 @@ spec:
         1-custom-config:
           config: |
             admin_contact: "mailto:me@stingalleman.nl"
+            max_upload_size: 2G
             url_preview_enabled: true
             url_preview_ip_range_blacklist:
             - 127.0.0.0/8
@@ -50,6 +51,13 @@ spec:
             - 2001:db8::/32
             - ff00::/8
             - fec0::/10
+            server_notices:
+              system_mxid_localpart: notices
+              system_mxid_display_name: maischat notices
+              room_name: maischat notices
+              room_topic: voor server shit
+              auto_join: true
+
       workers:
         account-data:
           enabled: true
