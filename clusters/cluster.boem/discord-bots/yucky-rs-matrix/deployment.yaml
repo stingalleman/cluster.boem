@@ -74,27 +74,46 @@ spec:
                 secretKeyRef:
                   name: yucky-rs-matrix
                   key: ethux_prompt
-            # - name: ALLES_DLP_PASSWORD
+            - name: STARBOARD_EMOTE
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs-matrix
+                  key: starboard_emote
+            # - name: ETHUX_PROMPT
             #   valueFrom:
             #     secretKeyRef:
             #       name: yucky-rs-matrix
-            #       key: alles_dlp_password
-            # - name: OPENAI
-            #   valueFrom:
-            #     secretKeyRef:
-            #       name: yucky-rs-matrix
-            #       key: openai_token
-          # volumeMounts:
-          #   - name: tz-config
-          #     mountPath: /etc/localtime
-          # securityContext:
-          #   capabilities:
-          #     drop:
-          #       - "ALL"
-          #   allowPrivilegeEscalation: false
-          #   runAsNonRoot: true
-          #   seccompProfile:
-          #     type: RuntimeDefault
+            #       key: starboard_limit
+            - name: STARBOARD_CHANNEL
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs-matrix
+                  key: starboard_room
+    starboard_emote: "⭐️"
+    starboard_limit: "3"
+    starboard_room:
+      "!wyHfFqhMEjzGevXVYq:maishond.nl"
+      # - name: ALLES_DLP_PASSWORD
+      #   valueFrom:
+      #     secretKeyRef:
+      #       name: yucky-rs-matrix
+      #       key: alles_dlp_password
+      # - name: OPENAI
+      #   valueFrom:
+      #     secretKeyRef:
+      #       name: yucky-rs-matrix
+      #       key: openai_token
+      # volumeMounts:
+      #   - name: tz-config
+      #     mountPath: /etc/localtime
+      # securityContext:
+      #   capabilities:
+      #     drop:
+      #       - "ALL"
+      #   allowPrivilegeEscalation: false
+      #   runAsNonRoot: true
+      #   seccompProfile:
+      #     type: RuntimeDefault
       # volumes:
       #   - name: tz-config
       #     hostPath:
