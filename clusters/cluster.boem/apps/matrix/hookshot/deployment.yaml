@@ -20,13 +20,13 @@ spec:
           image: halfshot/matrix-hookshot:latest
           volumeMounts:
             - name: registration
-              mountPath: /data
+              mountPath: /data/registration.yml
               subPath: registration.yml
             - name: config
-              mountPath: /data
+              mountPath: /data/config.yml
               subPath: config.yml
             - name: passkey
-              mountPath: /data
+              mountPath: /data/passkey.pem
               subPath: passkey.pem
       volumes:
         - name: registration
