@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hookshot
+  namespace: matrix
+  labels:
+    app: hookshot
+spec:
+  selector:
+    matchLabels:
+      app: hookshot
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hookshot
+    spec:
+      containers:
+        - name: hookshot
+          image: halfshot/matrix-hookshot:latest
+          volumeMounts:
+            - name: registration
+              mountPath: /data
+              subPath: registration.yml
+            - name: config
+              mountPath: /data
+              subPath: config.yml
+            - name: passkey
+              mountPath: /data
+              subPath: passkey.pem
+      volumes:
+        - name: registration
+          secret:
+            secretName: hookshot-registration
+        - name: config
+          secret:
+            secretName: hookshot-config
+        - name: passkey
+          secret:
+            secretName: hookshot-passkey
+      restartPolicy: Always
