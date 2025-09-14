@@ -1,18 +1,18 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: hookshot
-  namespace: matrix
-spec:
-  chart:
-    spec:
-      chart: hookshot
-      sourceRef:
-        kind: HelmRepository
-        name: hookshot
-        namespace: flux-system
-      version: "0.1.16"
-  interval: 24h
-  valuesFrom:
-    - kind: Secret
-      name: values-hookshot
+# apiVersion: helm.toolkit.fluxcd.io/v2beta1
+# kind: HelmRelease
+# metadata:
+#   name: hookshot
+#   namespace: matrix
+# spec:
+#   chart:
+#     spec:
+#       chart: hookshot
+#       sourceRef:
+#         kind: HelmRepository
+#         name: hookshot
+#         namespace: flux-system
+#       version: "0.1.16"
+#   interval: 24h
+#   valuesFrom:
+#     - kind: Secret
+#       name: values-hookshot
