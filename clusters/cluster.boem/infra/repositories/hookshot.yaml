@@ -1,0 +1,8 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: hookshot
+  namespace: flux-system
+spec:
+  interval: 24h
+  url: https://matrix-org.github.io/matrix-hookshot
