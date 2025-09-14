@@ -28,12 +28,12 @@
     "**/.vscode/**",
   ],
   flux: {
-    fileMatch: ["(^|/)kubernetes/.+\\.ya?ml$"]
+    managerFilePatterns: ["/\\.yaml(?:\\.j2)?$/"],
   },
   "helm-values": {
-    fileMatch: ["(^|/)kubernetes/.+\\.ya?ml$"]
+    managerFilePatterns: ["/\\.yaml(?:\\.j2)?$/"],
   },
   kubernetes: {
-    fileMatch: ["(^|/)kubernetes/.+\\.ya?ml$"]
+    managerFilePatterns: ["/\\.yaml(?:\\.j2)?$/"],
   },
 }
