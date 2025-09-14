@@ -24,6 +24,9 @@ spec:
           storageClassName: ceph-block
       ingress:
         host: matrix.maishond.nl
+      appservices:
+        - secret: hookshot-registration
+          secretKey: registration.yml
       additional:
         ## Either reference config to inject by:
         1-custom-config:
