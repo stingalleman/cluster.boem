@@ -43,5 +43,12 @@ spec:
           name: jip-vm
           namespace: traefik
           port: 2188
+    - kind: Rule
+      match: Host(`lizzy.jipfr.nl`)
+      services:
+        - kind: Service
+          name: jip-vm
+          namespace: traefik
+          port: 8081
   tls:
     secretName: jipfr.nl-prod-tls
