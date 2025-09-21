@@ -128,10 +128,10 @@ spec:
 
   # enable the crash collector for ceph daemon crash collection
   crashCollector:
-    disable: false
+    disable: true
     # Uncomment daysToRetain to prune ceph crash entries older than the
     # specified number of days.
-    #daysToRetain: 30
+    daysToRetain: 30
   # enable log collector, daemons will log on files and rotate
   logCollector:
     enabled: true
@@ -243,7 +243,7 @@ spec:
   #   exporter:
   #   cmd-reporter:
   # The option to automatically remove OSDs that are out and are safe to destroy.
-  removeOSDsIfOutAndSafeToRemove: true
+  removeOSDsIfOutAndSafeToRemove: false
   priorityClassNames:
     #all: rook-ceph-default-priority-class
     mon: system-node-critical
