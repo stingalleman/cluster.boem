@@ -23,10 +23,10 @@ spec:
               name: http
             - containerPort: 8554
               name: rtsp
-          volumeMounts:
-            - name: config
-              mountPath: /mediamtx.yml
-              subPath: mediamtx.yml
+          # volumeMounts:
+          #   - name: config
+          #     mountPath: /mediamtx.yml
+          #     subPath: mediamtx.yml
       volumes:
         - name: config
           configMap:
