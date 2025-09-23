@@ -10,7 +10,6 @@ data:
         # source: rtsp://10.10.11.2
         # Transport protocol used to pull the stream. available values are "automatic", "udp", "multicast", "tcp".
         # rtspTransport: tcp
-    paths:
       compressed:
       original:
         runOnReady: >
