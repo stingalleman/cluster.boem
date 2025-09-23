@@ -21,7 +21,7 @@ spec:
             min_size: "1"
           failureDomain: host
           replicated:
-            size: 1
+            size: 3
         storageClass:
           allowVolumeExpansion: true
           enabled: true
