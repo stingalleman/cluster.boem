@@ -11,3 +11,7 @@ spec:
       protocol: TCP
       port: 8889
       targetPort: http
+    - name: webrtcudp
+      protocol: UDP
+      port: 8189
+      targetPort: 8189

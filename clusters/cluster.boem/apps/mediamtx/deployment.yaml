@@ -23,6 +23,8 @@ spec:
               name: http
             - containerPort: 8554
               name: rtsp
+            - containerPort: 8189
+              name: webrtcudp
           volumeMounts:
             - name: config
               mountPath: /mediamtx.yml
