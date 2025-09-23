@@ -23,7 +23,7 @@ spec:
               name: mediamtx
           volumeMounts:
             - name: config
-              mountPath: /
+              mountPath: /mediamtx.yml
               subPath: mediamtx.yml
       volumes:
         - name: config
