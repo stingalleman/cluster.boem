@@ -14,21 +14,21 @@ spec:
       version: "v1.16.6"
   interval: 24h
   values:
-    cephBlockPools:
-      - name: ceph-blockpool
-        spec:
-          parameters:
-            min_size: "1"
-          failureDomain: host
-          replicated:
-            size: 3
-        storageClass:
-          allowVolumeExpansion: true
-          enabled: true
-          isDefault: true
-          name: ceph-block
-          reclaimPolicy: Delete
-          volumeBindingMode: Immediate
+    # cephBlockPools:
+    #   - name: ceph-blockpool
+    #     spec:
+    #       parameters:
+    #         min_size: "1"
+    #       failureDomain: host
+    #       replicated:
+    #         size: 3
+    #     storageClass:
+    #       allowVolumeExpansion: true
+    #       enabled: true
+    #       isDefault: true
+    #       name: ceph-block
+    #       reclaimPolicy: Delete
+    #       volumeBindingMode: Immediate
     # -- Namespace of the main rook operator
     operatorNamespace: rook-ceph
     # # Installs a debugging toolbox deployment
