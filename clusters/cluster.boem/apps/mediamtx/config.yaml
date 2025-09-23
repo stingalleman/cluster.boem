@@ -1,0 +1,10 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: mediamtx-config
+  namespace: default
+data:
+  mediamtx.yml: |
+    paths:
+      proxied:
+        source: rtsp://10.10.11.2

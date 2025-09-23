@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mediamtx
+  namespace: default
+  labels:
+    app: mediamtx
+spec:
+  selector:
+    matchLabels:
+      app: mediamtx
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mediamtx
+    spec:
+      containers:
+        - name: mediamtx
+          image: bluenviron/mediamtx:latest
+          ports:
+            - containerPort: 80
+              name: mediamtx
+          volumeMounts:
+            - name: config
+              mountPath: /
+              subPath: mediamtx.yml
+      volumes:
+        - name: config
+          configMap:
+            name: mediamtx-config
+      restartPolicy: Always
