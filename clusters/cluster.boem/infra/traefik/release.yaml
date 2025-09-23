@@ -502,13 +502,13 @@ spec:
           internal: false
         exposedPort: 53
         protocol: UDP
-      mediamtx-udp:
-        port: 8189
-        expose:
-          default: true
-          internal: false
-        exposedPort: 8189
-        protocol: UDP
+      # mediamtx-udp:
+      #   port: 8189
+      #   expose:
+      #     default: true
+      #     internal: false
+      #   exposedPort: 8189
+      #   protocol: UDP
       dns-tcp:
         port: 53
         expose:
