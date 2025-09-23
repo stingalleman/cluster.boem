@@ -123,5 +123,13 @@ spec:
           namespace: immich
           port: 2283
 
+    - kind: Rule
+      match: Host(`vroem.stingalleman.nl`)
+      services:
+        - kind: Service
+          name: mediamtx
+          namespace: default
+          port: http
+
   tls:
     secretName: stingalleman.nl-prod-tls

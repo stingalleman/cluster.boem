@@ -19,8 +19,10 @@ spec:
         - name: mediamtx
           image: bluenviron/mediamtx:latest
           ports:
-            - containerPort: 80
-              name: mediamtx
+            - containerPort: 8889
+              name: http
+            - containerPort: 8554
+              name: rtsp
           volumeMounts:
             - name: config
               mountPath: /mediamtx.yml
