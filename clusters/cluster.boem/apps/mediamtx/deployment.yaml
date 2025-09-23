@@ -17,16 +17,16 @@ spec:
     spec:
       containers:
         - name: mediamtx
-          image: bluenviron/mediamtx:latest
+          image: bluenviron/mediamtx:latest-ffmpeg
           ports:
             - containerPort: 8889
               name: http
             - containerPort: 8554
               name: rtsp
-          # volumeMounts:
-          #   - name: config
-          #     mountPath: /mediamtx.yml
-          #     subPath: mediamtx.yml
+          volumeMounts:
+            - name: config
+              mountPath: /mediamtx.yml
+              subPath: mediamtx.yml
       volumes:
         - name: config
           configMap:
