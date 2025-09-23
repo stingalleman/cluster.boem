@@ -8,7 +8,15 @@ spec:
     app: mediamtx
   type: LoadBalancer
   ports:
-    - name: rtsp
+    - name: rtsp1
+      protocol: SCTP
+      port: 8554
+      targetPort: 8554
+    - name: rtsp2
+      protocol: UDP
+      port: 8554
+      targetPort: 8554
+    - name: rtsp3
       protocol: TCP
       port: 8554
-      targetPort: rtsp
+      targetPort: 8554
