@@ -509,13 +509,13 @@ spec:
       #     internal: false
       #   exposedPort: 8189
       #   protocol: UDP
-      dns-tcp:
-        port: 53
-        expose:
-          default: true
-          internal: false
-        exposedPort: 53
-        protocol: TCP
+      # dns-tcp:
+      #   port: 53
+      #   expose:
+      #     default: true
+      #     internal: false
+      #   exposedPort: 53
+      #   protocol: TCP
       metrics:
         # -- When using hostNetwork, use another port to avoid conflict with node exporter:
         # https://github.com/prometheus/prometheus/wiki/Default-port-allocations
