@@ -9,7 +9,9 @@ data:
       - vroem.stingalleman.nl
       - 2a07:54c7:5201:6e6f::a
       - 45.83.205.8
-
+    webrtcLocalTCPAddress: :8189
+    webrtcICEServers2:
+      - url: stun:stun.l.google.com:19302
     paths:
       vroem:
         # source: rtsp://10.10.11.2
