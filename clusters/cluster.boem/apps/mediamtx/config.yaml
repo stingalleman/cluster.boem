@@ -14,7 +14,7 @@ data:
       - url: stun:stun.l.google.com:19302
     paths:
       vroem:
-        # source: rtsp://10.10.11.2
+        source: rtsp://10.10.88.10
         # Transport protocol used to pull the stream. available values are "automatic", "udp", "multicast", "tcp".
         # rtspTransport: tcp
       compressed:

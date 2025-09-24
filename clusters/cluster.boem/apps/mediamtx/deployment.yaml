@@ -5,6 +5,8 @@ metadata:
   namespace: default
   labels:
     app: mediamtx
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   selector:
     matchLabels:
