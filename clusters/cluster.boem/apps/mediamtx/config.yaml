@@ -16,7 +16,7 @@ data:
       vroem:
         source: rtsp://10.10.88.10
         # Transport protocol used to pull the stream. available values are "automatic", "udp", "multicast", "tcp".
-        # rtspTransport: tcp
+        rtspTransport: tcp
       compressed:
       original:
         runOnReady: >
