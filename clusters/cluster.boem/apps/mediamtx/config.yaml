@@ -24,3 +24,5 @@ data:
             -c:v libx264 -pix_fmt yuv420p -preset ultrafast -b:v 600k -c:a libopus -b:a 64K -async 50
             -f rtsp rtsp://localhost:$RTSP_PORT/compressed
         runOnReadyRestart: yes
+        source: rtsp://10.10.88.10
+        rtspTransport: tcp
