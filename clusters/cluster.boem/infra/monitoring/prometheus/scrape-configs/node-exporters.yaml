@@ -12,3 +12,4 @@ spec:
         job: node-exporters
       targets:
         - "10.10.10.2:9100"
+        - "10.10.10.21:9100"
