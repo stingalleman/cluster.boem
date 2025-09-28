@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: synapse-admin
+  namespace: matrix
+  labels:
+    app: synapse-admin
+spec:
+  selector:
+    matchLabels:
+      app: synapse-admin
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: synapse-admin
+    spec:
+      containers:
+        - name: synapse-admin
+          image: ghcr.io/etkecc/synapse-admin
+          ports:
+            - containerPort: 8080
+              name: http
+
+      restartPolicy: Always
