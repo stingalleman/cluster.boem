@@ -19,7 +19,7 @@ spec:
         - name: synapse-admin
           image: ghcr.io/etkecc/synapse-admin
           ports:
-            - containerPort: 8080
+            - containerPort: 80
               name: http
 
       restartPolicy: Always
