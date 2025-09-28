@@ -119,7 +119,6 @@ spec:
       workers:
         account-data:
           enabled: true
-          replicas: 2
         appservice:
           enabled: true
         background:
@@ -151,7 +150,6 @@ spec:
           enabled: true
         presence-writer:
           enabled: true
-          replicas: 2
         push-rules:
           enabled: true
         pusher:
@@ -161,7 +159,6 @@ spec:
           enabled: true
         sliding-sync:
           enabled: true
-          repliacas: 2
         sso-login:
           enabled: true
         synchrotron:
