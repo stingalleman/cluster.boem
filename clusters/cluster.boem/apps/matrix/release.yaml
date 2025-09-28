@@ -159,6 +159,7 @@ spec:
           enabled: true
         sliding-sync:
           enabled: true
+          replicas: 3
         sso-login:
           enabled: true
         synchrotron:
