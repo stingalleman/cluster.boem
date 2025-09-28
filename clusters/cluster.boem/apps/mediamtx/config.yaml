@@ -5,18 +5,21 @@ metadata:
   namespace: default
 data:
   mediamtx.yml: |
+    readTimeout: 30s
+    writeTimeout: 30s
     webrtcAdditionalHosts:
       - vroem.stingalleman.nl
       - 2a07:54c7:5201:6e6f::a
       - 45.83.205.8
-    webrtcLocalTCPAddress: :8189
+    # webrtcLocalUDPAddress: ":8189"
+    webrtcLocalUDPAddress: ""
+    webrtcLocalTCPAddress: ":8190" # keep disabled unless you really need TCP ICE. :contentReference[oaicite:5]{index=5}
     webrtcICEServers2:
       - url: stun:stun.l.google.com:19302
     paths:
       vroem:
-        # rtspTransport: tcp
-        # source: rtsp://10.10.88.10
-        # Transport protocol used to pull the stream. available values are "automatic", "udp", "multicast", "tcp".
+        rtspTransport: tcp
+        source: rtsp://10.10.88.10
       # compressed:
       # original:
       #   runOnReady: >
