@@ -18,6 +18,61 @@ spec:
       tlsSecret: maishond.nl-prod-tls
 
     synapse:
+      resources:
+        requests:
+          memory: 100Mi
+          cpu: 100m
+
+        limits:
+          memory: 6Gi
+          # cpu:
+      livenessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 50 # 8
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 6 # 6
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the readinessProbe
+      readinessProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 150 # 8
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 2
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 2
+      ## Configuration of the thresholds and frequencies of the startupProbe
+      startupProbe:
+        ## How many consecutive failures for the probe to be considered failed
+        failureThreshold: 54
+
+        ## Number of seconds after the container has started before the probe starts
+        initialDelaySeconds: 0
+
+        ## How often (in seconds) to perform the probe
+        periodSeconds: 2
+
+        ## How many consecutive successes for the probe to be consider successful after having failed
+        successThreshold: 1
+
+        ## Number of seconds after which the probe times out
+        timeoutSeconds: 1
       enabled: true
       media:
         storage:
@@ -64,6 +119,7 @@ spec:
       workers:
         account-data:
           enabled: true
+          replicas: 2
         appservice:
           enabled: true
         background:
@@ -72,6 +128,7 @@ spec:
           enabled: true
         device-lists:
           enabled: true
+          replicas: 3
         encryption:
           enabled: true
         event-creator:
@@ -89,10 +146,12 @@ spec:
           enabled: true
         initial-synchrotron:
           enabled: true
+          replicas: 3
         media-repository:
           enabled: true
         presence-writer:
           enabled: true
+          replicas: 2
         push-rules:
           enabled: true
         pusher:
@@ -102,10 +161,12 @@ spec:
           enabled: true
         sliding-sync:
           enabled: true
+          repliacas: 2
         sso-login:
           enabled: true
         synchrotron:
           enabled: true
+          replicas: 3
         typing-persister:
           enabled: true
         user-dir:
