@@ -134,6 +134,13 @@ peers:
         disabled: true
       - ip: 2001:7f8:1:0:a500:21:5577:1 # AMS-IX
 
+  # TODO: add tx-path
+  - name: bgproutes.io
+    as: 65000
+    # as_set: AS215577:AS-LUCAS
+    neighbors:
+      - ip: 2a01:4f8:1c1a:bf78::1 # eBGP
+
 prefixlists:
   - name: as216455_inet6
     prefixes:
