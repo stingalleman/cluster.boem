@@ -77,7 +77,7 @@ spec:
       media:
         storage:
           storageClassName: ceph-block
-        maxUploadSize: 2G
+        maxUploadSize: 2000M
       ingress:
         host: matrix.maishond.nl
       appservices:
