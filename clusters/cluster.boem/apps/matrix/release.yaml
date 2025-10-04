@@ -88,6 +88,11 @@ spec:
           config: |
             admin_contact: "mailto:me@stingalleman.nl"
             max_upload_size: 2G
+            media_upload_limits:
+            - time_period: 1h
+              max_size: 4G
+            - time_period: 1w
+              max_size: 10G
             url_preview_enabled: true
             url_preview_ip_range_blacklist:
             - 127.0.0.0/8
