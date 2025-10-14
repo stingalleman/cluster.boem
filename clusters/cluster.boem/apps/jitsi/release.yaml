@@ -1,164 +1,165 @@
-# apiVersion: helm.toolkit.fluxcd.io/v2
-# kind: HelmRelease
-# metadata:
-#   name: jitsi
-#   namespace: jitsi
-# spec:
-#   # install:
-#   #   remediation:
-#   #     retries: -1
-#   chart:
-#     spec:
-#       chart: jitsi-meet
-#       version: v1.5.1
-#       sourceRef:
-#         kind: HelmRepository
-#         name: jitsi
-#         namespace: flux-system
-#   # postRenderers:
-#   #   - kustomize:
-#   #       patches:
-#   #         - patch: |-
-#   #             apiVersion: v1
-#   #             kind: Deployment
-#   #             metadata:
-#   #               name: jitsi-jitsi-meet-jvb
-#   #               namespace: jitsi
-#   #               labels:
-#   #                 lb-pool: external
-#   #           target:
-#   #             name: jitsi-jitsi-meet-jvb
-#   #             kind: Service
-#   #             version: v1
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: jitsi
+  namespace: jitsi
+spec:
+  # install:
+  #   remediation:
+  #     retries: -1
+  chart:
+    spec:
+      chart: jitsi-meet
+      version: v1.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: jitsi
+        namespace: flux-system
+  # postRenderers:
+  #   - kustomize:
+  #       patches:
+  #         - patch: |-
+  #             apiVersion: v1
+  #             kind: Deployment
+  #             metadata:
+  #               name: jitsi-jitsi-meet-jvb
+  #               namespace: jitsi
+  #               labels:
+  #                 lb-pool: external
+  #           target:
+  #             name: jitsi-jitsi-meet-jvb
+  #             kind: Service
+  #             version: v1
 
-#   #         # - target:
-#   #         #     version: v1
-#   #         #     kind: Service
-#   #         #     name: jitsi-jitsi-meet-jvb
-#   #         #     namespace: jitsi
-#   #         #   patch: |
-#   #         #     - op: add
-#   #         #       path: /metadata/labels/lb-pool
-#   #         #       value: external
-#   interval: 24h
-#   values:
-#     enableAuth: false
-#     enableGuests: true
-#     publicURL: "meet.maishond.nl"
-#     tz: Europe/Amsterdam
+  #         # - target:
+  #         #     version: v1
+  #         #     kind: Service
+  #         #     name: jitsi-jitsi-meet-jvb
+  #         #     namespace: jitsi
+  #         #   patch: |
+  #         #     - op: add
+  #         #       path: /metadata/labels/lb-pool
+  #         #       value: external
+  interval: 24h
+  values:
+    enableAuth: false
+    enableGuests: true
+    publicURL: "meet.maishond.nl"
+    tz: Europe/Amsterdam
 
-#     ## WebSocket configuration:
-#     #
-#     #  Both Colibri and XMPP WebSockets are disabled by default,
-#     #  since some LoadBalancer / Reverse Proxy setups can't pass
-#     #  WebSocket connections properly, which might result in breakage
-#     #  for some clients.
-#     #
-#     #  Enable both Colibri and XMPP WebSockets to replicate the current
-#     #  upstream `meet.jit.si` setup. Keep both disabled to replicate
-#     #  older setups which might be more compatible in some cases.
-#     websockets:
-#       ## Colibri (JVB signalling):
-#       colibri:
-#         enabled: true
-#       ## XMPP (Prosody signalling):
-#       xmpp:
-#         enabled: true
+    ## WebSocket configuration:
+    #
+    #  Both Colibri and XMPP WebSockets are disabled by default,
+    #  since some LoadBalancer / Reverse Proxy setups can't pass
+    #  WebSocket connections properly, which might result in breakage
+    #  for some clients.
+    #
+    #  Enable both Colibri and XMPP WebSockets to replicate the current
+    #  upstream `meet.jit.si` setup. Keep both disabled to replicate
+    #  older setups which might be more compatible in some cases.
+    websockets:
+      ## Colibri (JVB signalling):
+      colibri:
+        enabled: true
+      ## XMPP (Prosody signalling):
+      xmpp:
+        enabled: false
 
-#     jvb:
-#       # publicIPs:
-#       #   - 45.83.205.8
-#       #   - 2a07:54c7:5201:6e6f::a
-#       UDPPort: 32768
-#       stunServers: >-
-#         stun.l.google.com:19302,stun1.l.google.com:19302,stun2.l.google.com:19302,stun3.l.google.com:19302,stun4.l.google.com:19302
-#       useHostPort: true
-#       useNodeIP: true
-#       # UDPPort: 10000
-#       # service:
-#       #   enabled: true
-#       #   type: ClusterIP
-#       # nodePort: 10000
-#       # service:
-#       #   enabled: true
-#       #   type: LoadBalancer
-#       #   ipFamilyPolicy: RequireDualStack
-#       #   externalTrafficPolicy: Cluster
-#       #   annotations:
-#       #     lbipam.cilium.io/ips: "45.83.205.8,2a07:54c7:5201:6e6f::a"
-#       #     lbipam.cilium.io/sharing-key: "8-share"
-#       #     lbipam.cilium.io/sharing-cross-namespace: "*"
-#       # securityContext:
-#       #   capabilities:
-#       #     drop:
-#       #       - ALL
-#       #   allowPrivilegeEscalation: false
-#       # podSecurityContext:
-#       #   seccompProfile:
-#       #     type: RuntimeDefault
+    jvb:
+      publicIPs:
+        - 45.83.205.8
+      #   - 2a07:54c7:5201:6e6f::a
+      # UDPPort: 32768
+      # stunServers: >-
+      # stun.l.google.com:19302,stun1.l.google.com:19302,stun2.l.google.com:19302,stun3.l.google.com:19302,stun4.l.google.com:19302
+      # useHostPort: true
+      # useNodeIP: true
+      # UDPPort: 10000
+      # service:
+      #   enabled: true
+      #   type: ClusterIP
+      # nodePort: 10000
+      # service:
+      #   enabled: true
+      #   type: LoadBalancer
+      #   ipFamilyPolicy: RequireDualStack
+      #   externalTrafficPolicy: Cluster
+      #   annotations:
+      #     lbipam.cilium.io/ips: "45.83.205.8,2a07:54c7:5201:6e6f::a"
+      #     lbipam.cilium.io/sharing-key: "8-share"
+      #     lbipam.cilium.io/sharing-cross-namespace: "*"
+      # securityContext:
+      #   capabilities:
+      #     drop:
+      #       - ALL
+      #   allowPrivilegeEscalation: false
+      # podSecurityContext:
+      #   seccompProfile:
+      #     type: RuntimeDefault
 
-#     web:
-#       replicaCount: 1
-#       # securityContext:
-#       #   capabilities:
-#       #     drop:
-#       #       - ALL
-#       #   allowPrivilegeEscalation: false
-#       # podSecurityContext:
-#       #   seccompProfile:
-#       #     type: RuntimeDefault
+    web:
+      replicaCount: 1
+      # securityContext:
+      #   capabilities:
+      #     drop:
+      #       - ALL
+      #   allowPrivilegeEscalation: false
+      # podSecurityContext:
+      #   seccompProfile:
+      #     type: RuntimeDefault
 
-#     jibri:
-#       # replicaCount: 3
-#       ## Enabling Jibri will allow users to record
-#       ## and/or stream their meetings (e.g. to YouTube).
-#       enabled: false # true
+    jibri:
+      # replicaCount: 3
+      ## Enabling Jibri will allow users to record
+      ## and/or stream their meetings (e.g. to YouTube).
+      enabled: false # true
 
-#       ## Enable single-use mode for Jibri (recommended).
-#       singleUseMode: false
+      ## Enable single-use mode for Jibri (recommended).
+      singleUseMode: false
 
-#       ## Enable multiple Jibri instances.
-#       ## Secommended for single-use mode.
-#       replicaCount: 1
+      ## Enable multiple Jibri instances.
+      ## Secommended for single-use mode.
+      replicaCount: 1
 
-#       ## Enable recording service.
-#       ## Set this to true/false to enable/disable local recordings.
-#       ## Defaults to enabled (allow local recordings).
-#       recording: true
+      ## Enable recording service.
+      ## Set this to true/false to enable/disable local recordings.
+      ## Defaults to enabled (allow local recordings).
+      recording: true
 
-#       ## Enable livestreaming service.
-#       ## Set this to true/false to enable/disable live streams.
-#       ## Defaults to disabled (livestreaming is forbidden).
-#       livestreaming: true
+      ## Enable livestreaming service.
+      ## Set this to true/false to enable/disable live streams.
+      ## Defaults to disabled (livestreaming is forbidden).
+      livestreaming: true
 
-#       ## Enable persistent storage for local recordings.
-#       ## If disabled, jibri pod will use a transient
-#       ## emptyDir-backed storage instead.
-#       # persistence:
-#       #   enabled: true
-#       #   size: 32Gi
+      ## Enable persistent storage for local recordings.
+      ## If disabled, jibri pod will use a transient
+      ## emptyDir-backed storage instead.
+      # persistence:
+      #   enabled: true
+      #   size: 32Gi
 
-#       shm:
-#         ## Set to true to enable "/dev/shm" mount.
-#         ## May be required by built-in Chromium.
-#         enabled: false # true
+      shm:
+        ## Set to true to enable "/dev/shm" mount.
+        ## May be required by built-in Chromium.
+        enabled: false # true
 
-#     # jigasi:
-#     #   securityContext:
-#     #     capabilities:
-#     #       drop:
-#     #         - ALL
-#     #     allowPrivilegeEscalation: false
-#     #   podSecurityContext:
-#     #     seccompProfile:
-#     #       type: RuntimeDefault
 
-#     # jicofo:
-#     #   securityContext:
-#     #     capabilities:
-#     #       drop:
-#     #         - ALL
-#     #     allowPrivilegeEscalation: false
-#     #   podSecurityContext:
-#     #     seccompProfile:
-#     #       type: RuntimeDefault
+    # jigasi:
+    #   securityContext:
+    #     capabilities:
+    #       drop:
+    #         - ALL
+    #     allowPrivilegeEscalation: false
+    #   podSecurityContext:
+    #     seccompProfile:
+    #       type: RuntimeDefault
+
+    # jicofo:
+    #   securityContext:
+    #     capabilities:
+    #       drop:
+    #         - ALL
+    #     allowPrivilegeEscalation: false
+    #   podSecurityContext:
+    #     seccompProfile:
+    #       type: RuntimeDefault
