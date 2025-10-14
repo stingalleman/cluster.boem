@@ -71,6 +71,8 @@ spec:
       useHostPort: false
       service:
         enabled: true
+        externalTrafficPolicy: Local
+
       #   - 2a07:54c7:5201:6e6f::a
       # UDPPort: 32768
       # stunServers: >-
