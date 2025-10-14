@@ -509,6 +509,13 @@ spec:
           internal: false
         exposedPort: 8189
         protocol: UDP
+      jitsi-udp:
+        port: 10000
+        expose:
+          default: true
+          internal: false
+        exposedPort: 10000
+        protocol: UDP
       # dns-tcp:
       #   port: 53
       #   expose:
