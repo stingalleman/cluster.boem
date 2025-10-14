@@ -66,13 +66,18 @@ spec:
         enabled: true
 
     jvb:
-      publicIPs:
-        - 45.83.205.8
-        - 2a07:54c7:5201:6e6f::a
-      UDPPort: 10000
-      service:
-        enabled: true
-        type: ClusterIP
+      # publicIPs:
+      #   - 45.83.205.8
+      #   - 2a07:54c7:5201:6e6f::a
+      UDPPort: 32768
+      stunServers: >-
+        meet-jit-si-turnrelay.jitsi.net:443,stun1.l.google.com:19302,stun2.l.google.com:19302,stun3.l.google.com:19302,stun4.l.google.com:19302
+      useHostPort: true
+      useNodeIP: true
+      # UDPPort: 10000
+      # service:
+      #   enabled: true
+      #   type: ClusterIP
       # nodePort: 10000
       # service:
       #   enabled: true
