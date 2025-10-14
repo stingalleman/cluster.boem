@@ -70,6 +70,9 @@ spec:
         - 45.83.205.8
         - 2a07:54c7:5201:6e6f::a
       UDPPort: 10000
+      service:
+        enabled: true
+        type: ClusterIP
       # nodePort: 10000
       # service:
       #   enabled: true
