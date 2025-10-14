@@ -15,16 +15,16 @@ spec:
         kind: HelmRepository
         name: jitsi
         namespace: flux-system
-  # postRenderers:
-  #   - kustomize:
-  #       patches:
-  #         - target:
-  #             version: v1
-  #             kind: Deployment
-  #             name: metrics-server
-  #           patch: |
-  #             - op: remove
-  #               path: /spec/externalTrafficPolicy
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              version: v1
+              kind: Service
+              name: jitsi-jitsi-meet-jvb
+            patch: |
+              - op: remove
+                path: /spec/externalTrafficPolicy
   # - patch: |-
   #     apiVersion: v1
   #     kind: Deployment
