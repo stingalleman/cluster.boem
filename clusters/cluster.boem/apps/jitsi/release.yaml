@@ -18,28 +18,35 @@ spec:
   # postRenderers:
   #   - kustomize:
   #       patches:
-  #         - patch: |-
-  #             apiVersion: v1
-  #             kind: Deployment
-  #             metadata:
-  #               name: jitsi-jitsi-meet-jvb
-  #               namespace: jitsi
-  #               labels:
-  #                 lb-pool: external
-  #           target:
-  #             name: jitsi-jitsi-meet-jvb
-  #             kind: Service
+  #         - target:
   #             version: v1
+  #             kind: Deployment
+  #             name: metrics-server
+  #           patch: |
+  #             - op: remove
+  #               path: /spec/externalTrafficPolicy
+  # - patch: |-
+  #     apiVersion: v1
+  #     kind: Deployment
+  #     metadata:
+  #       name: jitsi-jitsi-meet-jvb
+  #       namespace: jitsi
+  #       labels:
+  #         lb-pool: external
+  #   target:
+  #     name: jitsi-jitsi-meet-jvb
+  #     kind: Service
+  #     version: v1
 
-  #         # - target:
-  #         #     version: v1
-  #         #     kind: Service
-  #         #     name: jitsi-jitsi-meet-jvb
-  #         #     namespace: jitsi
-  #         #   patch: |
-  #         #     - op: add
-  #         #       path: /metadata/labels/lb-pool
-  #         #       value: external
+  # - target:
+  #     version: v1
+  #     kind: Service
+  #     name: jitsi-jitsi-meet-jvb
+  #     namespace: jitsi
+  #   patch: |
+  #     - op: add
+  #       path: /metadata/labels/lb-pool
+  #       value: external
   interval: 24h
   values:
     enableAuth: false
@@ -68,12 +75,12 @@ spec:
     jvb:
       publicIPs:
         - 45.83.205.8
+        - 2a07:54c7:5201:6e6f::a
       useHostPort: false
       service:
         enabled: true
-        externalTrafficPolicy: Local
+        # externalTrafficPolicy: Local
 
-      #   - 2a07:54c7:5201:6e6f::a
       # UDPPort: 32768
       # stunServers: >-
       # stun.l.google.com:19302,stun1.l.google.com:19302,stun2.l.google.com:19302,stun3.l.google.com:19302,stun4.l.google.com:19302
