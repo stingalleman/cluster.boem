@@ -155,6 +155,15 @@ spec:
         ## May be required by built-in Chromium.
         enabled: false # true
 
+    prosody:
+      extraVolumes:
+        - name: prosody-modules
+          configMap:
+            name: prosody-modules
+      extraVolumeMounts:
+        - name: prosody-modules
+          subPath: mod_event_sync_component.lua
+          mountPath: /prosody-plugins-custom/mod_event_sync_component.lua
 
     # jigasi:
     #   securityContext:
