@@ -115,6 +115,8 @@ spec:
             - 2001:db8::/32
             - ff00::/8
             - fec0::/10
+            - 45.83.205.8/32
+            - 2a07:54c7:5201:6e6f::a/128
             server_notices:
               system_mxid_localpart: notices
               system_mxid_display_name: maischat notices
