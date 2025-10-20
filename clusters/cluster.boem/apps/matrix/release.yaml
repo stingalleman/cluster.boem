@@ -214,3 +214,5 @@ spec:
 
     wellKnownDelegation:
       enabled: true
+      baseDomainRedirect:
+        enabled: false
