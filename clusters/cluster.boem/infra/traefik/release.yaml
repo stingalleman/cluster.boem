@@ -495,13 +495,13 @@ spec:
           internal: false
         exposedPort: 6697
         protocol: TCP
-      dns-udp:
-        port: 53
-        expose:
-          default: true
-          internal: false
-        exposedPort: 53
-        protocol: UDP
+      # dns-udp:
+      #   port: 53
+      #   expose:
+      #     default: true
+      #     internal: false
+      #   exposedPort: 53
+      #   protocol: UDP
       mediamtx-udp:
         port: 8189
         expose:
