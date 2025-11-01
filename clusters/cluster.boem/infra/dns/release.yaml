@@ -1,0 +1,110 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nameserver
+  namespace: dns
+spec:
+  chart:
+    spec:
+      version: 1.45.0
+      chart: coredns
+      sourceRef:
+        kind: HelmRepository
+        name: coredns
+        namespace: flux-system
+  interval: 24h
+  values:
+    replicaCount: 1
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 25%
+
+    prometheus:
+      service:
+        enabled: false
+        annotations:
+          prometheus.io/scrape: "true"
+          prometheus.io/port: "9153"
+        selector: {}
+      monitor:
+        enabled: false
+        additionalLabels: {}
+        namespace: ""
+        interval: ""
+        selector: {}
+
+    # isClusterService specifies whether chart should be deployed as cluster-service or normal k8s app.
+    isClusterService: false
+
+    # Default zone is what Kubernetes recommends:
+    # https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns-configmap-options
+    servers:
+      - zones:
+          - zone: .
+            use_tcp: true
+        port: 53
+        # -- expose the service on a different port
+        # servicePort: 5353
+        # If serviceType is nodePort you can specify nodePort here
+        # nodePort: 30053
+        # hostPort: 53
+        plugins:
+          - name: errors
+          # Serves a /health endpoint on :8080, required for livenessProbe
+          - name: health
+            configBlock: |-
+              lameduck 10s
+          # Serves a /ready endpoint on :8181, required for readinessProbe
+          - name: ready
+          # Serves a /metrics endpoint on :9153, required for serviceMonitor
+          - name: prometheus
+            parameters: 0.0.0.0:9153
+          - name: forward
+            parameters: . /etc/resolv.conf
+          - name: cache
+            parameters: 30
+          - name: loop
+          - name: reload
+          - name: loadbalance
+
+    # Complete example with all the options:
+    # - zones:                 # the `zones` block can be left out entirely, defaults to "."
+    #   - zone: hello.world.   # optional, defaults to "."
+    #     scheme: tls://       # optional, defaults to "" (which equals "dns://" in CoreDNS)
+    #   - zone: foo.bar.
+    #     scheme: dns://
+    #     use_tcp: true        # set this parameter to optionally expose the port on tcp as well as udp for the DNS protocol
+    #                          # Note that this will not work if you are also exposing tls or grpc on the same server
+    #   port: 12345            # optional, defaults to "" (which equals 53 in CoreDNS)
+    #   plugins:               # the plugins to use for this server block
+    #   - name: kubernetes     # name of plugin, if used multiple times ensure that the plugin supports it!
+    #     parameters: foo bar  # list of parameters after the plugin
+    #     configBlock: |-      # if the plugin supports extra block style config, supply it here
+    #       hello world
+    #       foo bar
+
+    # Extra configuration that is applied outside of the default zone block.
+    # Example to include additional config files, which may come from extraVolumes:
+    # extraConfig:
+    #   import:
+    #     parameters: /opt/coredns/*.conf
+    extraConfig: {}
+
+    # configure custom zone files as per https://coredns.io/2017/05/08/custom-dns-entries-for-kubernetes/
+    zoneFiles: []
+    #  - filename: example.db
+    #    domain: example.com
+    #    contents: |
+    #      example.com.   IN SOA sns.dns.icann.com. noc.dns.icann.com. 2015082541 7200 3600 1209600 3600
+    #      example.com.   IN NS  b.iana-servers.net.
+    #      example.com.   IN NS  a.iana-servers.net.
+    #      example.com.   IN A   192.168.99.102
+    #      *.example.com. IN A   192.168.99.102
