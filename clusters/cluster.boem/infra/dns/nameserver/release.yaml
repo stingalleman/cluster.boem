@@ -65,6 +65,7 @@ spec:
           # Serves a /ready endpoint on :8181, required for readinessProbe
           - name: ready
           # Serves a /metrics endpoint on :9153, required for serviceMonitor
+          - name: auto
           - name: prometheus
             parameters: 0.0.0.0:9153
           - name: cache
