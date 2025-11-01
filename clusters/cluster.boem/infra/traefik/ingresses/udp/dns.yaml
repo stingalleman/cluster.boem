@@ -1,13 +1,13 @@
-apiVersion: traefik.io/v1alpha1
-kind: IngressRouteUDP
-metadata:
-  name: dns-udp-ingress
-  namespace: traefik
-spec:
-  entryPoints:
-    - dns-udp
-  routes:
-    - services:
-        - name: nameserver
-          namespace: dns
-          port: 53
+# apiVersion: traefik.io/v1alpha1
+# kind: IngressRouteUDP
+# metadata:
+#   name: dns-udp-ingress
+#   namespace: traefik
+# spec:
+#   entryPoints:
+#     - dns-udp
+#   routes:
+#     - services:
+#         - name: nameserver
+#           namespace: dns
+#           port: 53
