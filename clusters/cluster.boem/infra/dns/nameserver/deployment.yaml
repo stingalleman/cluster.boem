@@ -52,6 +52,7 @@ spec:
           #   periodSeconds: 10
           ports:
             - containerPort: 53
+              protocol: UDP
               name: dns
           volumeMounts:
             - name: storage
