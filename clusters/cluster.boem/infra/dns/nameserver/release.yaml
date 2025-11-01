@@ -67,8 +67,6 @@ spec:
           # Serves a /metrics endpoint on :9153, required for serviceMonitor
           - name: prometheus
             parameters: 0.0.0.0:9153
-          - name: forward
-            parameters: . /etc/resolv.conf
           - name: cache
             parameters: 30
           - name: loop
@@ -99,12 +97,8 @@ spec:
     extraConfig: {}
 
     # configure custom zone files as per https://coredns.io/2017/05/08/custom-dns-entries-for-kubernetes/
-    zoneFiles: []
-    #  - filename: example.db
-    #    domain: example.com
-    #    contents: |
-    #      example.com.   IN SOA sns.dns.icann.com. noc.dns.icann.com. 2015082541 7200 3600 1209600 3600
-    #      example.com.   IN NS  b.iana-servers.net.
-    #      example.com.   IN NS  a.iana-servers.net.
-    #      example.com.   IN A   192.168.99.102
-    #      *.example.com. IN A   192.168.99.102
+    zoneFiles:
+      - filename: stingalleman.nl
+        domain: stingalleman.nl
+        contents: |
+          stingalleman.nl 3600 IN A 45.83.205.8
