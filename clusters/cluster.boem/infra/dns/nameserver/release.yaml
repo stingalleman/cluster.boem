@@ -66,6 +66,8 @@ spec:
           - name: ready
           # Serves a /metrics endpoint on :9153, required for serviceMonitor
           - name: auto
+            configBlock: |-
+              directory: /etc/coredns
           - name: prometheus
             parameters: 0.0.0.0:9153
           - name: cache
