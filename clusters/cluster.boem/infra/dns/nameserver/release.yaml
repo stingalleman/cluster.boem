@@ -67,7 +67,7 @@ spec:
           # Serves a /metrics endpoint on :9153, required for serviceMonitor
           - name: auto
             configBlock: |-
-              directory: /etc/coredns
+              directory: /etc/coredns/zones
           - name: prometheus
             parameters: 0.0.0.0:9153
           - name: cache
@@ -101,7 +101,7 @@ spec:
 
     # configure custom zone files as per https://coredns.io/2017/05/08/custom-dns-entries-for-kubernetes/
     zoneFiles:
-      - filename: stingalleman.nl
+      - filename: zones/stingalleman.nl.db
         domain: stingalleman.nl
         contents: |
           stingalleman.nl 3600 IN A 45.83.205.8
