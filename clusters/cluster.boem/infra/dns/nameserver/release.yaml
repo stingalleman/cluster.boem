@@ -65,7 +65,8 @@ spec:
           # Serves a /ready endpoint on :8181, required for readinessProbe
           - name: ready
           # Serves a /metrics endpoint on :9153, required for serviceMonitor
-          # - name: file stingalleman.nl.db stingalleman.nl
+          - name: root /etc/coredns
+          - name: file stingalleman.nl.db stingalleman.nl
           - name: prometheus
             parameters: 0.0.0.0:9153
           - name: cache
@@ -104,3 +105,4 @@ spec:
         contents: |
           $ORIGIN .
           stingalleman.nl 3600 IN A 45.83.205.8
+          stingalleman.nl 3600 IN SOA ns1.as216455.net. noc.as216455.net. 2025091906 7200 3600 86400 2419200
