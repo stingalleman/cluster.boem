@@ -101,7 +101,7 @@ spec:
 
     # configure custom zone files as per https://coredns.io/2017/05/08/custom-dns-entries-for-kubernetes/
     zoneFiles:
-      - filename: zones/stingalleman.nl.db
+      - filename: stingalleman.nl.db
         domain: stingalleman.nl
         contents: |
           stingalleman.nl 3600 IN A 45.83.205.8
