@@ -102,7 +102,6 @@ spec:
           cdn.stingalleman.nl     3600    IN      A       45.83.205.3
           chernobyl.stingalleman.nl       3600    IN      A       45.83.205.2
           _dmarc.stingalleman.nl  3600    IN      TXT     "v=DMARC1; p=quarantine; ruf=mailto:me@stingalleman.nl"
-          dns-test.stingalleman.nl        3600    IN      TXT     "update t? raaaa"
           finance-emiel.stingalleman.nl   3600    IN      A       45.83.205.8
           finance-emiel.stingalleman.nl   3600    IN      AAAA    2a07:54c7:5201:6e6f::a
           finance.stingalleman.nl 3600    IN      A       45.83.205.8
@@ -154,15 +153,12 @@ spec:
           stingalleman.nl 3600    IN      SOA     ns1.as216455.net noc.as216455.net 2025091906 7200 3600 86400 2419200
           stingalleman.nl 3660    IN      TXT     "google-site-verification=oqnTQoXlheTHUB24ZwXB463qPCe-p2rVsFOoWmA26Jw"
           stingalleman.nl 3660    IN      TXT     "apple-domain=iKcZGOSjEiX2tkmF"
-          stingalleman.nl 3660    IN      TXT     "test, test, 456 nieuwe test!"
           stingalleman.nl 3660    IN      TXT     "v=spf1 include:icloud.com ~all"
-          tteesstt.stingalleman.nl        3600    IN      TXT     "hoi nameservers"
           wp.stingalleman.nl      3600    IN      A       45.83.205.8
       - filename: db.3.0.0.0.5.4.3.e.7.0.a.2.ip6.arpa
         domain: 3.0.0.0.5.4.3.e.7.0.a.2.ip6.arpa
         contents: |
           $ORIGIN .
-          1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.1.0.0.0.3.0.0.0.5.4.3.e.7.0.a.2.ip6.arpa        300     IN      PTR     test.reactor.boem
           3.0.0.0.5.4.3.e.7.0.a.2.ip6.arpa        3600    IN      NS      ns2.as216455.net.
           3.0.0.0.5.4.3.e.7.0.a.2.ip6.arpa        3600    IN      NS      ns1.as216455.net.
           3.0.0.0.5.4.3.e.7.0.a.2.ip6.arpa        3600    IN      SOA     ns1.as216455.net root.stingalleman.nl 2023071706 7200 3600 86400 2419200
@@ -229,7 +225,6 @@ spec:
           request.maishond.nl     3600    IN      A       45.83.205.8
           request.maishond.nl     3600    IN      AAAA    2a07:54c7:5201:6e6f::a
           terraria.maishond.nl    60      IN      SRV     0 10 7777 t.maishond.nl.
-          test.maishond.nl        1       IN      CNAME   nos.nl.
           t.maishond.nl   60      IN      A       10.10.10.123
           wrap.maishond.nl        3600    IN      CNAME   cname.vercel-dns.com.
       - filename: db.k8s.as216455.net
@@ -257,7 +252,6 @@ spec:
         contents: |
           $ORIGIN .
           1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.2.0.5.8.1.c.f.d.5.0.a.2.ip6.arpa        3600    IN      PTR     ams-rtr01.stingalleman.nl
-          1.2.4.3.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.2.0.5.8.1.c.f.d.5.0.a.2.ip6.arpa        60      IN      PTR     testt
           2.0.5.8.1.c.f.d.5.0.a.2.ip6.arpa        3600    IN      NS      ns2.as216455.net.
           2.0.5.8.1.c.f.d.5.0.a.2.ip6.arpa        3600    IN      NS      ns1.as216455.net.
           2.0.5.8.1.c.f.d.5.0.a.2.ip6.arpa        3600    IN      SOA     ns1.as216455.net root.stingalleman.nl 2023071707 7200 3600 86400 2419200
@@ -399,7 +393,6 @@ spec:
           as216455.net    3600    IN      NS      ns2.as216455.net.
           as216455.net    3600    IN      NS      ns1.as216455.net.
           as216455.net    3600    IN      SOA     ns1.as216455.net noc.as216455.net 2025101204 7200 3600 86400 2419200
-          as216455.net    3600    IN      TXT     "dewdewdwehelloaaaatest"
           as216455.net    3600    IN      TXT     "google-site-verification=9TyMOTo9UJOICNXrf9OpurX1nafdpq8jBQScz9fYtHk"
           as216455.net    3600    IN      TXT     "apple-domain=YqjBqUuXdO7Vpxrh"
           as216455.net    3600    IN      TXT     "v=spf1 include:icloud.com include:_spf.tem.scaleway.com ~all"
