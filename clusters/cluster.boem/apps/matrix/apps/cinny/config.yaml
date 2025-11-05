@@ -11,7 +11,7 @@ data:
         "maishond.nl",
         "vdaa.me"
       ],
-      "allowCustomHomeservers": true,
+      "allowCustomHomeservers": false,
 
       "featuredCommunities": {
         "openAsDefault": false,
