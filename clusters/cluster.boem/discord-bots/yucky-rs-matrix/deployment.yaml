@@ -89,7 +89,7 @@ spec:
                 secretKeyRef:
                   name: yucky-rs-matrix
                   key: starboard_room
-            - name: GOBLIN_ROOM
+            - name: GOBLIN_CHANNEL
               valueFrom:
                 secretKeyRef:
                   name: yucky-rs-matrix
