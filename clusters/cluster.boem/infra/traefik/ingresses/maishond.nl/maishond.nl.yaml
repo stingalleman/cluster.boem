@@ -75,7 +75,7 @@ spec:
       match: Host(`chat.maishond.nl`)
       services:
         - kind: Service
-          name: cinny
+          name: cynisch
           namespace: matrix
           port: 80
 
