@@ -10,7 +10,7 @@ data:
       "homeserverList": [
         "maishond.nl"
       ],
-      "allowCustomHomeservers": false,
+      "allowCustomHomeservers": true,
 
       "featuredCommunities": {
         "openAsDefault": false,
