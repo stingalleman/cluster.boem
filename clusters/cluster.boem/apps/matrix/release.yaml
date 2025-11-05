@@ -216,3 +216,5 @@ spec:
       enabled: true
       baseDomainRedirect:
         enabled: false
+      additional:
+        support: '{ "contacts": [{ "email_address": "noc@as216455.net", "matrix_id": "@sting:maishond.nl", "role": "m.role.admin" }]}'
