@@ -15,9 +15,11 @@ spec:
       labels:
         app: cinny
     spec:
+      imagePullSecrets:
+        - name: ghcr-login-secret
       containers:
         - name: cinny
-          image: ghcr.io/cinnyapp/cinny:v4.10.1
+          image: ghcr.io/maishond/cynisch:latest
           ports:
             - containerPort: 80
               name: http
