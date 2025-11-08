@@ -29,23 +29,21 @@ spec:
 
     prometheus:
       service:
-        enabled: false
+        enabled: true
         annotations:
           prometheus.io/scrape: "true"
           prometheus.io/port: "9153"
-        selector: {}
+        # selector: {}
       monitor:
-        enabled: false
-        additionalLabels: {}
-        namespace: ""
-        interval: ""
-        selector: {}
+        enabled: true
+        # additionalLabels: {}
+        # namespace: ""
+        # interval: ""
+        # selector: {}
 
     # isClusterService specifies whether chart should be deployed as cluster-service or normal k8s app.
     isClusterService: false
 
-    # Default zone is what Kubernetes recommends:
-    # https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns-configmap-options
     servers:
       - zones:
           - zone: .
@@ -65,14 +63,17 @@ spec:
           # Serves a /ready endpoint on :8181, required for readinessProbe
           - name: ready
           # Serves a /metrics endpoint on :9153, required for serviceMonitor
-          - name: root /etc/coredns
-          - name: auto
-            configBlock: |-
-              directory /etc/coredns
+          # - name: root /etc/coredns
           - name: prometheus
             parameters: 0.0.0.0:9153
           - name: cache
             parameters: 30
+          - name: auto
+            configBlock: |-
+              directory /etc/coredns
+          - name: auto
+            configBlock: |-
+              directory /zones
           - name: loop
           - name: reload
           - name: loadbalance
@@ -84,77 +85,29 @@ spec:
     #     parameters: /opt/coredns/*.conf
     extraConfig: {}
 
+    extraVolumes:
+      - name: stingalleman.nl
+        configMap:
+          name: stingalleman.nl
+    # - name: some-volume-name
+    #   emptyDir: {}
+    # optional array of mount points for extraVolumes
+    extraVolumeMounts:
+      - name: some-volume-name
+        mountPath: /etc/wherever
+
+    # optional array of secrets to mount inside coredns container
+    # possible usecase: need for secure connection with etcd backend
+    extraSecrets: []
+    # - name: etcd-client-certs
+    #   mountPath: /etc/coredns/tls/etcd
+    #   defaultMode: 420
+    # - name: some-fancy-secret
+    #   mountPath: /etc/wherever
+    #   defaultMode: 440
+
     # configure custom zone files as per https://coredns.io/2017/05/08/custom-dns-entries-for-kubernetes/
     zoneFiles:
-      - filename: db.stingalleman.nl
-        domain: stingalleman.nl
-        contents: |
-          $ORIGIN .
-          ams-rtr01.stingalleman.nl       3600    IN      A       45.83.205.2
-          ams-rtr01.stingalleman.nl       3600    IN      AAAA    2a05:dfc1:8502::1
-          ams-rtr02.stingalleman.nl       3600    IN      A       78.141.216.17
-          ams-rtr02.stingalleman.nl       3600    IN      AAAA    2001:19f0:5001:1fe:5400:4ff:fe8b:34a0
-          as216455.stingalleman.nl        3600    IN      A       45.83.205.8
-          bloembergen.stingalleman.nl     3600    IN      A       45.83.205.8
-          bloembergen.stingalleman.nl     3600    IN      AAAA    2a07:54c7:5201:6e6f::a
-          books.stingalleman.nl   3600    IN      A       45.83.205.8
-          books.stingalleman.nl   3600    IN      AAAA    2a07:54c7:5201:6e6f::a
-          cdn.stingalleman.nl     3600    IN      A       45.83.205.3
-          chernobyl.stingalleman.nl       3600    IN      A       45.83.205.2
-          _dmarc.stingalleman.nl  3600    IN      TXT     "v=DMARC1; p=quarantine; ruf=mailto:me@stingalleman.nl"
-          finance-emiel.stingalleman.nl   3600    IN      A       45.83.205.8
-          finance-emiel.stingalleman.nl   3600    IN      AAAA    2a07:54c7:5201:6e6f::a
-          finance.stingalleman.nl 3600    IN      A       45.83.205.8
-          finance.stingalleman.nl 3600    IN      AAAA    2a07:54c7:5201:6e6f::a
-          firefly-importerr.stingalleman.nl       3600    IN      A       45.83.205.8
-          firefly-importerr.stingalleman.nl       3600    IN      AAAA    2a07:54c7:5201:6e6f::a
-          firefly.stingalleman.nl 3600    IN      A       45.83.205.8
-          firefly.stingalleman.nl 3600    IN      AAAA    2a07:54c7:5201:6e6f::a
-          flux.stingalleman.nl    3600    IN      A       45.83.205.8
-          flux-webhook.stingalleman.nl    3600    IN      A       45.83.205.8
-          gemairo.stingalleman.nl 3600    IN      A       45.83.205.3
-          gh.stingalleman.nl      3600    IN      A       45.83.205.3
-          grafiekjes.stingalleman.nl      3600    IN      A       45.83.205.8
-          grafiekjes.stingalleman.nl      3600    IN      AAAA    2a07:54c7:5201:6e6f::a
-          hahaha.stingalleman.nl  5       IN      A       95.98.217.139
-          harbor.stingalleman.nl  3600    IN      A       45.83.205.8
-          harbor.stingalleman.nl  3600    IN      AAAA    2a07:54c7:5201:6e6f::a
-          home.stingalleman.nl    3600    IN      A       45.83.205.8
-          home.stingalleman.nl    3600    IN      AAAA    2a07:54c7:5201:6e6f::a
-          irc.stingalleman.nl     60      IN      A       45.83.205.8
-          irc.stingalleman.nl     3600    IN      AAAA    2a07:54c7:5201:6e6f::a
-          kobo.stingalleman.nl    3600    IN      A       45.83.205.8
-          kobo.stingalleman.nl    3600    IN      AAAA    2a07:54c7:5201:6e6f::a
-          kube.stingalleman.nl    3600    IN      A       45.83.205.8
-          matrix.stingalleman.nl  3600    IN      A       45.83.205.3
-          mattermost.stingalleman.nl      3600    IN      A       45.83.205.8
-          media.stingalleman.nl   3600    IN      A       45.83.205.8
-          media.stingalleman.nl   3600    IN      AAAA    2a07:54c7:5201:6e6f::a
-          mqtt.home.stingalleman.nl       3600    IN      A       10.0.0.102
-          n8n.stingalleman.nl     3600    IN      A       45.83.205.8
-          n8n.stingalleman.nl     3600    IN      AAAA    2a07:54c7:5201:636f::a
-          reactor.chernobyl.stingalleman.nl       3600    IN      A       45.83.205.2
-          request.books.stingalleman.nl   3600    IN      A       45.83.205.8
-          request.books.stingalleman.nl   3600    IN      AAAA    2a07:54c7:5201:6e6f::a
-          request.stingalleman.nl 3600    IN      A       45.83.205.8
-          request.stingalleman.nl 3600    IN      AAAA    2a07:54c7:5201:6e6f::a
-          share.stingalleman.nl   3600    IN      A       45.83.205.8
-          sig1._domainkey.stingalleman.nl 3600    IN      CNAME   sig1.dkim.stingalleman.nl.at.icloudmailadmin.com.
-          sonar.stingalleman.nl   3600    IN      A       45.83.205.3
-          status.stingalleman.nl  3600    IN      A       45.83.205.8
-          *.stingalleman.nl       3600    IN      A       45.83.205.8
-          *.stingalleman.nl       3600    IN      AAAA    2a07:54c7:5201:6e6f::a
-          stingalleman.nl 3600    IN      A       45.83.205.8
-          stingalleman.nl 3600    IN      AAAA    2a07:54c7:5201:6e6f::a
-          stingalleman.nl 3600    IN      MX      10 mx02.mail.icloud.com.
-          stingalleman.nl 3600    IN      MX      10 mx01.mail.icloud.com.
-          stingalleman.nl 3600    IN      NS      ns2.as216455.net.
-          stingalleman.nl 3600    IN      NS      ns1.as216455.net.
-          stingalleman.nl 3600    IN      SOA     ns1.as216455.net noc.as216455.net 2025091906 7200 3600 86400 2419200
-          stingalleman.nl 3660    IN      TXT     "google-site-verification=oqnTQoXlheTHUB24ZwXB463qPCe-p2rVsFOoWmA26Jw"
-          stingalleman.nl 3660    IN      TXT     "apple-domain=iKcZGOSjEiX2tkmF"
-          stingalleman.nl 3660    IN      TXT     "v=spf1 include:icloud.com ~all"
-          wp.stingalleman.nl      3600    IN      A       45.83.205.8
       - filename: db.3.0.0.0.5.4.3.e.7.0.a.2.ip6.arpa
         domain: 3.0.0.0.5.4.3.e.7.0.a.2.ip6.arpa
         contents: |
@@ -269,25 +222,6 @@ spec:
           lleman.nl       3600    IN      TXT     "v=spf1 include:icloud.com ~all"
           lleman.nl       3600    IN      TXT     "apple-domain=HeGXABCcbHlFSyR0"
           sig1._domainkey.lleman.nl       3600    IN      CNAME   sig1.dkim.lleman.nl.at.icloudmailadmin.com.
-      - filename: db.mais.dog
-        domain: mais.dog
-        contents: |
-          $ORIGIN .
-          irc.mais.dog    3600    IN      A       45.83.205.10
-          irc.mais.dog    3600    IN      AAAA    2a07:54c7:5201:6e6f::b
-          lt.mais.dog     3600    IN      A       45.83.205.8
-          lt.mais.dog     3600    IN      AAAA    2a07:54c7:5201:6e6f::a
-          mais.dog        3600    IN      NS      ns2.as216455.net.
-          mais.dog        3600    IN      NS      ns1.as216455.net.
-          mais.dog        3600    IN      SOA     ns1.as216455.net root.mais.dog 2024070608 7200 3600 86400 3600
-          mais.dog        60      IN      TXT     "; DROP TABLE users;"
-          map.mais.dog    3600    IN      A       45.83.205.8
-          map.mais.dog    3600    IN      AAAA    2a07:54c7:5201:6e6f::a
-          _minecraft._tcp.play.mais.dog   3600    IN      SRV     1 1 25574 mc19.planetnode.net.
-          staging.chat.mais.dog   3600    IN      A       45.83.205.8
-          staging.chat.mais.dog   3600    IN      AAAA    2a07:54c7:5201:6e6f::a
-          trein.mais.dog  3600    IN      A       45.83.205.8
-          trein.mais.dog  3600    IN      AAAA    2a07:54c7:5201:6e6f::a
       - filename: db.babek.nl
         domain: babek.nl
         contents: |
