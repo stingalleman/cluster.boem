@@ -22,7 +22,7 @@ spec:
       containers:
         - name: yucky-rs-matrix
           # image: ghcr.io/maishond/yucky.rs-matrix:main
-          image: ghcr.io/maishond/yucky.rs@sha256:883f5f1d5aceafe94bc28361ccf7edba27d0305d4a5f3d89b82cd60f218947a2
+          image: ghcr.io/maishond/yucky.rs-matrix@sha256:883f5f1d5aceafe94bc28361ccf7edba27d0305d4a5f3d89b82cd60f218947a2
           imagePullPolicy: Always
           # resources:
           #   limits:
