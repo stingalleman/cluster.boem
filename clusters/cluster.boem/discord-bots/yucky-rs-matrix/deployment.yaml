@@ -21,8 +21,8 @@ spec:
         kubernetes.io/hostname: k-work-3
       containers:
         - name: yucky-rs-matrix
-          image: ghcr.io/maishond/yucky.rs-matrix:main
-          # image: ghcr.io/maishond/yucky.rs:main@sha256:4f5d38c80da522e8f48f6f8095915cb25b67d0860516be613fb164b3477cd5e0
+          # image: ghcr.io/maishond/yucky.rs-matrix:main
+          image: ghcr.io/maishond/yucky.rs:main@sha256:883f5f1d5aceafe94bc28361ccf7edba27d0305d4a5f3d89b82cd60f218947a2
           imagePullPolicy: Always
           # resources:
           #   limits:
