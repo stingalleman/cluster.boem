@@ -8,5 +8,5 @@ data:
     Component "muc.meet.jitsi" "muc"
 
     modules_enabled = {
-        "mod_muc_size";
+        "muc_size";
     }
