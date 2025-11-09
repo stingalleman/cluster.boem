@@ -4,8 +4,18 @@ metadata:
   name: prosody-modules
   namespace: jitsi
 data:
+  # Component "conference.meet.jitsi" "muc"
+  #   modules_enabled = {
+  #       "muc_size";
+  #   }
   muc-mod.cfg.lua: |
-    Component "conference.meet.jitsi" "muc"
-      modules_enabled = {
-          "muc_size";
-      }
+    VirtualHost "mucsize.meet.jitsi"
+        authentication = "anonymous"
+
+        -- Load the HTTP API module here
+        modules_enabled = {
+            "muc_size";
+        }
+
+        -- Ensure this matches your existing global setting
+        muc_mapper_domain_prefix = "muc";
