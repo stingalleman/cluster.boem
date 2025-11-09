@@ -99,3 +99,13 @@ spec:
                 secretKeyRef:
                   name: yucky-rs-matrix
                   key: goblin_delay
+            - name: JITSI_URL
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs-matrix
+                  key: jitsi_url
+            - name: JITSI_ROOM
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs-matrix
+                  key: jitsi_room
