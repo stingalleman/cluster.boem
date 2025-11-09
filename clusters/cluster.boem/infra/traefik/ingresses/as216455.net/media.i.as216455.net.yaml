@@ -27,5 +27,12 @@ spec:
           namespace: traefik
           port: 6789
 
+    - kind: Rule
+      match: Host(`sabnzbd.media.i.as216455.net`)
+      services:
+        - name: media-stingalleman-nl
+          namespace: traefik
+          port: 8080
+
   tls:
     secretName: media.i.as216455.net-prod-tls
