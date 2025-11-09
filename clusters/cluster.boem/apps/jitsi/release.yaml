@@ -172,7 +172,7 @@ spec:
       extraVolumeMounts:
         - name: prosody-modules
           subPath: muc-mod.cfg.lua
-          mountPath: /config/conf.d
+          mountPath: /config/conf.d/muc-mod.cfg.lua
 
     # jigasi:
     #   securityContext:
