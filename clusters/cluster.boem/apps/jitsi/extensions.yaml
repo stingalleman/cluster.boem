@@ -4,8 +4,8 @@ metadata:
   name: prosody-modules
   namespace: jitsi
 data:
-  # Component "muc.meet.jitsi" "muc"
   muc-mod.cfg.lua: |
-    modules_enabled = {
-        "muc_size";
-    }
+    Component "meet.maishond.nl" "muc"
+      modules_enabled = {
+          "muc_size";
+      }
