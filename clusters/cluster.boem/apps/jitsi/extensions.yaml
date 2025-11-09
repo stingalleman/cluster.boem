@@ -5,7 +5,7 @@ metadata:
   namespace: jitsi
 data:
   muc-mod.cfg.lua: |
-    Component "meet.maishond.nl" "muc"
+    Component "meet.jitsi" "muc"
       modules_enabled = {
           "muc_size";
       }
