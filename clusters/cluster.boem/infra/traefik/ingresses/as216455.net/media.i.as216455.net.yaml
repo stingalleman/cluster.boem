@@ -14,18 +14,13 @@ spec:
         - name: media-stingalleman-nl
           namespace: traefik
           port: 7878
+
     - kind: Rule
       match: Host(`sonarr.media.i.as216455.net`)
       services:
         - name: media-stingalleman-nl
           namespace: traefik
           port: 8989
-    - kind: Rule
-      match: Host(`nzbget.media.i.as216455.net`)
-      services:
-        - name: media-stingalleman-nl
-          namespace: traefik
-          port: 6789
 
     - kind: Rule
       match: Host(`sabnzbd.media.i.as216455.net`)
@@ -33,6 +28,13 @@ spec:
         - name: media-stingalleman-nl
           namespace: traefik
           port: 8080
+
+    - kind: Rule
+      match: Host(`profilarr.media.i.as216455.net`)
+      services:
+        - name: media-stingalleman-nl
+          namespace: traefik
+          port: 6868
 
   tls:
     secretName: media.i.as216455.net-prod-tls
