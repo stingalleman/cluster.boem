@@ -19,7 +19,7 @@ spec:
         - name: ghcr-login-secret
       containers:
         - name: cynisch
-          image: ghcr.io/maishond/cynisch:81b9367c0e9331a21bd78b0831d179ddbe7e6bf6
+          image: ghcr.io/maishond/cynisch:e83e21bb8726a0d42a6bb60296d3404569a3d31d
           ports:
             - containerPort: 80
               name: http
