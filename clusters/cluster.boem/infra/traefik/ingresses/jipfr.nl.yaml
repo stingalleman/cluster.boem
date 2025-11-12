@@ -44,6 +44,13 @@ spec:
           namespace: traefik
           port: 2188
     - kind: Rule
+      match: Host(`hclock.jipfr.nl`)
+      services:
+        - kind: Service
+          name: jip-vm
+          namespace: traefik
+          port: 1703
+    - kind: Rule
       match: Host(`lizzy.jipfr.nl`)
       services:
         - kind: Service
