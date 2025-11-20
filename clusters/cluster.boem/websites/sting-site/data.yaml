@@ -1,0 +1,14 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: sting-data
+  namespace: default
+data:
+  index.html: |
+    <html>
+      <body>
+        Hello World!
+        <br />
+        <p><a href="https://as216455.net">AS216455</a></p>
+      </body>
+    </html>

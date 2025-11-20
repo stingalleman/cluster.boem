@@ -11,12 +11,12 @@ spec:
   selector:
     matchLabels:
       app: sting-site
-  replicas: 1
-  # strategy:
-  #   type: RollingUpdate
-  #   rollingUpdate:
-  #     maxUnavailable: 2
-  #     maxSurge: 4
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 2
+      maxSurge: 4
   template:
     metadata:
       labels:
@@ -26,7 +26,7 @@ spec:
       #   - name: harbor-login-secret
       containers:
         - name: sting-site
-          image: ghcr.io/stingalleman/epaper-samla:main
+          image: caddy:latest
           resources:
             requests:
               cpu: 100m
@@ -54,4 +54,11 @@ spec:
           ports:
             - containerPort: 80
               name: http
+          volumeMounts:
+            - name: http-volume
+              mountPath: /usr/share/caddy
       restartPolicy: Always
+      volumes:
+        - name: http-volume
+          configMap:
+            name: sting-data
