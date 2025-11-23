@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: copyparty
+  namespace: default
+  labels:
+    app: copyparty
+spec:
+  selector:
+    matchLabels:
+      app: copyparty
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: copyparty
+    spec:
+      containers:
+        - name: copyparty
+          image: ghcr.io/9001/copyparty-ac:latest
+          ports:
+            - containerPort: 3923
+              name: http
+          volumeMounts:
+            - name: copyparty-data
+              mountPath: /w
+      volumes:
+        - name: copyparty-data
+          persistentVolumeClaim:
+            claimName: copyparty-data
