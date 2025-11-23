@@ -15,6 +15,8 @@ data:
       e2ts   # enable multimedia indexing
       ansi   # enable colors in log messages (both in logfiles and stdout)
 
+      xff-src: lan
+
       # q, lo: /cfg/log/%Y-%m%d.log   # log to file instead of docker
 
       # ipa: 10.89.      # only allow connections from 10.89.*
