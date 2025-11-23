@@ -209,6 +209,7 @@ spec:
         host: element.maishond.nl
 
     postgres:
+      enabled: true
       storage:
         storageClassName: ceph-block
 
