@@ -12,11 +12,9 @@ spec:
   values:
     serverName: maishond.nl
     ingress:
-      # className: traefik-ingress
-      className: gaat niet werken
+      className: traefik-ingress
       annotations:
-        # traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.entrypoints: gaatnietwerken
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
       tlsSecret: maishond.nl-prod-tls
 
     synapse:
