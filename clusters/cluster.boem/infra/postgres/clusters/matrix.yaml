@@ -4,14 +4,32 @@ metadata:
   name: matrix
   namespace: cnpg-system
 spec:
+  # imageName:
   instances: 1
   # Example of rolling update strategy:
   # - unsupervised: automated update of the primary once all
   #                 replicas have been upgraded (default)
   # - supervised: requires manual supervision to perform
   #               the switchover of the primary
-  primaryUpdateStrategy: supervised
+  primaryUpdateStrategy: unsupervised
   enableSuperuserAccess: true
+
+  managed:
+    roles:
+      - name: synapse
+        ensure: present
+        login: true
+        createdb: true
+        replication: false
+        connectionLimit: -1
+        passwordSecret:
+          name: matrix-synapse-user
+  bootstrap:
+    initdb:
+      database: synapse
+      owner: synapse_user
+      encoding: "UTF8"
+      locale: "C"
 
   # Require 1Gi of space
   storage:
