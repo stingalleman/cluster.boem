@@ -18,6 +18,7 @@ spec:
       tlsSecret: maishond.nl-prod-tls
 
     synapse:
+      enabled: false
       resources:
         requests:
           memory: 100Mi
@@ -73,7 +74,6 @@ spec:
 
         ## Number of seconds after which the probe times out
         timeoutSeconds: 1
-      enabled: true
       media:
         storage:
           storageClassName: ceph-block
@@ -179,7 +179,7 @@ spec:
           enabled: true
 
     matrixAuthenticationService:
-      enabled: true
+      enabled: false
       ingress:
         host: auth-matrix.maishond.nl
       additional:
@@ -188,12 +188,12 @@ spec:
           configSecretKey: shared.yaml
 
     matrixRTC:
-      enabled: true
+      enabled: false
       ingress:
         host: mrtc-matrix.maishond.nl
 
     elementWeb:
-      enabled: true
+      enabled: false
       image:
         ## The host and (optional) port of the container image registry for this component.
         ## If not specified Docker Hub is implied
