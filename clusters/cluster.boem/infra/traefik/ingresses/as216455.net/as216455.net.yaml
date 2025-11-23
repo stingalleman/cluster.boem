@@ -136,5 +136,13 @@ spec:
           namespace: harbor
           port: 80
 
+    - kind: Rule
+      match: Host(`party.as216455.net`)
+      services:
+        - kind: Service
+          name: copyparty
+          namespace: default
+          port: 80
+
   tls:
     secretName: as216455.net-prod-tls
