@@ -1,0 +1,33 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: copyparty-config
+  namespace: default
+data:
+  copyparty.conf: |
+    # not actually YAML but lets pretend:
+    # -*- mode: yaml -*-
+    # vim: ft=yaml:
+
+
+    [global]
+      e2dsa  # enable file indexing and filesystem scanning
+      e2ts   # enable multimedia indexing
+      ansi   # enable colors in log messages (both in logfiles and stdout)
+
+      # q, lo: /cfg/log/%Y-%m%d.log   # log to file instead of docker
+
+      # ipa: 10.89.      # only allow connections from 10.89.*
+      # df: 16           # stop accepting uploads if less than 16 GB free disk space
+      ver              # show copyparty version in the controlpanel
+      # grid             # show thumbnails/grid-view by default
+      # theme: 2         # monokai
+      name: copyparty-as216455  # change the server-name that's displayed in the browser
+      stats, nos-dup   # enable the prometheus endpoint, but disable the dupes counter (too slow)
+      no-robots, force-js  # make it harder for search engines to read your server
+
+    [/]            # create a volume at "/" (the webroot), which will
+      /w           # share /w (the docker data volume)
+      accs:
+        rw: *      # everyone gets read-write access, but
+        rwmda: sting  # the user "ed" gets read-write-move-delete-admin

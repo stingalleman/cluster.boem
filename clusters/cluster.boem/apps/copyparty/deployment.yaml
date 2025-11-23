@@ -24,7 +24,19 @@ spec:
           volumeMounts:
             - name: copyparty-data
               mountPath: /w
+            - name: copyparty-config
+              mountPath: /cfg/copyparty.conf
+              subPath: copyparty.conf
+            - name: copyparty-users
+              mountPath: /cfg/users.conf
+              subPath: users.conf
       volumes:
         - name: copyparty-data
           persistentVolumeClaim:
             claimName: copyparty-data
+        - name: copyparty-config
+          configMap:
+            name: copyparty-config
+        - name: copyparty-users
+          configMap:
+            name: copyparty-users
