@@ -12,6 +12,7 @@ spec:
   values:
     serverName: maishond.nl
     ingress:
+      enabled: false
       className: traefik-ingress
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
