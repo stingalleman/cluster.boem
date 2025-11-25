@@ -1,67 +1,67 @@
-apiVersion: postgresql.cnpg.io/v1
-kind: Cluster
-metadata:
-  name: matrix
-  namespace: cnpg-system
-spec:
-  # imageName:
-  instances: 1
-  # Example of rolling update strategy:
-  # - unsupervised: automated update of the primary once all
-  #                 replicas have been upgraded (default)
-  # - supervised: requires manual supervision to perform
-  #               the switchover of the primary
-  primaryUpdateStrategy: unsupervised
-  enableSuperuserAccess: true
+# apiVersion: postgresql.cnpg.io/v1
+# kind: Cluster
+# metadata:
+#   name: matrix
+#   namespace: cnpg-system
+# spec:
+#   # imageName:
+#   instances: 1
+#   # Example of rolling update strategy:
+#   # - unsupervised: automated update of the primary once all
+#   #                 replicas have been upgraded (default)
+#   # - supervised: requires manual supervision to perform
+#   #               the switchover of the primary
+#   primaryUpdateStrategy: unsupervised
+#   enableSuperuserAccess: true
 
-  managed:
-    roles:
-      - name: synapse
-        ensure: present
-        login: true
-        createdb: true
-        replication: false
-        connectionLimit: -1
-        passwordSecret:
-          name: matrix-synapse-user
-  bootstrap:
-    initdb:
-      database: synapse
-      owner: synapse_user
-      encoding: "UTF8"
-      locale: "C"
-      import:
-        type: microservice
-        databases:
-          - angus
-        source:
-          externalCluster: synapse-old-cluster
+#   managed:
+#     roles:
+#       - name: synapse
+#         ensure: present
+#         login: true
+#         createdb: true
+#         replication: false
+#         connectionLimit: -1
+#         passwordSecret:
+#           name: matrix-synapse-user
+#   bootstrap:
+#     initdb:
+#       database: synapse
+#       owner: synapse_user
+#       encoding: "UTF8"
+#       locale: "C"
+#       import:
+#         type: microservice
+#         databases:
+#           - angus
+#         source:
+#           externalCluster: synapse-old-cluster
 
-  # Require 1Gi of space
-  storage:
-    size: 20Gi
-    storageClass: ceph-block
+#   # Require 1Gi of space
+#   storage:
+#     size: 20Gi
+#     storageClass: ceph-block
 
-  externalClusters:
-    - name: synapse-old-cluster
-      connectionParameters:
-        # Use the correct IP or host name for the source database
-        host: matrix-stack-postgres-0.matrix.pod.cluster.local
-        user: synapse_user
-        dbname: synapse
-      password:
-        name: old-synapse-db
-        key: password
+#   externalClusters:
+#     - name: synapse-old-cluster
+#       connectionParameters:
+#         # Use the correct IP or host name for the source database
+#         host: matrix-stack-postgres-0.matrix.pod.cluster.local
+#         user: synapse_user
+#         dbname: synapse
+#       password:
+#         name: old-synapse-db
+#         key: password
 
-  # backup:
-  #   barmanObjectStore:
-  #     destinationPath: s3://kluster-cnpg-backup/matrix-cluster/
-  #     endpointURL: https://s3.eu-central-003.backblazeb2.com
-  #     s3Credentials:
-  #       accessKeyId:
-  #         name: generic-backup-creds
-  #         key: ACCESS_KEY_ID
-  #       secretAccessKey:
-  #         name: generic-backup-creds
-  #         key: ACCESS_SECRET_KEY
-  #   retentionPolicy: "5d"
+#   # backup:
+#   #   barmanObjectStore:
+#   #     destinationPath: s3://kluster-cnpg-backup/matrix-cluster/
+#   #     endpointURL: https://s3.eu-central-003.backblazeb2.com
+#   #     s3Credentials:
+#   #       accessKeyId:
+#   #         name: generic-backup-creds
+#   #         key: ACCESS_KEY_ID
+#   #       secretAccessKey:
+#   #         name: generic-backup-creds
+#   #         key: ACCESS_SECRET_KEY
+#   #   retentionPolicy: "5d"
