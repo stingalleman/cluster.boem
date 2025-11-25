@@ -198,7 +198,7 @@ spec:
       postgres:
         host: matrix-mas-rw.cnpg-system
         port: 5432
-        user: app
+        user: matrixauthenticationservice
         database: matrixauthenticationservice
         sslMode: prefer
         password:
