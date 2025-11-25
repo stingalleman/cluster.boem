@@ -2,11 +2,12 @@ apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
   name: matrix-mas-backup
+  namespace: cnpg-system
 spec:
   cluster:
     name: matrix-mas
   schedule: "0 0 0 * * *"
-  backupOwnerReference: selfa
+  backupOwnerReference: self
   method: plugin
   pluginConfiguration:
     name: barman-cloud.cloudnative-pg.io
