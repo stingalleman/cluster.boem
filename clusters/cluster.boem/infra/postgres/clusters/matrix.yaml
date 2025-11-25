@@ -14,6 +14,11 @@ spec:
   primaryUpdateStrategy: unsupervised
   enableSuperuserAccess: true
 
+  postgresql:
+    parameters:
+      max_connections: 300
+      shared_buffers: 384MB
+
   managed:
     roles:
       - name: synapse
