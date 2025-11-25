@@ -1,9 +1,0 @@
-# apiVersion: postgresql.cnpg.io/v1
-# kind: Backup
-# metadata:
-#   name: discord-backup
-#   namespace: cnpg-system
-# spec:
-#   method: barmanObjectStore
-#   cluster:
-#     name: discord

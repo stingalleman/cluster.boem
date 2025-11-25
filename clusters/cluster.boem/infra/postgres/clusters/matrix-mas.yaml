@@ -36,15 +36,8 @@ spec:
     size: 20Gi
     storageClass: ceph-block
 
-  backup:
-    barmanObjectStore:
-      destinationPath: s3://matrix-backup/mas/
-      endpointURL: https://de-fra.i3storage.com
-      s3Credentials:
-        accessKeyId:
-          name: generic-backup-creds
-          key: ACCESS_KEY_ID
-        secretAccessKey:
-          name: generic-backup-creds
-          key: ACCESS_SECRET_KEY
-    retentionPolicy: "5d"
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: mas-store
