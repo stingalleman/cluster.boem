@@ -42,15 +42,15 @@ spec:
     size: 20Gi
     storageClass: ceph-block
 
-  # backup:
-  #   barmanObjectStore:
-  #     destinationPath: s3://kluster-cnpg-backup/matrix-cluster/
-  #     endpointURL: https://s3.eu-central-003.backblazeb2.com
-  #     s3Credentials:
-  #       accessKeyId:
-  #         name: generic-backup-creds
-  #         key: ACCESS_KEY_ID
-  #       secretAccessKey:
-  #         name: generic-backup-creds
-  #         key: ACCESS_SECRET_KEY
-  #   retentionPolicy: "5d"
+  backup:
+    barmanObjectStore:
+      destinationPath: s3://matrix-backup/synapse/
+      endpointURL: https://de-fra.i3storage.com
+      s3Credentials:
+        accessKeyId:
+          name: generic-backup-creds
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: generic-backup-creds
+          key: ACCESS_SECRET_KEY
+    retentionPolicy: "5d"
