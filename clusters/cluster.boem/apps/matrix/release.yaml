@@ -177,15 +177,33 @@ spec:
           enabled: true
         user-dir:
           enabled: true
+      postgres:
+        host: matrix-rw.cnpg-system
+        port: 5432
+        user: synapse
+        database: synapse
+        sslMode: prefer
+        password:
+          secret: postgres
+          secretKey: synapse_password
 
     matrixAuthenticationService:
-      enabled: false
+      enabled: true
       ingress:
         host: auth-matrix.maishond.nl
       additional:
         1-custom-config:
           configSecret: mas-config
           configSecretKey: shared.yaml
+      postgres:
+        host: matrix-mas-rw.cnpg-system
+        port: 5432
+        user: app
+        database: matrixauthenticationservice
+        sslMode: prefer
+        password:
+          secret: postgres
+          secretKey: mas_password
 
     matrixRTC:
       enabled: false
@@ -193,7 +211,7 @@ spec:
         host: mrtc-matrix.maishond.nl
 
     elementWeb:
-      enabled: false
+      enabled: true
       image:
         ## The host and (optional) port of the container image registry for this component.
         ## If not specified Docker Hub is implied
