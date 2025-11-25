@@ -47,7 +47,7 @@ spec:
       connectionParameters:
         # Use the correct IP or host name for the source database
         host: 10.101.169.160
-        user: synapse_user
+        user: postgres
         dbname: matrixauthenticationservice
       password:
         name: old-synapse-db
