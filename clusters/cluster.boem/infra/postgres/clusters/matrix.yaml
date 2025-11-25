@@ -30,11 +30,28 @@ spec:
       owner: synapse_user
       encoding: "UTF8"
       locale: "C"
+      import:
+        type: microservice
+        databases:
+          - angus
+        source:
+          externalCluster: synapse-old-cluster
 
   # Require 1Gi of space
   storage:
     size: 20Gi
     storageClass: ceph-block
+
+  externalClusters:
+    - name: synapse-old-cluster
+      connectionParameters:
+        # Use the correct IP or host name for the source database
+        host: matrix-stack-postgres-0.matrix.pod.cluster.local
+        user: synapse_user
+        dbname: synapse
+      password:
+        name: old-synapse-db
+        key: password
 
   # backup:
   #   barmanObjectStore:
