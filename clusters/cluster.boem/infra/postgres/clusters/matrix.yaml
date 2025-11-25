@@ -16,7 +16,7 @@ spec:
 
   postgresql:
     parameters:
-      max_connections: 300
+      max_connections: "300"
       shared_buffers: 384MB
 
   managed:
