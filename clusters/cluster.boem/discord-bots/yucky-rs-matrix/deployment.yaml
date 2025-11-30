@@ -21,8 +21,8 @@ spec:
         kubernetes.io/hostname: k-work-3
       containers:
         - name: yucky-rs-matrix
-          # image: ghcr.io/maishond/yucky.rs-matrix:main
-          image: ghcr.io/maishond/yucky.rs-matrix@sha256:883f5f1d5aceafe94bc28361ccf7edba27d0305d4a5f3d89b82cd60f218947a2
+          image: ghcr.io/maishond/yucky.rs-matrix:main
+          # image: ghcr.io/maishond/yucky.rs-matrix@sha256:883f5f1d5aceafe94bc28361ccf7edba27d0305d4a5f3d89b82cd60f218947a2
           imagePullPolicy: Always
           # resources:
           #   limits:
@@ -109,3 +109,23 @@ spec:
                 secretKeyRef:
                   name: yucky-rs-matrix
                   key: jitsi_room
+            - name: MQTT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs-matrix
+                  key: mqtt_username
+            - name: MQTT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs-matrix
+                  key: mqtt_password
+            - name: MQTT_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs-matrix
+                  key: mqtt_port
+            - name: MQTT_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: yucky-rs-matrix
+                  key: mqtt_host
