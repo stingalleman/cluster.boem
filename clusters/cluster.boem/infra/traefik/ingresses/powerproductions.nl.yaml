@@ -20,8 +20,8 @@ spec:
       match: Host(`dwrg.nl`) || Host(`www.dwrg.nl`)
       services:
         - kind: Service
-          name: wordpress-dwrg
-          namespace: default
+          name: dwrg-wordpress
+          namespace: wordpress
           port: 80
 
   tls:
