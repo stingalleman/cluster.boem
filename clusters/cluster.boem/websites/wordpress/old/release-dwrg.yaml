@@ -18,12 +18,6 @@ spec:
   #   name: bitnami
   #   namespace: flux-system
   values:
-    ## WordPress service parameters
-    ##
-    service:
-      ## @param service.type WordPress service type
-      ##
-      type: ClusterPort
     resourcesPreset: xlarge
     wordpressConfigureCache: true
     wordpressTablePrefix: wpap_
