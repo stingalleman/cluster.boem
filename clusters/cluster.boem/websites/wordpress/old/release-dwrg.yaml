@@ -18,9 +18,6 @@ spec:
   #   name: bitnami
   #   namespace: flux-system
   values:
-    persistence:
-      annotations:
-        helm.sh/resource-policy: keep
     ## WordPress service parameters
     ##
     service:
