@@ -4,11 +4,14 @@ metadata:
   name: dwrg
   namespace: wordpress
 spec:
-  releaseName: dwrg
-  interval: 24h
-  chartRef:
-    kind: OCIRepository
-    name: slybase-wordpress-oci
+  interval: 10m
+  chart:
+    spec:
+      chart: wordpress
+      sourceRef:
+        kind: HelmRepository
+        name: slybase-oci-charts
+        namespace: flux-system
   values:
     wordpress:
       init:

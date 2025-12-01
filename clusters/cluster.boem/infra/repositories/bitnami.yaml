@@ -17,6 +17,16 @@ spec:
     name: ghcr-login-secret
   interval: 10m
   url: oci://ghcr.io/slybase/charts/wordpress
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: slybase-oci-charts
+  namespace: flux-system
+spec:
+  type: oci
+  interval: 10m
+  url: oci://ghcr.io/slybase/charts
   # ref:
   #   semver: ">6.0.0"
 # apiVersion: source.toolkit.fluxcd.io/v1beta2
