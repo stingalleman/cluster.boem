@@ -1,0 +1,21 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: dwrg
+  namespace: wordpress
+spec:
+  releaseName: dwrg
+  interval: 24h
+  chartRef:
+    kind: OCIRepository
+    name: slybase-wordpress-oci
+  values:
+    wordpress:
+      init:
+        existingSecret: dwrg
+      url: "https://dwrg.nl"
+    mariadb:
+      auth:
+        database: "bitnami_wordpress"
+        username: "bn_wordpress"
+        existingSecret: "dwrg-mariadb"
