@@ -6,6 +6,15 @@ metadata:
 spec:
   interval: 10m
   url: oci://registry-1.docker.io/bitnamicharts/wordpress
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: slybase-wordpress-oci
+  namespace: default
+spec:
+  interval: 10m
+  url: oci://ghcr.io/slybase/charts/wordpress
   # ref:
   #   semver: ">6.0.0"
 # apiVersion: source.toolkit.fluxcd.io/v1beta2
