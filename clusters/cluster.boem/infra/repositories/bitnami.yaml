@@ -6,7 +6,7 @@ metadata:
 spec:
   interval: 10m
   secretRef:
-    name: bitami-secret
+    name: bitnami-secret
   url: oci://registry-1.docker.io/bitnamicharts/wordpress
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
