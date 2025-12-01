@@ -13,6 +13,8 @@ metadata:
   name: slybase-wordpress-oci
   namespace: wordpress
 spec:
+  secretRef:
+    name: ghcr-login-secret
   interval: 10m
   url: oci://ghcr.io/slybase/charts/wordpress
   # ref:
