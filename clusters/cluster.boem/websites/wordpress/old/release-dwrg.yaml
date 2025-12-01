@@ -32,7 +32,3 @@ spec:
     wordpressTablePrefix: wpap_
     memcached:
       enabled: true
-    mariadb:
-      persistence:
-        annotations:
-          helm.sh/resource-policy: keep
