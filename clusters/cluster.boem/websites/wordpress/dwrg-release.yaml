@@ -1,25 +1,25 @@
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
-metadata:
-  name: dwrg
-  namespace: wordpress
-spec:
-  interval: 10m
-  chart:
-    spec:
-      chart: wordpress
-      sourceRef:
-        kind: HelmRepository
-        name: slybase-oci-charts
-        namespace: flux-system
-  values:
-    wordpress:
-      tablePrefix: wpap_
-      init:
-        existingSecret: dwrg
-      url: "https://dwrg.nl"
-    mariadb:
-      auth:
-        database: "bitnami_wordpress"
-        username: "bn_wordpress"
-        existingSecret: "dwrg-mariadb"
+# apiVersion: helm.toolkit.fluxcd.io/v2
+# kind: HelmRelease
+# metadata:
+#   name: dwrg
+#   namespace: wordpress
+# spec:
+#   interval: 10m
+#   chart:
+#     spec:
+#       chart: wordpress
+#       sourceRef:
+#         kind: HelmRepository
+#         name: slybase-oci-charts
+#         namespace: flux-system
+#   values:
+#     wordpress:
+#       tablePrefix: wpap_
+#       init:
+#         existingSecret: dwrg
+#       url: "https://dwrg.nl"
+#     mariadb:
+#       auth:
+#         database: "bitnami_wordpress"
+#         username: "bn_wordpress"
+#         existingSecret: "dwrg-mariadb"
