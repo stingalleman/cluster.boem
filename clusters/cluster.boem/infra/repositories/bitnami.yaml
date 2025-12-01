@@ -11,7 +11,7 @@ apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: OCIRepository
 metadata:
   name: slybase-wordpress-oci
-  namespace: default
+  namespace: wordpress
 spec:
   interval: 10m
   url: oci://ghcr.io/slybase/charts/wordpress
