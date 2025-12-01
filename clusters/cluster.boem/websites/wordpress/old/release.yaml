@@ -10,6 +10,9 @@ spec:
     kind: OCIRepository
     name: bitnami-wordpress-oci
   values:
+    persistence:
+      annotations:
+        helm.sh/resource-policy: keep
     resourcesPreset: xlarge
     wordpressConfigureCache: true
     wordpressTablePrefix: wpap_
