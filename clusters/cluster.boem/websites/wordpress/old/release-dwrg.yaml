@@ -1,0 +1,38 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: wordpress-dwrg
+  namespace: default
+spec:
+  releaseName: wordpress-dwrg
+  interval: 24h
+  chartRef:
+    kind: OCIRepository
+    name: bitnami-wordpress-oci
+  # chart:
+  #   spec:
+  # version: 55.8.1
+  # chart: wordpress
+  # sourceRef:
+  #   kind: HelmRepository
+  #   name: bitnami
+  #   namespace: flux-system
+  values:
+    persistence:
+      annotations:
+        helm.sh/resource-policy: keep
+    ## WordPress service parameters
+    ##
+    service:
+      ## @param service.type WordPress service type
+      ##
+      type: ClusterPort
+    resourcesPreset: xlarge
+    wordpressConfigureCache: true
+    wordpressTablePrefix: wpap_
+    memcached:
+      enabled: true
+    mariadb:
+      persistence:
+        annotations:
+          helm.sh/resource-policy: keep
