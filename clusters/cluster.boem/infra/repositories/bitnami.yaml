@@ -8,6 +8,8 @@ spec:
   secretRef:
     name: bitnami-secret
   url: oci://registry-1.docker.io/bitnamicharts/wordpress
+  ref:
+    semver: "28.0.1"
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: OCIRepository
