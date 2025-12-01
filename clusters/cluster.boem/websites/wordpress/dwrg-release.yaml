@@ -14,6 +14,7 @@ spec:
         namespace: flux-system
   values:
     wordpress:
+      tablePrefix: wpap_
       init:
         existingSecret: dwrg
       url: "https://dwrg.nl"
