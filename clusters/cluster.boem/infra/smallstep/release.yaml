@@ -11,7 +11,7 @@ spec:
         kind: HelmRepository
         name: smallstep
         namespace: flux-system
-      version: "1.28.4"
+      version: "1.29.0"
   interval: 24h
   values:
     existingSecrets:
