@@ -76,7 +76,9 @@ spec:
         timeoutSeconds: 1
       media:
         storage:
+          size: 15Gi
           storageClassName: ceph-block
+          resourcePolicy: keep
         maxUploadSize: 2000M
       ingress:
         host: matrix.maishond.nl
