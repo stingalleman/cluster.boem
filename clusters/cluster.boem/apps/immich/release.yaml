@@ -96,18 +96,17 @@ spec:
       #     tls: []
 
     machine-learning:
-      enabled: false
+      enabled: true
       controllers:
         main:
-          containers:
-            main:
-              image:
-                repository: ghcr.io/immich-app/immich-machine-learning
-                pullPolicy: IfNotPresent
-              env:
-                TRANSFORMERS_CACHE: /cache
-                HF_XET_CACHE: /cache/huggingface-xet
-                MPLCONFIGDIR: /cache/matplotlib-config
+          resources:
+            limits:
+              gpu.intel.com/i915: 1
+          annotations:
+            - key: "dedicated"
+              operator: "Equal"
+              value: "gpu"
+              effect: "NoExecute"
       persistence:
         cache:
           enabled: true
