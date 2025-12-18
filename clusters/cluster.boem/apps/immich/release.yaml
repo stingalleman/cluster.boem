@@ -99,7 +99,7 @@ spec:
       enabled: true
       controllers:
         main:
-          annotations:
+          tolerations:
             - key: "dedicated"
               operator: "Equal"
               value: "gpu"
