@@ -1,0 +1,15 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nfd
+  namespace: nfd
+spec:
+  chart:
+    spec:
+      chart: node-feature-discovery
+      sourceRef:
+        kind: HelmRepository
+        name: nfd
+        namespace: flux-system
+      version: "0.18.3"
+  interval: 24h
