@@ -103,7 +103,7 @@ spec:
             - key: "dedicated"
               operator: "Equal"
               value: "gpu"
-              effect: "NoExecute"
+              effect: "NoSchedule"
           containers:
             main:
               resources:
