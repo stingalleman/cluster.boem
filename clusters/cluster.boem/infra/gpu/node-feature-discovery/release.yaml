@@ -13,3 +13,11 @@ spec:
         namespace: flux-system
       version: "0.18.3"
   interval: 24h
+  values:
+    worker:
+      tolerations:
+        - operator: "Exists" # tolerate all taints
+        # - key: "dedicated"
+        #   operator: "Equal"
+        #   value: "gpu"
+        #   effect: "NoSchedule"
