@@ -99,14 +99,16 @@ spec:
       enabled: true
       controllers:
         main:
-          resources:
-            limits:
-              gpu.intel.com/i915: 1
           annotations:
             - key: "dedicated"
               operator: "Equal"
               value: "gpu"
               effect: "NoExecute"
+          containers:
+            main:
+              resources:
+                limits:
+                  gpu.intel.com/i915: 1
       persistence:
         cache:
           enabled: true
