@@ -1,87 +1,87 @@
-# # helm upgrade -i -n csi-proxmox -f proxmox-csi.yaml proxmox-csi-plugin oci://ghcr.io/sergelogvinov/charts/proxmox-csi-plugin
-# apiVersion: helm.toolkit.fluxcd.io/v2
-# kind: HelmRelease
-# metadata:
-#   name: proxmox-csi-plugin
-#   namespace: csi-proxmox
-# spec:
-#   chartRef:
-#     kind: OCIRepository
-#     name: proxmox-csi-plugin
-#     namespace: flux-system
-#   interval: 24h
-#   values:
-#     # -- Proxmox cluster config stored in secrets.
-#     existingConfigSecret: cluster-config
-#     # -- Proxmox cluster config stored in secrets key.
-#     existingConfigSecretKey: config.yaml
+# helm upgrade -i -n csi-proxmox -f proxmox-csi.yaml proxmox-csi-plugin oci://ghcr.io/sergelogvinov/charts/proxmox-csi-plugin
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: proxmox-csi-plugin
+  namespace: csi-proxmox
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: proxmox-csi-plugin
+    namespace: flux-system
+  interval: 24h
+  values:
+    # -- Proxmox cluster config stored in secrets.
+    existingConfigSecret: cluster-config
+    # -- Proxmox cluster config stored in secrets key.
+    existingConfigSecretKey: config.yaml
 
-#     nodeSelector:
-#       node-role.kubernetes.io/control-plane: ""
-#     tolerations:
-#       - key: node-role.kubernetes.io/control-plane
-#         effect: NoSchedule
+    nodeSelector:
+      node-role.kubernetes.io/control-plane: ""
+    tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        effect: NoSchedule
 
-#   node:
-#     plugin:
-#       # -- Tolerations for node-plugin assignment.
-#       # ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
-#       tolerations:
-#         - key: node.kubernetes.io/unschedulable
-#           operator: Exists
-#           effect: NoSchedule
-#         - key: node.kubernetes.io/disk-pressure
-#           operator: Exists
-#           effect: NoSchedule
-#         - key: dedicated
-#           operator: Exists
-#           effect: NoSchedule
+  node:
+    plugin:
+      # -- Tolerations for node-plugin assignment.
+      # ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+      tolerations:
+        - key: node.kubernetes.io/unschedulable
+          operator: Exists
+          effect: NoSchedule
+        - key: node.kubernetes.io/disk-pressure
+          operator: Exists
+          effect: NoSchedule
+        - key: dedicated
+          operator: Exists
+          effect: NoSchedule
 
-#     # -- Proxmox cluster config path.
-#     configFile: /etc/proxmox/config.yaml
+    # -- Proxmox cluster config path.
+    configFile: /etc/proxmox/config.yaml
 
-#     # -- Storage class definition.
-#     storageClass:
-#       - name: proxmox-data-zfs
-#         storage: local-zfs
-#         reclaimPolicy: Retain
-#         fstype: zfs
-#         # https://pve.proxmox.com/wiki/Performance_Tweaks
-#         cache: directsync|none|writeback|writethrough
-#         ssd: true
-#         mountOptions:
-#           - discard
-#       - name: proxmox-hdd
-#         storage: hdd
-#         reclaimPolicy: Retain
-#         fstype: zfs
-#         cache: directsync|none|writeback|writethrough
-#         ssd: false
-#         mountOptions:
-#           - discard
+    # -- Storage class definition.
+    storageClass:
+      - name: proxmox-data-zfs
+        storage: local-zfs
+        reclaimPolicy: Retain
+        fstype: zfs
+        # https://pve.proxmox.com/wiki/Performance_Tweaks
+        cache: directsync|none|writeback|writethrough
+        ssd: true
+        mountOptions:
+          - discard
+      - name: proxmox-hdd
+        storage: hdd
+        reclaimPolicy: Retain
+        fstype: zfs
+        cache: directsync|none|writeback|writethrough
+        ssd: false
+        mountOptions:
+          - discard
 
-#     # -- Prometheus metrics
-#     metrics:
-#       # -- Enable Prometheus metrics.
-#       enabled: true
-#       # -- Prometheus metrics port.
-#       port: 8080
-#       type: annotation
+    # -- Prometheus metrics
+    metrics:
+      # -- Enable Prometheus metrics.
+      enabled: true
+      # -- Prometheus metrics port.
+      port: 8080
+      type: annotation
 
-#     # TODO: add CA so proxmox api is secure
-#     # -- Additional volumes for Pods
-#     extraVolumes: []
-#     # - name: ca
-#     #   secret:
-#     #     secretName: my-ca
-#     # -- Additional volume mounts for Pods
+    # TODO: add CA so proxmox api is secure
+    # -- Additional volumes for Pods
+    extraVolumes: []
+    # - name: ca
+    #   secret:
+    #     secretName: my-ca
+    # -- Additional volume mounts for Pods
 
-#     extraVolumeMounts: []
-#     # - mountPath: /etc/ssl/certs/ca-certificates.crt
-#     #   name: ca
-#     #   subPath: ca.crt
-#   # nodeSelector:
-#   #   node-role.kubernetes.io/control-plane: ""
-#   # tolerations:
-#   #   - key: node-role.kubernetes.io/control-plane
-#   #     effect: NoSchedule
+    extraVolumeMounts: []
+    # - mountPath: /etc/ssl/certs/ca-certificates.crt
+    #   name: ca
+    #   subPath: ca.crt
+  # nodeSelector:
+  #   node-role.kubernetes.io/control-plane: ""
+  # tolerations:
+  #   - key: node-role.kubernetes.io/control-plane
+  #     effect: NoSchedule
