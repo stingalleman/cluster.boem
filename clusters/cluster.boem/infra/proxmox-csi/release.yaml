@@ -46,7 +46,7 @@ spec:
         reclaimPolicy: Retain
         fstype: zfs
         # https://pve.proxmox.com/wiki/Performance_Tweaks
-        cache: directsync|none|writeback|writethrough
+        cache: none
         ssd: true
         mountOptions:
           - discard
@@ -54,7 +54,7 @@ spec:
         storage: hdd
         reclaimPolicy: Retain
         fstype: zfs
-        cache: directsync|none|writeback|writethrough
+        cache: none
         ssd: false
         mountOptions:
           - discard
