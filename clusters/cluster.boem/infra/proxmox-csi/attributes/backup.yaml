@@ -2,7 +2,6 @@ apiVersion: storage.k8s.io/v1
 kind: VolumeAttributesClass
 metadata:
   name: backup
-  namespace: csi-proxmox
 driverName: csi.proxmox.sinextra.dev
 parameters:
   ## Optional: Proxmox disk speed limit
