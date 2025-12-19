@@ -18,7 +18,7 @@ spec:
       containers:
         - name: test
           image: debian
-          command: ["bash"]
+          command: ["bash", "-c", "sleep 84000s"]
           volumeMounts:
             - name: test-data
               mountPath: /data
