@@ -1,0 +1,13 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: proxmox-csi-plugin
+  namespace: flux-system
+spec:
+  interval: 10m
+  url: oci://ghcr.io/sergelogvinov/charts/proxmox-csi-plugin
+  provider: generic
+  secretRef:
+    name: ghcr-auth
+  ref:
+    semver: "0.5.3"
