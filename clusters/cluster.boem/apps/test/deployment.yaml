@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: test
-          image: docker
+          image: debian
           command: ["bash"]
           volumeMounts:
             - name: test-data
