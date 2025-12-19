@@ -1,0 +1,66 @@
+# helm upgrade -i -n csi-proxmox -f proxmox-csi.yaml proxmox-csi-plugin oci://ghcr.io/sergelogvinov/charts/proxmox-csi-plugin
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: proxmox-csi-plugin
+  namespace: csi-proxmox
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: proxmox-csi-plugin
+    namespace: flux-system
+  interval: 24h
+  values:
+    # -- Proxmox cluster config stored in secrets.
+    existingConfigSecret: cluster.config
+    # -- Proxmox cluster config stored in secrets key.
+    existingConfigSecretKey: config.yaml
+
+    # -- Proxmox cluster config path.
+    configFile: /etc/proxmox/config.yaml
+
+    # -- Storage class definition.
+    storageClass:
+      - name: proxmox-data-zfs
+        storage: local-zfs
+        reclaimPolicy: Retain
+        fstype: zfs
+        # https://pve.proxmox.com/wiki/Performance_Tweaks
+        cache: directsync|none|writeback|writethrough
+        ssd: true
+        mountOptions:
+          - discard
+      - name: proxmox-hdd
+        storage: hdd
+        reclaimPolicy: Retain
+        fstype: zfs
+        cache: directsync|none|writeback|writethrough
+        ssd: false
+        mountOptions:
+          - discard
+
+    # -- Prometheus metrics
+    metrics:
+      # -- Enable Prometheus metrics.
+      enabled: true
+      # -- Prometheus metrics port.
+      port: 8080
+      type: annotation
+
+    # TODO: add CA so proxmox api is secure
+    # -- Additional volumes for Pods
+    extraVolumes: []
+    # - name: ca
+    #   secret:
+    #     secretName: my-ca
+    # -- Additional volume mounts for Pods
+
+    extraVolumeMounts: []
+    # - mountPath: /etc/ssl/certs/ca-certificates.crt
+    #   name: ca
+    #   subPath: ca.crt
+  # nodeSelector:
+  #   node-role.kubernetes.io/control-plane: ""
+  # tolerations:
+  #   - key: node-role.kubernetes.io/control-plane
+  #     effect: NoSchedule
