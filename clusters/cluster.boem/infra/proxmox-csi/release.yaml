@@ -40,45 +40,41 @@ spec:
     configFile: /etc/proxmox/config.yaml
 
     # -- Storage class definition.
-    # storageClass:
-    #   - name: proxmox-ssd-xfs
-    #     storage: local-zfs
-    #     reclaimPolicy: Retain
-    #     fstype: xfs
-    #     # https://pve.proxmox.com/wiki/Performance_Tweaks
-    #     cache: none
-    #     ssd: true
-    #     mountOptions:
-    #       - discard
-    #       - backup
-    #   - name: proxmox-ssd-ext4
-    #     storage: local-zfs
-    #     reclaimPolicy: Retain
-    #     fstype: ext4
-    #     # https://pve.proxmox.com/wiki/Performance_Tweaks
-    #     cache: none
-    #     ssd: true
-    #     mountOptions:
-    #       - discard
-    #       - backup
-    #   - name: proxmox-hdd-xfs
-    #     storage: hdd
-    #     reclaimPolicy: Retain
-    #     fstype: ext4
-    #     cache: none
-    #     ssd: false
-    #     mountOptions:
-    #       - discard
-    #       - backup
-    #   - name: proxmox-hdd-ext4
-    #     storage: hdd
-    #     reclaimPolicy: Retain
-    #     fstype: ext4
-    #     cache: none
-    #     ssd: false
-    #     mountOptions:
-    #       - discard
-    #       - backup
+    storageClass:
+      - name: proxmox-ssd-xfs
+        storage: local-zfs
+        reclaimPolicy: Retain
+        fstype: xfs
+        # https://pve.proxmox.com/wiki/Performance_Tweaks
+        cache: none
+        ssd: true
+        mountOptions:
+          - discard
+      - name: proxmox-ssd-ext4
+        storage: local-zfs
+        reclaimPolicy: Retain
+        fstype: ext4
+        # https://pve.proxmox.com/wiki/Performance_Tweaks
+        cache: none
+        ssd: true
+        mountOptions:
+          - discard
+      - name: proxmox-hdd-xfs
+        storage: hdd
+        reclaimPolicy: Retain
+        fstype: ext4
+        cache: none
+        ssd: false
+        mountOptions:
+          - discard
+      - name: proxmox-hdd-ext4
+        storage: hdd
+        reclaimPolicy: Retain
+        fstype: ext4
+        cache: none
+        ssd: false
+        mountOptions:
+          - discard
 
     # -- Prometheus metrics
     metrics:
