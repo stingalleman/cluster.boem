@@ -40,24 +40,24 @@ spec:
     configFile: /etc/proxmox/config.yaml
 
     # -- Storage class definition.
-    # storageClass:
-    #   - name: proxmox-ssd
-    #     storage: local-zfs
-    #     reclaimPolicy: Retain
-    #     fstype: zfs
-    #     # https://pve.proxmox.com/wiki/Performance_Tweaks
-    #     cache: none
-    #     ssd: true
-    #     mountOptions:
-    #       - discard
-    #   - name: proxmox-hdd
-    #     storage: hdd
-    #     reclaimPolicy: Retain
-    #     fstype: zfs
-    #     cache: none
-    #     ssd: false
-    #     mountOptions:
-    #       - discard
+    storageClass:
+      - name: proxmox-ssd
+        storage: local-zfs
+        reclaimPolicy: Retain
+        fstype: zfs
+        # https://pve.proxmox.com/wiki/Performance_Tweaks
+        cache: none
+        ssd: true
+        mountOptions:
+          - discard
+      - name: proxmox-hdd
+        storage: hdd
+        reclaimPolicy: Retain
+        fstype: zfs
+        cache: none
+        ssd: false
+        mountOptions:
+          - discard
 
     # -- Prometheus metrics
     metrics:
