@@ -41,7 +41,7 @@ spec:
 
     # -- Storage class definition.
     storageClass:
-      - name: proxmox-data-zfs
+      - name: proxmox-ssd
         storage: local-zfs
         reclaimPolicy: Retain
         fstype: zfs
