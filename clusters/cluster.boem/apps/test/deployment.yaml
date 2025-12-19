@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test
+  namespace: default
+  labels:
+    app: test
+spec:
+  selector:
+    matchLabels:
+      app: test
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: test
+    spec:
+      containers:
+        - name: test
+          image: docker
+          command: ["bash"]
+          volumeMounts:
+            - name: test-data
+              mountPath: /data
+      volumes:
+        - name: test-data
+          persistentVolumeClaim:
+            claimName: test-data
