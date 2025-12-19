@@ -12,9 +12,30 @@ spec:
   interval: 24h
   values:
     # -- Proxmox cluster config stored in secrets.
-    existingConfigSecret: cluster.config
+    existingConfigSecret: cluster-config
     # -- Proxmox cluster config stored in secrets key.
     existingConfigSecretKey: config.yaml
+
+    nodeSelector:
+      node-role.kubernetes.io/control-plane: ""
+    tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        effect: NoSchedule
+
+  node:
+    plugin:
+      # -- Tolerations for node-plugin assignment.
+      # ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+      tolerations:
+        - key: node.kubernetes.io/unschedulable
+          operator: Exists
+          effect: NoSchedule
+        - key: node.kubernetes.io/disk-pressure
+          operator: Exists
+          effect: NoSchedule
+        - key: dedicated
+          operator: Exists
+          effect: NoSchedule
 
     # -- Proxmox cluster config path.
     configFile: /etc/proxmox/config.yaml
