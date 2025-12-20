@@ -44,6 +44,8 @@ spec:
 
     immich:
       persistence:
+        library:
+          existingClaim: immich-library
         upload:
           enabled: true
           name: immich-upload
