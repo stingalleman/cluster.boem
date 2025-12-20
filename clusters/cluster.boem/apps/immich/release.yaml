@@ -130,8 +130,8 @@ spec:
       persistence:
         cache:
           enabled: true
-          size: 25Gi
+          size: 50Gi
           # Optional: Set this to persistentVolumeClaim to avoid downloading the ML models every start.
           type: persistentVolumeClaim
-          accessMode: ReadWriteMany
+          accessMode: ReadWriteOnce
           storageClass: proxmox-ssd-ext4
