@@ -1,12 +1,12 @@
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: immich-encoded-video
-  namespace: immich
-spec:
-  storageClassName: proxmox-hdd-xfs
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 25Gi
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: immich-encoded-video
+#   namespace: immich
+# spec:
+#   storageClassName: proxmox-hdd-xfs
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 25Gi

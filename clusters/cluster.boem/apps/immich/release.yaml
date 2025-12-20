@@ -46,42 +46,6 @@ spec:
       persistence:
         library:
           existingClaim: immich-library
-        upload:
-          enabled: true
-          name: immich-upload
-          type: persistentVolumeClaim
-          existingClaim: immich-upload
-          advancedMounts:
-            main:
-              main:
-                - path: /data/upload
-        profile:
-          enabled: true
-          name: immich-profile
-          type: persistentVolumeClaim
-          existingClaim: immich-profile
-          advancedMounts:
-            main:
-              main:
-                - path: /data/profile
-        thumbs:
-          enabled: true
-          name: immich-thumbs
-          type: persistentVolumeClaim
-          existingClaim: immich-thumbs
-          advancedMounts:
-            main:
-              main:
-                - path: /data/thumbs
-        encoded-video:
-          enabled: true
-          name: immich-encoded-video
-          type: persistentVolumeClaim
-          existingClaim: immich-encoded-video
-          advancedMounts:
-            main:
-              main:
-                - path: /data/encoded-video
       controllers:
         main:
           pod:
