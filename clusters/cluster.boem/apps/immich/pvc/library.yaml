@@ -1,12 +1,12 @@
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: immich-library
-#   namespace: immich
-# spec:
-#   storageClassName: proxmox-hdd-ext4
-#   accessModes:
-#     - ReadWriteOnce
-#   resources:
-#     requests:
-#       storage: 50Gi
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: immich-library
+  namespace: immich
+spec:
+  storageClassName: proxmox-hdd-ext4
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
