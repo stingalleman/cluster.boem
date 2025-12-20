@@ -1,173 +1,173 @@
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
-metadata:
-  name: immich
-  namespace: immich
-spec:
-  chartRef:
-    kind: OCIRepository
-    name: immich
-    namespace: flux-system
-  interval: 24h
-  values:
-    ## This chart relies on the common library chart from bjw-s
-    ## You can find it at https://github.com/bjw-s-labs/helm-charts/tree/common-4.3.0/charts/library/common
-    ## Refer there for more detail about the supported values
+# apiVersion: helm.toolkit.fluxcd.io/v2
+# kind: HelmRelease
+# metadata:
+#   name: immich
+#   namespace: immich
+# spec:
+#   chartRef:
+#     kind: OCIRepository
+#     name: immich
+#     namespace: flux-system
+#   interval: 24h
+#   values:
+#     ## This chart relies on the common library chart from bjw-s
+#     ## You can find it at https://github.com/bjw-s-labs/helm-charts/tree/common-4.3.0/charts/library/common
+#     ## Refer there for more detail about the supported values
 
-    # These entries are shared between all the Immich components
+#     # These entries are shared between all the Immich components
 
-    controllers:
-      main:
-        containers:
-          main:
-            env:
-              DB_PASSWORD:
-                valueFrom:
-                  secretKeyRef:
-                    name: immich-postgres-app
-                    key: password
-              DB_HOSTNAME:
-                valueFrom:
-                  secretKeyRef:
-                    name: immich-postgres-app
-                    key: host
-              DB_USERNAME:
-                valueFrom:
-                  secretKeyRef:
-                    name: immich-postgres-app
-                    key: username
-              DB_DATABASE_NAME:
-                valueFrom:
-                  secretKeyRef:
-                    name: immich-postgres-app
-                    key: dbname
+#     controllers:
+#       main:
+#         containers:
+#           main:
+#             env:
+#               DB_PASSWORD:
+#                 valueFrom:
+#                   secretKeyRef:
+#                     name: immich-postgres-app
+#                     key: password
+#               DB_HOSTNAME:
+#                 valueFrom:
+#                   secretKeyRef:
+#                     name: immich-postgres-app
+#                     key: host
+#               DB_USERNAME:
+#                 valueFrom:
+#                   secretKeyRef:
+#                     name: immich-postgres-app
+#                     key: username
+#               DB_DATABASE_NAME:
+#                 valueFrom:
+#                   secretKeyRef:
+#                     name: immich-postgres-app
+#                     key: dbname
 
-    immich:
-      persistence:
-        library:
-          existingClaim: immich-library
-        upload:
-          enabled: true
-          name: immich-upload
-          type: persistentVolumeClaim
-          existingClaim: immich-upload
-          advancedMounts:
-            main:
-              main:
-                - path: /data/upload
-        profile:
-          enabled: true
-          name: immich-profile
-          type: persistentVolumeClaim
-          existingClaim: immich-profile
-          advancedMounts:
-            main:
-              main:
-                - path: /data/profile
-        thumbs:
-          enabled: true
-          name: immich-thumbs
-          type: persistentVolumeClaim
-          existingClaim: immich-thumbs
-          advancedMounts:
-            main:
-              main:
-                - path: /data/thumbs
-        encoded-video:
-          enabled: true
-          name: immich-encoded-video
-          type: persistentVolumeClaim
-          existingClaim: immich-encoded-video
-          advancedMounts:
-            main:
-              main:
-                - path: /data/encoded-video
-      controllers:
-        main:
-          pod:
-            # tolerations:
-            #   - key: "dedicated"
-            #     operator: "Equal"
-            #     value: "gpu"
-            # effect: "NoSchedule"
-          containers:
-            main:
-              # resources:
-              #   limits:
-              # gpu.intel.com/i915: 1
+#     immich:
+#       persistence:
+#         library:
+#           existingClaim: immich-library
+#         upload:
+#           enabled: true
+#           name: immich-upload
+#           type: persistentVolumeClaim
+#           existingClaim: immich-upload
+#           advancedMounts:
+#             main:
+#               main:
+#                 - path: /data/upload
+#         profile:
+#           enabled: true
+#           name: immich-profile
+#           type: persistentVolumeClaim
+#           existingClaim: immich-profile
+#           advancedMounts:
+#             main:
+#               main:
+#                 - path: /data/profile
+#         thumbs:
+#           enabled: true
+#           name: immich-thumbs
+#           type: persistentVolumeClaim
+#           existingClaim: immich-thumbs
+#           advancedMounts:
+#             main:
+#               main:
+#                 - path: /data/thumbs
+#         encoded-video:
+#           enabled: true
+#           name: immich-encoded-video
+#           type: persistentVolumeClaim
+#           existingClaim: immich-encoded-video
+#           advancedMounts:
+#             main:
+#               main:
+#                 - path: /data/encoded-video
+#       controllers:
+#         main:
+#           pod:
+#             # tolerations:
+#             #   - key: "dedicated"
+#             #     operator: "Equal"
+#             #     value: "gpu"
+#             # effect: "NoSchedule"
+#           containers:
+#             main:
+#               # resources:
+#               #   limits:
+#               # gpu.intel.com/i915: 1
 
-      metrics:
-        # Enabling this will create the service monitors needed to monitor immich with the prometheus operator
-        enabled: false
-      # persistence:
-      #   # Main data store for all photos shared between different components.
-      #   library:
-      #     # Automatically creating the library volume is not supported by this chart
-      #     # You have to specify an existing PVC to use
-      #     existingClaim: immich-library
-      # configuration is immich-config.json converted to yaml
-      # ref: https://immich.app/docs/install/config-file/
-      #
-      configuration:
-        {}
-        # trash:
-        #   enabled: false
-        #   days: 30
-        # storageTemplate:
-        #   enabled: true
-        #   template: "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}"
+#       metrics:
+#         # Enabling this will create the service monitors needed to monitor immich with the prometheus operator
+#         enabled: false
+#       # persistence:
+#       #   # Main data store for all photos shared between different components.
+#       #   library:
+#       #     # Automatically creating the library volume is not supported by this chart
+#       #     # You have to specify an existing PVC to use
+#       #     existingClaim: immich-library
+#       # configuration is immich-config.json converted to yaml
+#       # ref: https://immich.app/docs/install/config-file/
+#       #
+#       configuration:
+#         {}
+#         # trash:
+#         #   enabled: false
+#         #   days: 30
+#         # storageTemplate:
+#         #   enabled: true
+#         #   template: "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}"
 
-    # Dependencies
+#     # Dependencies
 
-    valkey:
-      enabled: true
-      persistence:
-        data:
-          enabled: true
-          size: 2Gi
-          # Optional: Set this to persistentVolumeClaim to keep job queues persistent
-          type: persistentVolumeClaim
-          accessMode: ReadWriteOnce
-          storageClass: proxmox-ssd-ext4
+#     valkey:
+#       enabled: true
+#       persistence:
+#         data:
+#           enabled: true
+#           size: 2Gi
+#           # Optional: Set this to persistentVolumeClaim to keep job queues persistent
+#           type: persistentVolumeClaim
+#           accessMode: ReadWriteOnce
+#           storageClass: proxmox-ssd-ext4
 
-    # Immich components
+#     # Immich components
 
-    server:
-      enabled: true
-      # ingress:
-      #   main:
-      #     enabled: false
-      #     annotations:
-      #       # proxy-body-size is set to 0 to remove the body limit on file uploads
-      #       nginx.ingress.kubernetes.io/proxy-body-size: "0"
-      #     hosts:
-      #       - host: immich.local
-      #         paths:
-      #           - path: "/"
-      #             service:
-      #               identifier: main
-      #     tls: []
+#     server:
+#       enabled: true
+#       # ingress:
+#       #   main:
+#       #     enabled: false
+#       #     annotations:
+#       #       # proxy-body-size is set to 0 to remove the body limit on file uploads
+#       #       nginx.ingress.kubernetes.io/proxy-body-size: "0"
+#       #     hosts:
+#       #       - host: immich.local
+#       #         paths:
+#       #           - path: "/"
+#       #             service:
+#       #               identifier: main
+#       #     tls: []
 
-    machine-learning:
-      enabled: true
-      controllers:
-        main:
-          pod:
-            tolerations:
-              - key: "dedicated"
-                operator: "Equal"
-                value: "gpu"
-                effect: "NoSchedule"
-          containers:
-            main:
-              resources:
-                limits:
-                  gpu.intel.com/i915: 1
-      persistence:
-        cache:
-          enabled: true
-          size: 25Gi
-          # Optional: Set this to persistentVolumeClaim to avoid downloading the ML models every start.
-          type: persistentVolumeClaim
-          accessMode: ReadWriteMany
-          storageClass: proxmox-ssd-ext4
+#     machine-learning:
+#       enabled: true
+#       controllers:
+#         main:
+#           pod:
+#             tolerations:
+#               - key: "dedicated"
+#                 operator: "Equal"
+#                 value: "gpu"
+#                 effect: "NoSchedule"
+#           containers:
+#             main:
+#               resources:
+#                 limits:
+#                   gpu.intel.com/i915: 1
+#       persistence:
+#         cache:
+#           enabled: true
+#           size: 25Gi
+#           # Optional: Set this to persistentVolumeClaim to avoid downloading the ML models every start.
+#           type: persistentVolumeClaim
+#           accessMode: ReadWriteMany
+#           storageClass: proxmox-ssd-ext4
