@@ -134,6 +134,15 @@ peers:
         disabled: true
       - ip: 2001:7f8:1:0:a500:21:5577:1 # AMS-IX
 
+  - name: ISC F-ROOT
+    as: 30132
+    as_set: AS-FROOT
+    neighbors:
+      - ip: 2001:7f8:10f::75b4:147 # FrysIX
+        disabled: true
+      - ip: 2001:7f8:1::a503:132:1 # AMS-IX
+      - ip: 80.249.208.111
+
   # TODO: add tx-path
   - name: bgproutes.io
     as: 65000
