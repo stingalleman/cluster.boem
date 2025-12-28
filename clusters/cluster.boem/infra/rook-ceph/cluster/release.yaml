@@ -22,6 +22,8 @@ spec:
           failureDomain: host
           replicated:
             size: 1
+          deviceClass: ssd
+          enableCrushUpdates: true
         storageClass:
           allowVolumeExpansion: true
           enabled: true
