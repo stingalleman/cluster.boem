@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarr
+  namespace: media
+  labels:
+    app: sonarr
+spec:
+  selector:
+    matchLabels:
+      app: sonarr
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sonarr
+    spec:
+      containers:
+        - name: sonarr
+          image: lscr.io/linuxserver/sonarr:latest
+          # resources:
+          #   requests:
+          #     cpu: 100m
+          #     memory: 100Mi
+          #   limits:
+          #     cpu: 100m
+          #     memory: 100Mi
+          livenessProbe:
+            tcpSocket:
+              port: 8989
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+            periodSeconds: 10
+          # readinessProbe:
+          #   httpGet:
+          #     path: /_status/healthz
+          #     port: 80
+          #   initialDelaySeconds: 5
+          #   timeoutSeconds: 2
+          #   successThreshold: 1
+          #   failureThreshold: 3
+          #   periodSeconds: 10
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: "Europe/Amsterdam"
+          ports:
+            - containerPort: 8989
+              name: http
+          volumeMounts:
+            - name: data
+              mountPath: /config
+            - name: movie-library
+              mountPath: /library
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-sonarr
+        - name: library
+          persistentVolumeClaim:
+            claimName: library
+      restartPolicy: Always

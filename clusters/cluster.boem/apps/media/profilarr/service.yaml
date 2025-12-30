@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: profilarr
+  namespace: media
+spec:
+  selector:
+    app: profilarr
+  ports:
+    - name: http
+      protocol: TCP
+      port: 6868
+      targetPort: http

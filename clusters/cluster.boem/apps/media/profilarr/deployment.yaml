@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: profilarr
+  namespace: media
+  labels:
+    app: profilarr
+spec:
+  selector:
+    matchLabels:
+      app: profilarr
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: profilarr
+    spec:
+      containers:
+        - name: profilarr
+          image: santiagosayshey/profilarr:latest
+          # resources:
+          #   requests:
+          #     cpu: 100m
+          #     memory: 100Mi
+          #   limits:
+          #     cpu: 100m
+          #     memory: 100Mi
+          livenessProbe:
+            tcpSocket:
+              port: 6868
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+            periodSeconds: 10
+          # readinessProbe:
+          #   httpGet:
+          #     path: /_status/healthz
+          #     port: 80
+          #   initialDelaySeconds: 5
+          #   timeoutSeconds: 2
+          #   successThreshold: 1
+          #   failureThreshold: 3
+          #   periodSeconds: 10
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: UMASK
+              value: "022"
+            - name: TZ
+              value: "Europe/Amsterdam"
+          ports:
+            - containerPort: 6868
+              name: http
+          volumeMounts:
+            - name: data
+              mountPath: /config
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-profilarr
+      restartPolicy: Always

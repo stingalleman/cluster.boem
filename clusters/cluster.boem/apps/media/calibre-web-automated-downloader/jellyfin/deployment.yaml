@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyfin
+  namespace: media
+  labels:
+    app: jellyfin
+spec:
+  selector:
+    matchLabels:
+      app: jellyfin
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: jellyfin
+    spec:
+      containers:
+        - name: jellyfin
+          image: lscr.io/linuxserver/jellyfin@sha256:2e4a4c271afa1488b8c2a7ee7aaf301e82cd0ce0855be023095ad143ed52be75
+          # resources:
+          #   requests:
+          #     cpu: 100m
+          #     memory: 100Mi
+          #   limits:
+          #     cpu: 100m
+          #     memory: 100Mi
+          livenessProbe:
+            tcpSocket:
+              port: 8096
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+            periodSeconds: 10
+          # readinessProbe:
+          #   httpGet:
+          #     path: /_status/healthz
+          #     port: 80
+          #   initialDelaySeconds: 5
+          #   timeoutSeconds: 2
+          #   successThreshold: 1
+          #   failureThreshold: 3
+          #   periodSeconds: 10
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: "Europe/Amsterdam"
+          ports:
+            - containerPort: 8096
+              name: http
+          volumeMounts:
+            - name: data
+              mountPath: /config
+            - name: library
+              mountPath: /data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-jellyfin
+        - name: library
+          persistentVolumeClaim:
+            claimName: library
+      restartPolicy: Always
