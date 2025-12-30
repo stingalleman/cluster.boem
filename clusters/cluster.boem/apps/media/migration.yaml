@@ -9,6 +9,11 @@ spec:
   containers:
     - name: migrate-data
       image: "debian:latest"
+      command:
+        # sleep forever to keep the pod running
+        - "/bin/sh"
+        - "-c"
+        - "sleep infinity"
       volumeMounts:
         - name: library
           mountPath: /library
