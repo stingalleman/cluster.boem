@@ -11,30 +11,30 @@ spec:
     - kind: Rule
       match: Host(`radarr.media.i.as216455.net`)
       services:
-        - name: media-stingalleman-nl
-          namespace: traefik
-          port: 7878
+        - name: radarr
+          namespace: media
+          port: http
 
     - kind: Rule
       match: Host(`sonarr.media.i.as216455.net`)
       services:
-        - name: media-stingalleman-nl
-          namespace: traefik
-          port: 8989
+        - name: sonarr
+          namespace: media
+          port: http
 
     - kind: Rule
       match: Host(`sabnzbd.media.i.as216455.net`)
       services:
-        - name: media-stingalleman-nl
-          namespace: traefik
-          port: 8080
+        - name: sabnzbd
+          namespace: media
+          port: http
 
     - kind: Rule
       match: Host(`profilarr.media.i.as216455.net`)
       services:
-        - name: media-stingalleman-nl
-          namespace: traefik
-          port: 6868
+        - name: profilarr
+          namespace: media
+          port: http
 
   tls:
     secretName: media.i.as216455.net-prod-tls

@@ -20,17 +20,17 @@ spec:
       match: Host(`media.maishond.nl`)
       services:
         - kind: Service
-          name: media-stingalleman-nl
-          namespace: traefik
-          port: 8096
+          name: jellyfin
+          namespace: media
+          port: http
 
     - kind: Rule
       match: Host(`request.maishond.nl`)
       services:
         - kind: Service
-          name: media-stingalleman-nl
-          namespace: traefik
-          port: 5055
+          name: jellyseerr
+          namespace: media
+          port: http
 
     - kind: Rule
       match: Host(`leuk-achtergrondje.maishond.nl`)
