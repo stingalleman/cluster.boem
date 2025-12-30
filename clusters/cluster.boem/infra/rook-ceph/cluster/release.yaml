@@ -120,9 +120,6 @@ spec:
           enableCrushUpdates: true
         storageClass:
           allowVolumeExpansion: true
-          enabled: true
-          isDefault: true
-          name: ceph-block
           reclaimPolicy: Delete
           volumeBindingMode: Immediate
     # -- Namespace of the main rook operator
