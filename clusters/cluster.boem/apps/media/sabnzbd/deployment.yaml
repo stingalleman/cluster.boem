@@ -15,6 +15,7 @@ spec:
       labels:
         app: sabnzbd
     spec:
+      nodeName: k-gpu
       containers:
         - name: sabnzbd
           image: lscr.io/linuxserver/sabnzbd:latest
