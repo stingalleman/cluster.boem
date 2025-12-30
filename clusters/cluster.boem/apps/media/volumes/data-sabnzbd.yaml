@@ -1,12 +1,12 @@
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: data-sabnzbd
-  namespace: media
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: ceph-block
-  resources:
-    requests:
-      storage: 10G
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: data-sabnzbd
+#   namespace: media
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   storageClassName: ceph-block
+#   resources:
+#     requests:
+#       storage: 10G
