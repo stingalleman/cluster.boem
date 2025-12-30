@@ -55,7 +55,7 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /config
-            - name: movie-library
+            - name: library
               mountPath: /library
       volumes:
         - name: data
