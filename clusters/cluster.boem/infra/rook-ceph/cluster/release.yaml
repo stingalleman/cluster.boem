@@ -110,7 +110,7 @@ spec:
           deviceClass: ssd
           enableCrushUpdates: true
         storageClass:
-          name: ceph-blockpool
+          name: ceph-block
           allowVolumeExpansion: true
           reclaimPolicy: Delete
           volumeBindingMode: Immediate
