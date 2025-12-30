@@ -16,6 +16,11 @@ spec:
         app: sabnzbd
     spec:
       nodeName: k-gpu
+      tolerations:
+        - key: "dedicated"
+          operator: "Equal"
+          value: "gpu"
+          effect: "NoSchedule"
       containers:
         - name: sabnzbd
           image: lscr.io/linuxserver/sabnzbd:latest
