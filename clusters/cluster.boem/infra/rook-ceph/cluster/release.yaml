@@ -51,62 +51,57 @@ spec:
           allowVolumeExpansion: true
           volumeBindingMode: "Immediate"
           parameters:
-            # The secrets contain Ceph admin credentials.
             csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
-            csi.storage.k8s.io/provisioner-secret-namespace: "rook-ceph"
+            csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph
             csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
-            csi.storage.k8s.io/controller-expand-secret-namespace: "rook-ceph"
-            csi.storage.k8s.io/controller-publish-secret-name: rook-csi-cephfs-provisioner
-            csi.storage.k8s.io/controller-publish-secret-namespace: "rook-ceph"
+            csi.storage.k8s.io/controller-expand-secret-namespace: rook-ceph
             csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
-            csi.storage.k8s.io/node-stage-secret-namespace: "rook-ceph"
-            # Specify the filesystem type of the volume. If not specified, csi-provisioner
-            # will set default as `ext4`. Note that `xfs` is not recommended due to potential deadlock
-            # in hyperconverged settings where the volume is mounted on the same node as the osds.
-        csi.storage.k8s.io/fstype: ext4
-      # - name: cephfs-hdd
-      #   # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#filesystem-settings for available configuration
-      #   spec:
-      #     metadataPool:
-      #       replicated:
-      #         size: 1
-      #       deviceClass: ssd
-      #     dataPools:
-      #       - failureDomain: host
-      #         replicated:
-      #           size: 1
-      #         # Optional and highly recommended, 'data0' by default, see https://github.com/rook/rook/blob/master/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#pools
-      #         name: data0
-      #         deviceClass: ssd
-      #     metadataServer:
-      #       activeCount: 1
-      #       activeStandby: true
-      #       resources:
-      #         limits:
-      #           memory: "4Gi"
-      #         requests:
-      #           cpu: "1000m"
-      #           memory: "4Gi"
-      #       priorityClassName: system-cluster-critical
-      #   storageClass:
-      #     enabled: true
-      #     isDefault: false
-      #     name: cephfs-hdd
-      #     # (Optional) specify a data pool to use, must be the name of one of the data pools above, 'data0' by default
-      #     pool: data0
-      #     reclaimPolicy: Delete
-      #     allowVolumeExpansion: true
-      #     volumeBindingMode: "Immediate"
-      #     parameters:
-      #       # The secrets contain Ceph admin credentials.
-      #       csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
-      #       csi.storage.k8s.io/provisioner-secret-namespace: "rook-ceph"
-      #       csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
-      #       csi.storage.k8s.io/controller-expand-secret-namespace: "rook-ceph"
-      #       csi.storage.k8s.io/controller-publish-secret-name: rook-csi-cephfs-provisioner
-      #       csi.storage.k8s.io/controller-publish-secret-namespace: "rook-ceph"
-      #       csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
-      #       csi.storage.k8s.io/node-stage-secret-namespace: "rook-ceph"
+            csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
+            csi.storage.k8s.io/fstype: ext4
+
+    # - name: cephfs-hdd
+    #   # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#filesystem-settings for available configuration
+    #   spec:
+    #     metadataPool:
+    #       replicated:
+    #         size: 1
+    #       deviceClass: ssd
+    #     dataPools:
+    #       - failureDomain: host
+    #         replicated:
+    #           size: 1
+    #         # Optional and highly recommended, 'data0' by default, see https://github.com/rook/rook/blob/master/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#pools
+    #         name: data0
+    #         deviceClass: ssd
+    #     metadataServer:
+    #       activeCount: 1
+    #       activeStandby: true
+    #       resources:
+    #         limits:
+    #           memory: "4Gi"
+    #         requests:
+    #           cpu: "1000m"
+    #           memory: "4Gi"
+    #       priorityClassName: system-cluster-critical
+    #   storageClass:
+    #     enabled: true
+    #     isDefault: false
+    #     name: cephfs-hdd
+    #     # (Optional) specify a data pool to use, must be the name of one of the data pools above, 'data0' by default
+    #     pool: data0
+    #     reclaimPolicy: Delete
+    #     allowVolumeExpansion: true
+    #     volumeBindingMode: "Immediate"
+    #     parameters:
+    #       # The secrets contain Ceph admin credentials.
+    #       csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
+    #       csi.storage.k8s.io/provisioner-secret-namespace: "rook-ceph"
+    #       csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
+    #       csi.storage.k8s.io/controller-expand-secret-namespace: "rook-ceph"
+    #       csi.storage.k8s.io/controller-publish-secret-name: rook-csi-cephfs-provisioner
+    #       csi.storage.k8s.io/controller-publish-secret-namespace: "rook-ceph"
+    #       csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
+    #       csi.storage.k8s.io/node-stage-secret-namespace: "rook-ceph"
 
     cephBlockPools:
       - name: ceph-blockpool
@@ -119,6 +114,7 @@ spec:
           deviceClass: ssd
           enableCrushUpdates: true
         storageClass:
+          name: ceph-blockpool
           allowVolumeExpansion: true
           reclaimPolicy: Delete
           volumeBindingMode: Immediate
