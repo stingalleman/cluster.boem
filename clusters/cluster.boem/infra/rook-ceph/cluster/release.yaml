@@ -58,46 +58,46 @@ spec:
             csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
             csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
             csi.storage.k8s.io/fstype: ext4
-      - name: cephfs-hdd
-        spec:
-          metadataPool:
-            replicated:
-              size: 1
-            deviceClass: ssd
-          dataPools:
-            - failureDomain: host
-              replicated:
-                size: 1
-              name: data0
-              deviceClass: hdd
-          metadataServer:
-            activeCount: 1
-            activeStandby: true
-            resources:
-              limits:
-                memory: "4Gi"
-              requests:
-                cpu: "1000m"
-                memory: "4Gi"
-            priorityClassName: system-cluster-critical
-        storageClass:
-          enabled: true
-          isDefault: false
-          name: cephfs-hdd
-          # (Optional) specify a data pool to use, must be the name of one of the data pools above, 'data0' by default
-          pool: data0
-          reclaimPolicy: Delete
-          allowVolumeExpansion: true
-          volumeBindingMode: "Immediate"
-          parameters:
-            # The secrets contain Ceph admin credentials.
-            csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
-            csi.storage.k8s.io/controller-expand-secret-namespace: rook-ceph
-            csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
-            csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
-            csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
-            csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph
-            csi.storage.k8s.io/fstype: ext4
+      # - name: cephfs-hdd
+      #   spec:
+      #     metadataPool:
+      #       replicated:
+      #         size: 1
+      #       deviceClass: ssd
+      #     dataPools:
+      #       - failureDomain: host
+      #         replicated:
+      #           size: 1
+      #         name: data0
+      #         deviceClass: hdd
+      #     metadataServer:
+      #       activeCount: 1
+      #       activeStandby: true
+      #       resources:
+      #         limits:
+      #           memory: "4Gi"
+      #         requests:
+      #           cpu: "1000m"
+      #           memory: "4Gi"
+      #       priorityClassName: system-cluster-critical
+      #   storageClass:
+      #     enabled: true
+      #     isDefault: false
+      #     name: cephfs-hdd
+      #     # (Optional) specify a data pool to use, must be the name of one of the data pools above, 'data0' by default
+      #     pool: data0
+      #     reclaimPolicy: Delete
+      #     allowVolumeExpansion: true
+      #     volumeBindingMode: "Immediate"
+      #     parameters:
+      #       # The secrets contain Ceph admin credentials.
+      #       csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
+      #       csi.storage.k8s.io/controller-expand-secret-namespace: rook-ceph
+      #       csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
+      #       csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
+      #       csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
+      #       csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph
+      #       csi.storage.k8s.io/fstype: ext4
 
     cephBlockPools:
       - name: ceph-blockpool
