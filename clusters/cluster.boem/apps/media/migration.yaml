@@ -1,50 +1,50 @@
-apiVersion: v1
-kind: Pod
-metadata:
-  name: "migrate-data"
-  namespace: media
-  labels:
-    app: "migrate-data"
-spec:
-  containers:
-    - name: migrate-data
-      image: "debian:latest"
-      volumeMounts:
-        - name: library
-          mountPath: /library
-        - name: data-jellyfin
-          mountPath: /data/jellyfin
-        - name: data-jellyseerr
-          mountPath: /data/jellyseerr
-        - name: data-sonarr
-          mountPath: /data/sonarr
-        - name: data-radarr
-          mountPath: /data/radarr
-        - name: data-profilarr
-          mountPath: /data/profilarr
-        - name: data-sabnzbd
-          mountPath: /data/sabnzbd
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: "migrate-data"
+#   namespace: media
+#   labels:
+#     app: "migrate-data"
+# spec:
+#   containers:
+#     - name: migrate-data
+#       image: "debian:latest"
+#       volumeMounts:
+#         - name: library
+#           mountPath: /library
+#         - name: data-jellyfin
+#           mountPath: /data/jellyfin
+#         - name: data-jellyseerr
+#           mountPath: /data/jellyseerr
+#         - name: data-sonarr
+#           mountPath: /data/sonarr
+#         - name: data-radarr
+#           mountPath: /data/radarr
+#         - name: data-profilarr
+#           mountPath: /data/profilarr
+#         - name: data-sabnzbd
+#           mountPath: /data/sabnzbd
 
-  volumes:
-    - name: library
-      persistentVolumeClaim:
-        claimName: library
-    - name: data-jellyfin
-      persistentVolumeClaim:
-        claimName: data-jellyfin
-    - name: data-jellyseerr
-      persistentVolumeClaim:
-        claimName: data-jellyseerr
-    - name: data-sonarr
-      persistentVolumeClaim:
-        claimName: data-sonarr
-    - name: data-radarr
-      persistentVolumeClaim:
-        claimName: data-radarr
-    - name: data-profilarr
-      persistentVolumeClaim:
-        claimName: data-profilarr
-    - name: data-sabnzbd
-      persistentVolumeClaim:
-        claimName: data-sabnzbd
-  restartPolicy: Always
+#   volumes:
+#     - name: library
+#       persistentVolumeClaim:
+#         claimName: library
+#     - name: data-jellyfin
+#       persistentVolumeClaim:
+#         claimName: data-jellyfin
+#     - name: data-jellyseerr
+#       persistentVolumeClaim:
+#         claimName: data-jellyseerr
+#     - name: data-sonarr
+#       persistentVolumeClaim:
+#         claimName: data-sonarr
+#     - name: data-radarr
+#       persistentVolumeClaim:
+#         claimName: data-radarr
+#     - name: data-profilarr
+#       persistentVolumeClaim:
+#         claimName: data-profilarr
+#     - name: data-sabnzbd
+#       persistentVolumeClaim:
+#         claimName: data-sabnzbd
+#   restartPolicy: Always
