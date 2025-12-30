@@ -54,7 +54,7 @@ spec:
               name: http
           volumeMounts:
             - name: data
-              mountPath: /config
+              mountPath: /app/config
       volumes:
         - name: data
           persistentVolumeClaim:
