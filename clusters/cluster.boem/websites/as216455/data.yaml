@@ -6,7 +6,7 @@ metadata:
 data:
   index.html: |
     <html>
-      <body>
+      <body style="font-family:monospace">
         AS216455 is an educational network. It also provides IPv6 tunnels for residential users that do not receive IPv6 from their ISP.
         <br />
         Open for peering. Contact <a href="mailto:noc@as216455.net">noc@as216455.net</a> for more information.
