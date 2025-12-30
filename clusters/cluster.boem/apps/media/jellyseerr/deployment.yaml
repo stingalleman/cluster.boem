@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: jellyseerr
-          image: lscr.io/linuxserver/jellyseerr:latest
+          image: ghcr.io/fallenbagel/jellyseerr:latest
           # resources:
           #   requests:
           #     cpu: 100m
