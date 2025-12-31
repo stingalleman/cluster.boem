@@ -123,5 +123,13 @@ spec:
           namespace: default
           port: 3000
 
+    - kind: Rule
+      match: Host(`ollama.i.as216455.net`)
+      services:
+        - kind: Service
+          name: ollama
+          namespace: default
+          port: http
+
   tls:
     secretName: i.as216455.net-prod-tls
