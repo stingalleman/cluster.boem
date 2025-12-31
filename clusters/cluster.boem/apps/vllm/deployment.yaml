@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vllm
+  namespace: default
+  labels:
+    app: vllm
+spec:
+  selector:
+    matchLabels:
+      app: vllm
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vllm
+    spec:
+      containers:
+        - name: vllm
+          image: intel/vllm:0.11.1-xpu
+          resources:
+            limits:
+              gpu.intel.com/i915: "1"
+          ports:
+            - containerPort: 11434
+              name: http
+          volumeMounts:
+            # - name: vllm
+            #   mountPath: /root/.vllm
+            - mountPath: /dev/shm
+              name: dshm
+      volumes:
+        # - name: vllm
+        #   persistentVolumeClaim:
+        #     claimName: vllm
+        - name: dshm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 10g
+      restartPolicy: Always
