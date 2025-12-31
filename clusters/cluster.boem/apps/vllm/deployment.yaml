@@ -30,16 +30,18 @@ spec:
             - containerPort: 11434
               name: http
           volumeMounts:
+            []
             # - name: vllm
             #   mountPath: /root/.vllm
-            - mountPath: /dev/shm
-              name: dshm
+            # - mountPath: /dev/shm
+            #   name: dshm
       volumes:
+        []
         # - name: vllm
         #   persistentVolumeClaim:
         #     claimName: vllm
-        - name: dshm
-          emptyDir:
-            medium: Memory
-            sizeLimit: 10Gi
+        # - name: dshm
+        #   emptyDir:
+        #     medium: Memory
+        #     sizeLimit: 10Gi
       restartPolicy: Always
