@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ollama
+  namespace: default
+  labels:
+    app: ollama
+spec:
+  selector:
+    matchLabels:
+      app: ollama
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ollama
+    spec:
+      containers:
+        - name: ollama
+          image: ollama/ollama:latest
+          # resources:
+          #   limits:
+          #     gpu.intel.com/i915: "1"
+          ports:
+            - containerPort: 11434
+              name: http
+          volumeMounts:
+            - name: ollama
+              mountPath: /root/.ollama
+      volumes:
+        - name: ollama
+          persistentVolumeClaim:
+            claimName: ollama
+      restartPolicy: Always
