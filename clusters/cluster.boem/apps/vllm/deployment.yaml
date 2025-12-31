@@ -36,5 +36,5 @@ spec:
         - name: dshm
           emptyDir:
             medium: Memory
-            sizeLimit: 10g
+            sizeLimit: 10Gi
       restartPolicy: Always
