@@ -27,7 +27,7 @@ spec:
             - "/bin/sh"
             - "-c"
           args:
-            - "vllm serve unsloth/Ministral-3-3B-Instruct-2512-GGUF"
+            - "vllm serve TinyLlama/TinyLlama-1.1B-Chat-v1.0"
           env:
             - name: HF_TOKEN
               valueFrom:
@@ -45,6 +45,18 @@ spec:
               mountPath: /root/.cache/huggingface
             # - mountPath: /dev/shm
             #   name: dshm
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 60
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 60
+            periodSeconds: 5
       volumes:
         - name: vllm
           persistentVolumeClaim:
