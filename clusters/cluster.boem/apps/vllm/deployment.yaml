@@ -27,7 +27,7 @@ spec:
             - "/bin/sh"
             - "-c"
           args:
-            - "vllm serve unsloth/Ministral-3-3B-Instruct-2512-GGUF:Q4_K_XL"
+            - "vllm serve unsloth/Ministral-3-3B-Instruct-2512-GGUF"
           env:
             - name: HF_TOKEN
               valueFrom:
