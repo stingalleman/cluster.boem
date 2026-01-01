@@ -27,7 +27,14 @@ spec:
             - "/bin/sh"
             - "-c"
           args:
-            - mkdir -p /llm/ollama && cd /llm/ollama && init-ollama && exec ./ollama serve
+            - |
+              export OLLAMA_HOST="0.0.0.0:11434"
+              export OLLAMA_INTEL_GPU="true"
+              export OLLAMA_NO_MMAP="1"
+              export ZES_ENABLE_SYSMAN="1"
+              export OLLAMA_NUM_GPU="24"
+              export OLLAMA_NUM_PARALLEL="1"
+              mkdir -p /llm/ollama && cd /llm/ollama &&  && exec ./ollama serve
           #   - "ollama serve TinyLlama/TinyLlama-1.1B-Chat-v1.0"
           env:
             # - name: HF_TOKEN
