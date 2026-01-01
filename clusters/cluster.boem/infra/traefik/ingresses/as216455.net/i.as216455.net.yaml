@@ -127,7 +127,7 @@ spec:
       match: Host(`ollama.i.as216455.net`)
       services:
         - kind: Service
-          name: vllm-service
+          name: ollama-service
           namespace: default
           port: http
 
