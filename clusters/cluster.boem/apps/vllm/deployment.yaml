@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vllm
+  name: ollama
   namespace: default
   labels:
-    app: vllm
+    app: ollama
 spec:
   selector:
     matchLabels:
-      app: vllm
+      app: ollama
   replicas: 1
   template:
     metadata:
       labels:
-        app: vllm
+        app: ollama
     spec:
       tolerations:
         - key: "dedicated"
@@ -21,14 +21,14 @@ spec:
           value: "gpu"
           effect: "NoSchedule"
       containers:
-        - name: vllm
+        - name: ollama
           image: intelanalytics/ipex-llm-inference-cpp-xpu:latest
           command:
             - "/bin/sh"
             - "-c"
           args:
             - mkdir -p /llm/ollama && cd /llm/ollama && init-ollama && exec ./ollama serve
-          #   - "vllm serve TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+          #   - "ollama serve TinyLlama/TinyLlama-1.1B-Chat-v1.0"
           env:
             # - name: HF_TOKEN
             #   valueFrom:
