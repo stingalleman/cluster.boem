@@ -23,23 +23,32 @@ spec:
       containers:
         - name: vllm
           image: intel/vllm:0.11.1-xpu
+          command:
+            - "/bin/sh"
+            - "-c"
+          args:
+            - "vllm serve meta-llama/Llama-3.2-1B-Instruct"
+          env:
+            - name: HF_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: huggingface
+                  key: token
           resources:
             limits:
               gpu.intel.com/i915: "1"
           ports:
-            - containerPort: 11434
+            - containerPort: 8000
               name: http
           volumeMounts:
-            []
-            # - name: vllm
-            #   mountPath: /root/.vllm
+            - name: vllm
+              mountPath: /root/.cache/huggingface
             # - mountPath: /dev/shm
             #   name: dshm
       volumes:
-        []
-        # - name: vllm
-        #   persistentVolumeClaim:
-        #     claimName: vllm
+        - name: vllm
+          persistentVolumeClaim:
+            claimName: vllm
         # - name: dshm
         #   emptyDir:
         #     medium: Memory
