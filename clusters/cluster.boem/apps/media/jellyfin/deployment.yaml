@@ -64,7 +64,7 @@ spec:
             - name: data
               mountPath: /config
             - name: library
-              mountPath: /data
+              mountPath: /library
       volumes:
         - name: data
           persistentVolumeClaim:
