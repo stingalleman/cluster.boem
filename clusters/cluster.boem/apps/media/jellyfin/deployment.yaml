@@ -41,15 +41,15 @@ spec:
             successThreshold: 2
             failureThreshold: 10
             periodSeconds: 15
-          # readinessProbe:
-          #   httpGet:
-          #     path: /_status/healthz
-          #     port: 80
-          #   initialDelaySeconds: 5
-          #   timeoutSeconds: 2
-          #   successThreshold: 1
-          #   failureThreshold: 3
-          #   periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8096
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
+            successThreshold: 2
+            failureThreshold: 10
+            periodSeconds: 15
           env:
             - name: PUID
               value: "1000"
