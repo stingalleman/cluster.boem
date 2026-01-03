@@ -47,7 +47,6 @@ spec:
               port: 8096
             initialDelaySeconds: 60
             timeoutSeconds: 5
-            successThreshold: 2
             failureThreshold: 10
             periodSeconds: 15
           env:
