@@ -57,6 +57,8 @@ spec:
               value: "1000"
             - name: TZ
               value: "Europe/Amsterdam"
+            - name: DOCKER_MODS
+              value: "linuxserver/mods:jellyfin-opencl-intel"
           ports:
             - containerPort: 8096
               name: http
