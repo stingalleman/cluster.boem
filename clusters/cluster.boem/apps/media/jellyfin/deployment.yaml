@@ -36,18 +36,18 @@ spec:
           livenessProbe:
             tcpSocket:
               port: 8096
-            initialDelaySeconds: 60
+            initialDelaySeconds: 40
             timeoutSeconds: 5
             failureThreshold: 10
-            periodSeconds: 15
+            periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /
               port: 8096
-            initialDelaySeconds: 60
+            initialDelaySeconds: 40
             timeoutSeconds: 5
             failureThreshold: 10
-            periodSeconds: 15
+            periodSeconds: 10
           env:
             - name: PUID
               value: "1000"
