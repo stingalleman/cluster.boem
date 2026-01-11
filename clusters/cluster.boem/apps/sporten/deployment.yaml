@@ -69,10 +69,7 @@ spec:
                 key: basic_device_id
                 name: sporten
           - name: BASE_URL
-            valueFrom:
-              secretKeyRef:
-                key: base_url
-                name: sporten
+            value: https://sport.isaensting.nl
         ports:
         - containerPort: 3000
           name: http

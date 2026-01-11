@@ -7,7 +7,14 @@ spec:
   entryPoints:
     - web
     - websecure
-  routes: []
+  routes:
+    - kind: Rule
+      match: Host(`sport.isaensting.nl`)
+      services:
+        - kind: Service
+          name: sporten
+          namespace: default
+          port: http
 
   tls:
     secretName: isaensting.nl-prod-tls
