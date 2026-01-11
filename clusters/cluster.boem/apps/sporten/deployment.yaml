@@ -18,7 +18,7 @@ spec:
       imagePullSecrets:
         - name: ghcr-login-secret
       containers:
-      - name: sporten
+      - name: sportennnnn
         image: ghcr.io/maishond/basicfit-ding:main
         livenessProbe:
           tcpSocket:
