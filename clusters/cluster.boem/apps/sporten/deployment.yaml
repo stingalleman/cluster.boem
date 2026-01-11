@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sportena
+  name: sporten
   namespace: default
   labels:
     app: sporten
@@ -18,8 +18,8 @@ spec:
       imagePullSecrets:
         - name: ghcr-login-secret
       containers:
-      - name: sportennnnn
-        image: ghcr.io/maishond/basicfit-ding:main
+      - name: sporten
+        image: ghcr.io/maishond/basicfit-ding:main-8030f8f
         livenessProbe:
           tcpSocket:
             port: 3000
