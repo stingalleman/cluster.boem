@@ -19,7 +19,7 @@ spec:
         - name: ghcr-login-secret
       containers:
       - name: sporten
-        image: ghcr.io/maishond/basicfit-ding:main-0f6fbae
+        image: ghcr.io/maishond/basicfit-ding:main
         livenessProbe:
           tcpSocket:
             port: 3000
