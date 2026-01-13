@@ -217,17 +217,17 @@ spec:
         host: element-admin.maishond.nl
     elementWeb:
       enabled: true
-      image:
-        ## The host and (optional) port of the container image registry for this component.
-        ## If not specified Docker Hub is implied
-        registry: ghcr.io
+      # image:
+      #   ## The host and (optional) port of the container image registry for this component.
+      #   ## If not specified Docker Hub is implied
+      #   registry: ghcr.io
 
-        ## The path in the registry where the container image is located
-        repository: element-hq/element-web
+      #   ## The path in the registry where the container image is located
+      #   repository: element-hq/element-web
 
-        ## The tag of the container image to use.
-        ## One of tag or digest must be provided.
-        tag: "v1.12.4"
+      #   ## The tag of the container image to use.
+      #   ## One of tag or digest must be provided.
+      #   tag: "v1.12.4"
       ingress:
         host: element.maishond.nl
 
