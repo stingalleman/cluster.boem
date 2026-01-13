@@ -4,3 +4,4 @@ resources:
 - alerts.yaml
 - github.yaml
 - notifications.yaml
+- matrix.yaml
