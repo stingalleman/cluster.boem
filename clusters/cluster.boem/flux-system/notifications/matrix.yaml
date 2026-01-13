@@ -1,0 +1,11 @@
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Provider
+metadata:
+  name: matrix
+  namespace: flux-system
+spec:
+  type: matrix
+  address: https://matrix.maishond.nl
+  channel: "!yPeUZjeJtJLiolkESC:maishond.nl"
+  secretRef:
+    name: matrix-notifications
