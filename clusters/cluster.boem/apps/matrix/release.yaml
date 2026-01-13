@@ -212,6 +212,9 @@ spec:
       ingress:
         host: mrtc-matrix.maishond.nl
 
+    elementAdmin:
+      ingress:
+        host: element-admin.maishond.nl
     elementWeb:
       enabled: true
       image:
