@@ -20,6 +20,13 @@ spec:
         - name: rook-ceph-mgr-dashboard
           namespace: rook-ceph
           port: 7000
+    - kind: Rule
+      match: Host(`kluster.i.as216455.net`)
+      services:
+        - name: headlamp
+          namespace: kube-system
+          port: 80
+
 
   tls:
     secretName: kluster.i.as216455.net-prod-tls
