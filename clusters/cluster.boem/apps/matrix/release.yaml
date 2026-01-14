@@ -245,3 +245,12 @@ spec:
 
     haproxy:
       replicas: 2
+      resources:
+        ## Requests describes the minimum amount of compute resources required. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+        requests:
+          memory: 350Mi
+          cpu: 150m
+
+        ## Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+        limits:
+          memory: 400Mi
