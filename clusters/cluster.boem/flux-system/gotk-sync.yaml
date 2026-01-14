@@ -19,7 +19,7 @@ metadata:
   name: flux-system
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 24h0s
   path: ./clusters/cluster.boem
   prune: true
   sourceRef:
