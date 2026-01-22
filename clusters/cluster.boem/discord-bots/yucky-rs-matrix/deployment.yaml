@@ -129,3 +129,5 @@ spec:
                 secretKeyRef:
                   name: yucky-rs-matrix
                   key: mqtt_host
+            - name: DISABLE_GOBLIN
+              value: yessir
