@@ -36,3 +36,9 @@ spec:
   #     online: true
   #     snapshotOwnerReference: none
   #     # cl
+
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: bots-store
