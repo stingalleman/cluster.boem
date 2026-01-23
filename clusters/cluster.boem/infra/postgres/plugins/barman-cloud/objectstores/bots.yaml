@@ -6,7 +6,7 @@ metadata:
 spec:
   configuration:
     destinationPath: s3://cnpg-bucket/matrix-bots/
-    endpointURL: http://10.0.0.106:3900
+    endpointURL: http://10.0.0.160:3900
     s3Credentials:
       accessKeyId:
         name: generic-backup-creds
