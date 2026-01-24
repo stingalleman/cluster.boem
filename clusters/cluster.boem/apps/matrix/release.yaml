@@ -144,18 +144,19 @@ spec:
           enabled: true
         event-persister:
           enabled: true
-          replicas: 3
+          replicas: 4
         federation-inbound:
           enabled: true
-          replicas: 3
+          replicas: 6
         federation-reader:
           enabled: true
-          replicas: 2
+          replicas: 6
         federation-sender:
           enabled: true
+          replicas: 3
         initial-synchrotron:
           enabled: true
-          replicas: 3
+          replicas: 4
         media-repository:
           enabled: true
         presence-writer:
@@ -169,12 +170,12 @@ spec:
           enabled: true
         sliding-sync:
           enabled: true
-          replicas: 3
+          replicas: 4
         sso-login:
           enabled: true
         synchrotron:
           enabled: true
-          replicas: 3
+          replicas: 4
         typing-persister:
           enabled: true
         user-dir:
