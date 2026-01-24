@@ -1,0 +1,11 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Backup
+metadata:
+  name: matrix-bots
+  namespace: cnpg-system
+spec:
+  cluster:
+    name: matrix-bots
+  method: plugin
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io
