@@ -5,8 +5,8 @@ metadata:
   namespace: cnpg-system
 spec:
   configuration:
-    destinationPath: s3://matrix-backup/synapse/
-    endpointURL: https://de-fra.i3storage.com
+    destinationPath: s3://cnpg-bucket/synapse/
+    endpointURL: http://10.0.0.160:3900
     s3Credentials:
       accessKeyId:
         name: generic-backup-creds
@@ -16,3 +16,4 @@ spec:
         key: ACCESS_SECRET_KEY
     wal:
       compression: gzip
+  retentionPolicy: 7d
