@@ -11,3 +11,15 @@ spec:
   storage:
     size: 5Gi
     storageClass: ceph-block
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: sporten
+  namespace: cnpg-system
+spec:
+  selector:
+    matchLabels:
+      cnpg.io/cluster: sporten
+  podMetricsEndpoints:
+    - port: metrics

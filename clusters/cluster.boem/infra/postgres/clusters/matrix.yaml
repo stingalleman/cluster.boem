@@ -47,3 +47,15 @@ spec:
       isWALArchiver: true
       parameters:
         barmanObjectName: synapse-store
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: matrix
+  namespace: cnpg-system
+spec:
+  selector:
+    matchLabels:
+      cnpg.io/cluster: matrix
+  podMetricsEndpoints:
+    - port: metrics
