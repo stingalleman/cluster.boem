@@ -39,6 +39,6 @@ metadata:
 spec:
   selector:
     matchLabels:
-      cnpg.io/cluster: immich
+      cnpg.io/cluster: immich-postgres
   podMetricsEndpoints:
     - port: metrics

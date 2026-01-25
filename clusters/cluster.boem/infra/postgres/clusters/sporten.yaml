@@ -16,7 +16,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   name: sporten
-  namespace: cnpg-system
+  namespace: default
 spec:
   selector:
     matchLabels:
