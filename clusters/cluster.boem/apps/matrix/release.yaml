@@ -125,6 +125,12 @@ spec:
               room_name: maischat notices
               room_topic: voor server shit
               auto_join: true
+            user_directory:
+              enabled: true
+              search_all_users: true
+              prefer_local_users: true
+            enable_room_list_search: true
+            enable_search: true
 
       workers:
         account-data:
