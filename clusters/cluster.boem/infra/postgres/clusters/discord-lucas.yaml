@@ -36,15 +36,3 @@ spec:
   #     online: true
   #     snapshotOwnerReference: none
   #     # cl
----
-apiVersion: monitoring.coreos.com/v1
-kind: PodMonitor
-metadata:
-  name: discord-lucas
-  namespace: cnpg-system
-spec:
-  selector:
-    matchLabels:
-      cnpg.io/cluster: discord-lucas
-  podMetricsEndpoints:
-    - port: metrics
