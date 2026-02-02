@@ -2,6 +2,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Pooler
 metadata:
   name: pooler-matrix-rw
+  namespace: cnpg-system
 spec:
   cluster:
     name: matrix
