@@ -187,7 +187,7 @@ spec:
         user-dir:
           enabled: true
       postgres:
-        host: matrix-rw.cnpg-system
+        host: pooler-matrix-rw.cnpg-system
         port: 5432
         user: postgres
         database: synapse
@@ -222,6 +222,8 @@ spec:
     elementAdmin:
       ingress:
         host: element-admin.maishond.nl
+      enabled: false
+
     elementWeb:
       enabled: true
       # image:
@@ -251,7 +253,7 @@ spec:
         support: '{ "contacts": [{ "email_address": "noc@as216455.net", "matrix_id": "@sting:maishond.nl", "role": "m.role.admin" }]}'
 
     haproxy:
-      replicas: 2
+      replicas: 3
       resources:
         ## Requests describes the minimum amount of compute resources required. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
         requests:
@@ -260,4 +262,4 @@ spec:
 
         ## Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
         limits:
-          memory: 400Mi
+          memory: 1G
