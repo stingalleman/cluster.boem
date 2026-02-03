@@ -233,6 +233,9 @@ spec:
     postgres:
       enabled: false
 
+    elementAdmin:
+      enabled: false
+
     wellKnownDelegation:
       enabled: true
       baseDomainRedirect:
