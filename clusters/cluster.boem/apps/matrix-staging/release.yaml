@@ -207,7 +207,7 @@ spec:
       postgres:
         host: matrix-mas-staging-rw.matrix-staging
         port: 5432
-        user: postgres
+        user: matrixauthenticationservice
         database: matrixauthenticationservice
         sslMode: prefer
         password:
