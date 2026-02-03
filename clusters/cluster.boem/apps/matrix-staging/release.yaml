@@ -214,6 +214,16 @@ spec:
           secret: matrix-mas-staging-app
           secretKey: password
 
+    matrixRTC:
+      enabled: false
+      ingress:
+        host: mrtc-matrix.maishond.nl
+
+    elementAdmin:
+      ingress:
+        host: element-admin.maishond.nl
+      enabled: false
+
     elementWeb:
       enabled: true
       # image:
@@ -231,12 +241,6 @@ spec:
         host: element.staging.matrix.maishond.nl
 
     postgres:
-      enabled: false
-
-    elementAdmin:
-      enabled: false
-
-    matrixRTC:
       enabled: false
 
     wellKnownDelegation:
