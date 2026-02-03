@@ -236,6 +236,9 @@ spec:
     elementAdmin:
       enabled: false
 
+    matrixRTC:
+      enabled: false
+
     wellKnownDelegation:
       enabled: true
       baseDomainRedirect:
