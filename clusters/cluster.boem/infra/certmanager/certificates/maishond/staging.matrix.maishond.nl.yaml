@@ -8,7 +8,7 @@ spec:
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
-  commonName: "*.matrix.maishond.nl"
+  commonName: "*.staging.matrix.maishond.nl"
   dnsNames:
     - "staging.matrix.maishond.nl"
     - "*.staging.matrix.maishond.nl"
