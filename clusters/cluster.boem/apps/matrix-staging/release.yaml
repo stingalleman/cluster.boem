@@ -193,7 +193,7 @@ spec:
         database: synapse
         sslMode: prefer
         password:
-          secret: matrix-staging-app
+          secret: matrix-staging-superuser
           secretKey: password
 
     matrixAuthenticationService:
@@ -207,11 +207,11 @@ spec:
       postgres:
         host: matrix-mas-staging-rw.matrix-staging
         port: 5432
-        user: matrixauthenticationservice
+        user: postgres
         database: matrixauthenticationservice
         sslMode: prefer
         password:
-          secret: matrix-mas-staging-app
+          secret: matrix-mas-staging-superuser
           secretKey: password
 
     matrixRTC:
