@@ -27,7 +27,7 @@ spec:
           dataPools:
             - failureDomain: host
               replicated:
-                size: 3
+                size: 2
               # Optional and highly recommended, 'data0' by default, see https://github.com/rook/rook/blob/master/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#pools
               name: data0
               deviceClass: ssd
