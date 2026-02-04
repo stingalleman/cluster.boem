@@ -76,7 +76,7 @@ spec:
         timeoutSeconds: 1
       media:
         storage:
-          size: 15Gi
+          size: 30Gi
           storageClassName: ceph-block
           resourcePolicy: keep
         maxUploadSize: 2000M
