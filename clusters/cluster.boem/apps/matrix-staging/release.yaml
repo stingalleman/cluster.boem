@@ -6,7 +6,7 @@ metadata:
 spec:
   chartRef:
     kind: OCIRepository
-    name: matrix-stack
+    name: matrix-stack-fork
     namespace: flux-system
   interval: 24h
   values:
@@ -261,53 +261,3 @@ spec:
         ## Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
         limits:
           memory: 1G
-
-      livenessProbe:
-        ## How many consecutive failures for the probe to be considered failed
-        failureThreshold: 3
-
-        ## Number of seconds after the container has started before the probe starts
-        initialDelaySeconds: 0
-
-        ## How often (in seconds) to perform the probe
-        periodSeconds: 10
-
-        ## How many consecutive successes for the probe to be consider successful after having failed
-        successThreshold: 0
-
-        ## Number of seconds after which the probe times out
-        timeoutSeconds: 5
-      ## Configuration of the thresholds and frequencies of the readinessProbe
-      readinessProbe:
-        ## How many consecutive failures for the probe to be considered failed
-        failureThreshold: 3
-
-        ## Number of seconds after the container has started before the probe starts
-        initialDelaySeconds: 0
-
-        ## How often (in seconds) to perform the probe
-        periodSeconds: 10
-
-        ## How many consecutive successes for the probe to be consider successful after having failed
-        successThreshold: 0
-
-        ## Number of seconds after which the probe times out
-        timeoutSeconds: 5
-      # The failureThreshold here is tweaked towards Synapse being ready
-      # If Synapse isn't being deployed, unsetting this or setting it to 3 maybe more appropriate
-      ## Configuration of the thresholds and frequencies of the startupProbe
-      startupProbe:
-        ## How many consecutive failures for the probe to be considered failed
-        failureThreshold: 150
-
-        ## Number of seconds after the container has started before the probe starts
-        initialDelaySeconds: 0
-
-        ## How often (in seconds) to perform the probe
-        periodSeconds: 2
-
-        ## How many consecutive successes for the probe to be consider successful after having failed
-        successThreshold: 0
-
-        ## Number of seconds after which the probe times out
-        timeoutSeconds: 1
