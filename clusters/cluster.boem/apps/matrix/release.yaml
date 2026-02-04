@@ -143,26 +143,26 @@ spec:
           enabled: true
         device-lists:
           enabled: true
-          replicas: 3
+          replicas: 1
         encryption:
           enabled: true
         event-creator:
           enabled: true
         event-persister:
           enabled: true
-          replicas: 4
+          replicas: 2
         federation-inbound:
           enabled: true
-          replicas: 6
+          replicas: 2
         federation-reader:
           enabled: true
-          replicas: 6
+          replicas: 2
         federation-sender:
           enabled: true
-          replicas: 3
+          replicas: 1
         initial-synchrotron:
           enabled: true
-          replicas: 4
+          replicas: 2
         media-repository:
           enabled: true
         presence-writer:
@@ -171,17 +171,17 @@ spec:
           enabled: true
         pusher:
           enabled: true
-          replicas: 3
+          replicas: 1
         receipts:
           enabled: true
         sliding-sync:
           enabled: true
-          replicas: 4
+          replicas: 1
         sso-login:
           enabled: true
         synchrotron:
           enabled: true
-          replicas: 4
+          replicas: 1
         typing-persister:
           enabled: true
         user-dir:
