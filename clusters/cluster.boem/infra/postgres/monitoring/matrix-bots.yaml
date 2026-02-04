@@ -1,11 +1,11 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: koen
+  name: matrix-bots-monitor
   namespace: cnpg-system
 spec:
   selector:
     matchLabels:
-      cnpg.io/cluster: koen
+      cnpg.io/cluster: matrix-bots
   podMetricsEndpoints:
     - port: metrics

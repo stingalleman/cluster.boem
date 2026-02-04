@@ -1,11 +1,11 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: sporten
-  namespace: default
+  name: koen-monitor
+  namespace: cnpg-system
 spec:
   selector:
     matchLabels:
-      cnpg.io/cluster: sporten
+      cnpg.io/cluster: koen
   podMetricsEndpoints:
     - port: metrics
