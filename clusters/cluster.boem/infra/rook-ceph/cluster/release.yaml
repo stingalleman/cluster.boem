@@ -106,7 +106,7 @@ spec:
             min_size: "1"
           failureDomain: host
           replicated:
-            size: 1
+            size: 2
           deviceClass: ssd
           enableCrushUpdates: true
         storageClass:
