@@ -1,42 +1,42 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: stalwart-test
-  namespace: stalwart
-  labels:
-    app: stalwart-test
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: stalwart-test
-  template:
-    metadata:
-      labels:
-        app: stalwart-test
-    spec:
-      containers:
-        - name: stalwart
-          image: stalwartlabs/stalwart:v0.15.4-alpine
-          imagePullPolicy: IfNotPresent
-          livenessProbe:
-            httpGet:
-              path: /healthz/live
-              port: 8080
-            initialDelaySeconds: 30
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /healthz/ready
-              port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 10
-          ports:
-            - containerPort: 8080
-            - containerPort: 443
-            - containerPort: 25
-            - containerPort: 587
-            - containerPort: 465
-            - containerPort: 143
-            - containerPort: 993
-            - containerPort: 4190
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: stalwart-test
+#   namespace: stalwart
+#   labels:
+#     app: stalwart-test
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: stalwart-test
+#   template:
+#     metadata:
+#       labels:
+#         app: stalwart-test
+#     spec:
+#       containers:
+#         - name: stalwart
+#           image: stalwartlabs/stalwart:v0.15.4-alpine
+#           imagePullPolicy: IfNotPresent
+#           livenessProbe:
+#             httpGet:
+#               path: /healthz/live
+#               port: 8080
+#             initialDelaySeconds: 30
+#             periodSeconds: 10
+#           readinessProbe:
+#             httpGet:
+#               path: /healthz/ready
+#               port: 8080
+#             initialDelaySeconds: 5
+#             periodSeconds: 10
+#           ports:
+#             - containerPort: 8080
+#             - containerPort: 443
+#             - containerPort: 25
+#             - containerPort: 587
+#             - containerPort: 465
+#             - containerPort: 143
+#             - containerPort: 993
+#             - containerPort: 4190
