@@ -1,0 +1,9 @@
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: stalwart
+  namespace: stalwart
+spec:
+  bucketName: stalwart
+  generateBucketName: stalwart
+  storageClassName: ceph-bucket
