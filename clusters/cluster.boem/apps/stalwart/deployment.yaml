@@ -46,6 +46,4 @@ spec:
       volumes:
         - name: config
           configMap:
-            items:
-              - config.toml
             name: stalwart-config
