@@ -41,9 +41,11 @@ spec:
             - containerPort: 993
             - containerPort: 4190
           volumeMounts:
-            - name: stalwart-data
-              mountPath: /opt/stalwart
+            - name: stalwart-config
+              mountPath: /opt/stalwart/etc
       volumes:
-        - name: stalwart-data
-          persistentVolumeClaim:
-            claimName: stalwart-data
+        - name: config
+          configMap:
+            items:
+              - config.toml
+            name: stalwart-config
