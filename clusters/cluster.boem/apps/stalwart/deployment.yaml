@@ -41,7 +41,7 @@ spec:
             - containerPort: 993
             - containerPort: 4190
           volumeMounts:
-            - name: stalwart-config
+            - name: config
               mountPath: /opt/stalwart/etc
       volumes:
         - name: config
