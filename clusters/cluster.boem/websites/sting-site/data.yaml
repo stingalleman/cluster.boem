@@ -12,3 +12,31 @@ data:
         <p><a href="https://as216455.net">AS216455</a></p>
       </body>
     </html>
+  agenda.ics: |
+    BEGIN:VCALENDAR
+    VERSION:2.0
+    PRODID:-//ical.marudot.com//iCal Event Maker
+    X-WR-CALNAME:maisagenda
+    NAME:maisagenda
+    REFRESH-INTERVAL;VALUE=DURATION:P1D
+    CALSCALE:GREGORIAN
+    BEGIN:VEVENT
+    DTSTAMP:20260209T112735Z
+    UID:1770636406161-56624@ical.marudot.com
+    DTSTART;VALUE=DATE:20260919
+    RRULE:FREQ=YEARLY;BYMONTH=9;BYMONTHDAY=19
+    DTEND;VALUE=DATE:20260920
+    SUMMARY:sting jarig
+    CLASS:PRIVATE
+    BEGIN:VALARM
+    ACTION:DISPLAY
+    DESCRIPTION:sting jarig
+    TRIGGER:-P1W
+    END:VALARM
+    BEGIN:VALARM
+    ACTION:DISPLAY
+    DESCRIPTION:sting jarig
+    TRIGGER:-P1D
+    END:VALARM
+    END:VEVENT
+    END:VCALENDAR
