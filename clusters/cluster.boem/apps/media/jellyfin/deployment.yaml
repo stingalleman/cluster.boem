@@ -24,12 +24,12 @@ spec:
       containers:
         - name: jellyfin
           image: lscr.io/linuxserver/jellyfin:latest
-          resources:
-            # requests:
-            #     cpu: 100m
-            #     memory: 100Mi
-            limits:
-              gpu.intel.com/i915: "1"
+          # resources:
+          #   # requests:
+          #   #     cpu: 100m
+          #   #     memory: 100Mi
+          #   limits:
+          #     gpu.intel.com/i915: "1"
 
           #     cpu: 100m
           #     memory: 100Mi
