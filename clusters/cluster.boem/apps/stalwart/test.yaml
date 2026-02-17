@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: stalwart
-          image: stalwartlabs/stalwart:v0.15.4-alpine
+          image: stalwartlabs/stalwart:v0.15.5-alpine
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
