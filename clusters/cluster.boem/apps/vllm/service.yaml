@@ -1,13 +1,13 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: llama
-  namespace: default
-spec:
-  selector:
-    app: llama
-  ports:
-    - name: http
-      protocol: TCP
-      port: 11434
-      targetPort: http
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: llama
+#   namespace: default
+# spec:
+#   selector:
+#     app: llama
+#   ports:
+#     - name: http
+#       protocol: TCP
+#       port: 11434
+#       targetPort: http

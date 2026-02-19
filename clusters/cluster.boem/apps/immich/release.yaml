@@ -113,7 +113,7 @@ spec:
       #     tls: []
 
     machine-learning:
-      enabled: true
+      enabled: false
       controllers:
         main:
           pod:

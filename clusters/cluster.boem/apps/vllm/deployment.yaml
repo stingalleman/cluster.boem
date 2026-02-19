@@ -1,77 +1,77 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: llama
-  namespace: default
-  labels:
-    app: llama
-spec:
-  selector:
-    matchLabels:
-      app: llama
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: llama
-    spec:
-      tolerations:
-        - key: "dedicated"
-          operator: "Equal"
-          value: "gpu"
-          effect: "NoSchedule"
-      containers:
-        - name: llama
-          image: intelanalytics/ipex-llm-inference-cpp-xpu:latest
-          command:
-            - sleep
-            - "infinity"
-          # args:
-          #   - mkdir -p /llm/llama && cd /llm/llama && init-llama && exec ./llama serve
-          #   - "llama serve TinyLlama/TinyLlama-1.1B-Chat-v1.0"
-          env:
-            # - name: HF_TOKEN
-            #   valueFrom:
-            #     secretKeyRef:
-            #       name: huggingface
-            #       key: token
-            - name: no_proxy
-              value: localhost,127.0.0.1
-            - name: llama_HOST
-              value: "0.0.0.0"
-            - name: DEVICE
-              value: Arc
-            - name: ZES_ENABLE_SYSMAN
-              value: "1"
-          resources:
-            limits:
-              gpu.intel.com/i915: "1"
-          ports:
-            - containerPort: 11434
-              name: http
-          volumeMounts:
-            - name: llama
-              mountPath: /models
-            # - mountPath: /dev/shm
-            #   name: dshm
-          # livenessProbe:
-          #   httpGet:
-          #     path: /health
-          #     port: 8000
-          #   initialDelaySeconds: 60
-          #   periodSeconds: 10
-          # readinessProbe:
-          #   httpGet:
-          #     path: /health
-          #     port: 8000
-          #   initialDelaySeconds: 60
-          #   periodSeconds: 5
-      volumes:
-        - name: llama
-          persistentVolumeClaim:
-            claimName: llama
-        # - name: dshm
-        #   emptyDir:
-        #     medium: Memory
-        #     sizeLimit: 10Gi
-      restartPolicy: Always
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: llama
+#   namespace: default
+#   labels:
+#     app: llama
+# spec:
+#   selector:
+#     matchLabels:
+#       app: llama
+#   replicas: 1
+#   template:
+#     metadata:
+#       labels:
+#         app: llama
+#     spec:
+#       tolerations:
+#         - key: "dedicated"
+#           operator: "Equal"
+#           value: "gpu"
+#           effect: "NoSchedule"
+#       containers:
+#         - name: llama
+#           image: intelanalytics/ipex-llm-inference-cpp-xpu:latest
+#           command:
+#             - sleep
+#             - "infinity"
+#           # args:
+#           #   - mkdir -p /llm/llama && cd /llm/llama && init-llama && exec ./llama serve
+#           #   - "llama serve TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+#           env:
+#             # - name: HF_TOKEN
+#             #   valueFrom:
+#             #     secretKeyRef:
+#             #       name: huggingface
+#             #       key: token
+#             - name: no_proxy
+#               value: localhost,127.0.0.1
+#             - name: llama_HOST
+#               value: "0.0.0.0"
+#             - name: DEVICE
+#               value: Arc
+#             - name: ZES_ENABLE_SYSMAN
+#               value: "1"
+#           resources:
+#             limits:
+#               gpu.intel.com/i915: "1"
+#           ports:
+#             - containerPort: 11434
+#               name: http
+#           volumeMounts:
+#             - name: llama
+#               mountPath: /models
+#             # - mountPath: /dev/shm
+#             #   name: dshm
+#           # livenessProbe:
+#           #   httpGet:
+#           #     path: /health
+#           #     port: 8000
+#           #   initialDelaySeconds: 60
+#           #   periodSeconds: 10
+#           # readinessProbe:
+#           #   httpGet:
+#           #     path: /health
+#           #     port: 8000
+#           #   initialDelaySeconds: 60
+#           #   periodSeconds: 5
+#       volumes:
+#         - name: llama
+#           persistentVolumeClaim:
+#             claimName: llama
+#         # - name: dshm
+#         #   emptyDir:
+#         #     medium: Memory
+#         #     sizeLimit: 10Gi
+#       restartPolicy: Always
