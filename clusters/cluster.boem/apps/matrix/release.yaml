@@ -267,7 +267,7 @@ spec:
     hookshot:
       enabled: true
       # Hookshot encryption support is experimental. You can enable it by setting `enableEncryption` to `true`.
-      enableEncryption: true
+      enableEncryption: false
 
       user:
         localpart: hookshot
