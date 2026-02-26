@@ -305,33 +305,7 @@ spec:
       ## How this ingress should be constructed
       ingress:
         ## What hostname should be used for this Ingress
-        # host:
-
-        ## Annotations to be added to this Ingress
-        annotations: {}
-
-        ## What Ingress Class Name that should be used for this Ingress
-        # className:
-
-        ## Disable TLS configuration by setting it to false
-        tlsEnabled: true
-
-        ## The name of the Secret containing the TLS certificate and the key that should be used for this Ingress
-        # tlsSecret:
-
-        ## How the Service behind this Ingress is constructed
-        # service:
-        #   type: ClusterIP
-        #   annotations: {}
-        #   # External traffic policy will be configured on services of type `NodePort` and `LoadBalancer`
-        #   externalTrafficPolicy: Cluster
-        #   internalTrafficPolicy: Cluster
-        #   # External IPs addresses of this service.
-        #   externalIPs: []
-        service: {}
-        ## If set, some tweaks will be applied automatically to ingresses based on the controller type here.
-        ## This can be set to `ingress-nginx`.
-        # controllerType:
+        host: hookshot.maishond.nl
 
       ## Additional configuration to provide to Hookshot.
       ## You can, if you whish, override it in the additional config.
