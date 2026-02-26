@@ -323,8 +323,11 @@ spec:
       ##     configSecretKey: shared.yaml
       ##
       ## Most settings are configurable but some settings are owned by the chart and can't overwritten
-      additional: {}
-
+      additional:
+        customconfig:
+          config: |
+            feeds:
+              enabled: true
 
       ## Configures the PersistentVolumeClaim to be used for storage
       storage:
