@@ -46,7 +46,7 @@ spec:
             - name: data
               mountPath: /opt/stalwart/data
             - name: cert
-              mountPath: /opt/stalwart/cert
+              mountPath: /cert
       volumes:
         - name: config
           persistentVolumeClaim:
