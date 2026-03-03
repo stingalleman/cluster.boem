@@ -1,19 +1,21 @@
-apiVersion: traefik.io/v1alpha1
-kind: IngressRouteTCP
-metadata:
-  name: imap-ingress
-  namespace: traefik
-spec:
-  entryPoints:
-    - imap
-  tls:
-    secretName: as216455.net-prod-tls
-  routes:
-    - match: HostSNI(`*`)
-      services:
-        - name: stalwart
-          namespace: stalwart
-          port: imap
+# apiVersion: traefik.io/v1alpha1
+# kind: IngressRouteTCP
+# metadata:
+#   name: imap-ingress
+#   namespace: traefik
+# spec:
+#   entryPoints:
+#     - imap
+#   tls:
+#     secretName: as216455.net-prod-tls
+#   routes:
+#     - match: HostSNI(`*`)
+#       services:
+#         - name: stalwart
+#           namespace: stalwart
+#           port: imap
+#           proxyProtocol:
+#             version: 2
 ---
 apiVersion: traefik.io/v1alpha1
 kind: IngressRouteTCP
@@ -24,13 +26,15 @@ spec:
   entryPoints:
     - imaps
   tls:
-    secretName: as216455.net-prod-tls
+    passthrough: true
   routes:
     - match: HostSNI(`*`)
       services:
         - name: stalwart
           namespace: stalwart
           port: imaps
+          proxyProtocol:
+            version: 2
 ---
 apiVersion: traefik.io/v1alpha1
 kind: IngressRouteTCP
@@ -40,14 +44,14 @@ metadata:
 spec:
   entryPoints:
     - smtp
-  tls:
-    secretName: as216455.net-prod-tls
   routes:
     - match: HostSNI(`*`)
       services:
         - name: stalwart
           namespace: stalwart
           port: smtp
+          proxyProtocol:
+            version: 2
 ---
 apiVersion: traefik.io/v1alpha1
 kind: IngressRouteTCP
@@ -58,13 +62,15 @@ spec:
   entryPoints:
     - submission
   tls:
-    secretName: as216455.net-prod-tls
+    passthrough: true
   routes:
     - match: HostSNI(`*`)
       services:
         - name: stalwart
           namespace: stalwart
           port: submission
+          proxyProtocol:
+            version: 2
 ---
 apiVersion: traefik.io/v1alpha1
 kind: IngressRouteTCP
@@ -75,10 +81,12 @@ spec:
   entryPoints:
     - submissions
   tls:
-    secretName: as216455.net-prod-tls
+    passthrough: true
   routes:
     - match: HostSNI(`*`)
       services:
         - name: stalwart
           namespace: stalwart
           port: submissions
+          proxyProtocol:
+            version: 2

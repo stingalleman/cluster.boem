@@ -145,7 +145,7 @@ spec:
           port: 80
 
     - kind: Rule
-      match: Host(`mail.as216455.net`)
+      match: Host(`mail.as216455.net`) || Host(`autodiscover.as216455.net`) || Host(`autoconfig.as216455.net`) || Host(`mta-sts.as216455.net`)
       services:
         - kind: Service
           name: stalwart
