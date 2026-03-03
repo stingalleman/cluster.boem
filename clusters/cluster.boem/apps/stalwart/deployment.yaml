@@ -57,6 +57,3 @@ spec:
         - name: cert
           secret:
             secretName: mail.as216455.net-prod-tls
-            items:
-              - tls.crt
-              - tls.key
