@@ -544,22 +544,24 @@ spec:
           internal: false
         exposedPort: 993
         protocol: TCP
+        tls:
+          enabled: true
 
-      pop3:
-        port: 110
-        expose:
-          default: true
-          internal: false
-        exposedPort: 110
-        protocol: TCP
+      # pop3:
+      #   port: 110
+      #   expose:
+      #     default: true
+      #     internal: false
+      #   exposedPort: 110
+      #   protocol: TCP
 
-      pop3s:
-        port: 995
-        expose:
-          default: true
-          internal: false
-        exposedPort: 995
-        protocol: TCP
+      # pop3s:
+      #   port: 995
+      #   expose:
+      #     default: true
+      #     internal: false
+      #   exposedPort: 995
+      #   protocol: TCP
 
       smtp:
         port: 25
@@ -576,6 +578,8 @@ spec:
           internal: false
         exposedPort: 587
         protocol: TCP
+        tls:
+          enabled: true
 
       submissions:
         port: 465
@@ -584,6 +588,8 @@ spec:
           internal: false
         exposedPort: 465
         protocol: TCP
+        tls:
+          enabled: true
 
       # dns-tcp:
       #   port: 53

@@ -21,6 +21,8 @@ metadata:
 spec:
   entryPoints:
     - imaps
+  tls:
+    secretName: as216455.net-prod-tls
   routes:
     - match: HostSNI(`*`)
       services:
@@ -51,6 +53,8 @@ metadata:
 spec:
   entryPoints:
     - submission
+  tls:
+    secretName: as216455.net-prod-tls
   routes:
     - match: HostSNI(`*`)
       services:
@@ -66,6 +70,8 @@ metadata:
 spec:
   entryPoints:
     - submissions
+  tls:
+    secretName: as216455.net-prod-tls
   routes:
     - match: HostSNI(`*`)
       services:
