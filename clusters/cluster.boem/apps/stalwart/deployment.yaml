@@ -45,6 +45,8 @@ spec:
               mountPath: /opt/stalwart/etc
             - name: data
               mountPath: /opt/stalwart/data
+            - name: cert
+              mountPath: /opt/stalwart/cert
       volumes:
         - name: config
           persistentVolumeClaim:
@@ -52,3 +54,9 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: stalwart-data
+        - name: cert
+          secret:
+            secretName: mail.as216455.net-prod-tls
+            items:
+              - tls.crt
+              - tls.key
