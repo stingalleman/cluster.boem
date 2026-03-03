@@ -17,6 +17,15 @@ spec:
       labels:
         app: stalwart
     spec:
+      initContainers:
+        - name: bootstrap
+          image: alpine
+          command:
+            - rm
+            - /opt/stalwart/data/LOCK
+          volumeMounts:
+            - name: data
+              mountPath: /opt/stalwart/data
       containers:
         - name: stalwart
           image: stalwartlabs/stalwart:v0.15.4-alpine
