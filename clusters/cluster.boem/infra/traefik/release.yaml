@@ -536,8 +536,6 @@ spec:
           internal: false
         exposedPort: 143
         protocol: TCP
-        tls:
-          enabled: true
 
       imaptls:
         port: 993
@@ -572,8 +570,6 @@ spec:
           internal: false
         exposedPort: 25
         protocol: TCP
-        tls:
-          enabled: true
 
       submission:
         port: 587
