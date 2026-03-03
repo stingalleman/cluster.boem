@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: mail.as216455.net
+  namespace: stalwart
+spec:
+  secretName: mail.as216455.net-prod-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: "mail.as216455.net"
+  dnsNames:
+    - "mail.as216455.net"
