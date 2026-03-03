@@ -388,6 +388,7 @@ spec:
         exposedPort: 8080
         # -- The port protocol (TCP/UDP)
         protocol: TCP
+
       web:
         ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
         asDefault: true
@@ -433,6 +434,7 @@ spec:
             graceTimeOut: # @schema type:[string, integer, null]
           keepAliveMaxRequests: # @schema type:[integer, null]; minimum:0
           keepAliveMaxTime: # @schema type:[string, integer, null]
+
       websecure:
         port: 8443
         expose:
@@ -446,6 +448,7 @@ spec:
         #   insecure: false
         tls:
           enabled: true
+
       internal:
         port: 9080
         expose:
@@ -458,6 +461,7 @@ spec:
             to: internalsecure
             scheme: https
             permanent: false
+
       internalsecure:
         port: 9443
         expose:
@@ -467,6 +471,7 @@ spec:
         protocol: TCP
         tls:
           enabled: true
+
       ldap:
         port: 9383
         expose:
@@ -474,6 +479,7 @@ spec:
           internal: true
         exposedPort: 389
         protocol: TCP
+
       ldapsecure:
         port: 9636
         expose:
@@ -481,6 +487,7 @@ spec:
           internal: true
         exposedPort: 636
         protocol: TCP
+
       irc:
         port: 6667
         expose:
@@ -488,6 +495,7 @@ spec:
           internal: false
         exposedPort: 6667
         protocol: TCP
+
       ircsecure:
         port: 6697
         expose:
@@ -495,6 +503,7 @@ spec:
           internal: false
         exposedPort: 6697
         protocol: TCP
+
       dns-udp:
         port: 53
         expose:
@@ -502,6 +511,7 @@ spec:
           internal: false
         exposedPort: 53
         protocol: UDP
+
       mediamtx-udp:
         port: 8189
         expose:
@@ -509,6 +519,7 @@ spec:
           internal: false
         exposedPort: 8189
         protocol: UDP
+
       jitsi-udp:
         port: 10000
         expose:
@@ -516,6 +527,64 @@ spec:
           internal: false
         exposedPort: 10000
         protocol: UDP
+
+      # Stalwart
+      imap:
+        port: 143
+        expose:
+          default: true
+          internal: false
+        exposedPort: 143
+        protocol: TCP
+
+      imaptls:
+        port: 993
+        expose:
+          default: true
+          internal: false
+        exposedPort: 993
+        protocol: TCP
+
+      pop3:
+        port: 110
+        expose:
+          default: true
+          internal: false
+        exposedPort: 110
+        protocol: TCP
+
+      pop3s:
+        port: 995
+        expose:
+          default: true
+          internal: false
+        exposedPort: 995
+        protocol: TCP
+
+      smtp:
+        port: 25
+        expose:
+          default: true
+          internal: false
+        exposedPort: 25
+        protocol: TCP
+
+      submission:
+        port: 587
+        expose:
+          default: true
+          internal: false
+        exposedPort: 587
+        protocol: TCP
+
+      submissions:
+        port: 465
+        expose:
+          default: true
+          internal: false
+        exposedPort: 465
+        protocol: TCP
+
       # dns-tcp:
       #   port: 53
       #   expose:
