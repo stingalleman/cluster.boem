@@ -20,7 +20,7 @@ spec:
     - name: submission
       port: 587
       targetPort: 587
-    - name: smtps
+    - name: submissions
       port: 465
       targetPort: 465
     - name: imap
