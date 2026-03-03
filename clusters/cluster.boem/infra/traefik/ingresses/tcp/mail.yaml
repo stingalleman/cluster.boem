@@ -6,6 +6,8 @@ metadata:
 spec:
   entryPoints:
     - imap
+  tls:
+    secretName: as216455.net-prod-tls
   routes:
     - match: HostSNI(`*`)
       services:
@@ -38,6 +40,8 @@ metadata:
 spec:
   entryPoints:
     - smtp
+  tls:
+    secretName: as216455.net-prod-tls
   routes:
     - match: HostSNI(`*`)
       services:
