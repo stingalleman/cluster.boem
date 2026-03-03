@@ -1,26 +1,26 @@
-apiVersion: postgresql.cnpg.io/v1
-kind: Cluster
-metadata:
-  name: stalwart-db
-  namespace: stalwart
-spec:
-  # imageName:
-  instances: 1
-  # Example of rolling update strategy:
-  # - unsupervised: automated update of the primary once all
-  #                 replicas have been upgraded (default)
-  # - supervised: requires manual supervision to perform
-  #               the switchover of the primary
-  primaryUpdateStrategy: unsupervised
-  enableSuperuserAccess: true
+# apiVersion: postgresql.cnpg.io/v1
+# kind: Cluster
+# metadata:
+#   name: stalwart-db
+#   namespace: stalwart
+# spec:
+#   # imageName:
+#   instances: 1
+#   # Example of rolling update strategy:
+#   # - unsupervised: automated update of the primary once all
+#   #                 replicas have been upgraded (default)
+#   # - supervised: requires manual supervision to perform
+#   #               the switchover of the primary
+#   primaryUpdateStrategy: unsupervised
+#   enableSuperuserAccess: true
 
-  # Require 1Gi of space
-  storage:
-    size: 10Gi
-    storageClass: ceph-block
+#   # Require 1Gi of space
+#   storage:
+#     size: 10Gi
+#     storageClass: ceph-block
 
-  # plugins:
-  #   - name: barman-cloud.cloudnative-pg.io
-  #     isWALArchiver: true
-  #     parameters:
-  #       barmanObjectName: mas-store
+#   # plugins:
+#   #   - name: barman-cloud.cloudnative-pg.io
+#   #     isWALArchiver: true
+#   #     parameters:
+#   #       barmanObjectName: mas-store
