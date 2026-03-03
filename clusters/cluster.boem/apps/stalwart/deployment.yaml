@@ -30,9 +30,9 @@ spec:
         - name: stalwart
           image: stalwartlabs/stalwart:v0.15.4-alpine
           imagePullPolicy: IfNotPresent
-          # command:
-          #   - sleep
-          #   - "3600"
+          command:
+            - sleep
+            - "3600"
           livenessProbe:
             httpGet:
               path: /healthz/live
