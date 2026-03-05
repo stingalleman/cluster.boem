@@ -8,7 +8,6 @@ spec:
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
-  commonName: "*.doubleblind.nl"
+  commonName: "doubleblind.nl"
   dnsNames:
     - "doubleblind.nl"
-    - "*.doubleblind.nl"
