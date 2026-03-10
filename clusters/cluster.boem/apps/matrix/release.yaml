@@ -149,19 +149,19 @@ spec:
         event-creator:
           enabled: false
         event-persister:
-          enabled: false
-          replicas: 2
+          enabled: true
+          replicas: 4
         federation-inbound:
-          enabled: false
-          replicas: 2
+          enabled: true
+          replicas: 3
         federation-reader:
           enabled: false
           replicas: 2
         federation-sender:
-          enabled: false
-          replicas: 1
+          enabled: true
+          replicas: 3
         initial-synchrotron:
-          enabled: false
+          enabled: true
           replicas: 2
         media-repository:
           enabled: false
@@ -170,18 +170,18 @@ spec:
         push-rules:
           enabled: false
         pusher:
-          enabled: false
-          replicas: 1
+          enabled: true
+          replicas: 2
         receipts:
           enabled: false
         sliding-sync:
-          enabled: false
-          replicas: 1
+          enabled: true
+          replicas: 2
         sso-login:
           enabled: false
         synchrotron:
-          enabled: false
-          replicas: 1
+          enabled: true
+          replicas: 2
         typing-persister:
           enabled: false
         user-dir:
