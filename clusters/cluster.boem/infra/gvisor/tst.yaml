@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gvisor-test
+spec:
+  runtimeClassName: gvisor
+  containers:
+    - name: test
+      image: busybox
+      command: ["sh", "-c", "dmesg"]
