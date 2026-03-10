@@ -18,7 +18,7 @@ spec:
       tlsSecret: maishond.nl-prod-tls
 
     synapse:
-      enabled: false
+      enabled: true
       resources:
         requests:
           memory: 100Mi
