@@ -1,0 +1,39 @@
+ self._pushers_id_gen = MultiWriterIdGenerator(
+                                ~~~~~~~~~~~~~~~~~~~~~~^
+             db_conn=db_conn,
+             ^^^^^^^^^^^^^^^^
+         ...<10 lines>...
+             writers=["master"],
+             ^^^^^^^^^^^^^^^^^^^
+         )
+         ^
+       File "/usr/local/lib/python3.13/site-packages/synapse/storage/util/id_generators.py", line 307, in __init__
+         self._sequence_gen.check_consistency(
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+             db_conn,
+             ^^^^^^^^
+         ...<3 lines>...
+             positive=positive,
+             ^^^^^^^^^^^^^^^^^^
+         )
+         ^
+       File "/usr/local/lib/python3.13/site-packages/synapse/storage/util/sequence.py", line 192, in check_consistency
+         raise IncorrectDatabaseSetup(
+         ...<2 lines>...
+         )
+     synapse.storage.engines._base.IncorrectDatabaseSetup:
+     Postgres sequence 'pushers_sequence' is inconsistent with associated stream position of 'pushers' in the 'stream_positions' table.
+
+     This is likely a programming error and should be reported at
+     https://github.com/matrix-org/synapse.
+
+     A temporary workaround to fix this error is to shut down Synapse (including
+     any and all workers) and run the following SQL:
+
+         DELETE FROM stream_positions WHERE stream_name = 'pushers';
+
+     This will need to be done every time the server is restarted.
+
+
+ There may be more information in the logs.
+**********************************************************************************
