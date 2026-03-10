@@ -18,7 +18,7 @@ spec:
       tlsSecret: maishond.nl-prod-tls
 
     synapse:
-      enabled: true
+      enabled: false
       resources:
         requests:
           memory: 100Mi
@@ -347,4 +347,3 @@ spec:
         ## Whether to instruct Helm to keep or delete the constructed PersistentVolumeClaim when uninstalling the chart
         ## Ignored if existingClaim is provided
         resourcePolicy: keep
-
