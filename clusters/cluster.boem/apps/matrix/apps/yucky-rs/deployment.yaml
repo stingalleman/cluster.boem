@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: yucky-rs-matrix
-  namespace: discord-bots
+  name: yucky-rs
+  namespace: matrix
   annotations:
     reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: yucky-rs-matrix
+      app: yucky-rs
   template:
     metadata:
       labels:
-        app: yucky-rs-matrix
+        app: yucky-rs
     spec:
       imagePullSecrets:
         - name: ghcr-login-secret
       nodeSelector:
         kubernetes.io/hostname: k-work-3
       containers:
-        - name: yucky-rs-matrix
+        - name: yucky-rs
           image: ghcr.io/maishond/yucky.rs-matrix:main
           # image: ghcr.io/maishond/yucky.rs-matrix@sha256:883f5f1d5aceafe94bc28361ccf7edba27d0305d4a5f3d89b82cd60f218947a2
           imagePullPolicy: Always
@@ -32,102 +32,102 @@ spec:
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
-                  name: yucky-rs-matrix
+                  name: yucky-rs
                   key: database_url
             - name: MATRIX_HOMESERVER
               valueFrom:
                 secretKeyRef:
-                  name: yucky-rs-matrix
+                  name: yucky-rs
                   key: matrix_homeserver
             - name: MATRIX_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: yucky-rs-matrix
+                  name: yucky-rs
                   key: matrix_username
             - name: MATRIX_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: yucky-rs-matrix
+                  name: yucky-rs
                   key: matrix_password
             - name: PREFIX
               valueFrom:
                 secretKeyRef:
-                  name: yucky-rs-matrix
+                  name: yucky-rs
                   key: prefix
             - name: HA_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: yucky-rs-matrix
+                  name: yucky-rs
                   key: ha-token
             - name: ETHUX_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: yucky-rs-matrix
+                  name: yucky-rs
                   key: ethux_token
             - name: ETHUX_MODEL
               valueFrom:
                 secretKeyRef:
-                  name: yucky-rs-matrix
+                  name: yucky-rs
                   key: ethux_model
             - name: ETHUX_PROMPT
               valueFrom:
                 secretKeyRef:
-                  name: yucky-rs-matrix
+                  name: yucky-rs
                   key: ethux_prompt
             - name: STARBOARD_EMOTE
               valueFrom:
                 secretKeyRef:
-                  name: yucky-rs-matrix
+                  name: yucky-rs
                   key: starboard_emote
             # - name: ETHUX_PROMPT
             #   valueFrom:
             #     secretKeyRef:
-            #       name: yucky-rs-matrix
+            #       name: yucky-rs
             #       key: starboard_limit
             - name: STARBOARD_CHANNEL
               valueFrom:
                 secretKeyRef:
-                  name: yucky-rs-matrix
+                  name: yucky-rs
                   key: starboard_room
             - name: GOBLIN_CHANNEL
               valueFrom:
                 secretKeyRef:
-                  name: yucky-rs-matrix
+                  name: yucky-rs
                   key: goblin_room
             - name: GOBLIN_DELAY
               valueFrom:
                 secretKeyRef:
-                  name: yucky-rs-matrix
+                  name: yucky-rs
                   key: goblin_delay
             - name: JITSI_URL
               valueFrom:
                 secretKeyRef:
-                  name: yucky-rs-matrix
+                  name: yucky-rs
                   key: jitsi_url
             - name: JITSI_ROOM
               valueFrom:
                 secretKeyRef:
-                  name: yucky-rs-matrix
+                  name: yucky-rs
                   key: jitsi_room
             - name: MQTT_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: yucky-rs-matrix
+                  name: yucky-rs
                   key: mqtt_username
             - name: MQTT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: yucky-rs-matrix
+                  name: yucky-rs
                   key: mqtt_password
             - name: MQTT_PORT
               valueFrom:
                 secretKeyRef:
-                  name: yucky-rs-matrix
+                  name: yucky-rs
                   key: mqtt_port
             - name: MQTT_HOST
               valueFrom:
                 secretKeyRef:
-                  name: yucky-rs-matrix
+                  name: yucky-rs
                   key: mqtt_host
             - name: DISABLE_GOBLIN
               value: yessir
