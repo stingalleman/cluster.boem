@@ -1,10 +1,44 @@
+# apiVersion: networking.k8s.io/v1
+# kind: NetworkPolicy
+# metadata:
+#   name: deny-all
+#   namespace: code-sandbox
+# spec:
+#   podSelector: {}
+#   policyTypes:
+#     - Ingress
+#     - Egress
+
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: deny-all
+  name: allow-internet-only
   namespace: code-sandbox
 spec:
   podSelector: {}
   policyTypes:
-    - Ingress
     - Egress
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+            except:
+              - 10.0.0.0/8
+              - 172.16.0.0/12
+              - 192.168.0.0/16
+              - 169.254.0.0/16
+              - 100.64.0.0/10
+              - 127.0.0.0/8
+        - ipBlock:
+            cidr: 10.96.0.10/32
+        - ipBlock:
+            cidr: 2a07:54c7:5201:7376::a/128
+    - to:
+        - ipBlock:
+            cidr: ::/0
+            except:
+              - fc00::/7
+              - fe80::/10
+              - ::1/128
+        - ipBlock:
+            cidr: 2a07:54c7:5201:7376::a/128
