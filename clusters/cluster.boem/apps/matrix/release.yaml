@@ -6,7 +6,7 @@ metadata:
 spec:
   chartRef:
     kind: OCIRepository
-    name: matrix-stack-fork
+    name: matrix-stack
     namespace: flux-system
   interval: 24h
   values:
@@ -140,7 +140,8 @@ spec:
         background:
           enabled: false
         client-reader:
-          enabled: false
+          enabled: true
+          replicas: 3
         device-lists:
           enabled: false
           replicas: 2
@@ -155,8 +156,8 @@ spec:
           enabled: true
           replicas: 3
         federation-reader:
-          enabled: false
-          replicas: 2
+          enabled: true
+          replicas: 3
         federation-sender:
           enabled: true
           replicas: 3
@@ -166,7 +167,7 @@ spec:
         media-repository:
           enabled: false
         presence-writer:
-          enabled: false
+          enabled: true
         push-rules:
           enabled: false
         pusher:
@@ -181,7 +182,7 @@ spec:
           enabled: false
         synchrotron:
           enabled: true
-          replicas: 2
+          replicas: 3
         typing-persister:
           enabled: false
         user-dir:
