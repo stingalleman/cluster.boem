@@ -18,6 +18,9 @@ spec:
     parameters:
       max_connections: "300"
       shared_buffers: 384MB
+      effective_cache_size: 8GB
+      work_mem: 64MB
+      maintenance_work_mem: 512MB
 
   managed:
     roles:
