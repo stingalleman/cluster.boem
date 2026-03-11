@@ -42,5 +42,5 @@ spec:
         - ipBlock:
             cidr: 2a07:54c7:5201:7376::a/128
       ports:
-        - protocol: TCP
+        - protocol: UDP
           port: 53
