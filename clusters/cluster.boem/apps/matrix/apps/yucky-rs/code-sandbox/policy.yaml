@@ -29,10 +29,6 @@ spec:
               - 169.254.0.0/16
               - 100.64.0.0/10
               - 127.0.0.0/8
-        - ipBlock:
-            cidr: 10.96.0.10/32
-        - ipBlock:
-            cidr: 2a07:54c7:5201:7376::a/128
     - to:
         - ipBlock:
             cidr: ::/0
@@ -40,5 +36,11 @@ spec:
               - fc00::/7
               - fe80::/10
               - ::1/128
+    - to:
+        - ipBlock:
+            cidr: 10.96.0.10/32
         - ipBlock:
             cidr: 2a07:54c7:5201:7376::a/128
+      ports:
+        - protocol: TCP
+          port: 53
