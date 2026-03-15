@@ -17,8 +17,7 @@ spec:
     spec:
       imagePullSecrets:
         - name: ghcr-login-secret
-      nodeSelector:
-        kubernetes.io/hostname: k-work-3
+      serviceAccountName: yucky-rs
       containers:
         - name: yucky-rs
           image: ghcr.io/maishond/yucky.rs-matrix:main
