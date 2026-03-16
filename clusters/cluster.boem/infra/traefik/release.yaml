@@ -543,7 +543,7 @@ spec:
           default: true
           internal: false
         exposedPort: 30002
-        protocol: TCP
+        protocol: UDP
 
       # Stalwart
       imap:
