@@ -171,7 +171,6 @@ spec:
           replicas: 2
         media-repository:
           enabled: true
-          replicas: 1
         presence-writer:
           enabled: true
         push-rules:
