@@ -170,7 +170,8 @@ spec:
           enabled: true
           replicas: 2
         media-repository:
-          enabled: false
+          enabled: true
+          replicas: 1
         presence-writer:
           enabled: true
         push-rules:
@@ -329,7 +330,7 @@ spec:
             # Annotations to be added to this service
             # This is unused if the portType is `HostPort` as the pod port
             # is exposed directly on the node running it, so no service is created.
-            annotations: {}
+            # annotations: {}
             # Either a NodePort, HostPort or LoadBalancer
             # If the port is a HostPort, no Service will be created.
             portType: NodePort
@@ -367,7 +368,7 @@ spec:
             # Annotations to be added to this service
             # This is unused if the portType is `HostPort` as the pod port
             # is exposed directly on the node running it, so no service is created.
-            annotations: {}
+            # annotations: {}
             # Either a NodePort, HostPort or LoadBalancer
             # If the port is a HostPort, no Service will be created.
             portType: NodePort
@@ -385,13 +386,13 @@ spec:
               # - "root" : The $ helm root special context
               # If empty, `nodePort` wont be set on the service port
               # And kubernetes will automatically assign a port.
-              nodePort: "{{ .context.port }}"
+              # nodePort: "{{ .context.port }}"
           turnTLS:
             enabled: false
             # Annotations to be added to this service
             # This is unused if the portType is `HostPort` as the pod port
             # is exposed directly on the node running it, so no service is created.
-            annotations: {}
+            # annotations: {}
             # Either a NodePort, HostPort or LoadBalancer
             # If the port is a HostPort, no Service will be created.
             portType: NodePort
@@ -399,7 +400,7 @@ spec:
             # externalIPs: []
             # Node Port template value. If empty, `nodePort` wont be set on the service port
             # And kubernetes will automatically assign a port.
-            nodePort: "{{ .context.port }}"
+            # nodePort: "{{ .context.port }}"
             # Either Local or Cluster
             internalTrafficPolicy: Cluster
             externalTrafficPolicy: Cluster
@@ -419,7 +420,7 @@ spec:
             # Annotations to be added to this service
             # This is unused if the portType is `HostPort` as the pod port
             # is exposed directly on the node running it, so no service is created.
-            annotations: {}
+            # annotations: {}
             # Either a NodePort, HostPort or LoadBalancer
             # If the port is a HostPort, no Service will be created.
             portType: NodePort
