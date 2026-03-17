@@ -5,7 +5,7 @@ metadata:
   namespace: grocy
 spec:
   selector:
-    app: grocy
+    app: grocy-staging
   type: ClusterIP
   ports:
     - name: http

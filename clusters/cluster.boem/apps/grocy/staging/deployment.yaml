@@ -6,11 +6,11 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: grocy
+      app: grocy-staging
   template:
     metadata:
       labels:
-        app: grocy
+        app: grocy-staging
     spec:
       containers:
         - name: grocy
