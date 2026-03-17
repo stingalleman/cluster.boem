@@ -116,7 +116,7 @@ spec:
           port: http
 
     - kind: Rule
-      match: Host(`grocy.home.stingalleman.nl`)
+      match: Host(`grocy-staging.home.stingalleman.nl`)
       services:
         - kind: Service
           name: grocy-staging
