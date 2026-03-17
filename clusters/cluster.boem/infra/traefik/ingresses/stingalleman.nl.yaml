@@ -108,11 +108,19 @@ spec:
           port: http
 
     - kind: Rule
-      match: Host(`grocy.stingalleman.nl`)
+      match: Host(`grocy.home.stingalleman.nl`)
       services:
         - kind: Service
           name: grocy
-          namespace: default
+          namespace: grocy
+          port: http
+
+    - kind: Rule
+      match: Host(`grocy.home.stingalleman.nl`)
+      services:
+        - kind: Service
+          name: grocy-staging
+          namespace: grocy
           port: http
 
     - kind: Rule
