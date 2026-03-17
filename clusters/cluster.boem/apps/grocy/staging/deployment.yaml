@@ -35,4 +35,4 @@ spec:
       volumes:
         - name: config
           persistentVolumeClaim:
-            claimName: grocy-config
+            claimName: grocy-config-staging
