@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: grocy
-  namespace: default
+  name: grocy-staging
+  namespace: grocy
 spec:
   selector:
     app: grocy
