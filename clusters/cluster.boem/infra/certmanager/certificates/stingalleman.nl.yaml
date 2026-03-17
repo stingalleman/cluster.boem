@@ -13,3 +13,4 @@ spec:
     - "stingalleman.nl"
     - "*.stingalleman.nl"
     - "request.books.stingalleman.nl"
+    - "*.home.stingalleman.nl"
