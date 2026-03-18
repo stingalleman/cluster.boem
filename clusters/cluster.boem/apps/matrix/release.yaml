@@ -139,33 +139,34 @@ spec:
 
       workers:
         account-data:
-          enabled: false
+          enabled: true
         appservice:
-          enabled: false
+          enabled: true
         background:
-          enabled: false
+          enabled: true
         client-reader:
           enabled: true
           replicas: 3
         device-lists:
-          enabled: false
+          enabled: true
           replicas: 2
         encryption:
-          enabled: false
+          enabled: true
         event-creator:
-          enabled: false
+          enabled: true
+          replicas: 2
         event-persister:
           enabled: true
           replicas: 4
         federation-inbound:
           enabled: true
-          replicas: 3
+          replicas: 4
         federation-reader:
           enabled: true
-          replicas: 3
+          replicas: 4
         federation-sender:
           enabled: true
-          replicas: 3
+          replicas: 4
         initial-synchrotron:
           enabled: true
           replicas: 2
@@ -174,24 +175,24 @@ spec:
         presence-writer:
           enabled: true
         push-rules:
-          enabled: false
+          enabled: true
         pusher:
           enabled: true
           replicas: 2
         receipts:
-          enabled: false
+          enabled: true
         sliding-sync:
           enabled: true
           replicas: 2
         sso-login:
-          enabled: false
+          enabled: true
         synchrotron:
           enabled: true
           replicas: 3
         typing-persister:
-          enabled: false
+          enabled: true
         user-dir:
-          enabled: false
+          enabled: true
       postgres:
         host: pooler-matrix-rw.cnpg-system
         port: 5432
