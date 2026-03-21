@@ -45,7 +45,7 @@
     mode: "0644"
     owner: bird
     group: bird
-    validate: bird -p -c %s
+    # validate: bird -p -c %s
   loop:
     - "filters/customer_export.conf"
     - "filters/customer_import.conf"

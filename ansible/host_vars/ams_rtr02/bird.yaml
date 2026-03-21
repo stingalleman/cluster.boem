@@ -166,6 +166,9 @@ prefixlists:
       # - 2a07:e345:200::/48
       # - 2a0e:b107:27c8::/45
       # - 2a14:6f44:b00b::/48
+  - name: as216455_inet4
+    prefixes:
+      - 2.27.100.0/24
 
 bird_extra_route6:
   - subnet: 2a05:dfc1:8511::/48
