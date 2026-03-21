@@ -19,12 +19,6 @@ spec:
           #   limits:
           #     memory: "128Mi"
           #     cpu: "500m"
-          livenessProbe:
-            httpGet:
-              path: "/"
-              port: 80
-            initialDelaySeconds: 5
-            periodSeconds: 3
           env:
             - name: PUID
               value: "1000"
