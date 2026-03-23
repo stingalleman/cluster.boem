@@ -7,14 +7,14 @@ spec:
   entryPoints:
     - web
     - websecure
-  routes:
-    - kind: Rule
-      match: Host(`webhook.matrix.maishond.nl`)
-      services:
-        - kind: Service
-          name: hookshot
-          namespace: matrix
-          port: webhook
+  routes: []
+    # - kind: Rule
+    #   match: Host(`webhook.matrix.maishond.nl`)
+    #   services:
+    #     - kind: Service
+    #       name: hookshot
+    #       namespace: matrix
+    #       port: webhook
 
   tls:
     secretName: matrix-maishond.nl-prod-tls
