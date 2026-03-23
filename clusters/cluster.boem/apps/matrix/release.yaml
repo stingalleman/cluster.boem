@@ -520,7 +520,7 @@ spec:
       ## How this ingress should be constructed
       ingress:
         ## What hostname should be used for this Ingress
-        host: hookshot.maishond.nl
+        host: webhook.matrix.maishond.nl
 
       ## Additional configuration to provide to Hookshot.
       ## You can, if you whish, override it in the additional config.
