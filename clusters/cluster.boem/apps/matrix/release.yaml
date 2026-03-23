@@ -543,6 +543,24 @@ spec:
           config: |
             feeds:
               enabled: true
+        github:
+          configSecret: hookshot-github-app
+          configSecretKey: config
+
+      # Extra volumes to mount in Hookshot, as a yaml array
+      # This supports helm templating
+      extraVolumes:
+        - name: github-key
+          secret:
+            secretName: hookshot-github-app
+            items:
+              - key: key.pem
+                path: key.pem
+
+      # Extra volumes to mount in Hookshot, as a yaml array
+      extraVolumeMounts:
+        - mountPath: "/github"
+          name: github-key
 
       ## Configures the PersistentVolumeClaim to be used for storage
       storage:
