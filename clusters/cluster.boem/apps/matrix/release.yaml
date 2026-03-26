@@ -436,8 +436,8 @@ spec:
 
     elementAdmin:
       ingress:
-        host: element-admin.maishond.nl
-      enabled: false
+        host: admin.matrix.maishond.nl
+      enabled: true
 
     elementWeb:
       enabled: true

@@ -1,47 +1,47 @@
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: bridge-whatsapp
-  namespace: matrix
-spec:
-  selector:
-    matchLabels:
-      app: bridge-whatsapp
-  serviceName: bridge-whatsapp
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: bridge-whatsapp
-    spec:
-      terminationGracePeriodSeconds: 10
-      containers:
-        - name: bridge-whatsapp
-          image: dock.mau.dev/mautrix/whatsapp:v26.03
-          command:
-            - "/usr/bin/mautrix-whatsapp"
-            - "--config"
-            - "/data/config.yaml"
-            - "--no-update"
-          ports:
-            - containerPort: 80
-              name: web
-          volumeMounts:
-            - name: config
-              mountPath: /data
-      volumes:
-        - name: config
-          secret:
-            secretName: bridge-whatsapp
-            items:
-              - key: config.yaml
-                path: config.yaml
-  # volumeClaimTemplates:
-  #   - metadata:
-  #       name: data
-  #     spec:
-  #       accessModes: ["ReadWriteOnce"]
-  #       storageClassName: "ceph-block"
-  #       resources:
-  #         requests:
-  #           storage: 5Gi
+# apiVersion: apps/v1
+# kind: StatefulSet
+# metadata:
+#   name: bridge-whatsapp
+#   namespace: matrix
+# spec:
+#   selector:
+#     matchLabels:
+#       app: bridge-whatsapp
+#   serviceName: bridge-whatsapp
+#   replicas: 1
+#   template:
+#     metadata:
+#       labels:
+#         app: bridge-whatsapp
+#     spec:
+#       terminationGracePeriodSeconds: 10
+#       containers:
+#         - name: bridge-whatsapp
+#           image: dock.mau.dev/mautrix/whatsapp:v26.03
+#           command:
+#             - "/usr/bin/mautrix-whatsapp"
+#             - "--config"
+#             - "/data/config.yaml"
+#             - "--no-update"
+#           ports:
+#             - containerPort: 80
+#               name: web
+#           volumeMounts:
+#             - name: config
+#               mountPath: /data
+#       volumes:
+#         - name: config
+#           secret:
+#             secretName: bridge-whatsapp
+#             items:
+#               - key: config.yaml
+#                 path: config.yaml
+#   # volumeClaimTemplates:
+#   #   - metadata:
+#   #       name: data
+#   #     spec:
+#   #       accessModes: ["ReadWriteOnce"]
+#   #       storageClassName: "ceph-block"
+#   #       resources:
+#   #         requests:
+#   #           storage: 5Gi
