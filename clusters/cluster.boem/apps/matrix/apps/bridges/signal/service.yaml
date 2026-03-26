@@ -10,5 +10,5 @@ spec:
   ports:
     - name: appservice
       protocol: TCP
-      port: 29318
-      targetPort: 29318
+      port: 29328
+      targetPort: 29328
