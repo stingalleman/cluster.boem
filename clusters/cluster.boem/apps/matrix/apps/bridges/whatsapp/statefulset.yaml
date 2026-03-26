@@ -20,7 +20,8 @@ spec:
           image: dock.mau.dev/mautrix/whatsapp:v26.03
           command:
             - "/usr/bin/mautrix-whatsapp"
-            - "--config /data/config.yaml"
+            - "--config"
+            - "/data/config.yaml"
             - "--no-update"
           ports:
             - containerPort: 80
