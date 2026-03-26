@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bridge-signal
+  namespace: matrix
+spec:
+  selector:
+    matchLabels:
+      app: bridge-signal
+  serviceName: bridge-signal
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: bridge-signal
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: bridge-signal
+          image: dock.mau.dev/mautrix/signal:latest
+          command:
+            - "/usr/bin/mautrix-signal"
+            - "--config"
+            - "/data/config.yaml"
+            - "--no-update"
+          ports:
+            - containerPort: 80
+              name: web
+          volumeMounts:
+            - name: config
+              mountPath: /data
+      volumes:
+        - name: config
+          secret:
+            secretName: bridge-signal
+            items:
+              - key: config.yaml
+                path: config.yaml
+  # volumeClaimTemplates:
+  #   - metadata:
+  #       name: data
+  #     spec:
+  #       accessModes: ["ReadWriteOnce"]
+  #       storageClassName: "ceph-block"
+  #       resources:
+  #         requests:
+  #           storage: 5Gi
