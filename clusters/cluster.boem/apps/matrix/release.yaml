@@ -90,6 +90,8 @@ spec:
       appservices:
         - secret: bridge-whatsapp
           secretKey: registration.yaml
+        - secret: bridge-signal
+          secretKey: registration.yaml
       additional:
         ## Either reference config to inject by:
         1-custom-config:
