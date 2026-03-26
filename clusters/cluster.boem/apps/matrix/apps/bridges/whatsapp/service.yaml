@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bridge-whatsapp
+  namespace: matrix
+spec:
+  publishNotReadyAddresses: true
+  selector:
+    app: bridge-whatsapp
+  ports:
+    - name: appservice
+      protocol: TCP
+      port: 29318
+      targetPort: 29318
