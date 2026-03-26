@@ -16,5 +16,13 @@ spec:
           namespace: matrix
           port: appservice
 
+    - kind: Rule
+      match: Host(`signal.bridge.matrix.maishond.nl`)
+      services:
+        - kind: Service
+          name: signal-bridge
+          namespace: matrix
+          port: appservice
+
   tls:
     secretName: matrix-maishond.nl-prod-tls
