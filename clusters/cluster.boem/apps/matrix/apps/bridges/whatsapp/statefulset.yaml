@@ -19,9 +19,9 @@ spec:
         - name: bridge-whatsapp
           image: dock.mau.dev/mautrix/whatsapp:v26.03
           command:
-            - /usr/bin/mautrix-whatsapp
-            - --config /data/config.yaml
-            - --no-update
+            - "/usr/bin/mautrix-whatsapp"
+            - "--config /data/config.yaml"
+            - "--no-update"
           ports:
             - containerPort: 80
               name: web
