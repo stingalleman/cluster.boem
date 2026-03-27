@@ -39,7 +39,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "fieldConfig": {
             "defaults": {
@@ -90,9 +90,11 @@ data:
                 "type": "prometheus",
                 "uid": "${DS_PROMETHEUS}"
               },
-              "expr": "bgptools_asn_upstreams{asn=\"$ASN\"}",
+              "editorMode": "code",
+              "expr": "bgptools_asn_upstreams{asn=\"216455\"}",
               "interval": "",
               "legendFormat": "",
+              "range": true,
               "refId": "A"
             }
           ],
@@ -102,7 +104,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "fieldConfig": {
             "defaults": {
@@ -153,9 +155,11 @@ data:
                 "type": "prometheus",
                 "uid": "${DS_PROMETHEUS}"
               },
-              "expr": "bgptools_asn_downstreams{asn=\"$ASN\"}",
+              "editorMode": "code",
+              "expr": "bgptools_asn_downstreams{asn=\"216455\"}",
               "interval": "",
               "legendFormat": "",
+              "range": true,
               "refId": "A"
             }
           ],
@@ -165,7 +169,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "fieldConfig": {
             "defaults": {
@@ -212,9 +216,11 @@ data:
                 "type": "prometheus",
                 "uid": "${DS_PROMETHEUS}"
               },
-              "expr": "bgptools_asn_peers{asn=\"$ASN\"}",
+              "editorMode": "code",
+              "expr": "bgptools_asn_peers{asn=\"216455\"}",
               "interval": "",
               "legendFormat": "",
+              "range": true,
               "refId": "A"
             }
           ],
@@ -224,7 +230,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "fieldConfig": {
             "defaults": {
@@ -275,9 +281,11 @@ data:
                 "type": "prometheus",
                 "uid": "${DS_PROMETHEUS}"
               },
-              "expr": "bgptools_asn_cone{asn=\"$ASN\"}",
+              "editorMode": "code",
+              "expr": "bgptools_asn_cone{asn=\"216455\"}",
               "interval": "",
               "legendFormat": "",
+              "range": true,
               "refId": "A"
             }
           ],
@@ -287,7 +295,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "fieldConfig": {
             "defaults": {
@@ -355,7 +363,8 @@ data:
                 "type": "prometheus",
                 "uid": "${DS_PROMETHEUS}"
               },
-              "expr": "bgptools_asn_upstream_visible{asn=\"$ASN\"}",
+              "editorMode": "code",
+              "expr": "bgptools_asn_upstream_visible{asn=\"216455\"}",
               "format": "table",
               "instant": true,
               "interval": "",
@@ -388,7 +397,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "fieldConfig": {
             "defaults": {
@@ -456,7 +465,8 @@ data:
                 "type": "prometheus",
                 "uid": "${DS_PROMETHEUS}"
               },
-              "expr": "bgptools_asn_downstream_visible{asn=\"$ASN\"}",
+              "editorMode": "code",
+              "expr": "bgptools_asn_downstream_visible{asn=\"216455\"}",
               "format": "table",
               "instant": true,
               "interval": "",
@@ -489,7 +499,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "fieldConfig": {
             "defaults": {
@@ -575,7 +585,8 @@ data:
                 "type": "prometheus",
                 "uid": "${DS_PROMETHEUS}"
               },
-              "expr": "bgptools_asn_peers{asn=\"$ASN\"}",
+              "editorMode": "code",
+              "expr": "bgptools_asn_peers{asn=\"216455\"}",
               "format": "time_series",
               "instant": false,
               "interval": "",
@@ -591,27 +602,7 @@ data:
       "schemaVersion": 41,
       "tags": [],
       "templating": {
-        "list": [
-          {
-            "current": {},
-            "datasource": {
-              "type": "prometheus",
-              "uid": "prometheus"
-            },
-            "definition": "label_values(bgptools_asn_upstreams,asn)",
-            "includeAll": false,
-            "name": "ASN",
-            "options": [],
-            "query": {
-              "qryType": 1,
-              "query": "label_values(bgptools_asn_upstreams,asn)",
-              "refId": "PrometheusVariableQueryEditor-VariableQuery"
-            },
-            "refresh": 1,
-            "regex": "/asn=\"(\\d+)\"/",
-            "type": "query"
-          }
-        ]
+        "list": []
       },
       "time": {
         "from": "now-6h",
@@ -621,5 +612,5 @@ data:
       "timezone": "",
       "title": "bgp.tools Customer Example Copy",
       "uid": "8E5DVvmVk",
-      "version": 1
+      "version": 2
     }
