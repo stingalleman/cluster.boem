@@ -36,12 +36,3 @@ spec:
             items:
               - key: config.yaml
                 path: config.yaml
-  # volumeClaimTemplates:
-  #   - metadata:
-  #       name: data
-  #     spec:
-  #       accessModes: ["ReadWriteOnce"]
-  #       storageClassName: "ceph-block"
-  #       resources:
-  #         requests:
-  #           storage: 5Gi
