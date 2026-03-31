@@ -7,7 +7,7 @@ spec:
   selector:
     app: poweradmin
   ports:
-    - name: poweradmin
+    - name: http
       protocol: TCP
       port: 80
       targetPort: http
