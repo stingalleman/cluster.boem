@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: poweradmin
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: poweradmin
+  serviceName: poweradmin
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: poweradmin
+    spec:
+      containers:
+        - name: poweradmin
+          image: poweradmin/poweradmin:stable
+          ports:
+            - containerPort: 80
+              name: http
+          envFrom:
+            - secretRef:
+                name: poweradmin
+
+# docker run -d --name poweradmin -p 80:80 \
+
+#   poweradmin/poweradmin:stable
+

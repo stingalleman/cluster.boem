@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: poweradmin
+  namespace: default
+spec:
+  selector:
+    app: poweradmin
+  ports:
+    - name: poweradmin
+      protocol: TCP
+      port: 80
+      targetPort: http
