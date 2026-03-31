@@ -538,7 +538,7 @@ spec:
       username: app
       # password: ""
       existingSecretName: netbox-database
-      existingSecretKey: postgresql-password
+      existingSecretKey: password
 
       # # The following settings also apply when using the bundled PostgreSQL chart:
       # engine: django.db.backends.postgresql
