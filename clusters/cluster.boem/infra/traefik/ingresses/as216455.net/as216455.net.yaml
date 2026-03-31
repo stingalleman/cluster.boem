@@ -52,9 +52,9 @@ spec:
     - kind: Rule
       match: Host(`dns.as216455.net`)
       services:
-        - name: pdns-admin
+        - name: poweradmin
           namespace: default
-          port: 80
+          port: http
 
     - kind: Rule
       match: Host(`nms.as216455.net`)
