@@ -124,7 +124,7 @@ spec:
             - 2001:db8::/32
             - ff00::/8
             - fec0::/10
-            - 45.83.205.8/32
+            - 2.27.100.100/32
             - 2a07:54c7:5201:6e6f::a/128
             server_notices:
               system_mxid_localpart: notices
@@ -296,7 +296,7 @@ spec:
         useStunToDiscoverPublicIP: false
 
         # Specify a manual IP address for the server public IP
-        manualIP: "45.83.205.8"
+        manualIP: "2.27.100.100"
 
         # LiveKit Logging level
         logging:
