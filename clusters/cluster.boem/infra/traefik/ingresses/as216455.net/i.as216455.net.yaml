@@ -83,9 +83,9 @@ spec:
     - kind: Rule
       match: Host(`netbox.i.as216455.net`)
       services:
-        - name: internals-vm
-          namespace: traefik
-          port: 8000
+        - name: netbox
+          namespace: default
+          port: http
 
     - kind: Rule
       match: Host(`oxidized.i.as216455.net`)
