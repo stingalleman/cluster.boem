@@ -7,4 +7,4 @@ spec:
   interval: 10m
   url: oci://ghcr.io/netbox-community/netbox-chart/netbox
   ref:
-    semver: "29.2.0"
+    semver: "8.0.24"
