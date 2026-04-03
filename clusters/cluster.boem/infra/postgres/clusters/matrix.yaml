@@ -42,7 +42,7 @@ spec:
 
   # Require 1Gi of space
   storage:
-    size: 70Gi
+    size: 100Gi
     storageClass: ceph-block
 
   plugins:
