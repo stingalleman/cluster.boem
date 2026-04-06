@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: rook-ceph-external-cluster
+  name: rook-ceph-external-pve
   namespace: rook-ceph-external
 spec:
   chart:
