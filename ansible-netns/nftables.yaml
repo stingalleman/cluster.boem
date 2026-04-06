@@ -1,0 +1,7 @@
+---
+- name: Configure nftables
+  gather_facts: false
+  hosts: ams_rtr02
+  become: true
+  roles:
+    - nftables

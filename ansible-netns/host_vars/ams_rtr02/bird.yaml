@@ -21,7 +21,7 @@
 #     type: routeserver
 #     disabled: true
 
-router_id: 2.27.100.1
+router_id: 45.83.205.3
 local_as: 216455
 
 types:
@@ -49,20 +49,9 @@ ix:
     local_pref: 5200
 
 peers:
-  - name: NetOne Direct
-    as: 200132
-    type: transit
-    local_pref: 3500
-    neighbors:
-      - ip: 2001:67c:dec:195:95:177a:64:a
-        id: 1
-      - ip: 195.95.177.64
-        id: 1
-
   - name: "ams-rtr01"
     neighbors:
       - ip: 2a07:e345:1:3001::2
-        disabled: true
     as: 216455
     type: transit
     local_pref: 5
@@ -71,10 +60,8 @@ peers:
   - name: "AMSIX RS #1"
     neighbors:
       - ip: 2001:7f8:1::a500:6777:1
-        disabled: true
         id: 1
       - ip: 80.249.208.255
-        disabled: true
         id: 1
     as: 6777
     local_pref: 4100
@@ -83,32 +70,26 @@ peers:
   - name: "AMSIX RS #2"
     neighbors:
       - ip: 2001:7f8:1::a500:6777:2
-        disabled: true
         id: 2
       - ip: 80.249.209.0
-        disabled: true
         id: 2
     as: 6777
     local_pref: 4100
     type: routeserver
 
-  # - name: NetOne
-  #   as: 200132
-  #   type: transit
-  #   local_pref: 3500
-  #   neighbors:
-  #     - ip: 2001:7f8:1:0:a500:20:132:1 # AMS-IX
-  #       disabled: true
-  #     - ip: 80.249.211.17
-  #       disabled: true
+  - name: NetOne
+    as: 200132
+    type: transit
+    local_pref: 3500
+    neighbors:
+      - ip: 2001:7f8:1:0:a500:20:132:1 # AMS-IX
+      - ip: 80.249.211.17
 
   - name: Jelle Luteijn
     as: 212855
     neighbors:
       - ip: 2001:7f8:1:0:a500:21:2855:1 # AMS-IX
-        disabled: true
       - ip: 80.249.214.252 # AMS-IX
-        disabled: true
       - ip: 2001:7f8:10f::3:3f95:152 # FrysIX
         disabled: true
 
@@ -116,7 +97,6 @@ peers:
     as: 216107
     neighbors:
       - ip: 2001:7f8:1:0:a500:21:6107:1 # AMS-IX
-        disabled: true
       - ip: 2001:7f8:10f::3:4c2b:64 # FrysIX
         disabled: true
 
@@ -124,10 +104,8 @@ peers:
     as: 13335
     neighbors:
       - ip: 2001:7f8:1::a501:3335:1 # AMS-IX
-        disabled: true
         id: 1
       - ip: 2001:7f8:1::a501:3335:2 # AMS-IX
-        disabled: true
         id: 2
 
   - name: Tim de Boer
@@ -135,9 +113,7 @@ peers:
     as_set: 214380:AS-TIM427
     neighbors:
       - ip: 2001:7f8:1:0:a500:21:4380:1 # AMS-IX
-        disabled: true
       - ip: 80.249.210.60
-        disabled: true
       - ip: 2001:7f8:10f::3:456c:81 # FrysIX
         disabled: true
 
@@ -146,9 +122,7 @@ peers:
     as_set: AS-NICK
     neighbors:
       - ip: 2001:7f8:1:0:a500:20:2585:1 # AMS-IX
-        disabled: true
       - ip: 80.249.212.222
-        disabled: true
       - ip: 2001:7f8:10f::3:1759:195 # FriesIX
         disabled: true
 
@@ -159,7 +133,6 @@ peers:
       - ip: 2001:7f8:10f::3:4a19:254 # FrysIX
         disabled: true
       - ip: 2001:7f8:1:0:a500:21:5577:1 # AMS-IX
-        disabled: true
 
   - name: ISC F-ROOT
     as: 30132
@@ -168,9 +141,7 @@ peers:
       - ip: 2001:7f8:10f::75b4:147 # FrysIX
         disabled: true
       - ip: 2001:7f8:1::a503:132:1 # AMS-IX
-        disabled: true
       - ip: 80.249.208.111
-        disabled: true
 
 prefixlists:
   - name: as216455_inet6

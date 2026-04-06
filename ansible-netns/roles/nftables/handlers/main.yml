@@ -1,0 +1,15 @@
+- name: Apply config
+  ansible.builtin.systemd_service:
+    name: nftables
+    state: reloaded
+    enabled: true
+- name: Restart nftables dataplane
+  block:
+    - name: Reload systemd
+      ansible.builtin.command:
+        cmd: "systemctl daemon-reload"
+    - name: Wait for nftables dataplane to be active
+      ansible.builtin.systemd:
+        name: nftables-dataplane
+        state: started
+        enabled: true

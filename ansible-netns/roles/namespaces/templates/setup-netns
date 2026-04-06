@@ -1,0 +1,28 @@
+#!/bin/bash
+
+{% for namespace in namespaces %}
+# Add namespace {{ namespace.name }}
+ip netns add {{ namespace.name }}
+ip netns exec {{ namespace.name }} ip link set lo up
+{% for interface in namespace.interfaces %}
+
+# Setup interface {{ interface.name }} in namespace {{ namespace.name }}
+{% if interface.type == "physical" %}
+ip link set {{ interface.name }} netns {{ namespace.name }}
+{% else %}
+ip netns exec {{ namespace.name }} ip link add {{ interface.name}} type {{ interface.type }}
+{% endif %}
+
+# Setup addresses
+{% for address in interface.addresses %}
+ip netns exec {{ namespace.name }} ip addr add {{ address }} dev {{ interface.name }}
+{% endfor %}
+ip netns exec {{ namespace.name }} ip link set {{ interface.name }} up
+{% endfor %}
+
+# Set sysctl parameters
+{% for cmd in namespace.sysctl %}
+ip netns exec {{ namespace.name }} sysctl -w {{ cmd }}
+{% endfor %}
+
+{% endfor %}

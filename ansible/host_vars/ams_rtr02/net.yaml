@@ -1,0 +1,34 @@
+namespace_dataplane: dataplane
+namespaces:
+  - name: dataplane
+    interfaces:
+      # WAN
+      - name: eth0
+        type: physical
+        addresses:
+          - 45.83.205.3/24
+          - 2a07:e345:1:3001::3/64
+      # AMS-IX
+      - name: eth2
+        type: physical
+        addresses:
+          - 80.249.211.52/21
+          - 2001:7f8:1:0:a500:21:6455:1/64
+      - name: dummy0
+        type: dummy
+        addresses:
+          - 2.27.100.1/24
+    sysctl:
+      - net.ipv4.ip_forward=1
+      # LAN (eth1)
+      # - net.ipv6.conf.eth1.autoconf=0
+      # - net.ipv6.conf.eth1.accept_ra=0
+      # AMS-IX (eth2)
+      - net.ipv4.conf.eth2.arp_ignore=1
+      - net.ipv4.conf.eth2.arp_announce=1
+      - net.ipv4.neigh.eth2.base_reachable_time=14400
+      - net.ipv6.neigh.eth2.base_reachable_time=14400
+      - net.ipv4.conf.eth2.proxy_arp=0
+      - net.ipv6.conf.eth2.autoconf=0
+      - net.ipv6.conf.eth2.accept_ra=0
+      - net.ipv4.conf.eth2.rp_filter=0

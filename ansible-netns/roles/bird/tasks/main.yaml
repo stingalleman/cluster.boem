@@ -1,0 +1,121 @@
+- name: Ensure Bird repository is present
+  ansible.builtin.deb822_repository:
+    name: bird3
+    signed_by: https://pkg.labs.nic.cz/gpg
+    uris: https://pkg.labs.nic.cz/bird3
+    components: main
+    suites: trixie
+    types: deb
+  register: apt_repo
+  tags:
+    - bird
+    - bird_install
+
+- name: Ensure Bird3 is installed
+  ansible.builtin.apt:
+    name: "bird3={{ bird_version }}-cznic.1~trixie"
+    update_cache: true
+    cache_valid_time: 3600
+    allow_change_held_packages: true
+  register: bird_install
+  notify: Hold bird3
+  tags:
+    - bird
+    - bird_install
+
+- name: Ensure Bird systemd file is present
+  ansible.builtin.template:
+    src: bird.service
+    dest: /usr/lib/systemd/system/bird.service
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart Bird
+  tags:
+    - bird
+    - bird_install
+
+- name: Ensure Bird configuration directories exist
+  ansible.builtin.file:
+    state: directory
+    mode: "0755"
+    owner: bird
+    group: bird
+    path: "{{ item }}"
+  loop:
+    - "/etc/bird"
+    - "/etc/bird/filters"
+    - "/etc/bird/prefixlists"
+  tags:
+    - bird
+    - bird_config
+
+- name: Make sure filters are up to date
+  ansible.builtin.template:
+    dest: "/etc/bird/{{ item }}"
+    src: "{{ item }}"
+    mode: "0644"
+    owner: bird
+    group: bird
+    # validate: bird -p -c %s
+  loop:
+    - "filters/customer_export.conf"
+    - "filters/customer_import.conf"
+    - "filters/ixp_export.conf"
+    - "filters/ixp_import.conf"
+    - "filters/peer_export.conf"
+    - "filters/peer_import.conf"
+    - "filters/transit_export.conf"
+    - "filters/transit_import.conf"
+  notify: Apply config
+  tags:
+    - bird
+    - bird_filters
+
+# - name: Make sure prefixlists are up to date
+#   ansible.builtin.template:
+#     dest: "/etc/bird/prefixlists{{ item }}"
+#     mode: "0644"
+#     owner: bird
+#     group: bird
+#     validate: bird -p -c %s
+#   with_fileglob: "prefixlists/*"
+
+- name: Make sure configuration is up to date
+  ansible.builtin.template:
+    dest: "/etc/bird/{{ item }}"
+    src: "{{ item }}"
+    mode: "0644"
+    owner: bird
+    group: bird
+    # validate: bird -p -c %s
+  loop:
+    - "envvars"
+    - "bird.conf"
+    - "peers.conf"
+    - "static.conf"
+    - "prefixlists.conf"
+    - "filters.conf"
+    - "rpki.conf"
+  notify: Apply config
+  tags:
+    - bird
+    - bird_config
+
+- name: Check configuration
+  ansible.builtin.command:
+    cmd: "birdc configure check"
+  changed_when: false
+  tags:
+    - bird
+    - bird_check
+
+- name: Ensure Bird is started and enabled
+  ansible.builtin.systemd:
+    service: bird
+    enabled: true
+    state: started
+  tags:
+    - bird
+    - bird_filters
+    - bird_config

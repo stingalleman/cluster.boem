@@ -1,0 +1,16 @@
+- name: Make sure network namespaces script is present
+  ansible.builtin.template:
+    src: setup-netns
+    dest: /usr/local/sbin/setup-netns
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Make sure network namespaces service is present
+  ansible.builtin.template:
+    src: netns.service
+    dest: /etc/systemd/system/netns-setup.service
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Enable and start netns-setup

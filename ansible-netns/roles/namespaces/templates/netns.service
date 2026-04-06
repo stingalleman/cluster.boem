@@ -1,0 +1,12 @@
+[Unit]
+Description=Set up network namespaces
+Before=network-pre.target
+Wants=network-pre.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/sbin/setup-netns
+
+[Install]
+WantedBy=network-pre.target
