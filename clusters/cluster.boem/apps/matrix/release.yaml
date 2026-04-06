@@ -545,6 +545,7 @@ spec:
           config: |
             feeds:
               enabled: true
+              pollIntervalSeconds: 60
         github:
           configSecret: hookshot-github-app
           configSecretKey: config
