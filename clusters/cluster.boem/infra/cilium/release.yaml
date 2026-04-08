@@ -14,12 +14,6 @@ spec:
         namespace: flux-system
   interval: 24h
   values:
-    egressGateway:
-      enabled: true
-
-    bpf:
-      masquerade: true
-
     bgpControlPlane:
       enabled: true
 
