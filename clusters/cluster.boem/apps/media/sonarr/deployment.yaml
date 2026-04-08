@@ -15,6 +15,7 @@ spec:
       labels:
         app: sonarr
     spec:
+      nodeName: "k-gpu"
       containers:
         - name: sonarr
           image: lscr.io/linuxserver/sonarr:latest

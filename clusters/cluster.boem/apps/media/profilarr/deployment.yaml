@@ -15,6 +15,7 @@ spec:
       labels:
         app: profilarr
     spec:
+      nodeName: "k-gpu"
       containers:
         - name: profilarr
           image: santiagosayshey/profilarr:latest
