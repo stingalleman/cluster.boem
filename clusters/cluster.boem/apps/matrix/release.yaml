@@ -140,61 +140,61 @@ spec:
             enable_search: true
 
       workers:
-        account-data:
-          enabled: true
-        appservice:
-          enabled: true
-        background:
-          enabled: true
-        client-reader:
-          enabled: true
-          replicas: 3
-        device-lists:
-          enabled: true
-          replicas: 2
-        encryption:
-          enabled: true
-        event-creator:
-          enabled: true
-          replicas: 2
-        event-persister:
-          enabled: true
-          replicas: 4
-        federation-inbound:
-          enabled: true
-          replicas: 4
-        federation-reader:
-          enabled: true
-          replicas: 4
-        federation-sender:
-          enabled: true
-          replicas: 4
-        initial-synchrotron:
-          enabled: true
-          replicas: 2
-        media-repository:
-          enabled: true
-        presence-writer:
-          enabled: true
-        push-rules:
-          enabled: true
-        pusher:
-          enabled: true
-          replicas: 2
-        receipts:
-          enabled: true
-        sliding-sync:
-          enabled: true
-          replicas: 2
-        sso-login:
-          enabled: true
-        synchrotron:
-          enabled: true
-          replicas: 3
-        typing-persister:
-          enabled: true
-        user-dir:
-          enabled: true
+        # account-data:
+        #   enabled: true
+        # appservice:
+        #   enabled: true
+        # background:
+        #   enabled: true
+        # client-reader:
+        #   enabled: true
+        #   replicas: 3
+        # device-lists:
+        #   enabled: true
+        #   replicas: 2
+        # encryption:
+        #   enabled: true
+        # event-creator:
+        #   enabled: true
+        #   replicas: 2
+        # event-persister:
+        #   enabled: true
+        #   replicas: 4
+        # federation-inbound:
+        #   enabled: true
+        #   replicas: 4
+        # federation-reader:
+        #   enabled: true
+        #   replicas: 4
+        # federation-sender:
+        #   enabled: true
+        #   replicas: 4
+        # initial-synchrotron:
+        #   enabled: true
+        #   replicas: 2
+        # media-repository:
+        #   enabled: true
+        # presence-writer:
+        #   enabled: true
+        # push-rules:
+        #   enabled: true
+        # pusher:
+        #   enabled: true
+        #   replicas: 2
+        # receipts:
+        #   enabled: true
+        # sliding-sync:
+        #   enabled: true
+        #   replicas: 2
+        # sso-login:
+        #   enabled: true
+        # synchrotron:
+        #   enabled: true
+        #   replicas: 3
+        # typing-persister:
+        #   enabled: true
+        # user-dir:
+        #   enabled: true
       postgres:
         host: pooler-matrix-rw.cnpg-system
         port: 5432
