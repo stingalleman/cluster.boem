@@ -159,16 +159,16 @@ spec:
           replicas: 1
         event-persister:
           enabled: true
-          replicas: 2
+          replicas: 1
         federation-inbound:
           enabled: true
-          replicas: 2
+          replicas: 1
         federation-reader:
           enabled: true
-          replicas: 2
+          replicas: 1
         federation-sender:
           enabled: true
-          replicas: 2
+          replicas: 1
         initial-synchrotron:
           enabled: false
           replicas: 1
@@ -180,7 +180,7 @@ spec:
           enabled: false
         pusher:
           enabled: true
-          replicas: 2
+          replicas: 1
         receipts:
           enabled: false
         sliding-sync:
