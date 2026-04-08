@@ -147,15 +147,15 @@ spec:
         background:
           enabled: false
         client-reader:
-          enabled: false
+          enabled: true
           replicas: 1
         device-lists:
-          enabled: false
+          enabled: true
           replicas: 1
         encryption:
-          enabled: false
+          enabled: true
         event-creator:
-          enabled: false
+          enabled: true
           replicas: 1
         event-persister:
           enabled: true
@@ -170,10 +170,10 @@ spec:
           enabled: true
           replicas: 1
         initial-synchrotron:
-          enabled: false
+          enabled: true
           replicas: 1
         media-repository:
-          enabled: false
+          enabled: true
         presence-writer:
           enabled: false
         push-rules:
@@ -182,19 +182,19 @@ spec:
           enabled: true
           replicas: 1
         receipts:
-          enabled: false
+          enabled: true
         sliding-sync:
-          enabled: false
+          enabled: true
           replicas: 1
         sso-login:
-          enabled: false
+          enabled: true
         synchrotron:
-          enabled: false
+          enabled: true
           replicas: 1
         typing-persister:
           enabled: false
         user-dir:
-          enabled: false
+          enabled: true
       postgres:
         host: pooler-matrix-rw.cnpg-system
         port: 5432
