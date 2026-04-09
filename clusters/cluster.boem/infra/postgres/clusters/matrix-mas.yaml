@@ -37,11 +37,11 @@ spec:
 
   # Require 1Gi of space
   storage:
-    size: 50Gi
+    size: 40Gi
     storageClass: ceph-block
 
-  # plugins:
-  #   - name: barman-cloud.cloudnative-pg.io
-  #     isWALArchiver: true
-  #     parameters:
-  #       barmanObjectName: mas-store
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: mas-store
