@@ -277,11 +277,11 @@ spec:
         devices:
           - name: "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi1"
           - name: "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi2"
-      - name: "k-gpu"
-        devices:
-          - name: "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi2"
-            config:
-              deviceClass: "hdd"
+      # - name: "k-gpu"
+      # devices:
+      # - name: "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi2"
+      #   config:
+      #     deviceClass: "hdd"
     # Whether to always schedule OSD pods on nodes declared explicitly in the "nodes" section, even if they are
     # temporarily not schedulable. If set to true, consider adding placement tolerations for unschedulable nodes.
     scheduleAlways: false
