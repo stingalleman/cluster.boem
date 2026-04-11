@@ -15,6 +15,10 @@ spec:
   interval: 24h
   values:
     operatorNamespace: rook-ceph
+    # # Installs a debugging toolbox deployment
+    toolbox:
+      #   # -- Enable Ceph debugging pod deployment. See [toolbox](../Troubleshooting/ceph-toolbox.md)
+      enabled: true
     # All values below are taken from the CephCluster CRD
     # -- Cluster configuration.
     # @default -- See [below](#ceph-cluster-spec)
