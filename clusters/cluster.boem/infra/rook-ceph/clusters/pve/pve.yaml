@@ -119,7 +119,7 @@ spec:
           name: ceph-rbd-pve-unreplicated
           annotations: {}
           labels: {}
-          isDefault: true
+          isDefault: false
           reclaimPolicy: Retain
           allowVolumeExpansion: true
           volumeBindingMode: "Immediate"
@@ -186,7 +186,7 @@ spec:
       #     name: ceph-rbd-hdd-pve
       #     annotations: {}
       #     labels: {}
-      #     isDefault: true
+      #     isDefault: false
       #     reclaimPolicy: Retain
       #     allowVolumeExpansion: true
       #     volumeBindingMode: "Immediate"
@@ -253,7 +253,7 @@ spec:
           name: ceph-rbd-hdd-pve-unreplicated
           annotations: {}
           labels: {}
-          isDefault: true
+          isDefault: false
           reclaimPolicy: Retain
           allowVolumeExpansion: true
           volumeBindingMode: "Immediate"
