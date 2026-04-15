@@ -141,43 +141,43 @@ spec:
 
       workers:
         account-data:
-          enabled: false
+          enabled: true
         appservice:
-          enabled: false
+          enabled: true
         background:
-          enabled: false
+          enabled: true
         client-reader:
           enabled: true
-          replicas: 1
+          replicas: 3
         device-lists:
           enabled: true
-          replicas: 1
+          replicas: 2
         encryption:
           enabled: true
         event-creator:
           enabled: true
-          replicas: 1
+          replicas: 2
         event-persister:
           enabled: true
-          replicas: 2
+          replicas: 4
         federation-inbound:
           enabled: true
-          replicas: 2
+          replicas: 4
         federation-reader:
           enabled: true
-          replicas: 2
+          replicas: 4
         federation-sender:
           enabled: true
-          replicas: 2
+          replicas: 4
         initial-synchrotron:
           enabled: true
-          replicas: 1
+          replicas: 2
         media-repository:
           enabled: true
         presence-writer:
-          enabled: false
+          enabled: true
         push-rules:
-          enabled: false
+          enabled: true
         pusher:
           enabled: true
           replicas: 2
@@ -185,14 +185,14 @@ spec:
           enabled: true
         sliding-sync:
           enabled: true
-          replicas: 1
+          replicas: 2
         sso-login:
           enabled: true
         synchrotron:
           enabled: true
-          replicas: 1
+          replicas: 3
         typing-persister:
-          enabled: false
+          enabled: true
         user-dir:
           enabled: true
       postgres:
