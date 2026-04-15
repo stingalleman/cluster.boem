@@ -6,7 +6,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: ceph-cephfs-hdd-pve-unreplicated
+  storageClassName: ceph-fs-hdd-pve-unreplicated
   resources:
     requests:
       storage: 2T
