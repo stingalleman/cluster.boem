@@ -305,7 +305,32 @@ spec:
 
     # -- A list of CephFileSystem configurations to deploy
     # @default -- See [below](#ceph-file-systems)
-    cephFileSystems: {}
+    cephFileSystems:
+      - name: k8s-cephfs-hdd-unreplicated
+        # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#filesystem-settings for available configuration
+        spec:
+          metadataPool:
+            failureDomain: osd
+            replicated:
+              size: 2
+          dataPools:
+            - name: data
+              failureDomain: osd
+              replicated:
+                size: 1
+                requireSafeReplicaSize: false
+              deviceClass: hdd
+          metadataServer:
+            activeCount: 1
+            activeStandby: true
+        storageClass:
+          enabled: true
+          isDefault: false
+          name: ceph-cephfs-hdd-pve-unreplicated
+          pool: data
+          reclaimPolicy: Retain
+          allowVolumeExpansion: true
+          volumeBindingMode: "Immediate"
 
     # -- A list of CephObjectStore configurations to deploy
     # @default -- See [below](#ceph-object-stores)
