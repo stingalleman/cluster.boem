@@ -4,7 +4,7 @@ metadata:
   name: stalwart-data
   namespace: stalwart
 spec:
-  storageClassName: ceph-block
+  storageClassName: ceph-rbd-pve
   accessModes:
     - ReadWriteOnce
   resources:
@@ -17,7 +17,7 @@ metadata:
   name: stalwart-config
   namespace: stalwart
 spec:
-  storageClassName: ceph-block
+  storageClassName: ceph-rbd-pve
   accessModes:
     - ReadWriteOnce
   resources:
