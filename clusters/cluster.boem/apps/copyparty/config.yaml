@@ -29,7 +29,12 @@ data:
       no-robots, force-js  # make it harder for search engines to read your server
 
     [/]            # create a volume at "/" (the webroot), which will
-      /w           # share /w (the docker data volume)
+      /w/pub         # share /w (the docker data volume)
       accs:
         rw: *      # everyone gets read-write access, but
+        rwmda: sting  # the user "ed" gets read-write-move-delete-admin
+
+    [/priv]            # create a volume at "/" (the webroot), which will
+      /w/priv          # share /w (the docker data volume)
+      accs:
         rwmda: sting  # the user "ed" gets read-write-move-delete-admin
