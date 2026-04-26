@@ -84,7 +84,7 @@ spec:
           size: 30Gi
           storageClassName: ceph-block
           resourcePolicy: keep
-        maxUploadSize: 2000M
+        maxUploadSize: 5000M
       ingress:
         host: matrix.maishond.nl
       appservices:
@@ -97,7 +97,7 @@ spec:
         1-custom-config:
           config: |
             admin_contact: "mailto:me@stingalleman.nl"
-            # max_upload_size: 2G
+            # max_upload_size: 5G
             # media_upload_limits:
             # - time_period: 1h
               # max_size: 4G
