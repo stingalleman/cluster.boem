@@ -348,4 +348,18 @@ spec:
 
     # -- A list of CephObjectStore configurations to deploy
     # @default -- See [below](#ceph-object-stores)
-    cephObjectStores: {}
+    cephObjectStores:
+      - name: "k8s-objectstore-ssd"
+        storageClass:
+          enabled: false
+        ingress:
+          enabled: false
+        spec:
+          gateway:
+            port: 7480
+            externalRgwEndpoints:
+              - ip: 10.176.70.1
+          healthCheck:
+            bucket:
+              enabled: true
+              interval: 60s
