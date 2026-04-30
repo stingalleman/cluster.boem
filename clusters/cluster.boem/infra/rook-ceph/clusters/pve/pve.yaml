@@ -351,7 +351,8 @@ spec:
     cephObjectStores:
       - name: "k8s-objectstore-ssd"
         storageClass:
-          enabled: false
+          enabled: true
+          name: "k8s-objectstore-ssd"
         ingress:
           enabled: false
         spec:
