@@ -26,7 +26,7 @@ spec:
               mountPath: /opt/stalwart/data
       containers:
         - name: stalwart
-          image: stalwartlabs/stalwart:v0.15.4-alpine
+          image: stalwartlabs/stalwart:v0.16.3-alpine
           imagePullPolicy: IfNotPresent
           # command:
           #   - sleep
