@@ -1,13 +1,15 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: oxidized
-  namespace: default
-spec:
-  selector:
-    app: oxidized
-  ports:
-    - name: http
-      protocol: TCP
-      port: 80
-      targetPort: 8888
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: oxidized
+#   namespace: default
+# spec:
+#   selector:
+#     app: oxidized
+#   ports:
+#     - name: http
+#       protocol: TCP
+#       port: 80
+#       targetPort: 8888
+
+null
