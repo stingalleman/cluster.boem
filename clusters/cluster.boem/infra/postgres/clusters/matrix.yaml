@@ -43,7 +43,7 @@ spec:
   # Require 1Gi of space
   storage:
     size: 100Gi
-    storageClass: ceph-block
+    storageClass: ceph-rbd-pve
 
   plugins:
     - name: barman-cloud.cloudnative-pg.io

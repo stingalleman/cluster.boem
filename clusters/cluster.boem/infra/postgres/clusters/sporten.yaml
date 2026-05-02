@@ -4,10 +4,10 @@ metadata:
   name: sporten
   namespace: default
 spec:
-  instances: 1
+  instances: 2
   primaryUpdateStrategy: unsupervised
   enableSuperuserAccess: false
 
   storage:
     size: 5Gi
-    storageClass: ceph-block
+    storageClass: ceph-rbd-pve

@@ -4,7 +4,7 @@ metadata:
   name: harbor
   namespace: cnpg-system
 spec:
-  instances: 1
+  instances: 2
   # Example of rolling update strategy:
   # - unsupervised: automated update of the primary once all
   #                 replicas have been upgraded (default)
@@ -16,8 +16,7 @@ spec:
   # Require 1Gi of space
   storage:
     size: 20Gi
-    storageClass: nfs-client
-
+    storageClass: ceph-rbd-pve
   # backup:
   #   barmanObjectStore:
   #     destinationPath: s3://kluster-cnpg-backup/harbor-cluster/
