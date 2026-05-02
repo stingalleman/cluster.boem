@@ -4,7 +4,7 @@ metadata:
   name: sporten
   namespace: default
 spec:
-  instances: 2
+  instances: 1
   primaryUpdateStrategy: unsupervised
   enableSuperuserAccess: false
 

@@ -5,7 +5,7 @@ metadata:
   namespace: matrix-staging
 spec:
   # imageName:
-  instances: 2
+  instances: 1
   # Example of rolling update strategy:
   # - unsupervised: automated update of the primary once all
   #                 replicas have been upgraded (default)
