@@ -1,0 +1,17 @@
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStoreUser
+metadata:
+  name: velero
+  namespace: rook-ceph-external-pve
+spec:
+  store: k8s-objectstore-ssd
+  displayName: velero
+---
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: velero
+  namespace: rook-ceph-external-pve
+spec:
+  generateBucketName: velero
+  storageClassName: k8s-objectstore-ssd
