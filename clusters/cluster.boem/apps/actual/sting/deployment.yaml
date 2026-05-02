@@ -56,11 +56,11 @@ spec:
             - containerPort: 5006
               name: http
           volumeMounts:
-            - name: actual-budget-volume
+            - name: actual-budget
               mountPath: "/data"
 
       volumes:
-        - name: actual-budget-volume
+        - name: actual-budget
           persistentVolumeClaim:
-            claimName: actual-budget-volume2
+            claimName: actual-budget
       restartPolicy: Always

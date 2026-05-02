@@ -56,11 +56,11 @@ spec:
             - containerPort: 5006
               name: http
           volumeMounts:
-            - name: actual-budget-wouter-volume
+            - name: data
               mountPath: "/data"
 
       volumes:
-        - name: actual-budget-wouter-volume
+        - name: data
           persistentVolumeClaim:
-            claimName: actual-budget-wouter-volume
+            claimName: actual-budget-wouter
       restartPolicy: Always
