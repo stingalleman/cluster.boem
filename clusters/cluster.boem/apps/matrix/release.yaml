@@ -82,7 +82,7 @@ spec:
       media:
         storage:
           size: 30Gi
-          storageClassName: ceph-block
+          storageClassName: ceph-rbd-pve
           resourcePolicy: keep
         maxUploadSize: 5000M
       ingress:
@@ -228,7 +228,6 @@ spec:
       ingress:
         ## What hostname should be used for this Ingress
         host: mrtc-matrix.maishond.nl
-
         ## Annotations to be added to this Ingress
         # annotations: {}
 
@@ -257,9 +256,7 @@ spec:
 
         # Allows restricting room creation to local users only
         # Remote federated users can still join the room
-      restrictRoomCreationToLocalUsers:
-        true
-
+      restrictRoomCreationToLocalUsers: true
         # LiveKit Authentication Configuration
         # This section allows you to configure authentication for the LiveKit SFU.
         # You can either use an existing keys.yaml file or provide a key and secret.
@@ -458,16 +455,15 @@ spec:
         host: element.maishond.nl
 
     postgres:
-      enabled: true
-      storage:
-        storageClassName: ceph-block
+      enabled: false
 
     wellKnownDelegation:
       enabled: true
       baseDomainRedirect:
         enabled: false
       additional:
-        support: '{ "contacts": [{ "email_address": "noc@as216455.net", "matrix_id": "@sting:maishond.nl", "role": "m.role.admin" }]}'
+        support: "{ \"contacts\": [{ \"email_address\": \"noc@as216455.net\",
+          \"matrix_id\": \"@sting:maishond.nl\", \"role\": \"m.role.admin\" }]}"
 
     haproxy:
       replicas: 3
