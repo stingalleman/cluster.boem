@@ -4,9 +4,9 @@ metadata:
   name: thelounge-data
   namespace: default
   labels:
-    app: krill
+    app: thelounge
 spec:
-  storageClassName: nfs-client
+  storageClassName: ceph-rbd-pve
   accessModes:
     - "ReadWriteOnce"
   resources:
