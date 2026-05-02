@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: krill-data2
+  name: krill-data
   namespace: default
   labels:
     app: krill
 spec:
-  storageClassName: nfs-client
+  storageClassName: ceph-rbd-pve
   accessModes:
     - "ReadWriteOnce"
   resources:
