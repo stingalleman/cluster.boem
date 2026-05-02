@@ -10,42 +10,43 @@ spec:
   url: oci://registry-1.docker.io/bitnamicharts/wordpress
   ref:
     semver: "29.2.0"
----
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: OCIRepository
-metadata:
-  name: slybase-wordpress-oci
-  namespace: wordpress
-spec:
-  secretRef:
-    name: ghcr-login-secret
-  interval: 10m
-  url: oci://ghcr.io/slybase/charts/wordpress
----
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: slybase-oci-charts
-  namespace: flux-system
-spec:
-  type: oci
-  interval: 10m
-  url: oci://ghcr.io/slybase/charts
-  # ref:
-  #   semver: ">6.0.0"
-# apiVersion: source.toolkit.fluxcd.io/v1beta2
-# kind: HelmRepository
-# metadata:
-#   name: bitnami
-#   namespace: flux-system
-# spec:
-#   interval: 24h
-#   url: https://charts.bitnami.com/bitnami
+
+# ---
 # apiVersion: source.toolkit.fluxcd.io/v1beta2
 # kind: OCIRepository
 # metadata:
-#   name: bitnami-wordpress
-#   namespace: default
+#   name: slybase-wordpress-oci
+#   namespace: wordpress
 # spec:
+#   secretRef:
+#     name: ghcr-login-secret
 #   interval: 10m
-#   url: oci://registry-1.docker.io/bitnamicharts/wordpress
+#   url: oci://ghcr.io/slybase/charts/wordpress
+# ---
+# apiVersion: source.toolkit.fluxcd.io/v1beta2
+# kind: HelmRepository
+# metadata:
+#   name: slybase-oci-charts
+#   namespace: flux-system
+# spec:
+#   type: oci
+#   interval: 10m
+#   url: oci://ghcr.io/slybase/charts
+#   # ref:
+#   #   semver: ">6.0.0"
+# # apiVersion: source.toolkit.fluxcd.io/v1beta2
+# # kind: HelmRepository
+# # metadata:
+# #   name: bitnami
+# #   namespace: flux-system
+# # spec:
+# #   interval: 24h
+# #   url: https://charts.bitnami.com/bitnami
+# # apiVersion: source.toolkit.fluxcd.io/v1beta2
+# # kind: OCIRepository
+# # metadata:
+# #   name: bitnami-wordpress
+# #   namespace: default
+# # spec:
+# #   interval: 10m
+# #   url: oci://registry-1.docker.io/bitnamicharts/wordpress
