@@ -6,7 +6,7 @@ metadata:
   labels:
     app: irc
 spec:
-  storageClassName: ceph-filesystem
+  storageClassName: ceph-rbd-pve
   accessModes:
     - ReadWriteOnce
   resources:
@@ -21,7 +21,7 @@ metadata:
   labels:
     app: irc
 spec:
-  storageClassName: ceph-filesystem
+  storageClassName: ceph-rbd-pve
   accessModes:
     - ReadWriteOnce
   resources:
