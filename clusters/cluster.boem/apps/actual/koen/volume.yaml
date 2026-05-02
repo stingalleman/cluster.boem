@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: actual-budget-koen-volume2
+  name: actual-budget-koen
   namespace: default
   labels:
     app: actual-budget-koen
 spec:
-  storageClassName: ceph-filesystem
+  storageClassName: ceph-rbd-pve
   accessModes:
     - ReadWriteOnce
   resources:

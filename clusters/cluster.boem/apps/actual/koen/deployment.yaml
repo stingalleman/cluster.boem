@@ -56,11 +56,11 @@ spec:
             - containerPort: 5006
               name: http
           volumeMounts:
-            - name: actual-budget-koen-volume
+            - name: data
               mountPath: "/data"
 
       volumes:
-        - name: actual-budget-koen-volume
+        - name: data
           persistentVolumeClaim:
-            claimName: actual-budget-koen-volume2
+            claimName: actual-budget-koen
       restartPolicy: Always
