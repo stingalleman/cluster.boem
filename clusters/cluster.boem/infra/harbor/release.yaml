@@ -149,7 +149,7 @@ spec:
           # Specify the "storageClass" used to provision the volume. Or the default
           # StorageClass will be used (the default).
           # Set it to "-" to disable dynamic provisioning
-          storageClass: "nfs-client"
+          storageClass: "ceph-rbd-pve"
           # subPath: ""
           # accessMode: ReadWriteOnce
           size: 10Gi
@@ -187,10 +187,10 @@ spec:
         #   accessMode: ReadWriteOnce
         #   size: 5Gi
         #   annotations: {}
-      # Define which storage backend is used for registry to store
-      # images and charts. Refer to
-      # https://github.com/distribution/distribution/blob/main/docs/configuration.md#storage
-      # for the detail.
+        # Define which storage backend is used for registry to store
+        # images and charts. Refer to
+        # https://github.com/distribution/distribution/blob/main/docs/configuration.md#storage
+        # for the detail.
       imageChartStorage:
         # Specify whether to disable `redirect` for images and chart storage, for
         # backends which not supported it (such as using minio for `s3` storage type), please disable
@@ -283,9 +283,9 @@ spec:
         #chunksize: 10M
         #rootdirectory: rootdirectory
 
-    # The initial password of Harbor admin. Change it from portal after launching Harbor
-    # or give an existing secret for it
-    # key in secret is given via (default to HARBOR_ADMIN_PASSWORD)
+        # The initial password of Harbor admin. Change it from portal after launching Harbor
+        # or give an existing secret for it
+        # key in secret is given via (default to HARBOR_ADMIN_PASSWORD)
     existingSecretAdminPassword: harbor-keys
     existingSecretAdminPasswordKey: HARBOR_ADMIN_PASSWORD
     # harborAdminPassword: "Harbor12345"
@@ -921,105 +921,105 @@ spec:
         # "verify-full" - Always SSL (verify that the certification presented by the
         # server was signed by a trusted CA and the server host name matches the one
         # in the certificate)
-      #   sslmode: "disable"
-      # # The maximum number of connections in the idle connection pool per pod (core+exporter).
-      # # If it <=0, no idle connections are retained.
-      # maxIdleConns: 100
-      # # The maximum number of open connections to the database per pod (core+exporter).
-      # # If it <= 0, then there is no limit on the number of open connections.
-      # # Note: the default number of connections is 1024 for harbor's postgres.
-      # maxOpenConns: 900
-      # ## Additional deployment annotations
-      # podAnnotations: {}
-      # ## Additional deployment labels
-      # podLabels: {}
+        #   sslmode: "disable"
+        # # The maximum number of connections in the idle connection pool per pod (core+exporter).
+        # # If it <=0, no idle connections are retained.
+        # maxIdleConns: 100
+        # # The maximum number of open connections to the database per pod (core+exporter).
+        # # If it <= 0, then there is no limit on the number of open connections.
+        # # Note: the default number of connections is 1024 for harbor's postgres.
+        # maxOpenConns: 900
+        # ## Additional deployment annotations
+        # podAnnotations: {}
+        # ## Additional deployment labels
+        # podLabels: {}
 
-    # redis:
-    #   # if external Redis is used, set "type" to "external"
-    #   # and fill the connection information in "external" section
-    #   type: internal
-    #   internal:
-    #     image:
-    #       repository: goharbor/redis-photon
-    #       tag: dev
-    #     # set the service account to be used, default if left empty
-    #     serviceAccountName: ""
-    #     # mount the service account token
-    #     automountServiceAccountToken: false
-    #     # resources:
-    #     #  requests:
-    #     #    memory: 256Mi
-    #     #    cpu: 100m
-    #     extraEnvVars: []
-    #     nodeSelector: {}
-    #     tolerations: []
-    #     affinity: {}
-    #     ## The priority class to run the pod as
-    #     priorityClassName:
-    #     # # jobserviceDatabaseIndex defaults to "1"
-    #     # # registryDatabaseIndex defaults to "2"
-    #     # # trivyAdapterIndex defaults to "5"
-    #     # # harborDatabaseIndex defaults to "0", but it can be configured to "6", this config is optional
-    #     # # cacheLayerDatabaseIndex defaults to "0", but it can be configured to "7", this config is optional
-    #     jobserviceDatabaseIndex: "1"
-    #     registryDatabaseIndex: "2"
-    #     trivyAdapterIndex: "5"
-    #     # harborDatabaseIndex: "6"
-    #     # cacheLayerDatabaseIndex: "7"
-    #   external:
-    #     # support redis, redis+sentinel
-    #     # addr for redis: <host_redis>:<port_redis>
-    #     # addr for redis+sentinel: <host_sentinel1>:<port_sentinel1>,<host_sentinel2>:<port_sentinel2>,<host_sentinel3>:<port_sentinel3>
-    #     addr: "192.168.0.2:6379"
-    #     # The name of the set of Redis instances to monitor, it must be set to support redis+sentinel
-    #     sentinelMasterSet: ""
-    #     # The "coreDatabaseIndex" must be "0" as the library Harbor
-    #     # used doesn't support configuring it
-    #     # harborDatabaseIndex defaults to "0", but it can be configured to "6", this config is optional
-    #     # cacheLayerDatabaseIndex defaults to "0", but it can be configured to "7", this config is optional
-    #     coreDatabaseIndex: "0"
-    #     jobserviceDatabaseIndex: "1"
-    #     registryDatabaseIndex: "2"
-    #     trivyAdapterIndex: "5"
-    #     # harborDatabaseIndex: "6"
-    #     # cacheLayerDatabaseIndex: "7"
-    #     # username field can be an empty string, and it will be authenticated against the default user
-    #     username: ""
-    #     password: ""
-    #     # If using existingSecret, the key must be REDIS_PASSWORD
-    #     existingSecret: ""
-    #   ## Additional deployment annotations
-    #   podAnnotations: {}
-    #   ## Additional deployment labels
-    #   podLabels: {}
+        # redis:
+        #   # if external Redis is used, set "type" to "external"
+        #   # and fill the connection information in "external" section
+        #   type: internal
+        #   internal:
+        #     image:
+        #       repository: goharbor/redis-photon
+        #       tag: dev
+        #     # set the service account to be used, default if left empty
+        #     serviceAccountName: ""
+        #     # mount the service account token
+        #     automountServiceAccountToken: false
+        #     # resources:
+        #     #  requests:
+        #     #    memory: 256Mi
+        #     #    cpu: 100m
+        #     extraEnvVars: []
+        #     nodeSelector: {}
+        #     tolerations: []
+        #     affinity: {}
+        #     ## The priority class to run the pod as
+        #     priorityClassName:
+        #     # # jobserviceDatabaseIndex defaults to "1"
+        #     # # registryDatabaseIndex defaults to "2"
+        #     # # trivyAdapterIndex defaults to "5"
+        #     # # harborDatabaseIndex defaults to "0", but it can be configured to "6", this config is optional
+        #     # # cacheLayerDatabaseIndex defaults to "0", but it can be configured to "7", this config is optional
+        #     jobserviceDatabaseIndex: "1"
+        #     registryDatabaseIndex: "2"
+        #     trivyAdapterIndex: "5"
+        #     # harborDatabaseIndex: "6"
+        #     # cacheLayerDatabaseIndex: "7"
+        #   external:
+        #     # support redis, redis+sentinel
+        #     # addr for redis: <host_redis>:<port_redis>
+        #     # addr for redis+sentinel: <host_sentinel1>:<port_sentinel1>,<host_sentinel2>:<port_sentinel2>,<host_sentinel3>:<port_sentinel3>
+        #     addr: "192.168.0.2:6379"
+        #     # The name of the set of Redis instances to monitor, it must be set to support redis+sentinel
+        #     sentinelMasterSet: ""
+        #     # The "coreDatabaseIndex" must be "0" as the library Harbor
+        #     # used doesn't support configuring it
+        #     # harborDatabaseIndex defaults to "0", but it can be configured to "6", this config is optional
+        #     # cacheLayerDatabaseIndex defaults to "0", but it can be configured to "7", this config is optional
+        #     coreDatabaseIndex: "0"
+        #     jobserviceDatabaseIndex: "1"
+        #     registryDatabaseIndex: "2"
+        #     trivyAdapterIndex: "5"
+        #     # harborDatabaseIndex: "6"
+        #     # cacheLayerDatabaseIndex: "7"
+        #     # username field can be an empty string, and it will be authenticated against the default user
+        #     username: ""
+        #     password: ""
+        #     # If using existingSecret, the key must be REDIS_PASSWORD
+        #     existingSecret: ""
+        #   ## Additional deployment annotations
+        #   podAnnotations: {}
+        #   ## Additional deployment labels
+        #   podLabels: {}
 
-    # exporter:
-    #   image:
-    #     repository: goharbor/harbor-exporter
-    #     tag: dev
-    #   serviceAccountName: ""
-    #   # mount the service account token
-    #   automountServiceAccountToken: false
-    #   replicas: 1
-    #   revisionHistoryLimit: 10
-    #   # resources:
-    #   #  requests:
-    #   #    memory: 256Mi
-    #   #    cpu: 100m
-    #   extraEnvVars: []
-    #   podAnnotations: {}
-    #   ## Additional deployment labels
-    #   podLabels: {}
-    #   nodeSelector: {}
-    #   tolerations: []
-    #   affinity: {}
-    #   # Spread Pods across failure-domains like regions, availability zones or nodes
-    #   topologySpreadConstraints: []
-    #   ## The priority class to run the pod as
-    #   priorityClassName:
-    #   # - maxSkew: 1
-    #   #   topologyKey: topology.kubernetes.io/zone
-    #   #   nodeTaintsPolicy: Honor
-    #   #   whenUnsatisfiable: DoNotSchedule
-    #   cacheDuration: 23
-    #   cacheCleanInterval: 14400
+        # exporter:
+        #   image:
+        #     repository: goharbor/harbor-exporter
+        #     tag: dev
+        #   serviceAccountName: ""
+        #   # mount the service account token
+        #   automountServiceAccountToken: false
+        #   replicas: 1
+        #   revisionHistoryLimit: 10
+        #   # resources:
+        #   #  requests:
+        #   #    memory: 256Mi
+        #   #    cpu: 100m
+        #   extraEnvVars: []
+        #   podAnnotations: {}
+        #   ## Additional deployment labels
+        #   podLabels: {}
+        #   nodeSelector: {}
+        #   tolerations: []
+        #   affinity: {}
+        #   # Spread Pods across failure-domains like regions, availability zones or nodes
+        #   topologySpreadConstraints: []
+        #   ## The priority class to run the pod as
+        #   priorityClassName:
+        #   # - maxSkew: 1
+        #   #   topologyKey: topology.kubernetes.io/zone
+        #   #   nodeTaintsPolicy: Honor
+        #   #   whenUnsatisfiable: DoNotSchedule
+        #   cacheDuration: 23
+        #   cacheCleanInterval: 14400
