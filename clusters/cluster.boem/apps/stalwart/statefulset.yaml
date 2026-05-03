@@ -1,0 +1,105 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: stalwart
+  labels:
+    app: stalwart
+spec:
+  serviceName: stalwart-headless
+  # Number of pods in the StatefulSet.
+  # Single-node deployments keep this at 1.
+  # For a clustered deployment, raise this value and set `role` (and
+  # `pushShard` where applicable) to a value that makes sense for the
+  # whole StatefulSet, or install multiple releases of this chart with
+  # different role values.
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stalwart
+  template:
+    metadata:
+      labels:
+        app: stalwart
+    spec:
+      securityContext:
+        fsGroup: 2000
+        runAsUser: 2000
+        runAsGroup: 2000
+      containers:
+        - name: stalwart
+          image: stalwartlabs/stalwart:v0.15.4-alpine
+          imagePullPolicy: IfNotPresent
+          args:
+            - "--config"
+            - "/etc/stalwart/config.json"
+            # env:
+            # Maps to STALWART_ROLE. Names a ClusterRole defined in the database.
+            # Leave empty on single-node installs to run every task and listener.
+            # See /docs/cluster/configuration/roles for the role model.
+            # - name: STALWART_ROLE
+            #   value: {{ .Values.role | quote }}
+            # {{- if .Values.pushShard }}
+            # Maps to STALWART_PUSH_SHARD. Only set on nodes whose role delivers
+            # push notifications. Leave empty on single-node installs.
+            # - name: STALWART_PUSH_SHARD
+            #   value: {{ .Values.pushShard | quote }}
+            # {{- end }}
+            # Starts the pods in recovery mode. Suspends mail services and
+            # exposes only the management listener on the configured port.
+            # See /docs/configuration/recovery-mode.
+            # {{- if .Values.recoveryMode.enabled }}
+            # - name: STALWART_RECOVERY_MODE
+            #   value: "true"
+            # - name: STALWART_RECOVERY_MODE_PORT
+            #   value: {{ .Values.recoveryMode.port | quote }}
+            # - name: STALWART_RECOVERY_MODE_LOG_LEVEL
+            #   value: {{ .Values.recoveryMode.logLevel | quote }}
+            # {{- end }}
+          envFrom:
+            - secretRef:
+                name: stalwart-env
+          ports:
+            - name: smtp
+              containerPort: 25
+            - name: smtps
+              containerPort: 465
+            - name: submission
+              containerPort: 587
+            - name: imap
+              containerPort: 143
+            - name: imaps
+              containerPort: 993
+            - name: pop3
+              containerPort: 110
+            - name: pop3s
+              containerPort: 995
+            - name: sieve
+              containerPort: 4190
+            - name: http
+              containerPort: 80
+            - name: https
+              containerPort: 443
+            - name: mgmt
+              containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /healthz/live
+              port: mgmt
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /healthz/ready
+              port: mgmt
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          volumeMounts:
+            - name: config
+              mountPath: /etc/stalwart/config.json
+              subPath: config.json
+              readOnly: true
+          # resources: TODO: set
+      volumes:
+        - name: config
+          configMap:
+            name: stalwart-config
