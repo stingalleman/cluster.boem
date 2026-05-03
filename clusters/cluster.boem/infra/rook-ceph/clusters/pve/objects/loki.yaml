@@ -1,19 +1,19 @@
 apiVersion: ceph.rook.io/v1
 kind: CephObjectStoreUser
 metadata:
-  name: velero
-  namespace: rook-ceph-external-pve
+  name: loki
+  namespace: monitoring
 spec:
   store: k8s-objectstore-ssd
-  displayName: velero
+  displayName: loki
 ---
 apiVersion: objectbucket.io/v1alpha1
 kind: ObjectBucketClaim
 metadata:
-  name: velero
-  namespace: rook-ceph-external-pve
+  name: loki
+  namespace: monitoring
 spec:
-  generateBucketName: velero
+  generateBucketName: loki
   storageClassName: ceph-objectstore-ssd-pve
   additionalConfig:
-    bucketOwner: "velero"
+    bucketOwner: "loki"
