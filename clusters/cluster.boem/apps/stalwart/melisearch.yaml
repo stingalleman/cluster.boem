@@ -1,0 +1,85 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: meilisearch
+  namespace: stalwart
+spec:
+  chart:
+    spec:
+      chart: meilisearch
+      sourceRef:
+        kind: HelmRepository
+        name: meilisearch
+        namespace: flux-system
+  interval: 24h
+  values:
+    environment:
+      # -- Deactivates analytics
+      MEILI_NO_ANALYTICS: true
+      # -- Sets the environment. Either **production** or **development**
+      MEILI_ENV: production
+      # For production deployment, the environment MEILI_MASTER_KEY is required.
+      # If MEILI_ENV is set to "production" without setting MEILI_MASTER_KEY, this
+      # chart will automatically create a secure MEILI_MASTER_KEY and push it as a
+      # secret. Otherwise the below value of MEILI_MASTER_KEY will be used instead.
+      # MEILI_MASTER_KEY: ""
+    auth:
+      # -- Use an existing Kubernetes secret for the MEILI_MASTER_KEY
+      existingMasterKeySecret: "meilisearch-master-key"
+    # -- Additional environment variables from ConfigMap or secrets
+    envFrom: []
+    # -- Service HTTP port
+    service:
+      # -- Kubernetes Service type
+      type: ClusterIP
+      port: 7700
+      # -- Additional annotations for service
+      annotations: {}
+    container:
+      containerPort: 7700
+    persistence:
+      # -- Enable persistence using PVC
+      enabled: true
+      # -- PVC Access Mode
+      accessMode: ReadWriteOnce
+      ## Persistent Volume Storage Class
+      ## If defined, storageClassName: <storageClass>
+      ## If set to "-", storageClassName: "", which disables dynamic provisioning
+      ## If undefined (the default) or set to null, no storageClassName spec is
+      ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+      ##   GKE, AWS & OpenStack)
+      ##
+      # -- PVC Storage Class
+      storageClass: ceph-rbd-pve
+      ## Data Persistent Volume existing claim name
+      ## Requires persistence.enabled: true
+      ## If defined, PVC must be created manually before volume will be bound
+      # -- Existing PVC
+      existingClaim: ""
+      # -- PVC Storage Request
+      size: 10Gi
+      # -- Additional annotations for PVC
+      annotations: {}
+      volume:
+        name: data
+        mountPath: /meili_data
+    # -- Monitoring with Prometheus Operator
+    serviceMonitor:
+      # -- Enable ServiceMonitor to configure scraping
+      enabled: true
+      # -- Set Namespace
+      namespace: stalwart
+      # -- Set of labels to transfer from the Kubernetes Service onto the target
+      additionalLabels: {}
+      # -- Set scraping frequency
+      interval: 1m
+      # -- Set scraping timeout
+      scrapeTimeout: 10s
+      # -- Set path to metrics
+      telemetryPath: /metrics
+      # -- Set of labels to transfer from the Kubernetes Service onto the target
+      targetLabels: []
+      # -- MetricRelabelConfigs to apply to samples before ingestion
+      metricRelabelings: []
+      # -- Set relabel_configs as per https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config
+      relabelings: []
