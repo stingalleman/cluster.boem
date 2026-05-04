@@ -99,8 +99,14 @@ spec:
               mountPath: /etc/stalwart/config.json
               subPath: config.json
               readOnly: true
+            - name: certificate
+              mountPath: /etc/mail-as216455-net-cert
+              readOnly: true
           # resources: TODO: set
       volumes:
         - name: config
           configMap:
             name: stalwart-config
+        - name: certificate
+          secret:
+            secretName: mail.as216455.net-prod-tls
