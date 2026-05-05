@@ -144,14 +144,6 @@ spec:
         - kind: Service
           name: stalwart
           namespace: stalwart
-          port: http
-
-    - kind: Rule
-      match: Host(`mail-admin.as216455.net`)
-      services:
-        - kind: Service
-          name: stalwart
-          namespace: stalwart
           port: mgmt
 
   tls:
