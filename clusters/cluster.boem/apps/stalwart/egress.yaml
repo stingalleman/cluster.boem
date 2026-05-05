@@ -1,0 +1,24 @@
+apiVersion: cilium.io/v2
+kind: CiliumEgressGatewayPolicy
+metadata:
+  name: mail-egress
+spec:
+  # Specify which pods should be subject to the current policy.
+  # Multiple pod selectors can be specified.
+  selectors:
+    - podSelector:
+        matchLabels:
+          app: stalwart
+          # io.kubernetes.pod.namespace: stalwart
+          # Specify which destination CIDR(s) this policy applies to.
+          # Multiple CIDRs can be specified.
+  destinationCIDRs:
+    - "0.0.0.0/0"
+    # excludedCIDRs:
+    # - "10.0.0.0/8"
+  egressGateway:
+    nodeSelector:
+      matchLabels:
+        kubernetes.io/hostname: k-work-1 #TODO: fix
+
+    egressIP: 10.10.102.201
