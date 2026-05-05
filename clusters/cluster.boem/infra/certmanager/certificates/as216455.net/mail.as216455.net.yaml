@@ -11,3 +11,4 @@ spec:
   commonName: "mail.as216455.net"
   dnsNames:
     - "mail.as216455.net"
+    - "*.mail.as216455.net"

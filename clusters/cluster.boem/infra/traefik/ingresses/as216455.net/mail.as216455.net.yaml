@@ -16,5 +16,13 @@ spec:
           namespace: stalwart
           port: mgmt
 
+    - kind: Rule
+      match: Host(`web.mail.as216455.net`)
+      services:
+        - kind: Service
+          name: bulwark
+          namespace: stalwart
+          port: http
+
   tls:
-    secretName: as216455.net-prod-tls
+    secretName: mail.as216455.net-prod-tls

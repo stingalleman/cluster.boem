@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bulwark
+  namespace: stalwart
+  labels:
+    app: bulwark
+spec:
+  selector:
+    matchLabels:
+      app: bulwark
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: bulwark
+    spec:
+      containers:
+        - name: bulwark
+          image: ghcr.io/bulwarkmail/webmail:latest
+          env:
+            - name: JMAP_SERVER_URL
+              value: https://mail.as216455.net
+          ports:
+            - containerPort: 3000
+              name: http
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bulwark
+  namespace: stalwart
+spec:
+  selector:
+    app: bulwark
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: http
