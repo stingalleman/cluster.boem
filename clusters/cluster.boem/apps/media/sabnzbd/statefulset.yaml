@@ -1,20 +1,19 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: sabnzbd
   namespace: media
-  labels:
-    app: sabnzbd
 spec:
   selector:
     matchLabels:
-      app: sabnzbd
+      app: sabnzbd # has to match .spec.template.metadata.labels
   replicas: 1
   template:
     metadata:
       labels:
-        app: sabnzbd
+        app: sabnzbd # has to match .spec.selector.matchLabels
     spec:
+      terminationGracePeriodSeconds: 10
       containers:
         - name: sabnzbd
           image: lscr.io/linuxserver/sabnzbd:latest
@@ -33,15 +32,6 @@ spec:
             successThreshold: 1
             failureThreshold: 3
             periodSeconds: 10
-          # readinessProbe:
-          #   httpGet:
-          #     path: /_status/healthz
-          #     port: 80
-          #   initialDelaySeconds: 5
-          #   timeoutSeconds: 2
-          #   successThreshold: 1
-          #   failureThreshold: 3
-          #   periodSeconds: 10
           env:
             - name: PUID
               value: "1000"
