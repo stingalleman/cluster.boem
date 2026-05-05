@@ -24,13 +24,13 @@ spec:
       containers:
         - name: sabnzbd
           image: lscr.io/linuxserver/sabnzbd:latest
-          # resources:
-          #   requests:
-          #     cpu: 100m
-          #     memory: 100Mi
-          #   limits:
-          #     cpu: 100m
-          #     memory: 100Mi
+          resources:
+            requests:
+              cpu: 1000m
+              memory: 1G
+            limits:
+              cpu: 2000m
+              memory: 2G
           livenessProbe:
             tcpSocket:
               port: 8080
