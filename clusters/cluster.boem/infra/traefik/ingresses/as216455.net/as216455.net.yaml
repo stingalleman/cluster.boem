@@ -138,12 +138,21 @@ spec:
           port: 80
 
     - kind: Rule
-      match: Host(`mail.as216455.net`) || Host(`autodiscover.as216455.net`) || Host(`autoconfig.as216455.net`) || Host(`mta-sts.as216455.net`)
+      match: Host(`mail.as216455.net`) || Host(`autodiscover.as216455.net`) ||
+        Host(`autoconfig.as216455.net`) || Host(`mta-sts.as216455.net`)
       services:
         - kind: Service
           name: stalwart
           namespace: stalwart
-          port: 8080
+          port: http
+
+    - kind: Rule
+      match: Host(`mail-admin.as216455.net`)
+      services:
+        - kind: Service
+          name: stalwart
+          namespace: stalwart
+          port: mgmt
 
   tls:
     secretName: as216455.net-prod-tls
