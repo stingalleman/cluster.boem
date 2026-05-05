@@ -617,6 +617,7 @@ spec:
         port: 993
         expose:
           default: true
+          mail: true
           internal: false
         exposedPort: 993
         protocol: TCP
@@ -635,6 +636,7 @@ spec:
         port: 995
         expose:
           default: true
+          mail: true
           internal: false
         exposedPort: 995
         protocol: TCP
@@ -643,6 +645,7 @@ spec:
         port: 25
         expose:
           default: true
+          mail: true
           internal: false
         exposedPort: 25
         protocol: TCP
@@ -661,6 +664,7 @@ spec:
         port: 465
         expose:
           default: true
+          mail: true
           internal: false
         exposedPort: 465
         protocol: TCP
