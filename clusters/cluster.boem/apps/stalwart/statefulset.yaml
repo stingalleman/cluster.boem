@@ -33,7 +33,7 @@ spec:
           args:
             - "--config"
             - "/etc/stalwart/config.json"
-          env:
+            # env:
             # Maps to STALWART_ROLE. Names a ClusterRole defined in the database.
             # Leave empty on single-node installs to run every task and listener.
             # See /docs/cluster/configuration/roles for the role model.
@@ -49,8 +49,8 @@ spec:
             # exposes only the management listener on the configured port.
             # See /docs/configuration/recovery-mode.
             # {{- if .Values.recoveryMode.enabled }}
-            - name: STALWART_RECOVERY_MODE
-              value: "true"
+            # - name: STALWART_RECOVERY_MODE
+            #   value: "true"
             # - name: STALWART_RECOVERY_MODE_PORT
             #   value: {{ .Values.recoveryMode.port | quote }}
             # - name: STALWART_RECOVERY_MODE_LOG_LEVEL
