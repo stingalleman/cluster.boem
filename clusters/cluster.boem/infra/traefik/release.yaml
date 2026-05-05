@@ -479,6 +479,35 @@ spec:
         tls:
           enabled: true
 
+      mail:
+        port: 8100
+        expose:
+          default: false
+          internal: false
+          mail: true
+        exposedPort: 80
+        protocol: TCP
+        redirections:
+          entryPoint:
+            to: mailsecure
+            scheme: https
+            permanent: true
+
+      mailsecure:
+        port: 8143
+        expose:
+          default: false
+          internal: false
+          mail: true
+        exposedPort: 443
+        protocol: TCP
+        # forwardedHeaders:
+        #   # -- Trust forwarded headers information (X-Forwarded-*).
+        #   trustedIPs: []
+        #   insecure: false
+        tls:
+          enabled: true
+
       internal:
         port: 9080
         expose:
@@ -706,6 +735,18 @@ spec:
           type: LoadBalancer
           annotations:
             io.cilium/lb-ipam-ips: "10.10.102.250,2a07:54c7:5201:7e6f::2000"
+          labels:
+            lb-pool: external
+          spec:
+            externalTrafficPolicy: Local
+          ipFamilyPolicy: RequireDualStack
+          ipFamilies:
+            - IPv4
+            - IPv6
+        mail:
+          type: LoadBalancer
+          annotations:
+            io.cilium/lb-ipam-ips: "2.27.100.101,2a07:54c7:5201:6e6f::b"
           labels:
             lb-pool: external
           spec:
