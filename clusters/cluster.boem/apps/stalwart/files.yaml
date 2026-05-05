@@ -1,11 +1,12 @@
-# apiVersion: ceph.rook.io/v1
-# kind: CephObjectStoreUser
-# metadata:
-#   name: stalwart
-#   namespace: stalwart
-# spec:
-#   store: k8s-objectstore-ssd
-#   displayName: stalwart
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStoreUser
+metadata:
+  name: stalwart
+  namespace: stalwart
+spec:
+  store: k8s-objectstore-ssd
+  displayName: stalwart
+
 # ---
 # apiVersion: objectbucket.io/v1alpha1
 # kind: ObjectBucketClaim
@@ -17,5 +18,3 @@
 #   storageClassName: ceph-objectstore-ssd-pve
 #   additionalConfig:
 #     bucketOwner: "stalwart"
-
-
