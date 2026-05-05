@@ -35,7 +35,7 @@ spec:
         # -- Specify the allowed entrypoints to use for the dashboard ingress route, (e.g. traefik, web, websecure).
         # By default, it's using traefik entrypoint, which is not exposed.
         # /!\ Do not expose your dashboard without any protection over the internet /!\
-        entryPoints: ["internalsecure"]
+        entryPoints: [ "internalsecure" ]
         # -- Additional ingressRoute middlewares (e.g. for authentication)
         middlewares: []
         # -- TLS options (e.g. secret containing certificate)
@@ -55,13 +55,14 @@ spec:
             kind: TraefikService
         # -- Specify the allowed entrypoints to use for the healthcheck ingress route, (e.g. traefik, web, websecure).
         # By default, it's using traefik entrypoint, which is not exposed.
-        entryPoints: ["traefik"]
+        entryPoints: [ "traefik" ]
         # -- Additional ingressRoute middlewares (e.g. for authentication)
         middlewares: []
         # -- TLS options (e.g. secret containing certificate)
         tls: {}
 
-    providers: # @schema additionalProperties: false
+    providers:
+      # @schema additionalProperties: false
       kubernetesCRD:
         # -- Load Kubernetes IngressRoute provider
         enabled: true
@@ -84,8 +85,10 @@ spec:
         # -- Allows to return 503 when there is no endpoints available
         allowEmptyServices: true
         # -- When ingressClass is set, only Ingresses containing an annotation with the same value are processed. Otherwise, Ingresses missing the annotation, having an empty value, or the value traefik are processed.
-        ingressClass: # @schema type:[string, null]
-        # labelSelector: environment=production,method=traefik
+        ingressClass:
+          # @schema type:[string, null]
+          # labelSelector: environment=production,method=traefik
+
         # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces.
         namespaces: []
         # IP used for Kubernetes Ingress endpoints
@@ -124,8 +127,10 @@ spec:
     logs:
       general:
         # -- Set [logs format](https://doc.traefik.io/traefik/observability/logs/#format)
-        format: # @schema enum:["common", "json", null]; type:[string, null]; default: "common"
-        # By default, the level is set to INFO.
+        format:
+          # @schema enum:["common", "json", null]; type:[string, null]; default: "common"
+          # By default, the level is set to INFO.
+
         # -- Alternative logging levels are TRACE, DEBUG, INFO, WARN, ERROR, FATAL, and PANIC.
         level: "INFO" # @schema enum:[TRACE,DEBUG,INFO,WARN,ERROR,FATAL,PANIC]; default: "INFO"
         # -- To write the logs into a log file, use the filePath option.
@@ -136,12 +141,17 @@ spec:
         # -- To enable access logs
         enabled: true
         # -- Set [access log format](https://doc.traefik.io/traefik/observability/access-logs/#format)
-        format: # @schema enum:["common", "json", null]; type:[string, null]; default: "common"
-        # filePath: "/var/log/traefik/access.log
+        format:
+          # @schema enum:["common", "json", null]; type:[string, null]; default: "common"
+          # filePath: "/var/log/traefik/access.log
+
         # -- Set [bufferingSize](https://doc.traefik.io/traefik/observability/access-logs/#bufferingsize)
-        bufferingSize: # @schema type:[integer, null]
-        # -- Set [filtering](https://docs.traefik.io/observability/access-logs/#filtering)
-        filters: # @schema additionalProperties: false
+        bufferingSize:
+          # @schema type:[integer, null]
+          # -- Set [filtering](https://docs.traefik.io/observability/access-logs/#filtering)
+
+        filters:
+          # @schema additionalProperties: false
           # -- Set statusCodes, to limit the access logs to requests with a status codes in the specified range
           statuscodes: ""
           # -- Set retryAttempts, to keep the access logs when at least one retry has happened
@@ -175,12 +185,18 @@ spec:
         # -- Entry point used to expose metrics.
         entryPoint: metrics
         # -- Enable metrics on entry points. Default: true
-        addEntryPointsLabels: # @schema type:[boolean, null]
-        # -- Enable metrics on routers. Default: false
-        addRoutersLabels: # @schema type:[boolean, null]
-        # -- Enable metrics on services. Default: true
-        addServicesLabels: # @schema type:[boolean, null]
-        # -- Buckets for latency metrics. Default="0.1,0.3,1.2,5.0"
+        addEntryPointsLabels:
+          # @schema type:[boolean, null]
+          # -- Enable metrics on routers. Default: false
+
+        addRoutersLabels:
+          # @schema type:[boolean, null]
+          # -- Enable metrics on services. Default: true
+
+        addServicesLabels:
+          # @schema type:[boolean, null]
+          # -- Buckets for latency metrics. Default="0.1,0.3,1.2,5.0"
+
         buckets: ""
         # -- When manualRouting is true, it disables the default internal router in
         ## order to allow creating a custom router for prometheus@internal service.
@@ -266,12 +282,18 @@ spec:
         # -- Set to true in order to enable the OpenTelemetry metrics
         enabled: false
         # -- Enable metrics on entry points. Default: true
-        addEntryPointsLabels: # @schema type:[boolean, null]
-        # -- Enable metrics on routers. Default: false
-        addRoutersLabels: # @schema type:[boolean, null]
-        # -- Enable metrics on services. Default: true
-        addServicesLabels: # @schema type:[boolean, null]
-        # -- Explicit boundaries for Histogram data points. Default: [.005, .01, .025, .05, .1, .25, .5, 1, 2.5, 5, 10]
+        addEntryPointsLabels:
+          # @schema type:[boolean, null]
+          # -- Enable metrics on routers. Default: false
+
+        addRoutersLabels:
+          # @schema type:[boolean, null]
+          # -- Enable metrics on services. Default: true
+
+        addServicesLabels:
+          # @schema type:[boolean, null]
+          # -- Explicit boundaries for Histogram data points. Default: [.005, .01, .025, .05, .1, .25, .5, 1, 2.5, 5, 10]
+
         explicitBoundaries: []
         # -- Interval at which metrics are sent to the OpenTelemetry Collector. Default: 10s
         pushInterval: ""
@@ -312,12 +334,15 @@ spec:
 
     ## Tracing
     # -- https://doc.traefik.io/traefik/observability/tracing/overview/
-    tracing: # @schema additionalProperties: false
+    tracing:
+      # @schema additionalProperties: false
       # -- Enables tracing for internal resources. Default: false.
       addInternals: false
       # -- Service name used in selected backend. Default: traefik.
-      serviceName: # @schema type:[string, null]
-      # -- Defines additional resource attributes to be sent to the collector.
+      serviceName:
+        # @schema type:[string, null]
+        # -- Defines additional resource attributes to be sent to the collector.
+
       resourceAttributes: {}
       # -- Defines the list of request headers to add as attributes. It applies to client and server kind spans.
       capturedRequestHeaders: []
@@ -369,8 +394,10 @@ spec:
       traefik:
         port: 8080
         # -- Use hostPort if set.
-        hostPort: # @schema type:[integer, null]; minimum:0
-        # -- Use hostIP if set. If not set, Kubernetes will default to 0.0.0.0, which
+        hostPort:
+          # @schema type:[integer, null]; minimum:0
+          # -- Use hostIP if set. If not set, Kubernetes will default to 0.0.0.0, which
+
         # means it's listening on all your interfaces and all your IPs. You may want
         # to set this value if you need traefik to listen on specific interface
         # only.
@@ -400,8 +427,10 @@ spec:
           internal: false
         exposedPort: 80
         ## -- Different target traefik port on the cluster, useful for IP type LB
-        targetPort: # @schema type:[string, integer, null]; minimum:0
-        # The port protocol (TCP/UDP)
+        targetPort:
+          # @schema type:[string, integer, null]; minimum:0
+          # The port protocol (TCP/UDP)
+
         protocol: TCP
         # -- See [upstream documentation](https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport)
         nodePort: # @schema type:[integer, null]; minimum:0
@@ -433,7 +462,8 @@ spec:
             requestAcceptGraceTimeout: # @schema type:[string, integer, null]
             graceTimeOut: # @schema type:[string, integer, null]
           keepAliveMaxRequests: # @schema type:[integer, null]; minimum:0
-          keepAliveMaxTime: # @schema type:[string, integer, null]
+          keepAliveMaxTime:
+            # @schema type:[string, integer, null]
 
       websecure:
         port: 8443
@@ -546,15 +576,15 @@ spec:
         protocol: UDP
 
       # Stalwart
-      imap:
-        port: 143
-        expose:
-          default: true
-          internal: false
-        exposedPort: 143
-        protocol: TCP
+      # imap:
+      #   port: 143
+      #   expose:
+      #     default: true
+      #     internal: false
+      #   exposedPort: 143
+      #   protocol: TCP
 
-      imaptls:
+      imaps:
         port: 993
         expose:
           default: true
@@ -572,13 +602,13 @@ spec:
       #   exposedPort: 110
       #   protocol: TCP
 
-      # pop3s:
-      #   port: 995
-      #   expose:
-      #     default: true
-      #     internal: false
-      #   exposedPort: 995
-      #   protocol: TCP
+      pop3s:
+        port: 995
+        expose:
+          default: true
+          internal: false
+        exposedPort: 995
+        protocol: TCP
 
       smtp:
         port: 25
@@ -588,17 +618,17 @@ spec:
         exposedPort: 25
         protocol: TCP
 
-      submission:
-        port: 587
-        expose:
-          default: true
-          internal: false
-        exposedPort: 587
-        protocol: TCP
-        tls:
-          enabled: true
+      # submission:
+      #   port: 587
+      #   expose:
+      #     default: true
+      #     internal: false
+      #   exposedPort: 587
+      #   protocol: TCP
+      #   tls:
+      #     enabled: true
 
-      submissions:
+      smtps:
         port: 465
         expose:
           default: true
