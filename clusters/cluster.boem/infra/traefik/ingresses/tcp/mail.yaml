@@ -63,8 +63,6 @@ metadata:
 spec:
   entryPoints:
     - smtp
-  tls:
-    passthrough: true
   routes:
     - match: HostSNI(`*`)
       services:
