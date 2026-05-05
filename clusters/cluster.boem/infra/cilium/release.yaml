@@ -59,3 +59,8 @@ spec:
           - SYS_RESOURCE
     ipv6:
       enabled: true
+
+    bpf:
+      masquerade: true
+    egressGateway:
+      enabled: true
