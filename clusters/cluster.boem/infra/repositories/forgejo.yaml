@@ -1,0 +1,11 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: forgejo
+  namespace: flux-system
+spec:
+  interval: 10m
+  url: oci://code.forgejo.org/forgejo-helm/forgejo
+  provider: generic
+  ref:
+    semver: "17.1.0"
