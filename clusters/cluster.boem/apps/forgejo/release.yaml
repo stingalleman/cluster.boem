@@ -1,0 +1,392 @@
+
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: forgejo
+  namespace: forgejo
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: forgejo
+    namespace: flux-system
+  interval: 24h
+  values:
+    ## @param namespaceOverride String to fully override common.names.namespace
+    ##
+    ## namespaceOverride: ''
+
+    ## @section deployment
+    #
+    ## @descriptionStart
+    ## Do not set `replicaCount` greater than `1`, Forgejo is not HA ready and this will cause issues with the deployment.
+    ## @descriptionEnd
+    #
+    ## @param resources Kubernetes resources
+    resources: {}
+      # We usually recommend not to specify default resources and to leave this as a conscious
+      # choice for the user. This also increases chances charts run on environments with little
+      # resources, such as Minikube. If you do want to specify resources, uncomment the following
+      # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+      # limits:
+      #   cpu: 100m
+      #   memory: 128Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
+
+    ## @section Persistence
+    #
+    ## @param persistence.enabled Enable persistent storage
+    ## @param persistence.create Whether to create the persistentVolumeClaim for shared storage
+    ## @param persistence.mount Whether the persistentVolumeClaim should be mounted (even if not created)
+    ## @param persistence.claimName Use an existing claim to store repository information
+    ## @param persistence.size Size for persistence to store repo information
+    ## @param persistence.accessModes AccessMode for persistence
+    ## @param persistence.labels Labels for the persistence volume claim to be created
+    ## @param persistence.annotations.helm.sh/resource-policy Resource policy for the persistence volume claim
+    ## @param persistence.storageClass Name of the storage class to use
+    ## @param persistence.subPath Subdirectory of the volume to mount at
+    ## @param persistence.volumeName Name of persistent volume in PVC
+    persistence:
+      enabled: true
+      create: true
+      mount: true
+      claimName: forgejo-shared-storage
+      size: 50Gi
+      accessModes:
+        - ReadWriteOnce
+      storageClass: ceph-rbd-pve 
+      annotations:
+        helm.sh/resource-policy: keep
+
+    ## @param extraVolumes Additional volumes to mount to the Forgejo deployment
+    extraVolumes: []
+    # - name: postgres-ssl-vol
+    #   secret:
+    #     secretName: forgejo-postgres-ssl
+
+    # Configure commit/action signing prerequisites
+    ## @section Signing
+    #
+    ## @param signing.enabled Enable commit/action signing
+    ## @param signing.gpgHome GPG home directory
+    ## @param signing.privateKey Inline private GPG key for signed internal Git activity
+    ## @param signing.existingSecret Use an existing secret to store the value of `signing.privateKey`
+    ## @param signing.ssh.privateKey Inline private SSH key for signed internal Git activity
+    ## @param signing.ssh.existingSecret Use an existing secret to store the value of `signing.ssh.privateKey`
+    signing:
+      enabled: false
+      gpgHome: /data/git/.gnupg
+      privateKey: ''
+      # privateKey: |-
+      #   -----BEGIN PGP PRIVATE KEY BLOCK-----
+      #   ...
+      #   -----END PGP PRIVATE KEY BLOCK-----
+      existingSecret: ''
+      ssh:
+        privateKey: ''
+        existingSecret: ''
+
+    ## @section Gitea
+    #
+    gitea:
+      ## @param gitea.admin.username Username for the Forgejo admin user
+      ## @param gitea.admin.existingSecret Use an existing secret to store admin user credentials
+      ## @param gitea.admin.password Password for the Forgejo admin user
+      ## @param gitea.admin.email Email for the Forgejo admin user
+      ## @param gitea.admin.passwordMode Mode for how to set/update the admin user password. Options are: initialOnlyNoReset, initialOnlyRequireReset, and keepUpdated
+      admin:
+        # existingSecret: gitea-admin-secret
+        existingSecret:
+        username: forgejo_admin
+        password: ''
+        email: 'forgejo@as216455.net'
+        passwordMode: keepUpdated
+
+      ## @param gitea.metrics.enabled Enable Forgejo metrics
+      ## @param gitea.metrics.serviceMonitor.enabled Enable Forgejo metrics service monitor
+      ## @param gitea.metrics.serviceMonitor.namespace Namespace in which Prometheus is running
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+          namespace: 'forgejo'
+          #  additionalLabels:
+          #    prometheus-release: prom1
+
+      ## @param gitea.ldap LDAP configuration
+      ldap: []
+        # - name: "LDAP 1"
+        #  existingSecret:
+        #  securityProtocol:
+        #  host:
+        #  port:
+        #  userSearchBase:
+        #  userFilter:
+        #  adminFilter:
+        #  emailAttribute:
+        #  bindDn:
+        #  bindPassword:
+        #  usernameAttribute:
+        #  publicSSHKeyAttribute:
+
+      # Either specify inline `key` and `secret` or refer to them via `existingSecret`
+      ## @param gitea.oauth OAuth configuration
+      oauth:
+        - name: 'Authentik'
+          provider: openidConnect
+          existingSecret: forgejo-config-oauth
+          autoDiscoverUrl: "https://auth.as216455.net/application/o/forgejo/.well-known/openid-configuration"
+          admin-group: forgejo-admin
+          scopes: email profile openid
+          group-team-map-removal: true
+          group-team-map: "{}"
+          skipLocal-2fa: true
+          group-claim-name: groups
+
+      ## @param gitea.additionalConfigSources Additional configuration from secret or configmap
+      additionalConfigSources:
+        - secret:
+            secretName: forgejo-config-db
+      #   - secret:
+      #       secretName: gitea-app-ini-oauth
+      #   - configMap:
+      #       name: gitea-app-ini-plaintext
+
+      ## @param gitea.additionalConfigFromEnvs Additional configuration sources from environment variables
+      additionalConfigFromEnvs: []
+
+      ## @param gitea.podAnnotations Annotations for the Forgejo pod
+      podAnnotations: {}
+
+      ## @param gitea.ssh.logLevel Configure OpenSSH's log level. Only available for root-based Forgejo image.
+      ssh:
+        logLevel: 'INFO'
+
+      ## @section `app.ini` overrides
+      ## @descriptionStart
+      ## Every value described in the [Cheat
+      ## Sheet](https://forgejo.org/docs/latest/admin/config-cheat-sheet/) can be
+      ## set as a Helm value. Configuration sections map to (lowercased) YAML
+      ## blocks, while the keys themselves remain in all caps.
+      ## @descriptionEnd
+      config:
+        # values in the DEFAULT section
+        # (https://forgejo.org/docs/latest/admin/config-cheat-sheet/#overall-default)
+        # are un-namespaced
+
+        ## @param gitea.config.APP_NAME Application name, used in the page title
+        APP_NAME: 'AS216455 Code Forge'
+
+        ## @param gitea.config.RUN_MODE Application run mode, affects performance and debugging: `dev` or `prod`
+        RUN_MODE: prod
+
+        ## @param gitea.config.repository General repository settings
+        repository: {}
+
+        ## @param gitea.config.cors Cross-origin resource sharing settings
+        cors: {}
+
+        ## @param gitea.config.ui User interface settings
+        ui: {}
+
+        ## @param gitea.config.markdown Markdown parser settings
+        markdown: {}
+
+        ## @param gitea.config.server [object] General server settings
+        server:
+          SSH_PORT: 22 # rootful image
+          SSH_LISTEN_PORT: 2222 # rootless image
+          PROTOCOL: http
+          DOMAIN: git.as216455.net
+          ROOT_URL: "https://git.as216455.net/"
+
+        ## @param gitea.config.indexer Settings for what content is indexed and how
+        indexer: {}
+
+        ## @param gitea.config.queue Job queue configuration
+        queue: {}
+
+        ## @param gitea.config.admin Admin user settings
+        admin: {}
+
+        ## @param gitea.config.security Site security settings
+        security: {}
+
+        ## @param gitea.config.camo Settings for the [camo](https://github.com/cactus/go-camo) media proxy server (disabled by default)
+        camo: {}
+
+        ## @param gitea.config.openid Configuration for authentication with OpenID (disabled by default)
+        openid: {}
+
+        ## @param gitea.config.oauth2_client OAuth2 client settings
+        oauth2_client: {}
+
+        ## @param gitea.config.service Configuration for miscellaneous Forgejo services
+        service: {}
+
+        ## @param gitea.config.ssh.minimum_key_sizes SSH minimum key sizes
+        ssh.minimum_key_sizes: {}
+
+        ## @param gitea.config.webhook Webhook settings
+        webhook: {}
+
+        ## @param gitea.config.mailer Mailer configuration (disabled by default)
+        mailer: {}
+
+        ## @param gitea.config.email.incoming Configuration for handling incoming mail (disabled by default)
+        email.incoming: {}
+
+        ## @param gitea.config.cache Cache configuration
+        cache: {}
+
+        ## @param gitea.config.session Session/cookie handling
+        session: {}
+
+        ## @param gitea.config.picture User avatar settings
+        picture: {}
+
+        ## @param gitea.config.project Project board defaults
+        project: {}
+
+        ## @param gitea.config.attachment Issue and PR attachment configuration
+        attachment: {}
+
+        ## @param gitea.config.log Logging configuration
+        log: {}
+
+        ## @param gitea.config.cron Cron job configuration
+        cron: {}
+
+        ## @param gitea.config.git Global settings for Git
+        git: {}
+
+        ## @param gitea.config.metrics Settings for the Prometheus endpoint (disabled by default)
+        metrics: {}
+
+        ## @param gitea.config.api Settings for the Swagger API documentation endpoints
+        api: {}
+
+        ## @param gitea.config.oauth2 Settings for the [OAuth2 provider](https://forgejo.org/docs/latest/admin/oauth2-provider/)
+        oauth2: {}
+
+        ## @param gitea.config.i18n Internationalization settings
+        i18n: {}
+
+        ## @param gitea.config.markup Configuration for advanced markup processors
+        markup: {}
+
+        ## @param gitea.config.highlight.mapping File extension to language mapping overrides for syntax highlighting
+        highlight.mapping: {}
+
+        ## @param gitea.config.time Locale settings
+        time: {}
+
+        ## @param gitea.config.migrations Settings for Git repository migrations
+        migrations: {}
+
+        ## @param gitea.config.federation Federation configuration
+        federation: {}
+
+        ## @param gitea.config.packages Package registry settings
+        packages: {}
+
+        ## @param gitea.config.mirror Configuration for repository mirroring
+        mirror: {}
+
+        ## @param gitea.config.lfs Large File Storage configuration
+        lfs: {}
+
+        ## @param gitea.config.repo-avatar Repository avatar storage configuration
+        repo-avatar: {}
+
+        ## @param gitea.config.avatar User/org avatar storage configuration
+        avatar: {}
+
+        ## @param gitea.config.storage General storage settings
+        storage: {}
+
+        ## @param gitea.config.proxy Proxy configuration (disabled by default)
+        proxy: {}
+
+        ## @param gitea.config.actions Configuration for [Forgejo Actions](https://forgejo.org/docs/latest/user/actions/)
+        actions: {}
+
+        ## @param gitea.config.other Uncategorized configuration options
+        other: {}
+
+      ## @section LivenessProbe
+      #
+      ## @param gitea.livenessProbe.enabled Enable liveness probe
+      ## @param gitea.livenessProbe.tcpSocket.port Port to probe for liveness
+      ## @param gitea.livenessProbe.initialDelaySeconds Initial delay before liveness probe is initiated
+      ## @param gitea.livenessProbe.timeoutSeconds Timeout for liveness probe
+      ## @param gitea.livenessProbe.periodSeconds Period for liveness probe
+      ## @param gitea.livenessProbe.successThreshold Success threshold for liveness probe
+      ## @param gitea.livenessProbe.failureThreshold Failure threshold for liveness probe
+      # Modify the liveness probe for your needs or completely disable it by commenting out.
+      livenessProbe:
+        enabled: true
+        tcpSocket:
+          port: http
+        initialDelaySeconds: 200
+        timeoutSeconds: 1
+        periodSeconds: 10
+        successThreshold: 1
+        failureThreshold: 10
+
+      ## @section ReadinessProbe
+      #
+      ## @param gitea.readinessProbe.enabled Enable readiness probe
+      ## @param gitea.readinessProbe.httpGet.path Path to probe for readiness
+      ## @param gitea.readinessProbe.httpGet.port Port to probe for readiness
+      ## @param gitea.readinessProbe.initialDelaySeconds Initial delay before readiness probe is initiated
+      ## @param gitea.readinessProbe.timeoutSeconds Timeout for readiness probe
+      ## @param gitea.readinessProbe.periodSeconds Period for readiness probe
+      ## @param gitea.readinessProbe.successThreshold Success threshold for readiness probe
+      ## @param gitea.readinessProbe.failureThreshold Failure threshold for readiness probe
+      # Modify the readiness probe for your needs or completely disable it by commenting out.
+      readinessProbe:
+        enabled: true
+        httpGet:
+          path: /api/healthz
+          port: http
+        initialDelaySeconds: 5
+        timeoutSeconds: 1
+        periodSeconds: 10
+        successThreshold: 1
+        failureThreshold: 3
+
+      # # Uncomment the startup probe to enable and modify it for your needs.
+      ## @section StartupProbe
+      #
+      ## @param gitea.startupProbe.enabled Enable startup probe
+      ## @param gitea.startupProbe.tcpSocket.port Port to probe for startup
+      ## @param gitea.startupProbe.initialDelaySeconds Initial delay before startup probe is initiated
+      ## @param gitea.startupProbe.timeoutSeconds Timeout for startup probe
+      ## @param gitea.startupProbe.periodSeconds Period for startup probe
+      ## @param gitea.startupProbe.successThreshold Success threshold for startup probe
+      ## @param gitea.startupProbe.failureThreshold Failure threshold for startup probe
+      startupProbe:
+        enabled: false
+        tcpSocket:
+          port: http
+        initialDelaySeconds: 60
+        timeoutSeconds: 1
+        periodSeconds: 10
+        successThreshold: 1
+        failureThreshold: 10
+
+    # By default, removed or moved settings that still remain in a user defined values.yaml will cause Helm to fail running the install/update.
+    # Set it to false to skip this basic validation check.
+    ## @section Advanced
+    ## @param checkDeprecation Whether to run this basic validation check.
+    ## @param test.enabled Whether to use test-connection Pod.
+    ## @param test.image.name Image name for the wget container used in the test-connection Pod.
+    ## @param test.image.tag Image tag for the wget container used in the test-connection Pod.
+    checkDeprecation: true
+
+    ## @param extraDeploy Array of extra objects to deploy with the release.
+    ##
+    extraDeploy: []
+

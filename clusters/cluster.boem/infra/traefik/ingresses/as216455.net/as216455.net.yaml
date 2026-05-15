@@ -146,5 +146,12 @@ spec:
           namespace: stalwart
           port: mgmt
 
+    - kind: Rule
+      match: Host(`git.as216455.net`)
+      services:
+        - kind: Service
+          name: forgejo-http 
+          namespace: forgejo
+          port: http
   tls:
     secretName: as216455.net-prod-tls

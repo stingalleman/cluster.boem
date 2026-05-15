@@ -1,8 +1,8 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: forgejo
-  namespace: cnpg-system
+  name: forgejo-db
+  namespace: forgejo
 spec:
   # imageName:
   instances: 2
