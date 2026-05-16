@@ -143,6 +143,9 @@ spec:
           group-team-map: "{}"
           skipLocal-2fa: true
           group-claim-name: groups
+        - name: 'GitHub'
+          provider: github
+          existingSecret: forgejo-config-oauth-github
 
       ## @param gitea.additionalConfigSources Additional configuration from secret or configmap
       additionalConfigSources:
