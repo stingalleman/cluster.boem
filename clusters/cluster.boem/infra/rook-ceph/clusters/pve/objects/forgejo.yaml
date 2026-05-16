@@ -1,0 +1,19 @@
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStoreUser
+metadata:
+  name: forgejo-files
+  namespace: forgejo
+spec:
+  store: k8s-objectstore-ssd
+  displayName: forgejo-files
+---
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: forgejo-files
+  namespace: forgejo
+spec:
+  generateBucketName: forgejo-files
+  storageClassName: ceph-objectstore-ssd-pve
+  additionalConfig:
+    bucketOwner: "forgejo-files"

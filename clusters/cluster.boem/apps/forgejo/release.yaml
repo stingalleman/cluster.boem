@@ -148,6 +148,10 @@ spec:
       additionalConfigSources:
         - secret:
             secretName: forgejo-config-db
+        - secret:
+            secretName: forgejo-config-storage
+        - secret:
+            secretName: forgejo-config-mailer
       #   - secret:
       #       secretName: gitea-app-ini-oauth
       #   - configMap:
@@ -231,9 +235,6 @@ spec:
         ## @param gitea.config.webhook Webhook settings
         webhook: {}
 
-        ## @param gitea.config.mailer Mailer configuration (disabled by default)
-        mailer: {}
-
         ## @param gitea.config.email.incoming Configuration for handling incoming mail (disabled by default)
         email.incoming: {}
 
@@ -245,12 +246,14 @@ spec:
 
         ## @param gitea.config.picture User avatar settings
         picture: {}
+          # AVATAR_STORAGE_TYPE: minio
 
         ## @param gitea.config.project Project board defaults
         project: {}
 
         ## @param gitea.config.attachment Issue and PR attachment configuration
         attachment: {}
+          # STORAGE_TYPE: minio
 
         ## @param gitea.config.log Logging configuration
         log: {}
@@ -296,15 +299,13 @@ spec:
 
         ## @param gitea.config.lfs Large File Storage configuration
         lfs: {}
+          #STORAGE_TYPE: minio
 
         ## @param gitea.config.repo-avatar Repository avatar storage configuration
         repo-avatar: {}
 
         ## @param gitea.config.avatar User/org avatar storage configuration
         avatar: {}
-
-        ## @param gitea.config.storage General storage settings
-        storage: {}
 
         ## @param gitea.config.proxy Proxy configuration (disabled by default)
         proxy: {}
@@ -314,6 +315,11 @@ spec:
 
         ## @param gitea.config.other Uncategorized configuration options
         other: {}
+        storage:
+          MINIO_ENDPOINT: s3.i.as216455.net
+
+        #'storage.packages':
+          # STORAGE_TYPE: minio
 
       ## @section LivenessProbe
       #
