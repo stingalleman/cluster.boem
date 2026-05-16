@@ -5,7 +5,7 @@ metadata:
   namespace: traefik
 spec:
   entryPoints:
-    - shh
+    - ssh
   routes:
     - match: HostSNI(`*`)
       services:
