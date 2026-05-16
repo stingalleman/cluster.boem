@@ -677,7 +677,18 @@ spec:
           default: true
           mail: false
           internal: true
+          webssh: true
         exposedPort: 22
+        protocol: TCP
+
+      webssh:
+        port: 443
+        expose:
+          default: false
+          mail: false
+          internal: false
+          webssh: true
+        exposedPort: 443
         protocol: TCP
 
       # dns-tcp:
@@ -760,6 +771,19 @@ spec:
           type: LoadBalancer
           annotations:
             io.cilium/lb-ipam-ips: "2.27.100.101,2a07:54c7:5201:6e6f::b"
+          labels:
+            lb-pool: external
+          spec:
+            externalTrafficPolicy: Local
+          ipFamilyPolicy: RequireDualStack
+          ipFamilies:
+            - IPv4
+            - IPv6
+
+        webssh:
+          type: LoadBalancer
+          annotations:
+            io.cilium/lb-ipam-ips: "2.27.100.102,2a07:54c7:5201:6e6f::c"
           labels:
             lb-pool: external
           spec:
