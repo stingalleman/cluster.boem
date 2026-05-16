@@ -140,7 +140,7 @@ spec:
           admin-group: forgejo-admin
           scopes: email profile openid
           group-team-map-removal: true
-          group-team-map: "{}"
+          group-team-map: '{"maishond": {"maishond": ["maishond","vrienden"]}}'
           skipLocal-2fa: true
           group-claim-name: groups
         - name: 'GitHub'
