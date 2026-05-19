@@ -11,7 +11,7 @@ spec:
         kind: HelmRepository
         name: librenms
         namespace: flux-system
-      # version: "6.6.51"
+      version: "7.5.0"
   interval: 24h
   valuesFrom:
     - kind: Secret
