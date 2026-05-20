@@ -542,6 +542,8 @@ spec:
             feeds:
               enabled: true
               pollIntervalSeconds: 60
+            generic:
+              allowJsTransformationFunctions: true
         github:
           configSecret: hookshot-github-app
           configSecretKey: config
