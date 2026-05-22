@@ -1,0 +1,108 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forgejo-runner-controller
+  namespace: forgejo-runner
+  labels:
+    app: forgejo-runner
+spec:
+  revisionHistoryLimit: 3
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: forgejo-runner
+  template:
+    metadata:
+      labels: 
+        app: forgejo-runner
+    spec: 
+      serviceAccountName: forgejo-runner
+      automountServiceAccountToken: true
+      securityContext: 
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        runAsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
+      containers: 
+        - args:
+          - --listen
+          - unix:///plugin/forgejo-runner-k8s.sock
+          image: git.erwanleboucher.dev/eleboucher/runner-k8s-plugin:sha-f7ab06b75887e5497c9f9f9bef641aafb2ae3e1c
+          name: k8s-plugin
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              cpu: 5m
+              memory: 32Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+          - mountPath: /config
+            name: config
+          - mountPath: /plugin
+            name: plugins
+          - mountPath: /etc/forgejo-runner-secret
+            name: runner-secret
+            readOnly: true
+          - mountPath: /data
+            name: tmpfs
+            subPath: data
+          - mountPath: /tmp
+            name: tmpfs
+            subPath: tmp
+        - command:
+          - sh
+          - -ec
+          - |
+            exec /bin/forgejo-runner daemon \
+              --config /config/runner.yaml \
+              --url "http://forgejo-http.forgejo:3000" \
+              --uuid "$(cat /etc/forgejo-runner-secret/uuid)" \
+              --token-url file:///etc/forgejo-runner-secret/token
+          image: git.erwanleboucher.dev/eleboucher/runner:sha-63d5504927ba6b9d511c0972beaf4ff5b3705f82
+          name: runner
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 5m
+              memory: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+          - mountPath: /config
+            name: config
+          - mountPath: /plugin
+            name: plugins
+          - mountPath: /etc/forgejo-runner-secret
+            name: runner-secret
+            readOnly: true
+          - mountPath: /data
+            name: tmpfs
+            subPath: data
+          - mountPath: /tmp
+            name: tmpfs
+            subPath: tmp
+      volumes: 
+        - configMap:
+            name: runner-config 
+          name: config
+        - emptyDir: {}
+          name: plugins
+        - name: runner-secret
+          secret:
+            secretName: forgejo-runner-secret
+        - emptyDir: {}
+          name: tmpfs
