@@ -1,0 +1,33 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: forgejo-runner
+  labels:
+    app: forgejo-runner
+  namespace: forgejo-runner
+rules:
+  - apiGroups:
+    - ""
+    resources:
+    - pods
+    verbs:
+    - list
+    - watch
+    - create
+    - get
+    - delete
+  - apiGroups:
+    - ""
+    resources:
+    - pods/exec
+    verbs:
+    - create
+    - get
+  - apiGroups:
+    - ""
+    resources:
+    - pods/log
+    verbs:
+    - list
+    - watch
+    - get
