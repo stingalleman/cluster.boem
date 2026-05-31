@@ -4,7 +4,7 @@ metadata:
   name: talos-cp
   namespace: cluster-api
 spec:
-  version: v1.36.1
+  version: v1.35.0
   replicas: 5
   infrastructureTemplate:
     kind: ProxmoxMachineTemplate
