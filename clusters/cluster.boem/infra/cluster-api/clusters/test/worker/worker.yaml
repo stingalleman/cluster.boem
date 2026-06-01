@@ -5,7 +5,7 @@ metadata:
   namespace: cluster-api
 spec:
   clusterName: test-cluster
-  replicas: 10
+  replicas: 2
   selector:
     matchLabels: null
   template:
