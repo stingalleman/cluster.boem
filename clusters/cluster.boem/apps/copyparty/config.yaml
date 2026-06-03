@@ -34,6 +34,12 @@ data:
         rw: *      # everyone gets read-write access, but
         rwmda: sting  # the user "ed" gets read-write-move-delete-admin
 
+    [/upload-only]            # create a volume at "/" (the webroot), which will
+      /w/upload-only         # share /w (the docker data volume)
+      accs:
+        w: *      # everyone gets read-write access, but
+        rwmda: sting  # the user "ed" gets read-write-move-delete-admin
+
     [/priv]            # create a volume at "/" (the webroot), which will
       /w/priv          # share /w (the docker data volume)
       accs:
