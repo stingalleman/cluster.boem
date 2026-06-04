@@ -1,14 +1,14 @@
-# apiVersion: cluster.x-k8s.io/v1beta1
-# kind: Cluster
-# metadata:
-#   name: test-cluster
-#   namespace: cluster-api
-# spec:
-#   controlPlaneRef:
-#     apiVersion: controlplane.cluster.x-k8s.io/v1alpha3
-#     kind: TalosControlPlane
-#     name: talos-cp
-#   infrastructureRef:
-#     apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
-#     kind: ProxmoxCluster
-#     name: proxmox-cluster
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: Cluster
+metadata:
+  name: test-cluster
+  namespace: cluster-api
+spec:
+  controlPlaneRef:
+    apiVersion: controlplane.cluster.x-k8s.io/v1alpha3
+    kind: TalosControlPlane
+    name: talos-cp
+  infrastructureRef:
+    apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+    kind: ProxmoxCluster
+    name: proxmox-cluster

@@ -12,20 +12,19 @@ spec:
           sizeGb: 32
       format: qcow2
       full: true
-      memoryMiB: 16384
+      memoryMiB: 2048
       network:
         default:
-          bridge: vmbr2
+          bridge: vmbr0
           model: virtio
-          vlan: 102
-      numCores: 12
+      numCores: 2
       numSockets: 1
-      sourceNode: pve
-      templateID: 9001
+      sourceNode: pve5
+      templateID: 9999
       pool: cluster-api
       vmIDRange:
-        start: 2200
-        end: 2299
+        start: 2000
+        end: 2999
       checks:
         skipCloudInitStatus: true
       metadataSettings:

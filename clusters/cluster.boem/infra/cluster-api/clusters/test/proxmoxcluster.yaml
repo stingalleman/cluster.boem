@@ -7,14 +7,19 @@ spec:
   schedulerHints:
     memoryAdjustment: 0
   allowedNodes:
-  - pve
+  - pve5
+  - pve6
+  - pve7
+  - pve8
+  - pve9
   controlPlaneEndpoint:
-    host: 10.10.102.121
+    host: 10.10.103.5
     port: 6443
   dnsServers:
   - 9.9.9.9
   ipv4Config:
     addresses:
-    - 10.10.102.122-10.10.102.150
-    gateway: 10.10.102.1
+    - 10.10.103.50-10.10.103.129
+    - 10.10.103.140-10.10.103.200
+    gateway: 10.10.103.1
     prefix: 24
