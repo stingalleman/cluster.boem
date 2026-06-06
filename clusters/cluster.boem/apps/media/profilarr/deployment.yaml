@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: profilarr
-          image: santiagosayshey/profilarr:latest
+          image: ghcr.io/dictionarry-hub/profilarr:2.0.8
           # resources:
           #   requests:
           #     cpu: 100m
@@ -51,6 +51,8 @@ spec:
               value: "022"
             - name: TZ
               value: "Europe/Amsterdam"
+            - name: AUTH
+              value: off
           ports:
             - containerPort: 6868
               name: http
