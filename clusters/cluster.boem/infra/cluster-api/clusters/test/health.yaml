@@ -1,0 +1,40 @@
+apiVersion: cluster.x-k8s.io/v1beta2
+kind: MachineHealthCheck
+metadata:
+  name: test-cluster-mhc
+  namespace: cluster-api
+spec:
+  clusterName: test-cluster
+  selector:
+    matchLabels:
+      cluster.x-k8s.io/cluster-name: test-cluster
+  #     cluster.x-k8s.io/deployment-name: my-cluster-md-0
+  checks:
+      # (Optional) nodeStartupTimeout determines how long a MachineHealthCheck should wait for
+      # a Node to join the cluster, before considering a Machine unhealthy.
+      # Defaults to 10 minutes if not specified.
+      # Set to 0 to disable the node startup timeout.
+      # Disabling this timeout will prevent a Machine from being considered unhealthy when
+      # the Node it created has not yet registered with the cluster. This can be useful when
+      # Nodes take a long time to start up or when you only want condition based checks for
+      # Machine health.
+      nodeStartupTimeoutSeconds: 300
+    
+      # Conditions to check on Nodes for matched Machines, if any condition is matched for the duration of its timeout, the Machine is considered unhealthy
+      unhealthyNodeConditions:
+      - type: Ready
+        status: Unknown
+        timeoutSeconds: 300
+      - type: Ready
+        status: "False"
+        timeoutSeconds: 300
+      unhealthyMachineConditions:
+      - type: "NodeReady"
+        status: Unknown
+        timeoutSeconds: 300
+      - type: "InfrastructureReady"
+        status: "False"
+        timeoutSeconds: 300
+  remediation:
+    triggerIf:
+      unhealthyLessThanOrEqualTo: 40%
