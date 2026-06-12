@@ -1,0 +1,42 @@
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: MachineDeployment
+metadata:
+  name: mgmt-workers
+  namespace: cluster-api
+spec:
+  clusterName: mgmt-cluster
+  replicas: 1
+  selector:
+    matchLabels: null
+  template:
+    spec:
+      bootstrap:
+        configRef:
+          apiVersion: bootstrap.cluster.x-k8s.io/v1alpha3
+          kind: TalosConfigTemplate
+          name: talosconfig-workers
+      clusterName: mgmt-cluster
+      infrastructureRef:
+        apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+        kind: ProxmoxMachineTemplate
+        name: worker-template
+      version: v1.36.1
+---
+apiVersion: bootstrap.cluster.x-k8s.io/v1alpha3
+kind: TalosConfigTemplate
+metadata:
+  name: talosconfig-workers
+  namespace: cluster-api
+spec:
+  template:
+    spec:
+      generateType: worker
+      strategicPatches:
+        - |
+          machine:
+            install:
+              disk: /dev/sda
+              image: factory.talos.dev/nocloud-installer/4d08604f1cc2836942a75c24f5a212a2f5872fe9dd49daaf1c2d15e9ee704e28:v1.13.4
+            kubelet:
+              extraArgs:
+                cloud-provider: external
