@@ -1,0 +1,51 @@
+apiVersion: controlplane.cluster.x-k8s.io/v1alpha3
+kind: TalosControlPlane
+metadata:
+  name: hub-controlplane
+  namespace: cluster-api
+spec:
+  version: v1.36.1
+  replicas: 1
+  infrastructureTemplate:
+    kind: ProxmoxMachineTemplate
+    apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+    name: hub-controlplane
+    namespace: cluster-api
+  controlPlaneConfig:
+    controlplane:
+      generateType: controlplane
+      strategicPatches:
+        - |
+          machine:
+            install:
+              disk: /dev/sda
+              image: factory.talos.dev/nocloud-installer/4d08604f1cc2836942a75c24f5a212a2f5872fe9dd49daaf1c2d15e9ee704e28:v1.13.4
+            network:
+              interfaces:
+                - deviceSelector:
+                    driver: virtio_net
+                  dhcp: false
+                  vip:
+                    ip: 10.10.104.11
+            kubelet:
+              extraArgs:
+                cloud-provider: external
+                rotate-server-certificates: "true"
+            features:
+              kubernetesTalosAPIAccess:
+                enabled: true
+                allowedRoles:
+                  - os:reader
+                allowedKubernetesNamespaces:
+                  - kube-system
+          cluster:
+            externalCloudProvider:
+              enabled: true
+              manifests:
+                - https://raw.githubusercontent.com/siderolabs/talos-cloud-controller-manager/main/docs/deploy/cloud-controller-manager.yml
+                - https://raw.githubusercontent.com/alex1989hu/kubelet-serving-cert-approver/main/deploy/standalone-install.yaml
+            network:
+              cni:
+                name: none
+            proxy:
+              disabled: true
