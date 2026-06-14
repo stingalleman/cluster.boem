@@ -1,0 +1,109 @@
+apiVersion: cluster.x-k8s.io/v1beta2
+kind: ClusterClass
+metadata:
+  name: talos-proxmox-clusterclass-v0.0.1
+  namespace: capi
+spec:
+  controlPlane:
+    naming:
+      template: "{{ .cluster.name }}-control-plane-{{ .random }}"
+    templateRef:
+      apiVersion: controlplane.cluster.x-k8s.io/v1beta1
+      kind: TalosControlPlaneTemplate
+      name: talos-proxmox-clusterclass-v0.0.1
+    machineInfrastructure:
+      templateRef:
+        apiVersion: infrastructure.cluster.x-k8s.io/v1alpha2
+        kind: ProxmoxMachineTemplate
+        name: talos-proxmox-clusterclass-v0.0.1-controlplane
+  infrastructure:
+    templateRef:
+      apiVersion: infrastructure.cluster.x-k8s.io/v1alpha2
+      kind: ProxmoxClusterTemplate
+      name: talos-proxmox-clusterclass-v0.0.1
+  workers:
+    machineDeployments:
+      - class: default-worker
+        bootstrap:
+          templateRef:
+            apiVersion: bootstrap.cluster.x-k8s.io/v1alpha3
+            kind: TalosConfigTemplate
+            name: talos-proxmox-clusterclass-v0.0.1
+        infrastructure:
+          templateRef:
+            apiVersion: infrastructure.cluster.x-k8s.io/v1alpha2
+            kind: ProxmoxMachineTemplate
+            name: talos-proxmox-clusterclass-v0.0.1-worker
+  variables:
+    - name: controlPlaneVIP
+      required: true
+      schema:
+        openAPIV3Schema:
+          type: string
+    - name: talosVersion
+      required: true
+      schema:
+        openAPIV3Schema:
+          type: string
+  patches:
+    - name: controlPlaneVIP
+      definitions:
+        - selector:
+            apiVersion: controlplane.cluster.x-k8s.io/v1beta1
+            kind: TalosControlPlaneTemplate
+            matchResources:
+              controlPlane: true
+          jsonPatches:
+            - op: add
+              path: /spec/template/spec/controlPlaneConfig/controlplane/strategicPatches/-
+              valueFrom:
+                template: |
+                  |
+                    machine:
+                      network:
+                        interfaces:
+                          - deviceSelector:
+                              driver: virtio_net
+                            dhcp: false
+                            vip:
+                              ip: {{ .controlPlaneVIP }}
+    - name: talosVersion
+      definitions:
+        - selector:
+            apiVersion: controlplane.cluster.x-k8s.io/v1beta1
+            kind: TalosControlPlaneTemplate
+            matchResources:
+              controlPlane: true
+          jsonPatches:
+            - op: add
+              path: /spec/template/spec/controlPlaneConfig/controlplane/strategicPatches/-
+              valueFrom:
+                template: |
+                  |
+                    machine:
+                      install:
+                        image: factory.talos.dev/nocloud-installer/4d08604f1cc2836942a75c24f5a212a2f5872fe9dd49daaf1c2d15e9ee704e28:{{ .talosVersion }}
+            - op: add
+              path: /spec/template/spec/controlPlaneConfig/controlplane/talosVersion
+              valueFrom:
+                variable: talosVersion
+        - selector:
+            apiVersion: bootstrap.cluster.x-k8s.io/v1alpha3
+            kind: TalosConfigTemplate
+            matchResources:
+              machineDeploymentClass:
+                names:
+                - default-worker
+          jsonPatches:
+            - op: add
+              path: /spec/template/spec/strategicPatches/-
+              valueFrom:
+                template: |
+                  |
+                    machine:
+                      install:
+                        image: factory.talos.dev/nocloud-installer/4d08604f1cc2836942a75c24f5a212a2f5872fe9dd49daaf1c2d15e9ee704e28:{{ .talosVersion }}
+            - op: add
+              path: /spec/template/talosVersion
+              valueFrom:
+                variable: talosVersion
