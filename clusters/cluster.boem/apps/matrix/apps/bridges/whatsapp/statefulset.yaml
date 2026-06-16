@@ -17,7 +17,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
         - name: bridge-whatsapp
-          image: dock.mau.dev/mautrix/whatsapp:v26.05
+          image: dock.mau.dev/mautrix/whatsapp:v26.06
           command:
             - "/usr/bin/mautrix-whatsapp"
             - "--config"
