@@ -1,26 +1,24 @@
 apiVersion: cluster.x-k8s.io/v1beta2
 kind: ClusterClass
 metadata:
+  # cluster class is immutable -> versioned
   name: talos-proxmox-clusterclass-v0.0.1
   namespace: capi
 spec:
   controlPlane:
     naming:
       template: "{{ .cluster.name }}-control-plane-{{ .random }}"
+    # control plane template (Talos)
     templateRef:
       apiVersion: controlplane.cluster.x-k8s.io/v1beta1
       kind: TalosControlPlaneTemplate
       name: talos-proxmox-clusterclass-v0.0.1
+    # Proxmox Machine template
     machineInfrastructure:
       templateRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1alpha2
         kind: ProxmoxMachineTemplate
         name: talos-proxmox-clusterclass-v0.0.1-controlplane
-  infrastructure:
-    templateRef:
-      apiVersion: infrastructure.cluster.x-k8s.io/v1alpha2
-      kind: ProxmoxClusterTemplate
-      name: talos-proxmox-clusterclass-v0.0.1
   workers:
     machineDeployments:
       - class: default-worker
@@ -34,6 +32,13 @@ spec:
             apiVersion: infrastructure.cluster.x-k8s.io/v1alpha2
             kind: ProxmoxMachineTemplate
             name: talos-proxmox-clusterclass-v0.0.1-worker
+  # define template for the ProxmoxCluster
+  infrastructure:
+    templateRef:
+      apiVersion: infrastructure.cluster.x-k8s.io/v1alpha2
+      kind: ProxmoxClusterTemplate
+      name: talos-proxmox-clusterclass-v0.0.1
+  # define variables that can be set in the Cluster kind
   variables:
     - name: controlPlaneVIP
       required: true
@@ -45,6 +50,7 @@ spec:
       schema:
         openAPIV3Schema:
           type: string
+  # patch the templates defined above with the variables
   patches:
     - name: controlPlaneVIP
       definitions:
