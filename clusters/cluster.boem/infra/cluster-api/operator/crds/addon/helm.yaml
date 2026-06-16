@@ -1,0 +1,7 @@
+apiVersion: operator.cluster.x-k8s.io/v1alpha2
+kind: AddonProvider
+metadata:
+  name: helm
+  namespace: capi-addon-helm
+spec:
+  version: v.0.6.4
