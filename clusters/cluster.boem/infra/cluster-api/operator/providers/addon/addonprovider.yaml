@@ -4,4 +4,4 @@ metadata:
   name: helm
   namespace: capi-addon-helm
 spec:
-  version: v.0.6.4
+  version: v0.6.4
