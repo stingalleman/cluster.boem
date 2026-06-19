@@ -2,7 +2,7 @@
 apiVersion: cluster.x-k8s.io/v1beta2
 kind: Cluster
 metadata:
-  name: production
+  name: hub
   namespace: capi
   labels:
     ciliumChart: enabled
@@ -15,7 +15,7 @@ spec:
         value: 10.10.104.11
     classRef:
       name: talos-proxmox-clusterclass-v0.0.1
-    version: v1.35.0
+    version: v1.36.0
     controlPlane:
       replicas: 2
     workers:
