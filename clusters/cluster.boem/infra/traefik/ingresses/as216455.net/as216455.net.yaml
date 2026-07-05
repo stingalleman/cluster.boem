@@ -150,8 +150,17 @@ spec:
       match: Host(`git.as216455.net`)
       services:
         - kind: Service
-          name: forgejo-http 
+          name: forgejo-http
           namespace: forgejo
           port: http
+
+    - kind: Rule
+      match: Host(`planka.as216455.net`)
+      services:
+        - kind: Service
+          name: planka
+          namespace: planka
+          port: http
+
   tls:
     secretName: as216455.net-prod-tls
