@@ -81,7 +81,7 @@ spec:
         timeoutSeconds: 1
       media:
         storage:
-          size: 30Gi
+          size: 60Gi
           storageClassName: ceph-rbd-pve
           resourcePolicy: keep
         maxUploadSize: 5000M
