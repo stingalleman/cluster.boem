@@ -6,17 +6,17 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: sabnzbd # has to match .spec.template.metadata.labels
+      app: sabnzbd
   replicas: 1
   template:
     metadata:
       labels:
-        app: sabnzbd # has to match .spec.selector.matchLabels
+        app: sabnzbd
     spec:
       terminationGracePeriodSeconds: 10
       containers:
         - name: sabnzbd
-          image: lscr.io/linuxserver/sabnzbd:latest
+          image: lscr.io/linuxserver/sabnzbd:nightly-version-a1c9a8aa
           # resources:
           #   requests:
           #     cpu: 1000m
