@@ -6,7 +6,7 @@ metadata:
 spec:
   chart:
     spec:
-      version: 1.45.2
+      version: 1.46.0
       chart: coredns
       sourceRef:
         kind: HelmRepository
