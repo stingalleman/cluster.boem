@@ -18,7 +18,7 @@ spec:
       tlsSecret: maishond.nl-prod-tls
 
     synapse:
-      enabled: false
+      enabled: true
       podSecurityContext:
         ## fsGroupChangePolicy defines behavior of changing ownership and permission of the volume before being exposed inside Pod.
         ## This field will only apply to volume types which support fsGroup based ownership(and permissions).
