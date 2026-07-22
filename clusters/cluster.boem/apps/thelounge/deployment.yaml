@@ -9,22 +9,22 @@ spec:
   selector:
     matchLabels:
       app: thelounge
-  replicas: 0
+  replicas: 1
   template:
     metadata:
       labels:
         app: thelounge
     spec:
-      # initContainers:
-      #   - name: thelounge-set-all-servers-to-disconnected
-      #     image: endeveit/docker-jq:latest
-      #     command:
-      #       - /bin/sh
-      #       - -c
-      #       - 'for f in /var/opt/thelounge/users/*.json; do jq ".networks |= map(.userDisconnected = true)" "$f" > "$f.tmp" && mv "$f.tmp" "$f"; done'
-      #     volumeMounts:
-      #       - name: thelounge-data
-      #         mountPath: /var/opt/thelounge
+      initContainers:
+        - name: thelounge-set-all-servers-to-disconnected
+          image: endeveit/docker-jq:latest
+          command:
+            - /bin/sh
+            - -c
+            - 'for f in /var/opt/thelounge/users/*.json; do jq ".networks |= map(.userDisconnected = true)" "$f" > "$f.tmp" && mv "$f.tmp" "$f"; done'
+          volumeMounts:
+            - name: thelounge-data
+              mountPath: /var/opt/thelounge
 
       containers:
         - name: thelounge
@@ -36,6 +36,9 @@ spec:
           #   httpGet:
           #     path: /
           #     port: 9000
+          resources:
+            limits:
+              memory: 1G
           ports:
             - containerPort: 9000
               name: http
