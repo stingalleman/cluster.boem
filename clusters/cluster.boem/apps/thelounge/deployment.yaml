@@ -28,7 +28,7 @@ spec:
 
       containers:
         - name: thelounge
-          image: ghcr.io/thelounge/thelounge:4.4.3
+          image: ghcr.io/thelounge/thelounge:4.5.2
           # livenessProbe:
           #   tcpSocket:
           #     port: 9000
