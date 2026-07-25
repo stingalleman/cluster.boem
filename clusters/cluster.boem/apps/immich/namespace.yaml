@@ -1,6 +1,4 @@
-# disabled for migration
-
-# apiVersion: v1
-# kind: Namespace
-# metadata:
-#   name: immich
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: immich
