@@ -1,139 +1,81 @@
-# disabled for migration
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: immich
+  namespace: immich
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: immich
+  interval: 24h
+  values:
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              tag: v3.0.3
+            env:
+              DB_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-database-app
+                    key: password
+              DB_HOSTNAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-database-app
+                    key: host
+              DB_USERNAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-database-app
+                    key: username
+              DB_DATABASE_NAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-database-app
+                    key: dbname
 
-# apiVersion: helm.toolkit.fluxcd.io/v2
-# kind: HelmRelease
-# metadata:
-#   name: immich
-#   namespace: immich
-# spec:
-#   chartRef:
-#     kind: OCIRepository
-#     name: immich
-#     namespace: flux-system
-#   interval: 24h
-#   values:
-#     ## This chart relies on the common library chart from bjw-s
-#     ## You can find it at https://github.com/bjw-s-labs/helm-charts/tree/common-4.3.0/charts/library/common
-#     ## Refer there for more detail about the supported values
+    immich:
+      metrics:
+        enabled: true
+      persistence:
+        library:
+          existingClaim: immich-library
 
-#     # These entries are shared between all the Immich components
+      # configuration is immich-config.json converted to yaml. Ignored if existingConfiguration is set.
+      # ref: https://immich.app/docs/install/config-file/
+      #
+      configuration: {}
+        # trash:
+        #   enabled: false
+        #   days: 30
+        # storageTemplate:
+        #   enabled: true
+        #   template: "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}"
+      # Sets the resource Kind to store configuration in. Must be either ConfigMap or Secret.
+      configurationKind: ConfigMap
 
-#     controllers:
-#       main:
-#         containers:
-#           main:
-#             env:
-#               DB_PASSWORD:
-#                 valueFrom:
-#                   secretKeyRef:
-#                     name: immich-postgres-app
-#                     key: password
-#               DB_HOSTNAME:
-#                 valueFrom:
-#                   secretKeyRef:
-#                     name: immich-postgres-app
-#                     key: host
-#               DB_USERNAME:
-#                 valueFrom:
-#                   secretKeyRef:
-#                     name: immich-postgres-app
-#                     key: username
-#               DB_DATABASE_NAME:
-#                 valueFrom:
-#                   secretKeyRef:
-#                     name: immich-postgres-app
-#                     key: dbname
+    valkey:
+      enabled: true
+      persistence:
+        data:
+          enabled: true
+          type: persistentVolumeClaim
+          size: 1Gi
+          accessMode: ReadWriteOnce
+          storageClass: ceph-rbd-pve
 
-#     immich:
-#       persistence:
-#         library:
-#           existingClaim: immich-library
-#       controllers:
-#         main:
-#           pod:
-#             # tolerations:
-#             #   - key: "dedicated"
-#             #     operator: "Equal"
-#             #     value: "gpu"
-#             # effect: "NoSchedule"
-#           containers:
-#             main:
-#               # resources:
-#               #   limits:
-#               # gpu.intel.com/i915: 1
+    server:
+      enabled: true
 
-#       metrics:
-#         # Enabling this will create the service monitors needed to monitor immich with the prometheus operator
-#         enabled: false
-#       # persistence:
-#       #   # Main data store for all photos shared between different components.
-#       #   library:
-#       #     # Automatically creating the library volume is not supported by this chart
-#       #     # You have to specify an existing PVC to use
-#       #     existingClaim: immich-library
-#       # configuration is immich-config.json converted to yaml
-#       # ref: https://immich.app/docs/install/config-file/
-#       #
-#       configuration:
-#         {}
-#         # trash:
-#         #   enabled: false
-#         #   days: 30
-#         # storageTemplate:
-#         #   enabled: true
-#         #   template: "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}"
-
-#     # Dependencies
-
-#     valkey:
-#       enabled: true
-#       persistence:
-#         data:
-#           enabled: false
-#           size: 2Gi
-#           # Optional: Set this to persistentVolumeClaim to keep job queues persistent
-#           type: persistentVolumeClaim
-#           accessMode: ReadWriteOnce
-#           storageClass: proxmox-ssd-ext4
-
-#     # Immich components
-
-#     server:
-#       enabled: true
-#       # ingress:
-#       #   main:
-#       #     enabled: false
-#       #     annotations:
-#       #       # proxy-body-size is set to 0 to remove the body limit on file uploads
-#       #       nginx.ingress.kubernetes.io/proxy-body-size: "0"
-#       #     hosts:
-#       #       - host: immich.local
-#       #         paths:
-#       #           - path: "/"
-#       #             service:
-#       #               identifier: main
-#       #     tls: []
-
-#     machine-learning:
-#       enabled: false
-#       controllers:
-#         main:
-#           pod:
-#             tolerations:
-#               - key: "dedicated"
-#                 operator: "Equal"
-#                 value: "gpu"
-#                 effect: "NoSchedule"
-#           containers:
-#             main:
-#               resources:
-#                 limits:
-#                   gpu.intel.com/i915: 1
-#       persistence:
-#         cache:
-#           enabled: false
-#           size: 50Gi
-#           # Optional: Set this to persistentVolumeClaim to avoid downloading the ML models every start.
-#           type: persistentVolumeClaim
-#           accessMode: ReadWriteOnce
-#           storageClass: proxmox-ssd-ext4
+    machine-learning:
+      enabled: false
+      # persistence:
+      #   cache:
+      #     enabled: true
+      #     type: persistentVolumeClaim
+      #     size: 10Gi
+      #     accessMode: ReadWriteMany
+      #     storageClass: ceph-rbd-pve
