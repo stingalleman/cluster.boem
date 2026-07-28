@@ -42,7 +42,7 @@ spec:
 
   # Require 1Gi of space
   storage:
-    size: 100Gi
+    size: 200Gi
     storageClass: ceph-rbd-pve
 
   plugins:
