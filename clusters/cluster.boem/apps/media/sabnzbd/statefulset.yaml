@@ -17,13 +17,13 @@ spec:
       containers:
         - name: sabnzbd
           image: lscr.io/linuxserver/sabnzbd:nightly-version-a1c9a8aa
-          # resources:
-          #   requests:
-          #     cpu: 1000m
-          #     memory: 1G
-          #   limits:
-          #     cpu: 2000m
-          # memory: 2G
+          resources:
+            requests:
+              cpu: 1000m
+              memory: 2000Mi
+            limits:
+              cpu: 2000m
+              memory: 2000Mi
           env:
             - name: PUID
               value: "1000"
