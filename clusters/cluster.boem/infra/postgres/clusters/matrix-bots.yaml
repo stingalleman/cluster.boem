@@ -13,6 +13,14 @@ spec:
   primaryUpdateStrategy: unsupervised
   enableSuperuserAccess: true
 
+  resources:
+    requests:
+      memory: "500Mi"
+      cpu: "500m"
+    limits:
+      memory: "1Gi"
+      cpu: "2"
+
   # Require 1Gi of space
   storage:
     size: 5Gi

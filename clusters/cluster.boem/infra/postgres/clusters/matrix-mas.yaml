@@ -18,6 +18,14 @@ spec:
     parameters:
       max_slot_wal_keep_size: "10GB"
 
+  resources:
+    requests:
+      memory: "500Mi"
+      cpu: "500m"
+    limits:
+      memory: "1Gi"
+      cpu: "2"
+
   managed:
     roles:
       - name: matrixauthenticationservice
