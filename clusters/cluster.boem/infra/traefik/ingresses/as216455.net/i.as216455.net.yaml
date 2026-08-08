@@ -146,5 +146,13 @@ spec:
           namespace: traefik
           port: 7480
 
+    - kind: Rule
+      match: Host(`litellm.i.as216455.net`)
+      services:
+        - kind: Service
+          name: litellm
+          namespace: litellm
+          port: 4000
+
   tls:
     secretName: i.as216455.net-prod-tls
