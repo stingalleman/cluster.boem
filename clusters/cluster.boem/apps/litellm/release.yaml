@@ -8,6 +8,10 @@ spec:
     kind: OCIRepository
     name: litellm
   interval: 24h
+  valuesFrom:
+    - kind: Secret
+      name: litellm-models
+      valuesKey: values
   values:
     # replicaCount: 3
 
