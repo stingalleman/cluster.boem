@@ -16,7 +16,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
         - name: sabnzbd
-          image: lscr.io/linuxserver/sabnzbd:nightly-version-a1c9a8aa
+          image: lscr.io/linuxserver/sabnzbd:5.1.0
           resources:
             requests:
               cpu: 1000m
