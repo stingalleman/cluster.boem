@@ -19,10 +19,10 @@ spec:
           image: lscr.io/linuxserver/sabnzbd:5.1.0
           resources:
             requests:
-              cpu: 1000m
+              cpu: 3000m
               memory: 2000Mi
             limits:
-              cpu: 2000m
+              cpu: 9000m
               memory: 2000Mi
           env:
             - name: PUID
