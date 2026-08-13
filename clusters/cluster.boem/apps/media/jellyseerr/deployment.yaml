@@ -1,3 +1,4 @@
+# TODO: migrate to helm chart
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,22 +18,22 @@ spec:
     spec:
       containers:
         - name: jellyseerr
-          image: ghcr.io/fallenbagel/jellyseerr:latest
-          # resources:
-          #   requests:
-          #     cpu: 100m
-          #     memory: 100Mi
-          #   limits:
-          #     cpu: 100m
-          #     memory: 100Mi
-          livenessProbe:
-            tcpSocket:
-              port: 5055
-            initialDelaySeconds: 5
-            timeoutSeconds: 5
-            successThreshold: 1
-            failureThreshold: 3
-            periodSeconds: 10
+          image: ghcr.io/seerr-team/seerr:latest
+          resources:
+            requests:
+              cpu: 1000m
+              memory: 500Mi
+            limits:
+              cpu: 2000m
+              memory: 1Gi
+          # livenessProbe:
+          #   tcpSocket:
+          #     port: 5055
+          #   initialDelaySeconds: 5
+          #   timeoutSeconds: 5
+          #   successThreshold: 1
+          #   failureThreshold: 3
+          #   periodSeconds: 10
           # readinessProbe:
           #   httpGet:
           #     path: /_status/healthz
