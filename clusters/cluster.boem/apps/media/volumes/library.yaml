@@ -11,4 +11,4 @@ spec:
   storageClassName: ceph-fs-hdd-pve-unreplicated
   resources:
     requests:
-      storage: 2T
+      storage: 2500Gi
