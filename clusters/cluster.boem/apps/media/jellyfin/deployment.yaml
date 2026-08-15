@@ -15,24 +15,16 @@ spec:
       labels:
         app: jellyfin
     spec:
-      # nodeName: "k-gpu"
-      tolerations:
-        - key: "dedicated"
-          operator: "Equal"
-          value: "gpu"
-          effect: "NoSchedule"
       containers:
         - name: jellyfin
           image: lscr.io/linuxserver/jellyfin:nightly-2026080308ubu2604-ls93
-          # resources:
-          #   # requests:
-          #   #     cpu: 100m
-          #   #     memory: 100Mi
-          #   limits:
-          #     gpu.intel.com/i915: "1"
-
-          #     cpu: 100m
-          #     memory: 100Mi
+          resources:
+            requests:
+              cpu: 3000m
+              memory: 3Gi
+            limits:
+              cpu: 6000m
+              memory: 6Gi
           livenessProbe:
             tcpSocket:
               port: 8096
