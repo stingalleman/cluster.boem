@@ -20,26 +20,26 @@ spec:
           image: lscr.io/linuxserver/jellyfin:nightly-2026080308ubu2604-ls93
           resources:
             requests:
-              cpu: 3000m
-              memory: 3Gi
-            limits:
               cpu: 6000m
               memory: 6Gi
+            limits:
+              cpu: 10000m
+              memory: 12Gi
           livenessProbe:
             tcpSocket:
               port: 8096
-            initialDelaySeconds: 40
+            initialDelaySeconds: 0
             timeoutSeconds: 5
-            failureThreshold: 10
-            periodSeconds: 10
+            failureThreshold: 60
+            periodSeconds: 20
           readinessProbe:
             httpGet:
               path: /
               port: 8096
-            initialDelaySeconds: 40
+            initialDelaySeconds: 0
             timeoutSeconds: 5
-            failureThreshold: 10
-            periodSeconds: 10
+            failureThreshold: 60
+            periodSeconds: 20
           env:
             - name: PUID
               value: "1000"
