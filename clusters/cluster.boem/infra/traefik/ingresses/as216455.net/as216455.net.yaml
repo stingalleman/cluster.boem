@@ -138,7 +138,8 @@ spec:
           port: 80
 
     - kind: Rule
-      match: Host(`autodiscover.as216455.net`) || Host(`autoconfig.as216455.net`) ||
+      match:
+        Host(`autodiscover.as216455.net`) || Host(`autoconfig.as216455.net`) ||
         Host(`mta-sts.as216455.net`)
       services:
         - kind: Service
@@ -161,6 +162,14 @@ spec:
           name: planka
           namespace: planka
           port: http
+
+    - kind: Rule
+      match: Host(`llm.as216455.net`)
+      services:
+        - kind: Service
+          name: openwebui-open-webui
+          namespace: openwebui
+          port: 80
 
   tls:
     secretName: as216455.net-prod-tls

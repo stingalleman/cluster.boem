@@ -154,13 +154,5 @@ spec:
           namespace: litellm
           port: 4000
 
-    - kind: Rule
-      match: Host(`llm.i.as216455.net`)
-      services:
-        - kind: Service
-          name: openwebui-open-webui
-          namespace: openwebui
-          port: 80
-
   tls:
     secretName: i.as216455.net-prod-tls
