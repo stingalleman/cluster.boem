@@ -24,5 +24,13 @@ spec:
           namespace: matrix
           port: appservice
 
+    - kind: Rule
+      match: Host(`slack.bridge.matrix.maishond.nl`)
+      services:
+        - kind: Service
+          name: slack-bridge
+          namespace: matrix
+          port: appservice
+
   tls:
     secretName: matrix-maishond.nl-prod-tls

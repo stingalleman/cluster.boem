@@ -88,9 +88,11 @@ spec:
       ingress:
         host: matrix.maishond.nl
       appservices:
-        - secret: bridge-whatsapp
-          secretKey: registration.yaml
         - secret: bridge-signal
+          secretKey: registration.yaml
+        - secret: bridge-slack
+          secretKey: registration.yaml
+        - secret: bridge-whatsapp
           secretKey: registration.yaml
       additional:
         ## Either reference config to inject by:

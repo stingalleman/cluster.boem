@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bridge-slack
+  namespace: matrix
+spec:
+  selector:
+    matchLabels:
+      app: bridge-slack
+  serviceName: bridge-slack
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: bridge-slack
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: bridge-slack
+          image: dock.mau.dev/mautrix/slack:latest
+          command:
+            - "/usr/bin/mautrix-slack"
+            - "--config"
+            - "/data/config.yaml"
+            - "--no-update"
+          ports:
+            - containerPort: 80
+              name: web
+          volumeMounts:
+            - name: config
+              mountPath: /data
+      volumes:
+        - name: config
+          secret:
+            secretName: bridge-slack
+            items:
+              - key: config.yaml
+                path: config.yaml

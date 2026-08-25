@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bridge-slack
+  namespace: matrix
+spec:
+  publishNotReadyAddresses: true
+  selector:
+    app: bridge-slack
+  ports:
+    - name: appservice
+      protocol: TCP
+      port: 29335
+      targetPort: 29335
