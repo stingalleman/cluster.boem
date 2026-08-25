@@ -12,7 +12,7 @@ spec:
       match: Host(`whatsapp.bridge.matrix.maishond.nl`)
       services:
         - kind: Service
-          name: whatsapp-bridge
+          name: bridge-whatsapp
           namespace: matrix
           port: appservice
 
@@ -20,7 +20,15 @@ spec:
       match: Host(`signal.bridge.matrix.maishond.nl`)
       services:
         - kind: Service
-          name: signal-bridge
+          name: bridge-signal
+          namespace: matrix
+          port: appservice
+
+    - kind: Rule
+      match: Host(`slack.bridge.matrix.maishond.nl`)
+      services:
+        - kind: Service
+          name: bridge-slack
           namespace: matrix
           port: appservice
 
