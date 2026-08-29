@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.31.0-standalone-strict/persistentvolumeclaim-v1.json
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: paperless-ngx-media
+  namespace: paperless-ngx
+spec:
+  storageClassName: ceph-rbd-pve
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
