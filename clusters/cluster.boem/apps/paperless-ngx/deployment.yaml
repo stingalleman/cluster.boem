@@ -1,0 +1,108 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.31.0-standalone-strict/deployment-apps-v1.json
+#   broker:
+#     image: docker.io/valkey/valkey:9-alpine
+#     restart: unless-stopped
+#     volumes:
+#       - redisdata:/data
+#   webserver:
+#       - "8000:8000"
+#     volumes:
+#     env_file: docker-compose.env
+#     environment:
+#       PAPERLESS_REDIS: redis://broker:6379
+#       PAPERLESS_DBHOST: db
+#       PAPERLESS_DBENGINE: postgresql
+# volumes:
+#   data:
+#   media:
+#   pgdata:
+#   redisdata:
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paperless-ngx
+  namespace: paperless-ngx
+  labels:
+    app: paperless-ngx
+spec:
+  selector:
+    matchLabels:
+      app: paperless-ngx
+  template:
+    metadata:
+      labels:
+        app: paperless-ngx
+    spec:
+      containers:
+        - name: paperless-ngx
+          image: ghcr.io/paperless-ngx/paperless-ngx:latest
+          env:
+            - name: PAPERLESS_URL
+              value: https://paperless.i.as216455.net
+            - name: PAPERLESS_TIME_ZONE
+              value: Europe/Amsterdam
+            - name: PAPERLESS_OCR_LANGUAGE
+              value: nld
+            - name: PAPERLESS_OCR_LANGUAGES
+              value: eng
+            - name: PAPERLESS_TASK_WORKERS
+              value: "2"
+            - name: PAPERLESS_THREADS_PER_WORKER
+              value: "2"
+            - name: PAPERLESS_REDIS
+              value: redis://valkey:6379
+          envFrom:
+            - secretRef:
+                name: paperless-ngx-env
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              memory: 4Gi
+          startupProbe:
+            httpGet:
+              path: /accounts/login/
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 60
+          readinessProbe:
+            httpGet:
+              path: /accounts/login/
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /accounts/login/
+              port: http
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 5
+          ports:
+            - name: http
+              containerPort: 8000
+          volumeMounts:
+            - name: data
+              mountPath: /usr/src/paperless/data
+            - name: media
+              mountPath: /usr/src/paperless/media
+            - name: export
+              mountPath: /usr/src/paperless/export
+            - name: consume
+              mountPath: /usr/src/paperless/consume
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: paperless-ngx-data
+        - name: media
+          persistentVolumeClaim:
+            claimName: paperless-ngx-media
+        - name: export
+          persistentVolumeClaim:
+            claimName: paperless-ngx-export
+        - name: consume
+          persistentVolumeClaim:
+            claimName: paperless-ngx-consume

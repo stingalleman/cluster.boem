@@ -154,5 +154,13 @@ spec:
           namespace: litellm
           port: 4000
 
+    - kind: Rule
+      match: Host(`paperless.i.as216455.net`)
+      services:
+        - kind: Service
+          name: paperless-ngx
+          namespace: paperless-ngx
+          port: http
+
   tls:
     secretName: i.as216455.net-prod-tls
