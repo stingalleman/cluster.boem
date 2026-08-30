@@ -52,8 +52,8 @@ spec:
     size: 300Gi
     storageClass: ceph-rbd-pve
 
-  plugins:
-    - name: barman-cloud.cloudnative-pg.io
-      isWALArchiver: true
-      parameters:
-        barmanObjectName: synapse-store
+  # plugins:
+  #   - name: barman-cloud.cloudnative-pg.io
+  #     isWALArchiver: true
+  #     parameters:
+  #       barmanObjectName: synapse-store
