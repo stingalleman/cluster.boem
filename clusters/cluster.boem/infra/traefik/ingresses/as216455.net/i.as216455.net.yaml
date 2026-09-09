@@ -162,5 +162,13 @@ spec:
           namespace: paperless-ngx
           port: http
 
+    - kind: Rule
+      match: Host(`grafana.i.as216455.net`)
+      services:
+        - name: monitoring-stack-grafana
+          namespace: monitoring
+          port: 80
+          passHostHeader: true
+
   tls:
     secretName: i.as216455.net-prod-tls

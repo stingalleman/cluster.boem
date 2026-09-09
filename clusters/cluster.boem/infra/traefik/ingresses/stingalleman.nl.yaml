@@ -20,14 +20,6 @@ spec:
           namespace: traefik
 
     - kind: Rule
-      match: Host(`grafiekjes.stingalleman.nl`)
-      services:
-        - name: monitoring-stack-grafana
-          namespace: monitoring
-          port: 80
-          passHostHeader: true
-
-    - kind: Rule
       match: Host(`media.stingalleman.nl`)
       services:
         - kind: Service
@@ -72,14 +64,6 @@ spec:
       services:
         - kind: Service
           name: home-stingalleman-nl
-          namespace: traefik
-          port: 8123
-
-    - kind: Rule
-      match: Host(`bloembergen.stingalleman.nl`)
-      services:
-        - kind: Service
-          name: bloembergen-stingalleman-nl
           namespace: traefik
           port: 8123
 
