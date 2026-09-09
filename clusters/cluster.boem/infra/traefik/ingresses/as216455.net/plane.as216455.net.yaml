@@ -1,0 +1,92 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: plane.as216455.net
+  namespace: traefik
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  # IMPORTANT: specific paths FIRST
+  - match: Host(`plane.as216455.net`) && PathPrefix(`/spaces`)
+    kind: Rule
+    # middlewares:
+    #   - name: plane-body-limit
+    services:
+      - name: plane-space
+        port: 3000
+        namespace: plane
+
+  - match: Host(`plane.as216455.net`) && PathPrefix(`/god-mode`)
+    kind: Rule
+    # middlewares:
+    #   - name: plane-body-limit
+    services:
+      - name: plane-admin
+        port: 3000
+        namespace: plane
+
+  - match: Host(`plane.as216455.net`) && PathPrefix(`/api`)
+    kind: Rule
+    # middlewares:
+    #   - name: plane-body-limit
+    services:
+      - name: plane-api
+        port: 8000
+        namespace: plane
+
+  - match: Host(`plane.as216455.net`) && PathPrefix(`/auth`)
+    kind: Rule
+    # middlewares:
+    #   - name: plane-body-limit
+    services:
+      - name: plane-api
+        port: 8000
+        namespace: plane
+
+  - match: Host(`plane.as216455.net`) && PathPrefix(`/live`)
+    kind: Rule
+    # middlewares:
+    #   - name: plane-body-limit
+    services:
+      - name: plane-live
+        port: 3000
+        namespace: plane
+
+  - match: Host(`plane.as216455.net`) && PathPrefix(`/uploads`)
+    kind: Rule
+    # middlewares:
+    #   - name: plane-body-limit
+    services:
+      - name: plane-minio
+        port: 9000
+        namespace: plane
+
+  # LAST: catch all
+  - match: Host(`plane.as216455.net`) && PathPrefix(`/`)
+    kind: Rule
+    # middlewares:
+    #   - name: plane-body-limit
+    services:
+      - name: plane-web
+        port: 3000
+        namespace: plane
+
+  - match: Host(`minioplane.as216455.net`)
+    kind: Rule
+    # middlewares:
+    #   - name: plane-body-limit
+    services:
+      - name: plane-minio
+        port: 9090
+        namespace: plane
+
+  - match: Host(`rabbitplane.as216455.net`)
+    kind: Rule
+    # middlewares:
+    #   - name: plane-body-limit
+    services:
+      - name: plane-rabbitmq
+        port: 15672
+        namespace: plane
