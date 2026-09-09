@@ -1,0 +1,32 @@
+apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+kind: ProxmoxMachineTemplate
+metadata:
+  name: worker-template
+  namespace: cluster-api
+spec:
+  template:
+    spec:
+      disks:
+        bootVolume:
+          disk: scsi0
+          sizeGb: 32
+      format: qcow2
+      full: true
+      memoryMiB: 4096
+      network:
+        default:
+          bridge: vmbr2
+          vlan: 104
+          model: virtio
+      numCores: 4
+      numSockets: 1
+      sourceNode: pve
+      templateID: 9001
+      pool: cluster-api
+      vmIDRange:
+        start: 4000
+        end: 4999
+      checks:
+        skipCloudInitStatus: true
+      metadataSettings:
+        providerIDInjection: true
