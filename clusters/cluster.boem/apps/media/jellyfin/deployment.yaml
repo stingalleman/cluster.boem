@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.31.0-standalone-strict/deployment-apps-v1.json
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -10,6 +11,8 @@ spec:
     matchLabels:
       app: jellyfin
   replicas: 1
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -21,10 +24,10 @@ spec:
           resources:
             requests:
               cpu: 6000m
-              memory: 6Gi
+              memory: 4Gi
             limits:
               cpu: 10000m
-              memory: 12Gi
+              memory: 8Gi
           livenessProbe:
             tcpSocket:
               port: 8096
