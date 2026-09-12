@@ -30,7 +30,7 @@ spec:
         - args:
           - --listen
           - unix:///plugin/forgejo-runner-k8s.sock
-          image: git.erwanleboucher.dev/eleboucher/runner-k8s-plugin@sha256:026dc73975fbbc56f0582ff540b6530ce6f6daf0194d6eda314cfd9464e80639
+          image: git.erwanleboucher.dev/eleboucher/runner-k8s-plugin@sha256:5fcd0c5cb22f0be8f4e16f98d153b339e81dd11d817c9f945a7dd950adb7812f
           name: k8s-plugin
           resources:
             limits:
