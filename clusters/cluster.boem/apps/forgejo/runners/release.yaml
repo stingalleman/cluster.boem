@@ -109,10 +109,10 @@ spec:
                 value: noninteractive
             resources:
               requests:
-                cpu: 100m
-                memory: 1Gi
+                cpu: 2000m
+                memory: 2Gi
               limits:
-                cpu: 500m
+                cpu: 4000m
                 memory: 4Gi
         restartPolicy: Never
       podspec-dind.yaml: |
@@ -154,10 +154,10 @@ spec:
                 value: /certs/client
             resources:
               requests:
-                cpu: 100m
-                memory: 1Gi
+                cpu: 2000m
+                memory: 2Gi
               limits:
-                cpu: 500m
+                cpu: 4000m
                 memory: 4Gi
             volumeMounts:
               - name: docker-certs
