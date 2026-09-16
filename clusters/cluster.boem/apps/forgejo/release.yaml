@@ -156,10 +156,8 @@ spec:
             secretName: forgejo-config-mailer
         - secret:
             secretName: forgejo-config-metrics
-      #   - secret:
-      #       secretName: gitea-app-ini-oauth
-      #   - configMap:
-      #       name: gitea-app-ini-plaintext
+        - secret:
+            secretName: forgejo-config-lfs
 
       ## @param gitea.additionalConfigFromEnvs Additional configuration sources from environment variables
       additionalConfigFromEnvs: []
@@ -211,6 +209,8 @@ spec:
           PROTOCOL: http
           DOMAIN: git.as216455.net
           ROOT_URL: "https://git.as216455.net/"
+          ## lfs
+          LFS_START_SERVER: true
 
         ## @param gitea.config.indexer Settings for what content is indexed and how
         indexer: {}
