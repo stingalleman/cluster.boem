@@ -154,6 +154,8 @@ spec:
             secretName: forgejo-config-storage
         - secret:
             secretName: forgejo-config-mailer
+        - secret:
+            secretName: forgejo-config-metrics
       #   - secret:
       #       secretName: gitea-app-ini-oauth
       #   - configMap:
@@ -233,7 +235,10 @@ spec:
           ENABLE_REMEMBER_ME: true
 
         ## @param gitea.config.service Configuration for miscellaneous Forgejo services
-        service: {}
+        service:
+          DISABLE_REGISTRATION: true
+          ENABLE_INTERNAL_SIGNIN: false
+          ENABLE_BASIC_AUTHENTICATION: false
 
         ## @param gitea.config.ssh.minimum_key_sizes SSH minimum key sizes
         ssh.minimum_key_sizes: {}
