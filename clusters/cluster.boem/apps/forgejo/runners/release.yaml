@@ -1,0 +1,221 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: forgejo-runner
+  namespace: forgejo-runner
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: forgejo-runner
+  interval: 24h
+  values:
+    # -- Number of runner replicas.
+    replicaCount: 1
+
+    forgejo:
+      # -- Forgejo instance URL the runner registers against (REQUIRED), e.g. `http://forgejo-http:3000`.
+      url: "http://forgejo-http.forgejo:3000"
+      # -- Name of an existing Secret holding the runner registration `token` and `uuid` (REQUIRED).
+      existingSecret: "registration"
+      secretKeys:
+        # -- Key within the Secret holding the registration token.
+        token: token
+        # -- Key within the Secret holding the runner UUID.
+        uuid: uuid
+
+    # Runner image. Forgejo Runner v13.1.0+ supports the experimental Kubernetes
+    # backend plugin protocol. Keep the tag compatible with the plugin version below.
+    # image:
+    # -- Runner image repository.
+    # repository: data.forgejo.org/forgejo/runner
+    # -- Runner image tag.
+    # tag: "13.1.0"
+    # -- Pin the runner image by digest (`sha256:…`); when set, overrides the tag.
+    # digest: ""
+    # -- Runner image pull policy.
+    # pullPolicy: IfNotPresent
+
+    plugin:
+      # image:
+      # -- Plugin image repository.
+      # repository: git.erwanleboucher.dev/eleboucher/runner-k8s-plugin
+      # -- Plugin image tag; defaults to the chart appVersion when empty. Since a release sets
+      # appVersion == chart version, the plugin image uses the same tag as the chart by default.
+      # tag: ""
+      # -- Pin the plugin image by digest (`sha256:…`); when set, overrides the tag.
+      # digest: ""
+      # -- Plugin image pull policy.
+      # pullPolicy: IfNotPresent
+      # -- Unix socket the plugin listens on and the runner connects to. Your runnerConfig's
+      # `plugins.k8s.address` MUST be `unix://<this path>`.
+      # socketPath: /plugin/forgejo-runner-k8s.sock
+      # -- Plugin sidecar resources.
+      resources:
+        requests:
+          cpu: 5m
+          memory: 32Mi
+        limits:
+          memory: 128Mi
+
+    # -- Full contents of `runner.yaml` (REQUIRED — no default is shipped). See
+    # [examples/values-example.yaml](./examples/values-example.yaml) for a complete config. The plugin
+    # listens on `plugin.socketPath`, so set `plugins.k8s.address: "unix:///plugin/forgejo-runner-k8s.sock"`
+    # and `plugins.k8s.options.namespace` to this release's namespace (where job pods are created).
+    runnerConfig: |
+      cache:
+        enabled: true
+        dir: /data/cache
+        port: 8088
+        proxy_port: 8089
+      container:
+        docker_host: "-"
+        workdir_parent: shared/workdir
+      host:
+        workdir_parent: /data/act
+      log:
+        level: info
+      plugins:
+        k8s:
+          address: "unix:///plugin/forgejo-runner-k8s.sock"
+          options:
+            namespace: forgejo-runner
+            poll_timeout: 10m
+            labels: "app.kubernetes.io/name=forgejo-runner-instance"
+            resources: |
+              requests:
+                cpu: 100m
+                memory: 256Mi
+              limits:
+                memory: 1Gi
+      runner:
+        capacity: 3
+        labels:
+          - ubuntu-latest:k8s:///config/podspec-default.yaml
+          - default:k8s:///config/podspec-default.yaml
+          - docker:k8s:///config/podspec-dind.yaml
+        timeout: 3h
+        shutdown_timeout: 3m
+
+    # -- PodSpec files referenced by your runner labels, keyed by filename -> content (REQUIRED).
+    # Mounted read-only into `/config` next to `runner.yaml`.
+    podSpecs:
+      podspec-default.yaml: |
+        containers:
+          - name: main
+            image: ghcr.io/bjw-s-labs/forgejo-runner:ubuntu-24.04
+            imagePullPolicy: IfNotPresent
+            env:
+              - name: DEBIAN_FRONTEND
+                value: noninteractive
+            resources:
+              requests:
+                cpu: 100m
+                memory: 1Gi
+              limits:
+                cpu: 500m
+                memory: 4Gi
+        restartPolicy: Never
+      podspec-dind.yaml: |
+        initContainers:
+          - name: dind
+            image: docker:29-dind
+            securityContext:
+              privileged: true
+            restartPolicy: Always
+            env:
+              - name: DOCKER_TLS_CERTDIR
+                value: /certs
+            volumeMounts:
+              - name: docker-storage
+                mountPath: /var/lib/docker
+              - name: docker-certs
+                mountPath: /certs
+            startupProbe:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - docker --tlsverify --tlscacert=/certs/client/ca.pem --tlscert=/certs/client/cert.pem --tlskey=/certs/client/key.pem -H tcp://localhost:2376 info
+              initialDelaySeconds: 5
+              periodSeconds: 1
+              failureThreshold: 30
+        containers:
+          - name: main
+            image: ghcr.io/bjw-s-labs/forgejo-runner:ubuntu-24.04
+            imagePullPolicy: IfNotPresent
+            env:
+              - name: DEBIAN_FRONTEND
+                value: noninteractive
+              - name: DOCKER_HOST
+                value: tcp://localhost:2376
+              - name: DOCKER_TLS_VERIFY
+                value: "1"
+              - name: DOCKER_CERT_PATH
+                value: /certs/client
+            resources:
+              requests:
+                cpu: 100m
+                memory: 1Gi
+              limits:
+                cpu: 500m
+                memory: 4Gi
+            volumeMounts:
+              - name: docker-certs
+                mountPath: /certs
+                readOnly: true
+        volumes:
+          - name: docker-storage
+            emptyDir: {}
+          - name: docker-certs
+            emptyDir: {}
+        restartPolicy: Never
+
+    # -- Override the runner container command. When empty, the chart builds a
+    # `forgejo-runner daemon` invocation from `forgejo.url` and the mounted secret.
+    command: []
+
+    # -- Image pull secrets for private registries.
+    imagePullSecrets: []
+
+    # -- Runner container resources.
+    resources:
+      requests:
+        cpu: 5m
+        memory: 256Mi
+      limits:
+        memory: 1Gi
+
+    # -- Deployment annotations. The default rolls the deployment when the config ConfigMap
+    # changes (requires stakater/reloader; the annotation must sit on the workload, not the pod).
+    deploymentAnnotations: {}
+      # reloader.stakater.com/auto: "true"
+    # -- Pod annotations.
+    podAnnotations: {}
+    # -- Extra pod labels.
+    podLabels: {}
+
+    # -- Pod security context.
+    podSecurityContext:
+      fsGroup: 1000
+      fsGroupChangePolicy: OnRootMismatch
+      runAsGroup: 1000
+      runAsNonRoot: true
+      runAsUser: 1000
+
+    # -- Container security context (applied to both the runner and the plugin sidecar).
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop:
+          - ALL
+
+    # -- Termination grace period. Must cover `runner.shutdown_timeout` plus the plugin's ~60s cleanup budget.
+    terminationGracePeriodSeconds: 300
+
+    # -- Node selector.
+    nodeSelector: {}
+    # -- Tolerations.
+    tolerations: []
+    # -- Affinity.
+    affinity: {}

@@ -1,0 +1,11 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: forgejo-runner
+  namespace: forgejo-runner
+spec:
+  interval: 10m
+  url: oci://git.erwanleboucher.dev/eleboucher/charts/forgejo-runner
+  provider: generic
+  ref:
+    semver: "13.1.0"
