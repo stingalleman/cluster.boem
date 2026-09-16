@@ -229,7 +229,8 @@ spec:
         openid: {}
 
         ## @param gitea.config.oauth2_client OAuth2 client settings
-        oauth2_client: {}
+        oauth2_client:
+          ENABLE_REMEMBER_ME: true
 
         ## @param gitea.config.service Configuration for miscellaneous Forgejo services
         service: {}

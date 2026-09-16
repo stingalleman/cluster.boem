@@ -8,4 +8,4 @@ spec:
   url: oci://code.forgejo.org/forgejo-helm/forgejo
   provider: generic
   ref:
-    semver: "17.1.0"
+    semver: "17.1.6"
