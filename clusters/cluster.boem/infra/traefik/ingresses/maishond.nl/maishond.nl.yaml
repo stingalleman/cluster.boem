@@ -79,5 +79,13 @@ spec:
           namespace: matrix
           port: 80
 
+    - kind: Rule
+      match: Host(`git.maishond.nl`)
+      services:
+        - kind: Service
+          name: forgejo-http
+          namespace: forgejo
+          port: http
+
   tls:
     secretName: maishond.nl-prod-tls
