@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: radarr
-          image: lscr.io/linuxserver/radarr:latest
+          image: lscr.io/linuxserver/radarr:version-6.4.4.10685
           # resources:
           #   requests:
           #     cpu: 100m
