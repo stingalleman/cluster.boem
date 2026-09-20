@@ -5,6 +5,7 @@
     "docker:enableMajor",
     "helpers:pinGitHubActionDigests",
     "docker:pinDigests",
+    "abandonments:recommended",
     // "github>onedr0p/home-ops//.renovate/autoMerge.json5",
     // "github>onedr0p/home-ops//.renovate/changelogs.json5",
     // "github>onedr0p/home-ops//.renovate/customManagers.json5",
@@ -36,7 +37,5 @@
   kubernetes: {
     // managerFilePatterns: ["/\\.yaml(?:\\.j2)?$/"],
     managerFilePatterns: ["/\\.ya?ml$/"],
-  },
-  branchConcurrentLimit: 30,
-  prConcurrentLimit: 30
+  }
 }
