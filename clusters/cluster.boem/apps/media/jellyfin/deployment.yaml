@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: jellyfin
-          image: lscr.io/linuxserver/jellyfin:12.1
+          image: lscr.io/linuxserver/jellyfin:12.1ubu2604-ls50
           resources:
             requests:
               cpu: 6000m
