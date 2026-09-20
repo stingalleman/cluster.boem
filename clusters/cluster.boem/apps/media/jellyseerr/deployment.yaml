@@ -11,6 +11,8 @@ spec:
     matchLabels:
       app: jellyseerr
   replicas: 1
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:

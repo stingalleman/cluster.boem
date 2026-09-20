@@ -10,6 +10,8 @@ spec:
     matchLabels:
       app: sonarr
   replicas: 1
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
