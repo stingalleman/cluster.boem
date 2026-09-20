@@ -4,6 +4,7 @@
     "config:recommended",
     "docker:enableMajor",
     "helpers:pinGitHubActionDigests",
+    "docker:pinDigests",
     // "github>onedr0p/home-ops//.renovate/autoMerge.json5",
     // "github>onedr0p/home-ops//.renovate/changelogs.json5",
     // "github>onedr0p/home-ops//.renovate/customManagers.json5",
@@ -30,10 +31,12 @@
   ],
   flux: {
     // managerFilePatterns: ["/\\.yaml(?:\\.j2)?$/"],
-    managerFilePatterns: ["/\\.yaml$/"],
+    managerFilePatterns: ["/\\.ya?ml$/"],
   },
   kubernetes: {
     // managerFilePatterns: ["/\\.yaml(?:\\.j2)?$/"],
-    managerFilePatterns: ["/\\.yaml$/"],
+    managerFilePatterns: ["/\\.ya?ml$/"],
   },
+  branchConcurrentLimit: 30,
+  prConcurrentLimit: 30
 }
