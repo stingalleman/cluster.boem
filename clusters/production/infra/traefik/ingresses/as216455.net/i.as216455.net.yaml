@@ -170,5 +170,12 @@ spec:
           port: 80
           passHostHeader: true
 
+    - kind: Rule
+      match: Host(`firefly.i.as216455.net`)
+      services:
+        - name: firefly-firefly-iii
+          namespace: firefly
+          port: 80
+
   tls:
     secretName: i.as216455.net-prod-tls
