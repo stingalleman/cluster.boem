@@ -11,12 +11,18 @@ spec:
     - name: smtp
       port: 25
       targetPort: 25
+    - name: smtp-k8s
+      port: 26
+      targetPort: 26
     - name: smtps
       port: 465
       targetPort: 465
     - name: submission
       port: 587
       targetPort: 587
+    - name: submission-kubernetes
+      port: 588
+      targetPort: 588
     - name: imap
       port: 143
       targetPort: 143

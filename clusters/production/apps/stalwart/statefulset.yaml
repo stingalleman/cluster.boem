@@ -64,10 +64,14 @@ spec:
           ports:
             - name: smtp
               containerPort: 25
+            - name: smtp-kubernetes
+              containerPort: 26
             - name: smtps
               containerPort: 465
             - name: submission
               containerPort: 587
+            - name: submission-k8s
+              containerPort: 588
             - name: imap
               containerPort: 143
             - name: imaps
