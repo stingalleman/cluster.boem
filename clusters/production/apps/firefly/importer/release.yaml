@@ -1,0 +1,63 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: importer
+  namespace: firefly
+spec:
+  chart:
+    spec:
+      chart: importer
+      sourceRef:
+        kind: HelmRepository
+        name: firefly
+        namespace: flux-system
+      version: "1.6.0"
+  interval: 24h
+  values:
+    replicaCount: 1
+
+    # -- The proxies that are trusted by the importer
+    trustedProxies: "**"
+
+    fireflyiii:
+      # -- The URL at which Firefly III is available. If you change this value, click the "Reauthenticate" button on the importer after opening it!
+      url: "http://firefly-firefly-iii:80"
+
+      # -- The URL at which you access Firefly III. Check https://docs.firefly-iii.org/data-importer/install/configure/#configure-fidi to find out if you should set this.
+      vanityUrl: "https://firefly.i.as216455.net"
+
+      auth:
+        # -- If you specify an existingSecret, it has to have the accessToken in a .spec.data.accessToken
+        existingSecret: "firefly-importer-auth"
+
+    # -- Environment variables for the importer. See docs at: https://github.com/firefly-iii/data-importer/blob/main/.env.example
+    config:
+      # -- Set this to the name of a secret to load environment variables from. If defined, values in the secret will override values in config.env
+      existingSecret: "firefly-importer-env"
+
+      # -- Directly defined environment variables. Use this for non-secret configuration values.
+      env:
+        IGNORE_DUPLICATE_ERRORS: "false"
+        TZ: "Europe/Amsterdam"
+        ENABLE_MAIL_REPORT: "true"
+
+      # -- A list of files with a mountPath, a file name and the file's content. Files are stored as a secret.
+      # files:
+      #   - mountPath: /var/www/html/storage/configurations
+      #     name: test.txt
+      #     content: |
+      #       This is a test file with some content
+
+    httpRoute:
+      enabled: false
+      annotations: {}
+      hostnames: []
+      parentRefs: []
+
+    resources:
+      limits:
+        cpu: 2000m
+        memory: 1G
+      requests:
+        cpu: 1000m
+        memory: 512Mi
