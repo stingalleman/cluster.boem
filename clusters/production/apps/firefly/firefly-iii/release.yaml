@@ -47,21 +47,15 @@ spec:
     # -- A cronjob for [recurring Firefly III tasks](https://docs.firefly-iii.org/firefly-iii/advanced-installation/cron/).
     cronjob:
       # -- Set to true to enable the CronJob. Note that you need to specify either cronjob.auth.existingSecret or cronjob.auth.token for it to actually be deployed.
-      enabled: false
+      enabled: true
 
       # -- Authorization for the CronJob. See https://docs.firefly-iii.org/firefly-iii/advanced-installation/cron/#request-a-page-over-the-web
       auth:
         # -- The name of a secret containing a data.token field with the cronjob token
-        existingSecret: ""
+        existingSecret: "firefly-cron"
 
         # -- The name of the key in the existing secret to get the cronjob token from
         secretKey: "token"
-
-        # -- The token in plain text
-        token: ""
-
-      # -- Annotations for the CronJob
-      annotations: {}
 
       # -- When to run the CronJob. Defaults to 03:00 as this is when Firefly III executes regular tasks.
       schedule: "0 3 * * *"
